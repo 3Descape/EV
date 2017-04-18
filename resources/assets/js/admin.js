@@ -1,8 +1,20 @@
+require('./bootstrap');
+window.Vue = require('vue');
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('parent', require('./components/Parent.vue'));
 
 const app = new Vue({
-  el: '#about'});
+  el: '#about',
+  data:{
+    num: 1,
+    test: "hallo",
+  },
+  methods:{
+    add: function(){
+      this.num+=1
+    },
+  },
+});
 
 var toolbarOptions = [
   ['bold', 'italic', 'underline', 'strike'],        // toggled buttons

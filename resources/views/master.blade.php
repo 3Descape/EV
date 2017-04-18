@@ -6,7 +6,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@yield('title')</title>
 
-    <link rel="stylesheet" href="{{asset('ev/public/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('ev/public/css/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('ev/public/css/app.css')}}">
   </head>
@@ -18,9 +17,6 @@
     </div>
 
     <footer>
-      <script src="{{asset('ev/public/js/jquery-3.1.1.min.js')}}"></script>
-      <script src="{{asset('ev/public/js/bootstrap.min.js')}}"></script>
-      <script src="{{asset('ev/public/js/vue.js')}}"></script>
       <script src="{{asset('ev/public/js/app.js')}}"></script>
     </footer>
   </body>

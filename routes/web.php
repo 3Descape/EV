@@ -20,6 +20,11 @@ Route::group(['prefix' => 'ev'], function () {
     Route::get('/events', 'AdminController@events')->name('admin_events');
     Route::get('/sga', 'AdminController@sga')->name('admin_sga');
     Route::get('/info', 'AdminController@info')->name('admin_info');
+
+    Route::post('/events/store', 'AdminController@events_store')->name('admin_events_store');
+    Route::post('/events/{id}/delete', 'AdminController@event_delete')->name('admin_events_delete');
+    Route::get('/events/json', 'AdminController@events_json')->name('admin_events_json');
+
   });
 
   Route::get('/', 'FrontendController@index')->name('home');

@@ -5,6 +5,25 @@ Home
 @endsection
 
 @section('content')
+  <div class="container-fluid" id="home_t">
+    <div class="start_image">
+    </div>
+    <div class="content">
+      <div class="content_padding">
+        <h1>Herzlick Willkommen beim Elternverein des BG/BRG Weiz</h1>
+      </div>
+
+      <div class="start_footer text-center">
+        <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
+        <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
+        <a href=""><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+        <a href=""><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+
+@endsection
+{{-- @section('content')
 <div class="col-md-10 col-sm-12 mx-auto mt-2">
   <div class="container-fluid" id="home">
     <h1 class="text-center">Elternverein Weiz</h1>
@@ -26,13 +45,13 @@ Home
       <div class="card">
         <div class="card-block">
           <h4 class="card-title">Veranstaltungen</h4>
-          <p class="card-text">Besuchen Sie uns auf einer unserer nächsten Veranstaltungen!</p> 
+          <p class="card-text">Besuchen Sie uns auf einer unserer nächsten Veranstaltungen!</p>
         </div>
         <div class="card-footer">
-          <a href="{{ route('events') }}" class="btn btn-primary">Zu den Veranstaltungen!</a> 
+          <a href="{{ route('events') }}" class="btn btn-primary">Zu den Veranstaltungen!</a>
         </div>
       </div>
-    
+
     <div>
   </div>
 
@@ -48,4 +67,4 @@ Home
       </div>
   </div>
 </div>
-@endsection
+@endsection --}}

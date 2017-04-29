@@ -6,27 +6,27 @@
 
 @section('content')
   <div class="row">
-    <div class="col-md-10 mx-auto bg-wrp space">
+    <div class="col-md-10 mx-auto bg-wrp space" id="about_master">
 
-      <div class="col-md-10 col-sm-12 mx-auto" id="über_uns">
+      <div class="col-md-10 col-sm-12 mx-auto sizing" id="über_uns">
         <h1 class="text-center">Über uns</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
 
 
-      <div class="col-md-10 col-sm-12 mx-auto" id="vorstand">
+      <div class="col-md-10 col-sm-12 mx-auto sizing" id="vorstand">
         <h2 class="text-center">Vorstand</h2>
         <div class="row">
           <div class="col-md-4 col-sm-12 text-center">
             <img src="http://www.hwsc.net/wp-content/uploads/2016/03/Unknown-person.gif" alt="Herr X" class="img-fluid">
           </div>
           <div class="col-md-8 col-sm-12">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
           </div>
         </div>
       </div>
 
-      <div class="col-md-10 col-sm-12 mx-auto" id="elternvertreterInnen">
+      <div class="col-md-10 col-sm-12 mx-auto sizing" id="elternvertreterInnen">
         <h2 class="text-center" >ElternvertreterInnen</h2>
         <div class="row" id="personen">
           @for ($i = 0; $i < 10; $i++)
@@ -44,17 +44,16 @@
       </div>
 
 
-      <div class="col-md-10 col-sm-12 mx-auto" id="mitgliedsbeitrag">
+      <div class="col-md-10 col-sm-12 mx-auto sizing" id="mitgliedsbeitrag">
           <h2 class="text-center">Mitgliedsbeitrag</h2>
           <p>10euro</p>
       </div>
 
 
-      <div class="col-md-10 col-sm-12 mx-auto" id="statuten">
+      <div class="col-md-10 col-sm-12 mx-auto sizing" id="statuten">
         <h2 class="text-center">Statuten</h2>
       </div>
 
     </div>
   </div>
 @endsection
-

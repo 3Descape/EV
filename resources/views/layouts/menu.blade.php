@@ -6,24 +6,12 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mx-auto">
-      <li class="{{ Route::currentRouteNamed('about') ? 'active nav-item' : 'nav-item' }}" >
-        <a class="nav-link" href="{{ route('about') }}">Über uns <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="{{ Route::currentRouteNamed('events') ? 'active nav-item' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('events')}}">Veranstaltungen</a>
-      </li>
-      <li class="{{ Route::currentRouteNamed('sga') ? 'active nav-item' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('sga') }}">SGA</a>
-      </li>
-      <li class="{{ Route::currentRouteNamed('info') ? 'active nav-item' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('info') }}">Informationen</a>
-      </li>
-      <li class="{{ Route::currentRouteNamed('contact') ? 'active nav-item' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('contact') }}">Kontakt</a>
-      </li>
-      <li class="{{ Route::currentRouteNamed('imprint') ? 'active nav-item' : 'nav-item' }}">
-        <a class="nav-link" href="{{ route('imprint') }}">Impressum</a>
-      </li>
+      {{-- @foreach ($links as $link)
+        <li class="nav-item" >
+          <a class="nav-link" href="{{route('home').'/'. $link->route}}">{{$link->name}} <span class="sr-only">(current)</span></a>
+        </li>
+      @endforeach --}}
+
     </ul>
   </div>
 </nav>

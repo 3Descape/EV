@@ -5,6 +5,7 @@ Home
 @endsection
 
 @section('content')
+  <div class="container-fluid">@include('layouts.menu')</div>
   <div class="container-fluid" id="home_t">
     <div class="start_image">
     </div>

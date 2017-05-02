@@ -17,8 +17,8 @@
   </head>
   <body>
 
-    <div class="container-fluid">@include('layouts.menu')</div>
-    <div class="container-fluid" id="app">
+    
+    <div class="container-fuid" id="app">
       @yield('content')
     </div>
 

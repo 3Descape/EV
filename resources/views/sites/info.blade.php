@@ -5,7 +5,7 @@ Info
 @endsection
 
 @section('content')
-  <div class="row">
+  <div>
     <div class="col-md-10 mx-auto bg-wrp space">
       <div class="col-md-10 col-sm-12 mx-auto sizing" id="info">
         <h2 class="text-center">Aktuelles</h2>

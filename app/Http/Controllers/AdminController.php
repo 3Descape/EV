@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\Text;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,23 @@ class AdminController extends Controller
   }
   public function about()
   {
-    return view('admin.sites.about');
+    $blocks = Text::where('category', '0')->get();
+    return view('admin.sites.about',['blocks' => $blocks]);
+  }
+  public function text_edit($id){
+    $block = Text::find($id);
+    return view('admin.sites.text_edit',['block' => $block]);
+  }
+  public function text_update($id, Request $request){
+    $text=Text::find($id);
+    $text->title = $request->title;
+    $text->text = $request->text;
+    $text->save();
+    return redirect()->route('admin_about');
+  }
+  public function text_delete($id){
+    Text::find($id)->delete();
+    return back();
   }
   public function events()
   {

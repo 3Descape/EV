@@ -3,16 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Text;
+use App\Menu;
 class FrontendController extends Controller
 {
+  public function dynamic($route){
+    $menu=Menu::where('route', $route)->first();
+    $id = $menu->id;
+    $contents = Text::where('category', $id)->get();
+    return view('sites.dynamic',['contents' => $contents]);
+  }
   public function index()
   {
     return view('sites.home');
   }
   public function about()
   {
-    return view('sites.about');
+    $blocks = Text::where('category', '0')->get();
+    return view('sites.about',['blocks' => $blocks]);
   }
   public function events()
   {

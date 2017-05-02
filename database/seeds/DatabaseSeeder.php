@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Text;
+use App\Menu;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -82,6 +83,37 @@ class DatabaseSeeder extends Seeder
         'text' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         'category' => '3',
         'order' => '4'
+      ]);
+
+      Menu::create([
+        'name' => 'Über uns',
+        'order' => '0',
+        'route' => 'über_uns',
+      ]);
+      Menu::create([
+        'name' => 'Veranstaltungen',
+        'order' => '1',
+        'route' => 'veranstaltungen',
+      ]);
+      Menu::create([
+        'name' => 'SGA',
+        'order' => '2',
+        'route' => 'sga',
+      ]);
+      Menu::create([
+        'name' => 'Informationen',
+        'order' => '3',
+        'route' => 'info',
+      ]);
+      Menu::create([
+        'name' => 'Kontakt',
+        'order' => '4',
+        'route' => 'kontakt',
+      ]);
+      Menu::create([
+        'name' => 'Impressum',
+        'order' => '5',
+        'route' => 'impressum',
       ]);
     }
 }

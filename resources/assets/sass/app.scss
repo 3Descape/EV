@@ -28,8 +28,6 @@ body{
 
 
 #app{
-  padding: 0px;
-
   h1, h2{
     text-align: left;
     font-weight: 700;
@@ -46,6 +44,7 @@ body{
       font-size: 1.5em;
     }
   }
+
   .sizing{
       min-height: calc(90vh - 50px);
       p{
@@ -58,7 +57,6 @@ body{
         }
       }
   }
-
   #home_t{
     padding: 0px;
     .start_image{
@@ -115,9 +113,8 @@ body{
         }
       }
     }
-
   }
-  div.row{
+  div{
     color: darken(white, 40%);
     .bg-wrp{
       padding-top: 4em;
@@ -129,11 +126,6 @@ body{
           padding-bottom: 0.5em;
         }
       }
-    }
-  }
-  div.col-md-12{
-    .card *{
-      color: lighten(black, 20%);
     }
   }
 

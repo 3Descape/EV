@@ -5,7 +5,7 @@ Veranstaltungen
 @endsection
 
 @section('content')
-  <div class="row">
+  <div>
     <div class="col-md-10 mx-auto bg-wrp">
      <h1 class="text-center">Veranstaltungen</h1>
       @for($i=0; $i<5; $i++)

@@ -17,6 +17,10 @@ Route::group(['prefix' => 'ev'], function () {
   Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin_index');
     Route::get('/about', 'AdminController@about')->name('admin_about');
+    Route::get('/about/text_edit/{id}', 'AdminController@text_edit')->name('admin_text_edit');
+    Route::get('/about/text_delete/{id}', 'AdminController@text_delete')->name('admin_text_delete');
+    Route::post('/about/text_update/{id}', 'AdminController@text_update')->name('admin_text_update');
+
     Route::get('/events', 'AdminController@events')->name('admin_events');
     Route::get('/sga', 'AdminController@sga')->name('admin_sga');
     Route::get('/info', 'AdminController@info')->name('admin_info');
@@ -27,11 +31,14 @@ Route::group(['prefix' => 'ev'], function () {
 
   });
 
+
+  Route::get('/{route}', 'FrontendController@dynamic');
+
   Route::get('/', 'FrontendController@index')->name('home');
-  Route::get('/über_uns', 'FrontendController@about')->name('about');
-  Route::get('/veranstaltungen', 'FrontendController@events')->name('events');
-  Route::get('/sga', 'FrontendController@sga')->name('sga');
-  Route::get('/info', 'FrontendController@info')->name('info');
-  Route::get('/kontakt', 'FrontendController@contact')->name('contact');
-  Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
+  // Route::get('/über_uns', 'FrontendController@about')->name('about');
+  // Route::get('/veranstaltungen', 'FrontendController@events')->name('events');
+  // Route::get('/sga', 'FrontendController@sga')->name('sga');
+  // Route::get('/info', 'FrontendController@info')->name('info');
+  // Route::get('/kontakt', 'FrontendController@contact')->name('contact');
+  // Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
 });

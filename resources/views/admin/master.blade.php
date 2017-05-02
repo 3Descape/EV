@@ -13,7 +13,6 @@
 
     <link rel="stylesheet" href="{{asset('ev/public/css/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" href="{{asset('ev/public/css/admin.css')}}">
-    <link href="https://cdn.quilljs.com/1.2.3/quill.snow.css" rel="stylesheet">
   </head>
   <body>
     <div class="container-fluid" id="app">
@@ -21,7 +20,7 @@
     </div>
 
     <footer>
-      <script src="//cdn.quilljs.com/1.0.0/quill.js" type="text/javascript"></script>
+      <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
       <script src="{{asset('ev/public/js/admin.js')}}"></script>
     </footer>
   </body>

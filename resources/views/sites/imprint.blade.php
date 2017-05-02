@@ -5,7 +5,7 @@ Impressum
 @endsection
 
 @section('content')
-  <div class="row">
+  <div>
     <div class="col-md-10 mx-auto bg-wrp">
 
       <div class="col-md-12">
@@ -27,6 +27,3 @@ Impressum
     </div>
   </div>
 @endsection
-
-
-

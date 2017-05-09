@@ -6,11 +6,11 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mx-auto">
-      {{-- @foreach ($links as $link)
+      @foreach ($links as $link)
         <li class="nav-item" >
           <a class="nav-link" href="{{route('home').'/'. $link->route}}">{{$link->name}} <span class="sr-only">(current)</span></a>
         </li>
-      @endforeach --}}
+      @endforeach
 
     </ul>
   </div>

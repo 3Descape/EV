@@ -11,7 +11,7 @@ Home
     </div>
     <div class="content">
       <div class="content_padding">
-        <h1>Herzlick Willkommen beim Elternverein des BG/BRG Weiz</h1>
+        <h1>Herzlich Willkommen beim Elternverein des BG/BRG Weiz</h1>
       </div>
 
       <div class="start_footer text-center">

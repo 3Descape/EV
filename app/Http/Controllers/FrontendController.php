@@ -9,9 +9,7 @@ class FrontendController extends Controller
 {
   public function dynamic($route){
     $menu=Menu::where('route', $route)->first();
-    $id = $menu->id;
-    $contents = Text::where('category', $id)->get();
-    return view('sites.dynamic',['contents' => $contents]);
+    return view('sites.'. $menu->template,['content' => $menu->content]);
   }
   public function index()
   {

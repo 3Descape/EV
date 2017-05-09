@@ -6,7 +6,7 @@
 
 
     <div id="accordion" role="tablist" aria-multiselectable="true">
-      @foreach ($blocks as $block)
+      {{-- @foreach ($blocks as $block)
         <div class="card">
           <div class="card-header" role="tab" id="{{"h_".$block->id}}">
             <h5 class="mb-0">
@@ -26,7 +26,19 @@
             </div>
           </div>
         </div>
-      @endforeach
+      @endforeach --}}
+
+      <div class="form-group">
+        <form action="{{route('admin_text_update', $block->id)}}" method="post" id="target_form">
+          <input type="text" name="title" class="form-control" value="{{$block->name}}">
+          <textarea name="text" id="editor" rows="30">
+              {{$block->content}}
+          </textarea>
+          <input type="submit" class="btn btn-success form-control" value="Speichern">
+          {{ csrf_field() }}
+        </form>
+      </div>
+
     </div>
 
   </div>

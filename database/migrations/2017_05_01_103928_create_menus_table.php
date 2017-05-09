@@ -18,6 +18,8 @@ class CreateMenusTable extends Migration
             $table->string('name')->unique();
             $table->integer('order');
             $table->string('route');
+            $table->string('template')->default('dynamic');
+            $table->text('content')->nullable();
             $table->timestamps();
         });
     }

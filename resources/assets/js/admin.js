@@ -56,3 +56,15 @@ var app = new Vue({
 });
 
 CKEDITOR.replace( 'editor' );
+CKEDITOR.stylesSet.add( 'bootstrap', [
+    // Block-level styles.
+    { name: 'H1', element: 'h1' },
+    { name: 'H1', element: 'h1',attributes:{'class': 'text-center'} },
+    { name: 'Text Wrapper', element: 'div', attributes:{'class': 'col-md-10 col-sm-12 mx-auto sizing'} },
+    { name: 'Wrapper 12', element: 'div', attributes:{'class': 'col-md-12 mx-auto'} },
+    { name: 'Red Title',  element: 'h3', styles: { color: 'Red' } },
+
+    // Inline styles.
+    { name: 'CSS Style', element: 'span', attributes: { 'class': 'my_style' } },
+    { name: 'Marker: Yellow', element: 'span', styles: { 'background-color': 'Yellow' } }
+]);

@@ -14,7 +14,7 @@
 Route::group(['prefix' => 'ev'], function () {
   Auth::routes();
 
-  Route::group(['middleware' => 'auth','prefix' => 'admin'], function () {
+  Route::group(['prefix' => 'admin'], function () {
     Route::get('/', 'AdminController@index')->name('admin_index');
     Route::get('/about', 'AdminController@about')->name('admin_about');
     Route::get('/about/text_edit/{id}', 'AdminController@text_edit')->name('admin_text_edit');

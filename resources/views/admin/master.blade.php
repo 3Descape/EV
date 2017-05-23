@@ -21,7 +21,7 @@
     </div>
 
     <footer>
-      <script src="{{asset('ev/public/js/ckeditor/ckeditor.js')}}"></script>
+      {{-- <script src="{{asset('ev/public/js/ckeditor/ckeditor.js')}}"></script> --}}
       <script src="{{asset('ev/public/js/admin.js')}}"></script>
     </footer>
   </body>

@@ -79,3 +79,26 @@ $sitebar_color: #222;
     }
   }
 }
+
+
+#richTextField {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    min-height: 5em;
+    overflow: auto;
+    padding: 2px;
+    resize: both;
+    min-width: 100%;
+    max-width: 100%;
+    div{
+     border: 1px solid rgba(0, 0, 0, 0.2);
+     h1{
+       border: 1px solid rgba(0, 255, 200, 0.22);
+     }
+     p{
+       border: 1px solid rgba(0, 125, 255, 0.22);
+     }
+   }
+}

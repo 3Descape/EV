@@ -7,10 +7,10 @@ use App\Text;
 use App\Menu;
 class FrontendController extends Controller
 {
-  public function dynamic($route){
-    $menu=Menu::where('route', $route)->first();
-    return view('sites.'. $menu->template,['content' => $menu->content]);
-  }
+  // public function dynamic($route){
+  //   $menu=Menu::where('route', $route)->first();
+  //   return view('sites.'. $menu->template,['content' => $menu->content]);
+  // }
   public function index()
   {
     return view('sites.home');

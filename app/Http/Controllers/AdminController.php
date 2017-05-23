@@ -22,10 +22,9 @@ class AdminController extends Controller
     $block = Text::find($id);
     return view('admin.sites.text_edit',['block' => $block]);
   }
-  public function text_update($id, Request $request){
+  public function menu_cont_update($id, Request $request){
     $menu=Menu::find($id);
-    $menu->name = $request->title;
-    $menu->content = $request->text;
+    $menu->content = $request->content;
     $menu->save();
     return redirect()->route('admin_about');
   }

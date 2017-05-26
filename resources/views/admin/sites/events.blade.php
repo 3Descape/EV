@@ -1,58 +1,95 @@
 @extends('admin.master')
 
 @section('content')
-  <div class="col-md-10 mx-auto">
+  <div class="col-md-10 mx-auto" id="events">
+    <h2 class="text-center">Veranstaltungen</h2>
 
-      <div class="alert alert-danger" style="display:none" v-show="show_errors">
-        <ul>
-          <li v-for="error in errors">@{{error[0]}}</li>
-        </ul>
-      </div>
-
-    <form method="post" action="{{route('admin_events_store')}}" @submit.prevent="saveEvent" class="form-group">
-      <input type="text" class="form-control" name="name" value="{{ old('name') }}">
-      <input type="date" class="form-control" name="date" value="{{ old('date') }}">
-      <input type="text" class="form-control" name="text" value="{{ old('text') }}">
-      <input type="submit" class="form-control btn btn-success" value="Submit">
-      {{ csrf_field() }}
-    </form>
-    <ul class="list-group">
-        <div class="row">
-          <div class="col-md-1">
-            Index
-          </div>
-          <div class="col-md-4">
-            Name:
-          </div>
-          <div class="col-md-4">
-            Text:
-          </div>
-          <div class="col-md-1">
-            Date:
-          </div>
-          <div class="col-md-2">
-          </div>
-        </div>
-
-        <li class="list-group-item" v-for="event in events">
-            <div class="col-md-1">
-              @{{event.id}}
-            </div>
-            <div class="col-md-4">
-              @{{event.name}}
-            </div>
-            <div class="col-md-4">
-              @{{event.text}}
-            </div>
-            <div class="col-md-1">
-              @{{event.date}}
-            </div>
-            <div class="col-md-2">
-              <button type="button" class="fa fa-edit btn btn-warning" @click="edit_event(event.id)"></button>
-              <button type="button" class="fa fa-trash-o btn btn-danger" @click="delete_event(event.id)"></button>
-            </div>
-        </li>
+    <div class="alert alert-danger" style="display:none" v-show="show_errors">
+      <ul>
+        <li v-for="(error, index) in errors">@{{error[0]}}</li>
       </ul>
     </div>
+
+
+
+    <form class="form-group" @submit.prevent="addEvent">
+      {{ csrf_field() }}
+
+      <div class="form-group row">
+        <div class="col-md-1">
+          Name:
+        </div>
+        <div class="col-md-11">
+          <input type="text" class="form-control" name="event_name">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-1">
+          Datum:
+        </div>
+        <div class="col-md-11">
+          <vue-datepicker></vue-datepicker>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-1">
+          Beschreibung:
+        </div>
+        <div class="col-md-11">
+          <input type="text" class="form-control" name="event_description">
+        </div>
+      </div>
+      <input type="submit" class="form-control btn btn-success" value="Hinzufügen">
+    </form>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Datum</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(event, index) in events">
+          <td>@{{event.name}}</td>
+          <td>@{{event.date}}</td>
+          <td class="clearfix">
+            <div class="float-right">
+              <button type="button" class="btn btn-warning mx-1" @click="editEvent(index)"><i class="fa fa-edit" aria-hidden="true"></i></button>
+              <button type="button" class="btn btn-danger mx-1" @click="deleteEvent(event.id, index)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">@{{eventEdit.name}}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form @submit.prevent="updateEvent">
+            <div class="modal-body">
+              <input type="text" class="form-control" name="name" :value="eventEdit.name">
+              <input type="text" class="form-control" name="description" :value="eventEdit.description">
+              <vue-datepicker :starttime="eventEdit.starttime"></vue-datepicker>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
+              <button type="submit" class="btn btn-outline-success">Speichern</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 @endsection

@@ -14,22 +14,23 @@
 Route::group(['prefix' => 'ev'], function () {
   Auth::routes();
 
-  Route::group(['prefix' => 'admin'], function () {
+  Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', 'AdminController@index')->name('admin_index');
     Route::get('/about', 'AdminController@about')->name('admin_about');
     Route::get('/about/text_edit/{id}', 'AdminController@text_edit')->name('admin_text_edit');
     Route::get('/about/text_delete/{id}', 'AdminController@text_delete')->name('admin_text_delete');
     Route::post('/about/menu_cont_update/{id}', 'AdminController@menu_cont_update')->name('admin_menu_cont_update');
 
-    Route::get('/events', 'AdminController@events')->name('admin_events');
+    Route::get('/events', 'AdminController@events');
     Route::get('/sga', 'AdminController@sga')->name('admin_sga');
     Route::get('/info', 'AdminController@info')->name('admin_info');
-
-    Route::post('/events/store', 'AdminController@events_store')->name('admin_events_store');
-    Route::post('/events/{id}/delete', 'AdminController@event_delete')->name('admin_events_delete');
-    Route::get('/events/json', 'AdminController@events_json')->name('admin_events_json');
-
   });
+
+  Route::group(['prefix' => 'api', 'middleware' => 'auth'], function () {
+    Route::resource('events', 'EventController');
+  });
+
+
 
 
   //Route::get('/{route}', 'FrontendController@dynamic');

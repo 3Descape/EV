@@ -48397,8 +48397,10 @@ var app = new Vue({
       var name = event.target.event_name;
       var description = event.target.event_description;
       var date = event.target.event_date;
+      if (name.value.length > 4 && description.value.length > 9) {
+        this.events.push({ id: this.events.length + 1, name: name.value, description: description.value, date: date.value });
+      }
 
-      this.events.push({ id: this.events.length + 1, name: name.value, description: description.value, date: date.value });
       vue = this;
       axios.post('/ev/api/events', {
         name: name.value,
@@ -48412,7 +48414,7 @@ var app = new Vue({
         description.value = '';
         date.value = datestr;
       }).catch(function (error) {
-        vue.errors = error.response.data;
+        vue.errors = error.response.data.errors;
         vue.show_errors = true;
       });
     },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use App\Event;
 class EventController extends Controller
 {
@@ -34,18 +35,28 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
-      $this->validate($request, [
-        'name' => 'required|min:5|max:255',
-        'description' => 'required|min:10',
-        'date' => 'required|date',
-      ]);
+        $validator = Validator::make($request->all(),
+            [
+                'name' => 'required|min:5|max:255',
+                'description' => 'required|min:10',
+                'date' => 'required|date'
 
-      Event::create([
-        'name' => $request->name,
-        'description' => $request->description,
-        'date' => $request->date
-      ]);
+            ]
+        );
+
+      if ($validator->fails()) {
+          $messages = $validator->messages();
+          return response()->json(['errors'=> $messages],500);
+        }
+        else{
+            Event::create([
+              'name' => $request->name,
+              'description' => $request->description,
+              'date' => $request->date
+            ]);
+        }
     }
+
 
     /**
      * Display the specified resource.

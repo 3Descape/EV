@@ -5,7 +5,7 @@ export default {
   props:{
     starttime: {
         default: function () {
-          return { time: String(date.getFullYear())+'-'+String(date.getMonth())+'-'+String(date.getDate()) }
+          return { time: String(date.getFullYear())+'-'+String(('0'+(date.getMonth()+1)).slice(-2))+'-'+String(date.getDate()) }
         }
     },
 

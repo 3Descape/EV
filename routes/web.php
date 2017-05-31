@@ -21,7 +21,7 @@ Route::group(['prefix' => 'ev'], function () {
     Route::get('/about/text_delete/{id}', 'AdminController@text_delete')->name('admin_text_delete');
     Route::post('/about/menu_cont_update/{id}', 'AdminController@menu_cont_update')->name('admin_menu_cont_update');
 
-    Route::get('/events', 'AdminController@events');
+    Route::get('/events', 'AdminController@events')->name('admin_events');
     Route::get('/sga', 'AdminController@sga')->name('admin_sga');
     Route::get('/info', 'AdminController@info')->name('admin_info');
   });

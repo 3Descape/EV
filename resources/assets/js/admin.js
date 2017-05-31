@@ -3,7 +3,11 @@ window.Vue = require('vue');
 
 Vue.component('vue-datepicker', require('./components/DatePicker.vue'));
 date = new Date();
-datestr = String(date.getFullYear())+'-'+String(date.getMonth())+'-'+String(date.getDate());
+month = ('0'+(date.getMonth()+1)).slice(-2)
+day = ('0'+(date.getDate())).slice(-2)
+datestr = String(date.getFullYear())+'-'+String(month)+'-'+String(day);
+console.log(datestr);
+
 const app = new Vue({
   el: "#events",
   data:{
@@ -12,6 +16,7 @@ const app = new Vue({
     tempIndex: 0,
     errors: [],
     show_errors: false,
+
   },
   methods:{
     addEvent(event){
@@ -57,8 +62,8 @@ const app = new Vue({
       $('#myModal').modal('show');
     },
     updateEvent(event){
-      console.log(this.events[this.tempIndex])
-      this.events[this.tempIndex] = {id: this.eventEdit.id, name: event.target.name.value, description: event.target.description.value, date: event.target.date.value};
+      //console.log(this.events[this.tempIndex])
+      this.events[this.tempIndex] = {id: this.eventEdit.id, name: event.target.name.value, description: event.target.description.value, date: event.target.event_date.value};
       $('#myModal').modal('hide');
 
       vue = this;
@@ -66,7 +71,7 @@ const app = new Vue({
         id: vue.eventEdit.id,
         name: event.target.name.value,
         description: event.target.description.value,
-        date: event.target.date.value,
+        date: event.target.event_date.value,
         _method: 'put',
       })
       .catch(function (error) {

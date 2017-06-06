@@ -35,6 +35,15 @@
 
       <div class="form-group row">
         <div class="col-md-1">
+          Ort:
+        </div>
+        <div class="col-md-11">
+          <input type="text" class="form-control" name="event_location">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-md-1">
           Beschreibung:
         </div>
         <div class="col-md-11">
@@ -55,6 +64,7 @@
         <tr v-for="(event, index) in events">
           <td>@{{event.name}}</td>
           <td>@{{event.date}}</td>
+          <td>@{{event.location}}</td>
           <td class="clearfix">
             <div class="float-right">
               <button type="button" class="btn btn-warning mx-1" @click="editEvent(index)"><i class="fa fa-edit" aria-hidden="true"></i></button>
@@ -80,6 +90,7 @@
               <input type="text" class="form-control" name="name" :value="eventEdit.name">
               <input type="text" class="form-control" name="description" :value="eventEdit.description">
               <vue-datepicker :starttime="eventEdit.starttime"></vue-datepicker>
+              <input type="text" class="form-control" name="location" :value="eventEdit.location">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>
@@ -91,5 +102,4 @@
     </div>
 
   </div>
-
 @endsection

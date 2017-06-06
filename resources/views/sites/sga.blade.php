@@ -22,19 +22,7 @@ SGA
       </div>
       <div class="col-md-10 col-sm-12 mx-auto sizing">
         <h2 class="text-center">Mitglieder</h2>
-        <div class="row" id="personen">
-          @for ($i = 0; $i < 10; $i++)
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 py-2">
-              <div class="card">
-                <div class="img-wrp"><img class="img-cls mx-auto" src="http://www.hwsc.net/wp-content/uploads/2016/03/Unknown-person.gif" alt="Card image cap"></div>
-                <div class="card-block">
-                  <h4 class="card-title">Card title</h4>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                </div>
-              </div>
-            </div>
-          @endfor
-        </div>
+        <vue-people id="2"></vue-people>
       </div>
     </div>
   </div>

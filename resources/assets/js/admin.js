@@ -23,8 +23,9 @@ const app = new Vue({
       var name = event.target.event_name;
       var description = event.target.event_description;
       var date = event.target.event_date;
-      if(name.value.length>4 && description.value.length > 9){
-        this.events.push({id: this.events.length+1, name: name.value, description: description.value, date: date.value});
+      var location = event.target.event_location;
+      if(name.value.length>4 && description.value.length > 9 && location.value.length > 5){
+        this.events.push({id: this.events.length+1, name: name.value, description: description.value, date: date.value, location: location.value});
       }
 
       vue = this;
@@ -32,6 +33,7 @@ const app = new Vue({
         name: name.value,
         description: description.value,
         date: date.value,
+        location: location.value,
       }).then(function(){
         vue.show_errors = false;
         vue.errors = [];
@@ -65,7 +67,7 @@ const app = new Vue({
     },
     updateEvent(event){
       //console.log(this.events[this.tempIndex])
-      this.events[this.tempIndex] = {id: this.eventEdit.id, name: event.target.name.value, description: event.target.description.value, date: event.target.event_date.value};
+      this.events[this.tempIndex] = {id: this.eventEdit.id, name: event.target.name.value, description: event.target.description.value, date: event.target.event_date.value, location: event.target.location.value};
       $('#myModal').modal('hide');
 
       vue = this;
@@ -74,6 +76,7 @@ const app = new Vue({
         name: event.target.name.value,
         description: event.target.description.value,
         date: event.target.event_date.value,
+        location: event.target.location.value,
         _method: 'put',
       })
       .catch(function (error) {

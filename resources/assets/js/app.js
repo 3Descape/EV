@@ -1,20 +1,9 @@
 require('./bootstrap');
 window.$ = window.jQuery = require('jquery');
+window.Vue = require('vue');
 
+Vue.component('vue-people', require('./components/PeopleList.vue'));
 
-// $(document).ready(function(){
-//             var scroll_pos = 0;
-//             $(document).scroll(function() {
-//                 scroll_pos = $(this).scrollTop();
-//                 if(scroll_pos < $('#über_uns').height()){
-//                   $("body").removeClass('bg-dark');
-//                 }
-//                 if(scroll_pos > $('#über_uns').height()) {
-//                     $("body").addClass('bg-dark');
-//                 } if (scroll_pos > $('#über_uns').height() + $('#vorstand').height()) {
-//                     $("body").removeClass('bg-dark');
-//                 } if (scroll_pos > $('#über_uns').height() + $('#vorstand').height() + $('#elternvertreterInnen').height()) {
-//                     $("body").addClass('bg-dark');
-//                 }
-//             });
-//         });
+const app = new Vue({
+    el: '#app',
+});

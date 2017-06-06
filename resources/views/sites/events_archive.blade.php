@@ -1,14 +1,14 @@
 @extends('master')
 
 @section('title')
-Veranstaltungen
+Veranstaltungen Archiv
 @endsection
 
 @section('content')
   <div class="container-fluid">@include('layouts.menu')</div>
   <div>
     <div class="col-md-10 mx-auto bg-wrp">
-     <h1 class="text-center">Veranstaltungen</h1>
+     <h1 class="text-center">Veranstaltungen Archiv</h1>
 
      @foreach ($events as $event)
 
@@ -27,8 +27,7 @@ Veranstaltungen
                       <p class="card-text">{{$event->description}}</p>
                     </div>
                     <div class="col-md-12 mt-4">
-                      <h4 class="card-title">Wo und Wann?</h4>
-                      <p class="card-text">{{$event->date->format('d.m.Y') . ' ' . $event->location}}</p>
+                      <p class="card-text">{{$event->date->diffForHumans() . ' ' . $event->location}}</p>
                     </div>
                   </div>
                 </div>
@@ -38,7 +37,6 @@ Veranstaltungen
         </div>
       @endforeach
 
-      <h2 class="text-center"><a href="{{route('events_archive')}}">Archiv</a></h2>
     </div>
   </div>
 @endsection

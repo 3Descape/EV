@@ -6,12 +6,25 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mx-auto">
-      @foreach ($links as $link)
         <li class="nav-item" >
-          <a class="nav-link" href="{{route('home').'/'. $link->route}}">{{$link->name}} <span class="sr-only">(current)</span></a>
+          <a class="nav-link" href="{{route('about')}}">Über uns</a>
         </li>
-      @endforeach
 
+        <li class="nav-item" >
+          <a class="nav-link" href="{{route('events')}}">Veranstaltungen</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" href="{{route('sga')}}">SGA</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" href="{{route('info')}}">Informationen</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" href="{{route('contact')}}">Kontakt</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" href="{{route('imprint')}}">Impressum</a>
+        </li>
     </ul>
   </div>
 </nav>

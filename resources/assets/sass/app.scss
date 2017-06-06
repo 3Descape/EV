@@ -1,4 +1,7 @@
+@import "/palettes/palette_4.scss";
+@import "/_variables.scss";
 @import "node_modules/bootstrap/scss/bootstrap";
+
 body{
   background-color: #F4F4F4;
   text-align: justify;
@@ -12,13 +15,13 @@ body{
   background-color: #272B33;
   transition: 0.5s;
 }
-.img-wrp{
-  overflow: hidden;
-  .img-cls{
-    height: auto;
-    width: 100%;
-    }
-}
+// .img-wrp{
+//   overflow: hidden;
+//   .img-cls{
+//     height: auto;
+//     width: 100%;
+//     }
+// }
 #menu{
   background-color: #272B33;
   *{
@@ -35,34 +38,36 @@ body{
     word-spacing: 0.1em;
     line-height: 1.2em;
     color: #1B1C1E;
-    font-size: 6em;
-    max-width: 60vw;
-    @media(max-width:992px){
-      font-size: 3.5em;
-    }
-    @media(max-width:768px){
-      font-size: 1.5em;
-    }
+    //font-size: 6em;
+    //max-width: 60vw;
+    //@media(max-width:992px){
+      //font-size: 3.5em;
+    //}
+    //@media(max-width:768px){
+      //font-size: 1.5em;
+    //}
   }
 
-  .sizing{
+  //.sizing{
       //min-height: calc(90vh - 50px);
-      p{
-        font-size: 2em;
-        @media(max-width:992px){
-          font-size: 1.5em;
-        }
-        @media(max-width:768px){
-          font-size: 1em;
-        }
-      }
-  }
+      //p{
+        //font-size: 2em;
+        //@media(max-width:992px){
+          //font-size: 1.5em;
+        //}
+        //@media(max-width:768px){
+          //font-size: 1em;
+        //}
+      //}
+  //}
+
   #home_t{
     padding: 0px;
     .start_image{
       height: calc(100vh - 50px);
-      background: url('/ev/public/img/home.jpg');
-      background-size: cover;
+      background-color: $color3;
+    //   background: url('/ev/public/img/home.jpg');
+    //   background-size: cover;
     }
     .content{
       position: absolute;
@@ -115,7 +120,7 @@ body{
     }
   }
   div{
-    color: darken(white, 40%);
+    color: hsv(0, 0%, 40%);
     .bg-wrp{
       padding-top: 4em;
       }

@@ -66,8 +66,21 @@ body{
     .start_image{
       height: calc(100vh - 50px);
       background-color: $color3;
-    //   background: url('/ev/public/img/home.jpg');
-    //   background-size: cover;
+      z-index: -2;
+      //background-image: url('/public/img/preview.jpg');
+      //background-blend-mode: multiply;
+      &:before {
+        content : "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: url('/public/img/preview.jpg');
+        background-blend-mode: multiply;
+        width: 100%;
+        height: 100%;
+        opacity : 0.1;
+    }
     }
     .content{
       position: absolute;

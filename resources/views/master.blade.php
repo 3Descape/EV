@@ -12,18 +12,18 @@
     ]); ?>
     </script>
 
-    <link rel="stylesheet" href="{{asset('ev/public/css/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ev/public/css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/css/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/css/app.css')}}">
   </head>
   <body>
 
-    
+
     <div class="container-fuid" id="app">
       @yield('content')
     </div>
 
     <footer>
-      <script src="{{asset('ev/public/js/app.js')}}" type="text/javascript"></script>
+      <script src="{{asset('/public/js/app.js')}}" type="text/javascript"></script>
     </footer>
   </body>
 </html>

@@ -12,8 +12,8 @@
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{asset('ev/public/css/font-awesome/css/font-awesome.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ev/public/css/admin.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/css/font-awesome/css/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/css/admin.css')}}">
   </head>
   <body>
     <div class="container-fluid" id="app">
@@ -22,7 +22,7 @@
 
     <footer>
       {{-- <script src="{{asset('ev/public/js/ckeditor/ckeditor.js')}}"></script> --}}
-      <script src="{{asset('ev/public/js/admin.js')}}"></script>
+      <script src="{{asset('/public/js/admin.js')}}"></script>
     </footer>
   </body>
 </html>

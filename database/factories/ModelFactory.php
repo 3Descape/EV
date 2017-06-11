@@ -27,6 +27,15 @@ $factory->define(App\Event::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->word,
         'description' => $faker->sentences($nb = 3,$asText = true),
-        'date' => $faker->dateTime($max = 'now', $timezone = date_default_timezone_get()),
+        'date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = '+3 years', $timezone = date_default_timezone_get()),
+        'location' => $faker->word,
+    ];
+});
+
+$factory->define(App\Person::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->word,
+        'description' => $faker->sentences($nb = 1,$asText = true),
+        'category' => $faker->numberBetween($min = 0, $max = 3),
     ];
 });

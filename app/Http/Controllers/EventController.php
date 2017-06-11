@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Event;
+use Carbon\Carbon;
+
 class EventController extends Controller
 {
     /**
@@ -14,7 +16,7 @@ class EventController extends Controller
      */
     public function index()
     {
-      return response()->json(Event::all());
+      return response()->json(Event::orderBy('date', 'desc')->get());
     }
 
     /**
@@ -36,13 +38,14 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),
-            [
-                'name' => 'required|min:5|max:255',
-                'description' => 'required|min:10',
-                'date' => 'required|date'
-
-            ]
+          [
+              'name' => 'required|min:5|max:255',
+              'description' => 'required|min:10',
+              'date' => 'required|date',
+              'location' => 'required|min:5',
+          ]
         );
+    
 
       if ($validator->fails()) {
           $messages = $validator->messages();
@@ -52,7 +55,8 @@ class EventController extends Controller
             Event::create([
               'name' => $request->name,
               'description' => $request->description,
-              'date' => $request->date
+              'date' => $request->date,
+              'location' => $request->location,
             ]);
         }
     }
@@ -93,6 +97,7 @@ class EventController extends Controller
         'name' => $request->name,
         'description' => $request->description,
         'date' => $request->date,
+        'location' => $request->location,
       ]);
     }
 

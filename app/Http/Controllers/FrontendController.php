@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Text;
-use App\Menu;
+use App\Event;
+use App\Person;
+use Carbon\Carbon;
 class FrontendController extends Controller
 {
   // public function dynamic($route){
@@ -22,7 +24,19 @@ class FrontendController extends Controller
   }
   public function events()
   {
-    return view('sites.events');
+      $events_future = Event::where('date', '>', Carbon::now())->orderBy('date', 'desc')->get();
+      return view('sites.events', ['events' => $events_future]);
+  }
+
+  public function events_archive()
+  {
+      $events_past = Event::where('date', '<', Carbon::now())->orderBy('date', 'desc')->get();
+      return view('sites.events_archive', ['events' => $events_past]);
+  }
+  public function get_people($id)
+  {
+      $people = Person::where('category', $id)->get();
+      return response()->json($people, 200);
   }
   public function sga()
   {

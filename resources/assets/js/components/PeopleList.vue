@@ -27,7 +27,7 @@
         },
         created: function (){
           var vue = this;
-          axios.get('/ev/api/people/' + vue.id)
+          axios.get('/api/people/' + vue.id)
           .then(function (response) {
             vue.people = response.data;
           })

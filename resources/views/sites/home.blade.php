@@ -5,7 +5,7 @@ Home
 @endsection
 
 @section('content')
-  <div class="container-fluid">@include('layouts.menu')</div>
+  {{-- <div class="container-fluid">@include('layouts.menu')</div> --}}
   <div class="container-fluid" id="home_t">
     <div class="start_image">
     </div>
@@ -14,12 +14,12 @@ Home
         <h1>Herzlich Willkommen beim Elternverein des BG/BRG Weiz</h1>
       </div>
 
-      <div class="start_footer text-center">
+      {{-- <div class="start_footer text-center">
         <a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a>
         <a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a>
         <a href=""><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
         <a href=""><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
-      </div>
+      </div> --}}
     </div>
   </div>
 

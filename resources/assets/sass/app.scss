@@ -6,7 +6,7 @@ body{
   background-color: #F4F4F4;
   text-align: justify;
   text-justify: inter-word;
-  padding-top: 50px;
+  //padding-top: 50px;
   font-family: 'Poppins', sans-serif;
   transition: 0.5s;
 }
@@ -64,9 +64,8 @@ body{
   #home_t{
     padding: 0px;
     .start_image{
-      height: calc(100vh - 50px);
+      height: 100vh;
       background-color: $color3;
-      z-index: -2;
       //background-image: url('/public/img/preview.jpg');
       //background-blend-mode: multiply;
       &:before {
@@ -84,12 +83,12 @@ body{
     }
     .content{
       position: absolute;
-      height: calc(100vh - 50px);
+      height: 100vh;
       width: 100vw;
       top: 0px;
       left: 0px;
       .content_padding{
-        margin: 10vh 50px 50px 50px;
+        margin: 10vh 0px 50px 50px;
         @media(max-width:768px){
           margin: 20px;
         }

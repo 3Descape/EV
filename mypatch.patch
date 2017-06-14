@@ -1,0 +1,10 @@
+diff --git a/resources/views/layouts/menu.blade.php b/resources/views/layouts/menu.blade.php
+index bf5c487..6fbbaa7 100644
+--- a/resources/views/layouts/menu.blade.php
++++ b/resources/views/layouts/menu.blade.php
+@@ -1,4 +1,4 @@
+-<nav class="navbar fixed-top navbar-toggleable-md navbar-inverse " id="menu">
++<nav class="navbar  navbar-toggleable-md navbar-inverse " id="menu">
+   <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span>
+   </button>

@@ -3,13 +3,21 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
 body{
-    background-color: #F4F4F4;
+    background-color: $color3;
     text-align: justify;
     text-justify: inter-word;
     font-family: 'Poppins', sans-serif;
     transition: 0.5s;
 }
-
+div.bg{
+    background-image: url('/public/img/preview.jpg');
+    background-blend-mode: multiply;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    opacity: 0.2;
+}
 .bg-dark{
     background-color: #272B33;
     transition: 0.5s;
@@ -17,15 +25,21 @@ body{
 .page-content{
     margin-top: -56px;
 }
-#menu{
+.menu{
     background-color: rgba(0,0,0,0.0);
     z-index: 2;
     *{
         color: white;
         font-weight: 800;
     }
+
 }
 
+@include media-breakpoint-down(md) {
+    .menu{
+        background-color: $color3;
+    }
+}
 
 #app{
     h1, h2{
@@ -106,16 +120,18 @@ body{
         #social-media{
             background-color: #292D39;
             .row{
-                .col-md-3{
+                .col-lg-3{
                     height: 8vh;
                     display: table;
                     a{
-                        padding: 20px;
+                        padding: 15px;
                         display: table-cell;
                         vertical-align: middle;
                         color: $color5;
-                        font-size: 1.5em;
+                        font-size: 1.4em;
                         font-weight: bold;
+                        text-align: center;
+
                     }
                 }
             }

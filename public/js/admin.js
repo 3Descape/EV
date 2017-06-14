@@ -37294,7 +37294,7 @@ process.umask = function() { return 0; };
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(global) {/*!
- * Vue.js v2.3.4
+ * Vue.js v2.3.3
  * (c) 2014-2017 Evan You
  * Released under the MIT License.
  */
@@ -41723,7 +41723,7 @@ Object.defineProperty(Vue$3.prototype, '$ssrContext', {
   }
 });
 
-Vue$3.version = '2.3.4';
+Vue$3.version = '2.3.3';
 
 /*  */
 
@@ -42214,7 +42214,6 @@ function createPatchFunction (backend) {
   function initComponent (vnode, insertedVnodeQueue) {
     if (isDef(vnode.data.pendingInsert)) {
       insertedVnodeQueue.push.apply(insertedVnodeQueue, vnode.data.pendingInsert);
-      vnode.data.pendingInsert = null;
     }
     vnode.elm = vnode.componentInstance.$el;
     if (isPatchable(vnode)) {
@@ -59094,7 +59093,7 @@ exports.default = {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(158)();
-exports.push([module.i, "\n.datepicker-overlay[data-v-ef081df0] {\n  position: fixed;\n  width: 100%;\n  height: 100%;\n  z-index: 998;\n  top: 0;\n  left: 0;\n  overflow: hidden;\n  -webkit-animation: fadein 0.5s;\n  /* Safari, Chrome and Opera > 12.1 */\n  /* Firefox < 16 */\n  /* Internet Explorer */\n  /* Opera < 12.1 */\n  animation: fadein 0.5s;\n}\n@keyframes fadein {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Firefox < 16 */\n/* Safari, Chrome and Opera > 12.1 */\n@-webkit-keyframes fadein {\nfrom {\n    opacity: 0;\n}\nto {\n    opacity: 1;\n}\n}\n/* Internet Explorer */\n/* Opera < 12.1 */\n.cov-date-body[data-v-ef081df0] {\n  display: inline-block;\n  background: #3F51B5;\n  overflow: hidden;\n  position: relative;\n  font-size: 16px;\n  font-family: 'Roboto';\n  font-weight: 400;\n  position: fixed;\n  display: block;\n  width: 400px;\n  max-width: 100%;\n  z-index: 999;\n  top: 50%;\n  left: 50%;\n  -webkit-transform: translate(-50%, -50%);\n  transform: translate(-50%, -50%);\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n}\n.cov-picker-box[data-v-ef081df0] {\n  background: #fff;\n  width: 100%;\n  display: inline-block;\n  padding: 25px;\n  box-sizing: border-box !important;\n  -moz-box-sizing: border-box !important;\n  -webkit-box-sizing: border-box !important;\n  -ms-box-sizing: border-box !important;\n  width: 400px;\n  max-width: 100%;\n  height: 280px;\n  text-align: start!important;\n}\n.cov-picker-box td[data-v-ef081df0] {\n  height: 34px;\n  width: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-picker-box td[data-v-ef081df0]:hover {\n  background: #E6E6E6;\n}\ntable[data-v-ef081df0] {\n  border-collapse: collapse;\n  border-spacing: 0;\n  width: 100%;\n}\n.day[data-v-ef081df0] {\n  width: 14.2857143%;\n  display: inline-block;\n  text-align: center;\n  cursor: pointer;\n  height: 34px;\n  padding: 0;\n  line-height: 34px;\n  color: #000;\n  background: #fff;\n  vertical-align: middle;\n}\n.week ul[data-v-ef081df0] {\n  margin: 0 0 8px;\n  padding: 0;\n  list-style: none;\n}\n.week ul li[data-v-ef081df0] {\n  width: 14.2%;\n  display: inline-block;\n  text-align: center;\n  background: transparent;\n  color: #000;\n  font-weight: bold;\n}\n.passive-day[data-v-ef081df0] {\n  color: #bbb;\n}\n.checked[data-v-ef081df0] {\n  background: #F50057;\n  color: #FFF !important;\n  border-radius: 3px;\n}\n.unavailable[data-v-ef081df0] {\n  color: #ccc;\n  cursor: not-allowed;\n}\n.cov-date-monthly[data-v-ef081df0] {\n  height: 150px;\n}\n.cov-date-monthly > div[data-v-ef081df0] {\n  display: inline-block;\n  padding: 0;\n  margin: 0;\n  vertical-align: middle;\n  color: #fff;\n  height: 150px;\n  float: left;\n  text-align: center;\n  cursor: pointer;\n}\n.cov-date-previous[data-v-ef081df0],\n.cov-date-next[data-v-ef081df0] {\n  position: relative;\n  width: 20% !important;\n  text-indent: -300px;\n  overflow: hidden;\n  color: #fff;\n}\n.cov-date-caption[data-v-ef081df0] {\n  width: 60%;\n  padding: 50px 0!important;\n  box-sizing: border-box;\n  font-size: 24px;\n}\n.cov-date-caption span[data-v-ef081df0]:hover {\n  color: rgba(255, 255, 255, 0.7);\n}\n.cov-date-previous[data-v-ef081df0]:hover,\n.cov-date-next[data-v-ef081df0]:hover {\n  background: rgba(255, 255, 255, 0.1);\n}\n.day[data-v-ef081df0]:hover {\n  background: #EAEAEA;\n}\n.unavailable[data-v-ef081df0]:hover {\n  background: none;\n}\n.checked[data-v-ef081df0]:hover {\n  background: #FF4F8E;\n}\n.cov-date-next[data-v-ef081df0]::before,\n.cov-date-previous[data-v-ef081df0]::before {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  top: 50%;\n  margin-top: -7px;\n  margin-left: -7px;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-next[data-v-ef081df0]::after,\n.cov-date-previous[data-v-ef081df0]::after {\n  width: 20px;\n  height: 2px;\n  text-align: center;\n  position: absolute;\n  background: #fff;\n  margin-top: 6px;\n  margin-left: -7px;\n  top: 50%;\n  left: 50%;\n  line-height: 0;\n  content: '';\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.cov-date-previous[data-v-ef081df0]::after {\n  -webkit-transform: rotate(45deg);\n  transform: rotate(45deg);\n}\n.cov-date-previous[data-v-ef081df0]::before {\n  -webkit-transform: rotate(-45deg);\n  transform: rotate(-45deg);\n}\n.date-item[data-v-ef081df0] {\n  text-align: center;\n  font-size: 20px;\n  padding: 10px 0;\n  cursor: pointer;\n}\n.date-item[data-v-ef081df0]:hover {\n  background: #e0e0e0;\n}\n.date-list[data-v-ef081df0] {\n  overflow: auto;\n  vertical-align: top;\n  padding: 0;\n}\n.cov-vue-date[data-v-ef081df0] {\n  color: #5D5D5D;\n}\n.button-box[data-v-ef081df0] {\n  background: #fff;\n  vertical-align: top;\n  height: 50px;\n  line-height: 50px;\n  text-align: right;\n  padding-right: 20px;\n}\n.button-box span[data-v-ef081df0] {\n  cursor: pointer;\n  padding: 10px 20px;\n}\n.watch-box[data-v-ef081df0] {\n  height: 100%;\n  overflow: hidden;\n}\n.hour-box[data-v-ef081df0],\n.min-box[data-v-ef081df0] {\n  display: inline-block;\n  width: 50%;\n  text-align: center;\n  height: 100%;\n  overflow: auto;\n  float: left;\n}\n.hour-box ul[data-v-ef081df0],\n.min-box ul[data-v-ef081df0] {\n  list-style: none;\n  margin: 0;\n  padding: 0;\n}\n.hour-item[data-v-ef081df0],\n.min-item[data-v-ef081df0] {\n  padding: 10px;\n  font-size: 36px;\n  cursor: pointer;\n}\n.hour-item[data-v-ef081df0]:hover,\n.min-item[data-v-ef081df0]:hover {\n  background: #E3E3E3;\n}\n.hour-box .active[data-v-ef081df0],\n.min-box .active[data-v-ef081df0] {\n  background: #F50057;\n  color: #FFF !important;\n}\n[data-v-ef081df0]::-webkit-scrollbar {\n  width: 2px;\n}\n[data-v-ef081df0]::-webkit-scrollbar-track {\n  background: #E3E3E3;\n}\n[data-v-ef081df0]::-webkit-scrollbar-thumb {\n  background: #C1C1C1;\n  border-radius: 2px;\n}\n", ""]);
+exports.push([module.i, "\n.datepicker-overlay[data-v-961a15f0] {\r\n  position: fixed;\r\n  width: 100%;\r\n  height: 100%;\r\n  z-index: 998;\r\n  top: 0;\r\n  left: 0;\r\n  overflow: hidden;\r\n  -webkit-animation: fadein 0.5s;\r\n  /* Safari, Chrome and Opera > 12.1 */\r\n  /* Firefox < 16 */\r\n  /* Internet Explorer */\r\n  /* Opera < 12.1 */\r\n  animation: fadein 0.5s;\n}\n@keyframes fadein {\nfrom {\r\n    opacity: 0;\n}\nto {\r\n    opacity: 1;\n}\n}\r\n/* Firefox < 16 */\r\n/* Safari, Chrome and Opera > 12.1 */\n@-webkit-keyframes fadein {\nfrom {\r\n    opacity: 0;\n}\nto {\r\n    opacity: 1;\n}\n}\r\n/* Internet Explorer */\r\n/* Opera < 12.1 */\n.cov-date-body[data-v-961a15f0] {\r\n  display: inline-block;\r\n  background: #3F51B5;\r\n  overflow: hidden;\r\n  position: relative;\r\n  font-size: 16px;\r\n  font-family: 'Roboto';\r\n  font-weight: 400;\r\n  position: fixed;\r\n  display: block;\r\n  width: 400px;\r\n  max-width: 100%;\r\n  z-index: 999;\r\n  top: 50%;\r\n  left: 50%;\r\n  -webkit-transform: translate(-50%, -50%);\r\n  transform: translate(-50%, -50%);\r\n  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);\n}\n.cov-picker-box[data-v-961a15f0] {\r\n  background: #fff;\r\n  width: 100%;\r\n  display: inline-block;\r\n  padding: 25px;\r\n  box-sizing: border-box !important;\r\n  -moz-box-sizing: border-box !important;\r\n  -webkit-box-sizing: border-box !important;\r\n  -ms-box-sizing: border-box !important;\r\n  width: 400px;\r\n  max-width: 100%;\r\n  height: 280px;\r\n  text-align: start!important;\n}\n.cov-picker-box td[data-v-961a15f0] {\r\n  height: 34px;\r\n  width: 34px;\r\n  padding: 0;\r\n  line-height: 34px;\r\n  color: #000;\r\n  background: #fff;\r\n  text-align: center;\r\n  cursor: pointer;\n}\n.cov-picker-box td[data-v-961a15f0]:hover {\r\n  background: #E6E6E6;\n}\ntable[data-v-961a15f0] {\r\n  border-collapse: collapse;\r\n  border-spacing: 0;\r\n  width: 100%;\n}\n.day[data-v-961a15f0] {\r\n  width: 14.2857143%;\r\n  display: inline-block;\r\n  text-align: center;\r\n  cursor: pointer;\r\n  height: 34px;\r\n  padding: 0;\r\n  line-height: 34px;\r\n  color: #000;\r\n  background: #fff;\r\n  vertical-align: middle;\n}\n.week ul[data-v-961a15f0] {\r\n  margin: 0 0 8px;\r\n  padding: 0;\r\n  list-style: none;\n}\n.week ul li[data-v-961a15f0] {\r\n  width: 14.2%;\r\n  display: inline-block;\r\n  text-align: center;\r\n  background: transparent;\r\n  color: #000;\r\n  font-weight: bold;\n}\n.passive-day[data-v-961a15f0] {\r\n  color: #bbb;\n}\n.checked[data-v-961a15f0] {\r\n  background: #F50057;\r\n  color: #FFF !important;\r\n  border-radius: 3px;\n}\n.unavailable[data-v-961a15f0] {\r\n  color: #ccc;\r\n  cursor: not-allowed;\n}\n.cov-date-monthly[data-v-961a15f0] {\r\n  height: 150px;\n}\n.cov-date-monthly > div[data-v-961a15f0] {\r\n  display: inline-block;\r\n  padding: 0;\r\n  margin: 0;\r\n  vertical-align: middle;\r\n  color: #fff;\r\n  height: 150px;\r\n  float: left;\r\n  text-align: center;\r\n  cursor: pointer;\n}\n.cov-date-previous[data-v-961a15f0],\r\n.cov-date-next[data-v-961a15f0] {\r\n  position: relative;\r\n  width: 20% !important;\r\n  text-indent: -300px;\r\n  overflow: hidden;\r\n  color: #fff;\n}\n.cov-date-caption[data-v-961a15f0] {\r\n  width: 60%;\r\n  padding: 50px 0!important;\r\n  box-sizing: border-box;\r\n  font-size: 24px;\n}\n.cov-date-caption span[data-v-961a15f0]:hover {\r\n  color: rgba(255, 255, 255, 0.7);\n}\n.cov-date-previous[data-v-961a15f0]:hover,\r\n.cov-date-next[data-v-961a15f0]:hover {\r\n  background: rgba(255, 255, 255, 0.1);\n}\n.day[data-v-961a15f0]:hover {\r\n  background: #EAEAEA;\n}\n.unavailable[data-v-961a15f0]:hover {\r\n  background: none;\n}\n.checked[data-v-961a15f0]:hover {\r\n  background: #FF4F8E;\n}\n.cov-date-next[data-v-961a15f0]::before,\r\n.cov-date-previous[data-v-961a15f0]::before {\r\n  width: 20px;\r\n  height: 2px;\r\n  text-align: center;\r\n  position: absolute;\r\n  background: #fff;\r\n  top: 50%;\r\n  margin-top: -7px;\r\n  margin-left: -7px;\r\n  left: 50%;\r\n  line-height: 0;\r\n  content: '';\r\n  -webkit-transform: rotate(45deg);\r\n  transform: rotate(45deg);\n}\n.cov-date-next[data-v-961a15f0]::after,\r\n.cov-date-previous[data-v-961a15f0]::after {\r\n  width: 20px;\r\n  height: 2px;\r\n  text-align: center;\r\n  position: absolute;\r\n  background: #fff;\r\n  margin-top: 6px;\r\n  margin-left: -7px;\r\n  top: 50%;\r\n  left: 50%;\r\n  line-height: 0;\r\n  content: '';\r\n  -webkit-transform: rotate(-45deg);\r\n  transform: rotate(-45deg);\n}\n.cov-date-previous[data-v-961a15f0]::after {\r\n  -webkit-transform: rotate(45deg);\r\n  transform: rotate(45deg);\n}\n.cov-date-previous[data-v-961a15f0]::before {\r\n  -webkit-transform: rotate(-45deg);\r\n  transform: rotate(-45deg);\n}\n.date-item[data-v-961a15f0] {\r\n  text-align: center;\r\n  font-size: 20px;\r\n  padding: 10px 0;\r\n  cursor: pointer;\n}\n.date-item[data-v-961a15f0]:hover {\r\n  background: #e0e0e0;\n}\n.date-list[data-v-961a15f0] {\r\n  overflow: auto;\r\n  vertical-align: top;\r\n  padding: 0;\n}\n.cov-vue-date[data-v-961a15f0] {\r\n  color: #5D5D5D;\n}\n.button-box[data-v-961a15f0] {\r\n  background: #fff;\r\n  vertical-align: top;\r\n  height: 50px;\r\n  line-height: 50px;\r\n  text-align: right;\r\n  padding-right: 20px;\n}\n.button-box span[data-v-961a15f0] {\r\n  cursor: pointer;\r\n  padding: 10px 20px;\n}\n.watch-box[data-v-961a15f0] {\r\n  height: 100%;\r\n  overflow: hidden;\n}\n.hour-box[data-v-961a15f0],\r\n.min-box[data-v-961a15f0] {\r\n  display: inline-block;\r\n  width: 50%;\r\n  text-align: center;\r\n  height: 100%;\r\n  overflow: auto;\r\n  float: left;\n}\n.hour-box ul[data-v-961a15f0],\r\n.min-box ul[data-v-961a15f0] {\r\n  list-style: none;\r\n  margin: 0;\r\n  padding: 0;\n}\n.hour-item[data-v-961a15f0],\r\n.min-item[data-v-961a15f0] {\r\n  padding: 10px;\r\n  font-size: 36px;\r\n  cursor: pointer;\n}\n.hour-item[data-v-961a15f0]:hover,\r\n.min-item[data-v-961a15f0]:hover {\r\n  background: #E3E3E3;\n}\n.hour-box .active[data-v-961a15f0],\r\n.min-box .active[data-v-961a15f0] {\r\n  background: #F50057;\r\n  color: #FFF !important;\n}\n[data-v-961a15f0]::-webkit-scrollbar {\r\n  width: 2px;\n}\n[data-v-961a15f0]::-webkit-scrollbar-track {\r\n  background: #E3E3E3;\n}\n[data-v-961a15f0]::-webkit-scrollbar-thumb {\r\n  background: #C1C1C1;\r\n  border-radius: 2px;\n}\r\n", ""]);
 
 /***/ }),
 /* 158 */
@@ -59412,13 +59411,13 @@ var Component = __webpack_require__(10)(
   /* script */
   __webpack_require__(154),
   /* template */
-  __webpack_require__(164),
+  __webpack_require__(165),
   /* scopeId */
   null,
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\EV\\resources\\assets\\js\\components\\DatePicker.vue"
+Component.options.__file = "C:\\xampp\\htdocs\\ev\\resources\\assets\\js\\components\\DatePicker.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] DatePicker.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -59429,9 +59428,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-acfcfebe", Component.options)
+    hotAPI.createRecord("data-v-dbcaf6be", Component.options)
   } else {
-    hotAPI.reload("data-v-acfcfebe", Component.options)
+    hotAPI.reload("data-v-dbcaf6be", Component.options)
   }
 })()}
 
@@ -59451,13 +59450,13 @@ var Component = __webpack_require__(10)(
   /* script */
   __webpack_require__(156),
   /* template */
-  __webpack_require__(165),
+  __webpack_require__(164),
   /* scopeId */
-  "data-v-ef081df0",
+  "data-v-961a15f0",
   /* cssModules */
   null
 )
-Component.options.__file = "C:\\xampp\\htdocs\\EV\\resources\\assets\\js\\components\\vue-datepicker.vue"
+Component.options.__file = "C:\\xampp\\htdocs\\ev\\resources\\assets\\js\\components\\vue-datepicker.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] vue-datepicker.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -59468,9 +59467,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-ef081df0", Component.options)
+    hotAPI.createRecord("data-v-961a15f0", Component.options)
   } else {
-    hotAPI.reload("data-v-ef081df0", Component.options)
+    hotAPI.reload("data-v-961a15f0", Component.options)
   }
 })()}
 
@@ -59480,26 +59479,6 @@ module.exports = Component.exports
 /***/ }),
 /* 163 */,
 /* 164 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', {}, [_c('date-picker', {
-    attrs: {
-      "date": _vm.starttime,
-      "option": _vm.option
-    }
-  })], 1)
-},staticRenderFns: []}
-module.exports.render._withStripped = true
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-acfcfebe", module.exports)
-  }
-}
-
-/***/ }),
-/* 165 */
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -59698,7 +59677,27 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-hot-reload-api").rerender("data-v-ef081df0", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-961a15f0", module.exports)
+  }
+}
+
+/***/ }),
+/* 165 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {}, [_c('date-picker', {
+    attrs: {
+      "date": _vm.starttime,
+      "option": _vm.option
+    }
+  })], 1)
+},staticRenderFns: []}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-dbcaf6be", module.exports)
   }
 }
 
@@ -59713,13 +59712,13 @@ var content = __webpack_require__(157);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(167)("2862218a", content, false);
+var update = __webpack_require__(167)("78d1f6c2", content, false);
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-ef081df0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-ef081df0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-961a15f0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"id\":\"data-v-961a15f0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./vue-datepicker.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });

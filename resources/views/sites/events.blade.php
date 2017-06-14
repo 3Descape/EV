@@ -5,7 +5,10 @@ Veranstaltungen
 @endsection
 
 @section('content')
-  <div class="container-fluid">@include('layouts.menu')</div>
+  <div class="container-fluid menu">@include('layouts.menu')</div>
+  <div class="bg">
+
+  </div>
   <div>
     <div class="col-md-10 mx-auto bg-wrp">
      <h1 class="text-center">Veranstaltungen</h1>

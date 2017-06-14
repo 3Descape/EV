@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">@include('layouts.menu')</div>
+<div class="container-fluid menu">@include('layouts.menu')</div>
 <div class="container-fluid page-content" id="home_t">
 
     <div>
@@ -64,10 +64,10 @@
             <div class="row">
                 <div class="col-md-10 mx-auto">
                     <div class="row">
-                        <div class="col-md-3 col-sm-12"><a href=""><i class="fa fa-youtube-play" aria-hidden="true"></i> YouTube</a></div>
-                        <div class="col-md-3 col-sm-12"><a href=""><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a></div>
-                        <div class="col-md-3 col-sm-12"><a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a></div>
-                        <div class="col-md-3 col-sm-12"><a href=""><i class="fa fa-graduation-cap" aria-hidden="true"></i> BG Weiz</a></div>
+                        <div class="col-lg-3 col-md-6 col-sm-12"><a href=""><i class="fa fa-youtube-play" aria-hidden="true"></i> YouTube</a></div>
+                        <div class="col-lg-3 col-md-6 col-sm-12"><a href=""><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a></div>
+                        <div class="col-lg-3 col-md-6 col-sm-12"><a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a></div>
+                        <div class="col-lg-3 col-md-6 col-sm-12"><a href=""><i class="fa fa-graduation-cap" aria-hidden="true"></i> BG Weiz</a></div>
                     </div>
                 </div>
             </div>

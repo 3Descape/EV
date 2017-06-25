@@ -15,8 +15,8 @@
         ]) !!};
     </script>
 
-    <link rel="stylesheet" href="{{asset('ev/public/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('ev/public/css/app.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/public/css/app.css')}}">
   </head>
   <body>
     <div class="container-fluid" id="app">
@@ -24,8 +24,8 @@
     </div>
 
     <footer>
-      <script src="{{asset('ev/public/js/jquery-3.1.1.min.js')}}"></script>
-      <script src="{{asset('ev/public/js/bootstrap.min.js')}}"></script>
+      <script src="{{asset('/public/js/jquery-3.1.1.min.js')}}"></script>
+      <script src="{{asset('/public/js/bootstrap.min.js')}}"></script>
     </footer>
   </body>
 </html>

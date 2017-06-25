@@ -1,104 +1,69 @@
+@import "/palettes/palette_4.scss";
+@import "/_variables.scss";
 @import "node_modules/bootstrap/scss/bootstrap";
 //admin section
-$sitebar_color: #222;
-#sidebar{
-  .list-group-item{
-    border-radius: 0;
-    background-color: $sitebar_color;
-    color: #ccc;
-    border-left: 0;
-    border-right: 0;
-    border-color: #2c2c2c;
-    white-space: nowrap;
-  }
-  .list-group{
-    .list-group-item[aria-expanded="false"]{
-      background-color: lighten($sitebar_color, 10%);
-      ::after {
-        content: " \f0d7";
-        font-family: FontAwesome;
-        display: inline;
-        text-align: right;
-        padding-left: 5px;
-      }
+
+$bg-sitebar: rgb(29, 29, 37);
+.sitebar-wrp{
+    position: relative;
+    margin-right: 4rem;
+    transform: translateX(-20px);
+    height: 100vh;
+    &>a.data-toggle{
+        position: absolute;
+        top: 0;
+        right: -3rem;
+        z-index: 10;
     }
-    .list-group-item[aria-expanded="true"]{
-      ::after {
-        content: " \f0da";
-        font-family: FontAwesome;
-        display: inline;
-        text-align: right;
-        padding-left: 5px;
-      }
-    }
-  }
-  .collapse{
-    .list-group-item{
-      padding-left: 20px;
-      background-color: lighten($sitebar_color, 5%);
-      .collapse{
-        .list-group-item{
-          padding-left: 30px;
+    &>div{
+        overflow: hidden;
+        height: 100%;
+        background-color: $bg-sitebar;
+
+        .list-group{
+            .fa{
+                margin-right: 3px;
+            }
+            background-color: $bg-sitebar;
+            @include media-breakpoint-up(md) {
+                &>a{
+                    padding-right: 50px;
+                }
+            }
+            form{
+                &>button{
+                    width: 100%;
+                    cursor: pointer;
+                    background-color: inherit;
+                    border: none;
+                }
+            }
+            .list-group-item{
+                color: $color1;
+                background-color: $bg-sitebar;
+                &:hover{
+                    background-color: lighten($bg-sitebar, 10%);
+                }
+            }
+            &>div{
+                padding-left: 15px;
+                &>div{
+                    padding-left: 15px;
+                }
+            }
+            .user{
+                color: $color3;
+                background-color: $bg-sitebar !important;
+            }
+
         }
-        .collapse{
-          .list-group-item{
-            padding-left: 40px;
-          }
-        }
-      }
     }
-  }
 }
 
-@media (max-width:48em) {
-  #sidebar{
-    .list-group{
-      .list-group-item{
-        text-align: center;
-        padding: .75rem .5rem;
-      }
-      .list-group-item[aria-expanded="false"]{
-        ::after{
-          display:none;
+.card.person{
+    tr{
+        td:last-child(){
+            width: 135px;
         }
-      }
     }
-  }
-}
-
-
-
-.admin_home_links{
-  .col-md-6{
-    padding: 20px;
-    height: 80px;
-    a{
-      display: block;
-      vertical-align: middle;
-      border: 1px solid black;
-    }
-  }
-}
-
-
-#richTextField {
-    -moz-appearance: textfield-multiline;
-    -webkit-appearance: textarea;
-    font: medium -moz-fixed;
-    font: -webkit-small-control;
-    min-height: 5em;
-    overflow: auto;
-    padding: 2px;
-    resize: both;
-    min-width: 100%;
-    max-width: 100%;
-    div{
-     border: 1px solid rgba(0, 0, 0, 0.2);
-     h1{
-       border: 1px solid rgba(0, 255, 200, 0.22);
-     }
-     p{
-       border: 1px solid rgba(0, 125, 255, 0.22);
-     }
-   }
 }

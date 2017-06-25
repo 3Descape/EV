@@ -1,7 +1,7 @@
-<nav class="navbar navbar-toggleable-md navbar-inverse">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav class="navbar navbar-toggleable-md">
+    <button class="navbar-toggler fa fa-bars navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   <a class="navbar-brand" href="{{ route('home') }}">Ev Weiz</a>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">

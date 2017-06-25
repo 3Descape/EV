@@ -6,13 +6,11 @@
 
 @section('content')
 <div class="container-fluid menu">@include('layouts.menu')</div>
-<div class="bg">
-    
-</div>
+
 <div>
     <div class="col-md-10 mx-auto bg-wrp space">
 
-      <div class="col-md-10 col-sm-12 mx-auto sizing" id="vorstand">
+      <div class="col-md-10 col-sm-12 mx-auto " id="vorstand">
         <h1 class="text-center">Vorstand</h1>
         <div class="row">
           <div class="col-md-4 col-sm-12 text-center">
@@ -24,20 +22,29 @@
         </div>
       </div>
 
-      <div class="col-md-10 col-sm-12 mx-auto sizing" id="elternvertreterInnen">
+      <div class="col-md-10 col-sm-12 mx-auto " id="elternvertreterInnen">
         <h1 class="text-center" >ElternvertreterInnen</h1>
         <div class="row" id="personen">
-            <vue-people id="1"></vue-people>
+            {{-- @foreach ($people as $person)
+
+                <div class="card col-md-3">
+                  <div class="card-block">
+                    <h4 class="card-title">{{$person->name}}</h4>
+                    <p class="card-text">{{$person->description}}</p>
+                  </div>
+                </div>
+
+            @endforeach --}}
         </div>
       </div>
 
-      <div class="col-md-10 col-sm-12 mx-auto sizing" id="mitgliedsbeitrag">
+      <div class="col-md-10 col-sm-12 mx-auto " id="mitgliedsbeitrag">
         <h1 class="text-center">Mitgliedsbeitrag</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </div>
 
 
-      <div class="col-md-10 col-sm-12 mx-auto sizing" id="statuten">
+      <div class="col-md-10 col-sm-12 mx-auto " id="statuten">
         <h1 class="text-center">Statuten</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>

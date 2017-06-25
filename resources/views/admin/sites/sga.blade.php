@@ -1,6 +1,6 @@
-@extends('admin.master')
+@extends('admin.layouts.sitebar')
 
-@section('content')
+@section('sitebar_inner')
 
   <div class="col-md-10 mx-auto">
     Sga

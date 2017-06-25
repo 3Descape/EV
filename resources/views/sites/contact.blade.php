@@ -6,9 +6,7 @@ Kontakt
 
 @section('content')
   <div class="container-fluid menu">@include('layouts.menu')</div>
-  <div class="bg">
 
-  </div>
   <div>
     <div class="col-md-10 col-sm-12 mx-auto bg-wrp">
 

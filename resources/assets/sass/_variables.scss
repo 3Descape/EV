@@ -328,9 +328,9 @@ $component-active-bg:    $brand-primary !default;
 
 $caret-width:            .3em !default;
 
-$transition-base:        all .2s ease-in-out !default;
-$transition-fade:        opacity .15s linear !default;
-$transition-collapse:    height .35s ease !default;
+$transition-base:        all 0.2s ease-in-out !default;
+$transition-fade:        opacity  0.2s ease-in-out !default;
+$transition-collapse:    width  0.2s ease-in-out !default;
 
 
 // Tables

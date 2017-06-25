@@ -1,8 +1,13 @@
-@extends('admin.master')
+@extends('admin.layouts.sitebar')
 
-@section('content')
 
+@section('sitebar_inner')
 <div class="row">
+    <div class="col-md-12">
+        Testasdf
+    </div>
+</div>
+{{-- <div class="row">
   <div class="col-md-10 mx-auto">
     <div class="row text-center admin_home_links">
       <div class="col-md-6">
@@ -19,6 +24,6 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
 @endsection

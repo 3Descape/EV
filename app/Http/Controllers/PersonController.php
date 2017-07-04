@@ -14,6 +14,7 @@ class PersonController extends Controller
 
     public function store(Request $request)
     {
+        //TODO: Validation
         Person::create($request->all());
         return redirect()->route('admin_people_frontend');
     }

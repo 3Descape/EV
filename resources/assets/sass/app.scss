@@ -2,12 +2,19 @@
 @import "/_variables.scss";
 @import "node_modules/bootstrap/scss/bootstrap";
 
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,400i,600');
+
 body{
     text-align: justify;
+    line-height: 2em;
     text-justify: inter-word;
-    font-family: 'Poppins', sans-serif;
     transition: 0.5s;
     background-color: #F4F4F4;
+    color: #0a0a0a;
+    *{
+        font-family: 'Montserrat', sans-serif;
+    }
+
 }
 div.bg{
     background-image: url('/public/img/preview.jpg');
@@ -41,6 +48,7 @@ div.bg{
 }
 
 #app{
+    font-family: Popins;
     h1, h2{
         text-align: left;
         font-weight: 700;
@@ -134,7 +142,7 @@ div.bg{
             padding-top: 4em;
         }
         .space{
-            .col-md-10{
+            .col-md-6{
                 padding-bottom: 5em;
                 h2{
                     padding-bottom: 0.5em;

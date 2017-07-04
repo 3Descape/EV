@@ -29,16 +29,28 @@ class FrontendController extends Controller
         //,['people' => $people]
     );
     }
-    public function events_future()
+    public function events_future($type = null)
     {
-        $events_future = Event::futureEvents()->get();
-        return view('sites.events', ['events' => $events_future]);
+        $text = 'Alle';
+        $query = Event::futureEvents();
+        if($type){
+            $text = ucfirst($type);
+            $query->where('category', $type);
+        }
+        $events_future = $query->get();
+        return view('sites.events', ['events' => $events_future,'text' => $text]);
     }
 
-    public function events_archived()
+    public function events_archived($type = null)
     {
-        $events_past = Event::pastEvents()->get();
-        return view('sites.events_archive', ['events' => $events_past]);
+        $query = Event::pastEvents();
+        $text = 'Alle';
+        if($type){
+            $text = ucfirst($type);
+            $query->where('category', $type);
+        }
+        $events_past = $query->get();
+        return view('sites.events_archive', ['events' => $events_past, 'text' => $text]);
     }
     public function sga()
     {

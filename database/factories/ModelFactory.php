@@ -24,17 +24,24 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 });
 
 $factory->define(App\Event::class, function (Faker\Generator $faker) {
+    $cont = $faker->randomElement([
+        ['name' => 'Maturaball', 'location' => 'im Bg/Brg Weiz', 'category' => 'bälle'],
+        ['name' => 'Tanzkränzchen', 'location' => 'im Garten der Generationen', 'category' => 'bälle'],
+        ['name' => 'Leichtathletik', 'location' => 'am Sportplatz', 'category' => 'sport'],
+        ['name' => 'Gesundes Frühstück', 'location' => 'beim Bleykolm Weiz', 'category' => 'sonstige'],
+    ]);
     return [
-        'name' => $faker->word,
+        'name' => $cont['name'],
         'description' => $faker->sentences($nb = 3,$asText = true),
         'date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = '+3 years', $timezone = date_default_timezone_get()),
-        'location' => $faker->word,
+        'location' => $cont['location'],
+        'category' => $cont['category'],
     ];
 });
 
 $factory->define(App\Person::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->word,
+        'name' => $faker->name,
         'description' => $faker->sentences($nb = 1,$asText = true),
         'category' => $faker->numberBetween($min = 0, $max = 3),
     ];

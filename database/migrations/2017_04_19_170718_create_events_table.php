@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration
             $table->text('description');
             $table->date('date');
             $table->string('location');
+            $table->string('category');
             $table->timestamps();
         });
     }

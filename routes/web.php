@@ -44,8 +44,9 @@ Route::get('/', 'FrontendController@index')->name('home');
 Route::get('/förderansuchen', 'FrontendController@download_pdf')->name('pdf_start_download');
 
 Route::get('/über_uns', 'FrontendController@about')->name('about');
-Route::get('/veranstaltungen', 'FrontendController@events_future')->name('events');
-Route::get('/veranstaltungen/archiv', 'FrontendController@events_archived')->name('events_archive');
+Route::get('/veranstaltungen/archiv/{type?}', 'FrontendController@events_archived')->name('events_archive');
+Route::get('/veranstaltungen/{type?}', 'FrontendController@events_future')->name('events');
+
 Route::get('/sga', 'FrontendController@sga')->name('sga');
 Route::get('/info', 'FrontendController@info')->name('info');
 Route::get('/kontakt', 'FrontendController@contact')->name('contact');

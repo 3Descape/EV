@@ -58082,7 +58082,7 @@ datestr = String(date.getFullYear()) + '-' + String(month) + '-' + String(day);
 console.log(datestr);
 
 var app = new Vue({
-  el: "#events",
+  el: '#events',
   data: {
     events: [],
     eventEdit: {},
@@ -58098,7 +58098,13 @@ var app = new Vue({
       var date = event.target.event_date;
       var location = event.target.event_location;
       if (name.value.length > 4 && description.value.length > 9 && location.value.length > 5) {
-        this.events.push({ id: this.events.length + 1, name: name.value, description: description.value, date: date.value, location: location.value });
+        this.events.push({
+          id: this.events.length + 1,
+          name: name.value,
+          description: description.value,
+          date: date.value,
+          location: location.value
+        });
       }
 
       vue = this;
@@ -58131,18 +58137,27 @@ var app = new Vue({
     },
     editEvent: function editEvent(index) {
       this.eventEdit = this.events[index];
-      this.eventEdit['starttime'] = { 'time': this.eventEdit.date };
+      this.eventEdit['starttime'] = {
+        'time': this.eventEdit.date
+      };
 
       this.tempIndex = index;
       $('#myModal').modal('show');
     },
     updateEvent: function updateEvent(event) {
-      //console.log(this.events[this.tempIndex])
-      this.events[this.tempIndex] = { id: this.eventEdit.id, name: event.target.name.value, description: event.target.description.value, date: event.target.event_date.value, location: event.target.location.value };
+
+      this.events[this.tempIndex] = {
+        id: this.eventEdit.id,
+        name: event.target.name.value,
+        description: event.target.description.value,
+        date: event.target.event_date.value,
+        location: event.target.location.value
+      };
+
       $('#myModal').modal('hide');
 
-      vue = this;
-      axios.post('/ev/api/events/' + vue.eventEdit.id, {
+      _this = this;
+      axios.post('/ev/api/events/' + _this.eventEdit.id, {
         id: vue.eventEdit.id,
         name: event.target.name.value,
         description: event.target.description.value,
@@ -58152,6 +58167,7 @@ var app = new Vue({
       }).catch(function (error) {
         console.log(error);
       });
+
       this.eventEdit = [];
     }
   },

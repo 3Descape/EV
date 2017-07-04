@@ -10,7 +10,7 @@ Kontakt
   <div>
     <div class="col-md-10 col-sm-12 mx-auto bg-wrp">
 
-        <div class="col-md-10 col-sm-12 mx-auto" id="contact">
+        <div class="col-md-6 col-sm-12 mx-auto" id="contact">
           <h1 class="text-center">Kontakt</h1>
 
           <p>Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</p>

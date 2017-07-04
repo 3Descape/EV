@@ -1,45 +1,64 @@
 @extends('master')
 
 @section('title')
-Veranstaltungen
+    Veranstaltungen
 @endsection
 
 @section('content')
-  <div class="container-fluid menu">@include('layouts.menu')</div>
+    <div class="container-fluid menu">@include('layouts.menu')</div>
 
-  <div>
-    <div class="col-md-10 mx-auto bg-wrp">
-     <h1 class="text-center">Veranstaltungen</h1>
+    <div>
+        <div class="col-md-9 mx-auto bg-wrp">
+            <div class="row">
+                <div class="col-md-10 col-sm-12 push-md-1 push-12">
+                    <h1 class="text-center">Veranstaltungen</h1>
+                    @foreach ($events as $event)
 
-     @foreach ($events as $event)
-
-
-        <div class="col-md-10 mx-auto">
-          <div class="card">
-            <div class="card-block">
-              <div class="row">
-                <div class="col-md-2">
-                  <img class="img-fluid" src="https://cdn.dribbble.com/users/2915/screenshots/111453/shot_1297091762.jpg" alt="Card image cap">
+                        <div class="col-md-12 mx-auto mt-4">
+                            <div class="card">
+                                <div class="card-block">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h3 class="card-title">{{ucfirst($event->name)}}</h3>
+                                                    <p class="card-text">{{$event->description}}</p>
+                                                </div>
+                                                <div class="col-md-12 mt-4">
+                                                    <h4 class="card-title">Wo und Wann?</h4>
+                                                    <p class="card-text">{{$event->date->format('d.m.Y') . ' ' . $event->location}}</p>
+                                                    <span class="badge badge-info float-right">{{ ucfirst($event->category)}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div class="col-md-10">
-                  <div class="row">
+
+                <div class="col-md-2 col-sm-12 push-md-1 pull-sm-12">
                     <div class="col-md-12">
-                      <h3 class="card-title">{{$event->name}}</h3>
-                      <p class="card-text">{{$event->description}}</p>
+                        <div class="btn-group" role="group">
+                            <button id="event_select" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{$text}}
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="event_select">
+                                <a class="dropdown-item" href="{{route('events')}}">Alle</a>
+                                <a class="dropdown-item" href="{{route('events', 'bälle')}}">Bälle</a>
+                                <a class="dropdown-item" href="{{route('events', 'sport')}}">Sport</a>
+                                <a class="dropdown-item" href="{{route('events', 'sonstige')}}">Sonstige</a>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-md-12 mt-4">
-                      <h4 class="card-title">Wo und Wann?</h4>
-                      <p class="card-text">{{$event->date->format('d.m.Y') . ' ' . $event->location}}</p>
+                        <a class="btn btn-success" href="{{route('events_archive')}}"> <i class="fa fa-arrow-right"></i> Archiv</a>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
-      @endforeach
 
-      <h2 class="text-center"><a href="{{route('events_archive')}}">Archiv</a></h2>
+        </div>
+
     </div>
-  </div>
 @endsection

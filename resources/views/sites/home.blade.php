@@ -52,7 +52,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <a href="#" class="btn btn-success float-right"><i class="fa fa-arrow-right"></i> Ansehen</a>
+                                    <a href="{{route('events_archive')}}?event={{$event->id}}" class="btn btn-success float-right"><i class="fa fa-arrow-right"></i> Ansehen</a>
                                 </div>
                             </div>
                         </div>
@@ -90,10 +90,18 @@
             <div class="row">
                 <div class="col-md-10 mx-auto">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-12"><a href=""><i class="fa fa-youtube-play" aria-hidden="true"></i> YouTube</a></div>
-                        <div class="col-lg-3 col-md-6 col-sm-12"><a href=""><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a></div>
-                        <div class="col-lg-3 col-md-6 col-sm-12"><a href=""><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a></div>
-                        <div class="col-lg-3 col-md-6 col-sm-12"><a href=""><i class="fa fa-graduation-cap" aria-hidden="true"></i> BG Weiz</a></div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i> YouTube</a>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-sm-12">
+                            <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> BG Weiz</a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -25,7 +25,7 @@ SGA
         <div class="row" id="personen">
             @foreach ($people as $person)
 
-                <div class="card col-md-12">
+                <div class="card col-md-12" style="background-color: #FFFFFF">
                   <div class="card-block">
                     <h4 class="card-title">{{$person->name}}</h4>
                     <p class="card-text">{{$person->description}}</p>

@@ -37,20 +37,36 @@ class FrontendController extends Controller
             $text = ucfirst($type);
             $query->where('category', $type);
         }
-        $events_future = $query->get();
-        return view('sites.events', ['events' => $events_future,'text' => $text]);
+        $events_future = $query->paginate(10);
+        return view('sites.events', [
+            'events' => $events_future,
+            'text' => $text
+        ]);
     }
 
     public function events_archived($type = null)
     {
-        $query = Event::pastEvents();
-        $text = 'Alle';
-        if($type){
-            $text = ucfirst($type);
-            $query->where('category', $type);
+        if(request('event'))
+        {
+            $event = Event::find(request('event'));
+            return view('sites.event_view', [
+                'event' => $event,
+            ]);
+
+        }else {
+            $query = Event::pastEvents();
+            $text = 'Alle';
+            if($type){
+                $text = ucfirst($type);
+                $query->where('category', $type);
+            }
+            $events_past = $query->paginate(10);
+            return view('sites.events_archive', [
+                'events' => $events_past,
+                'text' => $text
+            ]);
         }
-        $events_past = $query->get();
-        return view('sites.events_archive', ['events' => $events_past, 'text' => $text]);
+
     }
     public function sga()
     {

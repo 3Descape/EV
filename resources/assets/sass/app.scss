@@ -9,8 +9,8 @@ body{
     line-height: 2em;
     text-justify: inter-word;
     transition: 0.5s;
-    background-color: #F4F4F4;
-    color: #0a0a0a;
+    background-color: #FFFFFF;
+    color: #333333;
     *{
         font-family: 'Montserrat', sans-serif;
     }
@@ -55,7 +55,7 @@ div.bg{
         letter-spacing: -.02em;
         word-spacing: 0.1em;
         line-height: 1.2em;
-        color: #1B1C1E;
+        color: #333333;
     }
 
     #home_t{
@@ -157,5 +157,11 @@ div.bg{
                 height:100%;
             }
         }
+    }
+
+    #event_select + div.dropdown-menu{
+        left: auto;
+        width: calc(100% - 30px);
+        text-align: center;
     }
 }

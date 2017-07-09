@@ -34,6 +34,10 @@ div.bg{
     margin-top: -56px;
 }
 .menu{
+    nav{
+        padding-top: 0px;
+        padding-bottom: 0px;
+    }
     background-color: $color6;
     z-index: 2;
     *{
@@ -41,11 +45,18 @@ div.bg{
         font-weight: 600;
     }
     a{
+        padding-top: 16px;
+        padding-bottom: 16px;
+        &.active{
+            color: lighten($color1, 10%);
+            background-color: lighten($color6, 10%);
+        }
         &:hover{
             color: darken($color1, 10%);
         }
     }
 }
+
 
 #app{
     font-family: Popins;

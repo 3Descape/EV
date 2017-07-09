@@ -7,23 +7,23 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mx-auto">
         <li class="nav-item" >
-          <a class="nav-link" href="{{route('about')}}">Über uns</a>
+          <a class="nav-link {{request()->is('über_uns') ? 'active' : ''}}" href="{{route('about')}}">Über uns</a>
         </li>
 
         <li class="nav-item" >
-          <a class="nav-link" href="{{route('events')}}">Veranstaltungen</a>
+          <a class="nav-link {{request()->is('veranstaltungen*') ? 'active' : ''}}" href="{{route('events')}}">Veranstaltungen</a>
         </li>
         <li class="nav-item" >
-          <a class="nav-link" href="{{route('sga')}}">SGA</a>
+          <a class="nav-link {{request()->is('sga') ? 'active' : ''}}" href="{{route('sga')}}">SGA</a>
         </li>
         <li class="nav-item" >
-          <a class="nav-link" href="{{route('info')}}">Informationen</a>
+          <a class="nav-link {{request()->is('info') ? 'active' : ''}}" href="{{route('info')}}">Informationen</a>
         </li>
         <li class="nav-item" >
-          <a class="nav-link" href="{{route('contact')}}">Kontakt</a>
+          <a class="nav-link {{request()->is('kontakt') ? 'active' : ''}}" href="{{route('contact')}}">Kontakt</a>
         </li>
         <li class="nav-item" >
-          <a class="nav-link" href="{{route('imprint')}}">Impressum</a>
+          <a class="nav-link {{request()->is('impressum') ? 'active' : ''}}" href="{{route('imprint')}}">Impressum</a>
         </li>
     </ul>
   </div>

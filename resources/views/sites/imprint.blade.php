@@ -14,7 +14,7 @@ Impressum
           <h1 class="text-center">Impressum</h1>
           <div class="text-center mt-4">
             <p>Elternverein Weiz</p>
-            <p>Inh. Waldemar Vogel</p>
+            <p>Andreas Hammerschmidt</p>
             <p>Offenburger Gasse 23</p>
             <p>8160 Weiz</p>
             <p>Telefon: 49 2845 / 936 82 38</p>

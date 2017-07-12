@@ -40,6 +40,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 //Route::get('/{route}', 'FrontendController@dynamic');
 
+
+
 Route::get('/', 'FrontendController@index')->name('home');
 Route::get('/förderansuchen', 'FrontendController@download_pdf')->name('pdf_start_download');
 
@@ -51,3 +53,11 @@ Route::get('/sga', 'FrontendController@sga')->name('sga');
 Route::get('/info', 'FrontendController@info')->name('info');
 Route::get('/kontakt', 'FrontendController@contact')->name('contact');
 Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
+
+Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
+Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
+Route::get('/flash', function(){
+    session()->flash('msg', 'test');
+
+    return redirect()->route('contact');
+});

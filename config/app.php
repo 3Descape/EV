@@ -13,6 +13,8 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'ev_address' => env('APP_EV_ADDRESS', 'miclack30@gmail.com'),
+    'obmann_address' => env('APP_OBMANN_ADDRESS', 'miclack30@gmail.com'),
 
     /*
     |--------------------------------------------------------------------------

@@ -25,7 +25,7 @@
                                                 </div>
                                                 <div class="col-md-12 mt-4">
                                                     <h4 class="card-title">Wo und Wann?</h4>
-                                                    <p class="card-text">Am {{$event->date->format('d.m.Y') . ' ' . $event->location}}</p>
+                                                    <p class="card-text">Am {{$event->date->formatLocalized('%#d %B %Y') . ' ' . $event->location}}</p>
                                                     <span class="badge badge-info float-right">{{ ucfirst($event->category)}}</span>
                                                 </div>
                                             </div>

@@ -34,9 +34,26 @@ div.bg{
     margin-top: -56px;
 }
 .menu{
+    padding: 0px;
     nav{
-        padding-top: 0px;
-        padding-bottom: 0px;
+        padding: 0px;
+        div.navbar-collapse > ul > li{
+            a{
+                padding-top: 16px;
+                padding-bottom: 16px;
+                @include media-breakpoint-down(md) {
+                    padding-left: 35px;
+                }
+                &.active{
+                    color: lighten($color1, 10%);
+                    background-color: lighten($color6, 10%);
+                }
+                &:hover{
+                    color: darken($color1, 10%);
+                    background-color: darken($color6, 2%);
+                }
+            }
+        }
     }
     background-color: $color6;
     z-index: 2;
@@ -44,13 +61,15 @@ div.bg{
         color: $color1;
         font-weight: 600;
     }
-    a{
+    button.navbar-toggler-right{
+        margin-top: 16px;
+        margin-bottom: 16px;
+        right: 0px;
+    }
+    a.navbar-brand{
+        margin-left: 35px;
         padding-top: 16px;
         padding-bottom: 16px;
-        &.active{
-            color: lighten($color1, 10%);
-            background-color: lighten($color6, 10%);
-        }
         &:hover{
             color: darken($color1, 10%);
         }

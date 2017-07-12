@@ -31,7 +31,7 @@
                         <div class="card">
                             <div class="card-block">
                                 <h4>{{$event->name}}</h4>
-                                <div class="text-muted">Am {{$event->date->formatLocalized('%A') ." dem ". $event->date->formatLocalized('%d %B %Y') .', '. $event->location}}</div>
+                                <div class="text-muted">Am {{$event->date->formatLocalized('%A') ." dem ". $event->date->formatLocalized('%#d %B %Y') .', '. $event->location}}</div>
                             </div>
                         </div>
                     @endforeach

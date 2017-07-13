@@ -57,6 +57,7 @@ Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
 Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
 Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
 Route::get('/roles', function(){
+
     $user = \App\User::first();
 
     // $permission = \App\Permission::create([
@@ -76,8 +77,6 @@ Route::get('/roles', function(){
 
     return json_encode($user->isDefaultUser());
     //return json_encode($is_admin);
-
-
-
-
 });
+
+Route::get('/po', 'AdminController@test');

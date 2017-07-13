@@ -79,4 +79,11 @@ class AdminController extends Controller
         User::destroy($user);
         return back();
     }
+
+    public function test()
+    {
+        $this->authorize('is_admin', User::class);
+        return \App\Role::firstOrFail();
+
+    }
 }

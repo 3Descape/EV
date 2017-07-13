@@ -56,8 +56,28 @@ Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
 
 Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
 Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
-Route::get('/flash', function(){
-    session()->flash('msg', 'test');
+Route::get('/roles', function(){
+    $user = \App\User::first();
 
-    return redirect()->route('contact');
+    // $permission = \App\Permission::create([
+    //     'name' => 'event',
+    //     'label' => 'Can create an event',
+    // ]);
+    //
+    // $role = \App\Role::create([
+    //     'name' => 'admin',
+    //     'label' => 'Admin is cool',
+    // ]);
+    $is_admin = $user->hasRole('admin');
+
+    if (! $is_admin) {
+        $user->assignRole('admin');
+    }
+
+    return json_encode($user->isDefaultUser());
+    //return json_encode($is_admin);
+
+
+
+
 });

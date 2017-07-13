@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\User;
+use App\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class RolePolicy
@@ -21,6 +22,7 @@ class RolePolicy
 
     public function is_admin(User $user)
     {
-        return $user->hasRole('admin');
+        dd('test');
+        return true;
     }
 }

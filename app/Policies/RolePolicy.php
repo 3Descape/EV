@@ -3,9 +3,11 @@
 namespace App\Policies;
 
 use App\User;
-use App\Permission;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
+/**
+ * Role Policy
+ */
 class RolePolicy
 {
     use HandlesAuthorization;
@@ -19,10 +21,18 @@ class RolePolicy
     {
 
     }
-
-    public function is_admin(User $user)
+    public function before()
     {
-        dd('test');
-        return true;
+        //
+    }
+
+    public function admin(User $user)
+    {
+        return $user->hasRole('admin');
+    }
+
+    public function can_create_event(User $user)
+    {
+        return $user->hasPermission('create_event');
     }
 }

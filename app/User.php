@@ -72,7 +72,19 @@ class User extends Authenticatable
         if(is_string($role)){
             return $this->roles->contains('name', $role);
         }
-
         return !! $role->intersection($this->roles)->count();
+    }
+
+    public function hasPermission($permission)
+    {
+        $contains = $this->roles()
+        ->with('permissions')
+        ->get()
+        ->map(function($item) use ($permission){
+            return $item->permissions
+            ->contains('name', $permission);
+        });
+
+        return !! in_array(true, $contains->toArray());
     }
 }

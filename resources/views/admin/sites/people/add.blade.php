@@ -1,7 +1,9 @@
-@extends('admin.master')
+@extends('admin.layouts.sitebar')
 
-@section('content')
-    <div class="row">
+
+@section('sitebar_inner')
+    <div class="container-fluid">
+        <div class="row">
         <div class="col-md-10 mx-auto">
             <form action="{{route('api_person_store')}}" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -23,7 +25,7 @@
                 </div>
 
                 <input class="btn btn-success" type="submit" value="Hinzufügen">
-                <a href="{{route('admin_people_frontend')}}" class="btn btn-primary">Abbrechen</a>
+                <a href="{{route('admin_people_frontend_sga')}}" class="btn btn-primary">Abbrechen</a>
             </form>
         </div>
     </div>

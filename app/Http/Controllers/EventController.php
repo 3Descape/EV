@@ -37,12 +37,14 @@ class EventController extends Controller
     */
     public function store(Request $request)
     {
+        //TODO: 'state' => 'exists:states,abbreviation'
         $validator = Validator::make($request->all(),
         [
             'name' => 'required|min:5|max:255',
             'description' => 'required|min:10',
             'date' => 'required|date',
             'location' => 'required|min:5',
+            'category' => 'required|in:bälle,sport,sonstige',
         ]
     );
 
@@ -57,6 +59,7 @@ class EventController extends Controller
             'description' => $request->description,
             'date' => $request->date,
             'location' => $request->location,
+            'category' => $request->category,
         ]);
     }
 }

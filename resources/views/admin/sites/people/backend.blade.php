@@ -16,7 +16,7 @@
                                 <tr>
                                     <th>Name</th>
                                     <th>E-Mail</th>
-                                    <th>Berechtigung</th>
+                                    <th>Berechtigungen</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -24,10 +24,24 @@
                                     <tr>
                                         <td scope="row">{{$user->name}}</td>
                                         <td>{{$user->email}}</td>
-                                        <td>{{$user->role}}</td>
                                         <td>
-                                            <a href="{{route('api_user_delete', $user->id)}}" class="btn btn-danger float-right mx-1"><i class="fa fa-trash-o"></i></a>
-                                            <a href="{{route('user_role', $user->id)}}" class="btn btn-warning float-right mx-1"><i class="fa fa-pencil"></i></a>
+                                            @foreach ($user->roles as $role)
+                                                <a href="{{route('roles_show') .'#' . $role->name}}" class="role">
+                                                    <span class="badge badge-default">
+                                                        {{ucfirst($role->name)}}
+                                                    </span>
+                                                </a>
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            <a href="{{route('api_user_delete', $user->id)}}"
+                                                class="btn btn-danger float-right mx-1">
+                                                <i class="fa fa-trash-o"></i>
+                                            </a>
+                                            <a href="{{route('user_role', $user->id)}}"
+                                                class="btn btn-warning float-right mx-1">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

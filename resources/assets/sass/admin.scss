@@ -4,59 +4,70 @@
 //admin section
 
 $bg-sitebar: rgb(29, 29, 37);
-.sitebar-wrp{
-    position: relative;
-    margin-right: 4rem;
-    transform: translateX(-20px);
-    height: 100vh;
-    &>a.data-toggle{
-        position: absolute;
-        top: 0;
-        right: -3rem;
-        z-index: 10;
-    }
-    &>div{
-        overflow: hidden;
-        height: 100%;
-        background-color: $bg-sitebar;
-
-        .list-group{
-            .fa{
-                margin-right: 3px;
-            }
-            background-color: $bg-sitebar;
-            @include media-breakpoint-up(md) {
-                &>a{
-                    padding-right: 50px;
-                }
-            }
-            form{
-                &>button{
-                    width: 100%;
-                    cursor: pointer;
-                    background-color: inherit;
-                    border: none;
-                }
-            }
-            .list-group-item{
-                color: $color1;
-                background-color: $bg-sitebar;
-                &:hover{
-                    background-color: lighten($bg-sitebar, 10%);
-                }
-            }
-            &>div{
-                padding-left: 15px;
-                &>div{
-                    padding-left: 15px;
-                }
-            }
-            .user{
-                color: $color3;
-                background-color: $bg-sitebar !important;
-            }
-
+#app{
+    display: flex;
+    .sitebar-wrp{
+        position: relative;
+        margin-right: 4rem;
+        transform: translateX(-20px);
+        align-items: stretch;
+        min-height: 100vh;
+        &>a.data-toggle{
+            position: absolute;
+            top: 0;
+            right: -3rem;
+            z-index: 10;
         }
+        &>div{
+            overflow: hidden;
+            height: 100%;
+            background-color: $bg-sitebar;
+
+            .list-group{
+                .fa{
+                    margin-right: 3px;
+                }
+                background-color: $bg-sitebar;
+                @include media-breakpoint-up(md) {
+                    &>a{
+                        padding-right: 50px;
+                    }
+                }
+                form{
+                    &>button{
+                        width: 100%;
+                        cursor: pointer;
+                        background-color: inherit;
+                        border: none;
+                        text-align: left;
+                    }
+                }
+                .list-group-item{
+                    color: $color1;
+                    background-color: $bg-sitebar;
+                    &:hover{
+                        background-color: lighten($bg-sitebar, 10%);
+                    }
+                }
+                &>div{
+                    &>a{
+                        padding-left: 30px;
+                    }
+                    &>div>a{
+                        padding-left: 45px;
+                    }
+                }
+                .user{
+                    color: $color3;
+                    background-color: $bg-sitebar !important;
+                }
+
+            }
+        }
+    }
+    .content{
+        flex:1;
+        padding-top: 50px;
     }
 }
 
@@ -66,4 +77,8 @@ $bg-sitebar: rgb(29, 29, 37);
             width: 135px;
         }
     }
+}
+
+.role{
+    text-decoration: none !important;
 }

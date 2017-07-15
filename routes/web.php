@@ -23,7 +23,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
 
     Route::group(['prefix' => 'personen'], function(){
-        Route::get('/frontend', 'AdminController@personen_frontend')->name('admin_people_frontend');
+        Route::get('/frontend/sga', 'AdminController@personen_frontend_sga')->name('admin_people_frontend_sga');
+        Route::get('/frontend/ev', 'AdminController@personen_frontend_ev')->name('admin_people_frontend_ev');
         Route::get('/backend', 'AdminController@personen_backend')->name('admin_people_backend');
     });
 
@@ -36,6 +37,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/user/{user}/edit', 'AdminController@user_role')->name('user_role');
     Route::put('/user/{user}', 'AdminController@user_role_update')->name('api_user_role_update');
     Route::get('/user/{user}/delete', 'AdminController@user_delete')->name('api_user_delete');
+
+    Route::get('/roles', 'RolesController@index')->name('roles_show');
+    Route::post('/roles', 'RolesController@store')->name('api_role_add');
+    Route::post('/roles/permission/add', 'RolesController@add_permission')->name('api_role_permission_add');
+    Route::delete('/roles/{role}/permission/{permission}', 'RolesController@destroy_permission')->name('api_role_permission_destroy');
+    Route::delete('/roles/{role}/delete', 'RolesController@destroy')->name('api_role_delete');
 });
 
 //Route::get('/{route}', 'FrontendController@dynamic');
@@ -56,19 +63,22 @@ Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
 
 Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
 Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
-Route::get('/roles', function(){
+
+Route::get('/role/create', function(){
+    $permission = \App\Permission::create([
+        'name' => 'event',
+        'label' => 'Can create an event',
+    ]);
+
+    $role = \App\Role::create([
+        'name' => 'admin',
+        'label' => 'Admin is cool',
+    ]);
+});
+Route::get('/role/admin', function(){
 
     $user = \App\User::first();
 
-    // $permission = \App\Permission::create([
-    //     'name' => 'event',
-    //     'label' => 'Can create an event',
-    // ]);
-    //
-    // $role = \App\Role::create([
-    //     'name' => 'admin',
-    //     'label' => 'Admin is cool',
-    // ]);
     $is_admin = $user->hasRole('admin');
 
     if (! $is_admin) {

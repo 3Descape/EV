@@ -50,6 +50,20 @@
           <input type="text" class="form-control" name="event_description">
         </div>
       </div>
+
+      <div class="form-group row">
+        <div class="col-md-1">
+          Kategory
+        </div>
+        <div class="col-md-11">
+            <select class="form-control" name="event_category">
+                <option value="bälle">Ball</option>
+                <option value="sport">Sport</option>
+                <option value="sonstige">Sonstig</option>
+            </select>
+        </div>
+      </div>
+
       <input type="submit" class="form-control btn btn-success" value="Hinzufügen">
     </form>
 
@@ -58,6 +72,8 @@
         <tr>
           <th>Name</th>
           <th>Datum</th>
+          <th>Ort</th>
+          <th>Kategorie</th>
         </tr>
       </thead>
       <tbody>
@@ -65,6 +81,7 @@
           <td>@{{event.name}}</td>
           <td>@{{event.date}}</td>
           <td>@{{event.location}}</td>
+          <td>@{{event.category | capitalize}}</td>
           <td class="clearfix">
             <div class="float-right">
               <button type="button" class="btn btn-warning mx-1" @click="editEvent(index)"><i class="fa fa-edit" aria-hidden="true"></i></button>
@@ -91,6 +108,11 @@
               <input type="text" class="form-control" name="description" :value="eventEdit.description">
               <vue-datepicker :starttime="eventEdit.starttime"></vue-datepicker>
               <input type="text" class="form-control" name="location" :value="eventEdit.location">
+              <select class="form-control" name="category">
+                  <option :selected=" 'bälle' == eventEdit.category" value="bälle">Bälle</option>
+                  <option :selected=" 'sport' == eventEdit.category" value="sport">Sport</option>
+                  <option :selected=" 'sonstige' == eventEdit.category" value="sonstige">Sonstige</option>
+              </select>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Abbrechen</button>

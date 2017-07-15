@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Permission;
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Event;
 use App\Person;
 use App\User;
+use App\Role;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -24,22 +24,22 @@ class AdminController extends Controller
     {
         return view('admin.sites.events')->with('events',Event::all()->toJson());
     }
-    public function events_json()
-    {
-        return response()->json(Event::all());
-    }
+    // public function events_json()
+    // {
+    //     return response()->json(Event::all());
+    // }
 
-    public function events_store(Request $request)
-    {
-        $this->validate($request, [
-            'name' => 'required|min:5|max:255',
-            'date' => 'required|date',
-            'text' => 'required|max:255',
-        ]);
-
-        Event::create($request->all());
-        return back();
-    }
+    // public function events_store(Request $request)
+    // {
+    //     $this->validate($request, [
+    //         'name' => 'required|min:5|max:255',
+    //         'date' => 'required|date',
+    //         'text' => 'required|max:255',
+    //     ]);
+    //
+    //     Event::create($request->all());
+    //     return back();
+    // }
     public function event_delete($id){
         Event::where('id','=', $id)->delete();
     }
@@ -52,27 +52,37 @@ class AdminController extends Controller
         return view('admin.sites.info');
     }
 
-    public function personen_frontend()
+    public function personen_frontend_sga()
     {
         $sga = Person::SGAMitglieder()->get();
+        return view('admin.sites.people.sga', ['sga' => $sga]);
+    }
+
+    public function personen_frontend_ev()
+    {
         $ev = Person::EVMitglieder()->get();
-        return view('admin.sites.people.frontend', ['sga' => $sga, 'ev' => $ev]);
+        return view('admin.sites.people.ev', ['ev' => $ev]);
     }
 
     public function personen_backend()
     {
-        $users = User::all();
+        $users = User::with('roles')->get();
         return view('admin.sites.people.backend', ['users' => $users]);
     }
 
     public function user_role(User $user)
     {
-        return view('admin.sites.people.user_edit', ['user' => $user]);
+        $roles = Role::whereNotIn('id', $user->roles()->pluck('id'))->get();
+
+        return view('admin.sites.roles.edit', [
+            'user' => $user->load('roles'),
+            'roles' => $roles,
+        ]);
     }
 
-    public function user_role_update($user, Request $request)
+    public function user_role_update(User $user, Request $request)
     {
-        User::find($user)->update(['role' => $request['role']]);
+        $user->roles()->save(Role::whereName($request->role)->first());
         return redirect()->route('admin_people_backend');
     }
 
@@ -84,8 +94,8 @@ class AdminController extends Controller
 
     public function test()
     {
-        $this->authorize('is_admin', User::class);
-        return \App\Role::firstOrFail();
-
+        //return Auth::user()->roles()->with('permissions')->get();
+        $this->authorize('can_create_event', User::class);
+        return 'works';
     }
 }

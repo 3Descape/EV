@@ -1,7 +1,9 @@
-@extends('admin.master')
+@extends('admin.layouts.sitebar')
 
-@section('content')
-    <div class="row">
+
+@section('sitebar_inner')
+    <div class="container-fluid">
+        <div class="row">
         <div class="col-md-10 mx-auto">
             <form action="{{route('api_person_update', $person->id)}}" method="POST">
                 {{method_field('PUT')}}

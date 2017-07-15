@@ -85,6 +85,6 @@ class User extends Authenticatable
             ->contains('name', $permission);
         });
 
-        return !! in_array(true, $contains->toArray());
+        return in_array(true, $contains->toArray());
     }
 }

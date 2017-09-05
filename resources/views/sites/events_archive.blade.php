@@ -10,7 +10,7 @@
     <div>
         <div class="col-md-9 mx-auto bg-wrp">
             <div class="row">
-                <div class="col-md-10 col-sm-12 push-md-1">
+                <div class="col-lg-10 col-md-12 order-lg-1 order-md-2">
                     <h1 class="text-center">Veranstaltungen Archiv</h1>
                     @foreach ($events as $event)
                         <div class="col-md-12 mx-auto mt-4">
@@ -47,7 +47,7 @@
                     {{ $events->links('layouts.paginator') }}
                 </div>
 
-                <div class="col-md-2 col-sm-12 push-md-1 mb-4 mb-md-0 flex-first flex-md-unordered">
+                <div class="col-lg-2 col-md-12 mb-4 mb-md-0 order-lg-1 order-md-1">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row" role="group">
@@ -59,9 +59,9 @@
                                         {{$text}}
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="event_select">
-                                        <a class="dropdown-item" href="{{route('events')}}">Alle</a>
+                                        <a class="dropdown-item" href="{{route('events_archive')}}">Alle</a>
                                         @foreach ($categories as $category)
-                                            <a class="dropdown-item" href="{{route('events', $category->name)}}">
+                                            <a class="dropdown-item" href="{{route('events_archive', $category->name)}}">
                                                 {{ucfirst($category->name)}}
                                             </a>
                                         @endforeach

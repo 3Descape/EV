@@ -1,0 +1,6 @@
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "/_variables.scss";
+@import "/palettes/palette_4.scss";
+div.full-height{
+    min-height: 100vh;
+}

@@ -75,7 +75,7 @@ class FrontendController extends Controller
             $text = 'Alle';
             if($type)
             {
-                $text = str_lower($type);
+                $text = ucfirst($type);
                 $events = Category::where('name', $type)
                 ->first()
                 ->events()

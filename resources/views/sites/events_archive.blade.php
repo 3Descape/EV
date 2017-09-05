@@ -61,7 +61,7 @@
                                     <div class="dropdown-menu" aria-labelledby="event_select">
                                         <a class="dropdown-item" href="{{route('events_archive')}}">Alle</a>
                                         @foreach ($categories as $category)
-                                            <a class="dropdown-item" href="{{route('events_archive', $category->name)}}">
+                                            <a class="dropdown-item" href="{{route('events_archive', mb_strtolower($category->name))}}">
                                                 {{ucfirst($category->name)}}
                                             </a>
                                         @endforeach

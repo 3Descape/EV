@@ -34,8 +34,8 @@ class EventsController extends Controller
         $this->authorize('can_access_events', User::class);
         $this->validate($request,[
             'name' => 'required|min:5|max:255',
-            'description' => 'required|min:10',
-            'date' => 'required|date',
+            'description' => 'required|min:5',
+            'date' => 'required|date_format:d.m.Y H:i',
             'location' => 'required|min:5',
             'category_id' => 'exists:categories,id',
         ]);

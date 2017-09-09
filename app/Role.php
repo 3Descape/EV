@@ -20,6 +20,6 @@ class Role extends Model
 
     public function setNameAttribute($name)
     {
-        return $this->attributes['name'] => strtolower($name)
+        return $this->attributes['name'] = strtolower($name);
     }
 }

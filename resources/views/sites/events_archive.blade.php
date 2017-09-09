@@ -10,7 +10,7 @@
     <div>
         <div class="col-md-9 mx-auto bg-wrp">
             <div class="row">
-                <div class="col-lg-10 col-md-12 order-lg-1 order-md-2">
+                <div class="col-lg-10 col-md-12 order-2 order-lg-1">
                     <h1 class="text-center">Veranstaltungen Archiv</h1>
                     @foreach ($events as $event)
                         <div class="col-md-12 mx-auto mt-4">
@@ -18,11 +18,11 @@
                                 <div class="card-body">
                                     <div class="row">
                                         @if($event->thump_path)
-                                            <div class="col-md-2 event_thump">
+                                            <div class="col-lg-2 col-md-12 event_thump">
                                                 <img src="{{asset($event->thump_path)}}" alt="" class="img-responsive">
                                             </div>
                                         @endif
-                                        <div class="col-md-{{$event->thump_path ? '10' : '12'}}">
+                                        <div class="{{$event->thump_path ? 'col-lg-10 col-md-12' : 'col-lg-12'}}">
                                             <div class="row">
                                                 <div class="col-md-12">
 
@@ -47,7 +47,7 @@
                     {{ $events->links('layouts.paginator') }}
                 </div>
 
-                <div class="col-lg-2 col-md-12 mb-4 mb-md-0 order-lg-1 order-md-1">
+                <div class="col-lg-2 col-md-12 mb-4 mb-md-0 order-1 order-lg-1">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="row" role="group">

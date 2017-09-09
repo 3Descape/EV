@@ -28,7 +28,7 @@ class HolidayController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|min:5',
+            'name' => 'required',
             'date' => 'required',
             'category' => 'required'
         ]);

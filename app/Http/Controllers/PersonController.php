@@ -2,34 +2,47 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Person;
+use Illuminate\Http\Request;
 
 class PersonController extends Controller
 {
     public function add($type = 'default')
     {
-        return view('admin.sites.people.add',['selected' => $type]);
+        return view('admin.sites.people.add', [
+            'selected' => $type
+        ]);
     }
 
     public function store(Request $request)
     {
-        //TODO: Validation
-        
+        $this->validate($request, [
+            'name' => 'required|string',
+            'description' => 'nullable',
+            'category' => 'required'
+        ]);
+
         Person::create($request->all());
+
         if($request->category == '1')
             return redirect()->route('admin_people_frontend_sga');
         return redirect()->route('admin_people_frontend_ev');
     }
+
     public function edit(Person $person)
     {
         return view('admin.sites.people.edit', ['person' =>$person]);
-
     }
 
-    public function update($person, Request $request)
+    public function update(Person $person, Request $request)
     {
-        Person::find($person)->update($request->all());
+        $this->validate($request, [
+            'name' => 'required|string',
+            'description' => 'nullable',
+            'category' => 'required'
+        ]);
+
+        $person->update($request->all());
         if($request->category)
             return redirect()->route('admin_people_frontend_sga');
         return redirect()->route('admin_people_frontend_ev');
@@ -40,5 +53,4 @@ class PersonController extends Controller
         Person::destroy($person->id);
         return back();
     }
-
 }

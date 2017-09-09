@@ -7,24 +7,31 @@ use Carbon\Carbon;
 
 class Event extends Model
 {
-    protected $fillable = ['name', 'category_id','description','date', 'location', 'category'];
-    protected $with = ['category'];
-    protected $dates = [
-    'created_at',
-    'updated_at',
-    'date'
+    protected $fillable = [
+        'name',
+        'category_id',
+        'description',
+        'date',
+        'location',
+        'category'
     ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'date'
+    ];
+
+    protected $with = ['category'];
 
     public function scopeFutureEvents($query)
     {
         return $query->where('date', '>', Carbon::now())->orderBy('date', 'asc');
-
     }
 
     public function scopepastEvents($query)
     {
         return $query->where('date', '<', Carbon::now())->orderBy('date', 'desc');
-
     }
 
     public function images()

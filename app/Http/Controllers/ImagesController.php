@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\File;
+use Image;
 use App\Event;
 use Illuminate\Http\Request;
-use Image;
-use File;
+
 class ImagesController extends Controller
 {
     public function store(Request $request, $event_id)

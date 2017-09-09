@@ -19,17 +19,12 @@ class DashboardController extends Controller
         return $dates;
     }
 
-    /**
-     * Return the dashboard view
-     * @method index
-     * @return Response
-     */
     public function index()
     {
         $this->authorize('can_access_dashboard', User::class);
-        //return count($final_data);
         return view('admin.sites.home');
     }
+
     public function getAnalythics()
     {
         $options = [
@@ -68,9 +63,7 @@ class DashboardController extends Controller
         });
 
         $all_days_of_interval = $this->generateDateRange($start_date, Carbon::now(), $format, $increment);
-        //return count($all_days_of_interval);
-        //return json_encode($all_days_of_interval);
-        //return json_encode($data);
+
         $formated = array_fill_keys($all_days_of_interval, 0);
         $final_data = array_replace($formated, $data->toArray());
 

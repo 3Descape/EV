@@ -7,30 +7,16 @@ use Illuminate\Http\Request;
 
 class HolidayController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $ferien = Holiday::where('category', 'ferien')->get();
-        $schulautonom = Holiday::where('category', 'schulautonom')->get();
+        $school = Holiday::schoolFree();
+        $autonomous = Holiday::schoolAutonomous();
 
         return view('admin.sites.holidays.holiday_index',[
-            'ferien' => $ferien,
-            'schulautonom' => $schulautonom,
+            'ferien' => $school,
+            'schulautonom' => $autonomous,
         ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -52,17 +38,6 @@ class HolidayController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Holiday  $holiday
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Holiday $holiday)
-    {
-
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Holiday  $holiday
@@ -70,7 +45,7 @@ class HolidayController extends Controller
      */
     public function edit(Holiday $holiday)
     {
-        return view('admin.sites.holidays.holiday_edit',[
+        return view('admin.sites.holidays.holiday_edit', [
             'holiday' => $holiday,
         ]);
     }

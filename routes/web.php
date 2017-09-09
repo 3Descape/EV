@@ -1,17 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -34,19 +22,19 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/categories/{id}/delte', 'CategoriesController@pre_delete')->name('adming_categories_pre_delete');
     Route::delete('/categories/{id}', 'CategoriesController@destroy')->name('admin_categories_destroy');
 
-    Route::get('/people/frontend/sga', 'AdminController@personen_frontend_sga')->name('admin_people_frontend_sga');
-    Route::get('/people/frontend/ev', 'AdminController@personen_frontend_ev')->name('admin_people_frontend_ev');
-    Route::get('/people/backend', 'AdminController@personen_backend')->name('admin_people_backend');
+    Route::get('/people/frontend/sga', 'AdminController@people_frontend_sga')->name('admin_people_frontend_sga');
+    Route::get('/people/frontend/ev', 'AdminController@people_frontend_ev')->name('admin_people_frontend_ev');
+    Route::get('/people/backend', 'AdminController@people_backend')->name('admin_people_backend');
     Route::get('/people/add/{type?}', 'PersonController@add')->name('person_add');
     Route::post('/people/add', 'PersonController@store')->name('api_person_store');
     Route::get('/people/{person}/edit', 'PersonController@edit')->name('api_person_edit');
     Route::put('/people/{person}', 'PersonController@update')->name('api_person_update');
     Route::get('/people/{person}/delete', 'PersonController@delete')->name('api_person_delete');
 
-    Route::get('/users/{user}/edit', 'AdminController@user_role')->name('user_role');
-    Route::put('/users/{user}', 'AdminController@user_role_update')->name('api_user_role_update');
-    Route::get('/users/{user}/delete', 'AdminController@user_delete')->name('api_user_delete');
-    Route::delete('/users/{user}/role/{role}', 'AdminController@detach_role')->name('api_user_role_detach');
+    Route::get('/users/{user}/edit', 'UserRoleController@edit_user_roles')->name('user_role');
+    Route::put('/users/{user}', 'UserRoleController@user_roles_update')->name('api_user_role_update');
+    Route::get('/users/{user}/delete', 'UserController@user_delete')->name('api_user_delete');
+    Route::delete('/users/{user}/role/{role}', 'UserRoleController@detach_role')->name('api_user_role_detach');
 
     Route::get('/roles', 'RolesController@index')->name('roles_show');
     Route::post('/roles', 'RolesController@store')->name('api_role_add');
@@ -84,10 +72,3 @@ Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
 
 Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
 Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
-
-Route::get('/mail', function(){
-    $data = ['name' => 'Franz Rüdiger', 'text' => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."];
-    return view('emails.contact', [
-        'data' => $data
-    ]);
-});

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Text;
+use Illuminate\Http\Request;
+
 class SitesController extends Controller
 {
     public function about()
@@ -40,10 +41,8 @@ class SitesController extends Controller
 
     public function edit($id)
     {
-        $text = Text::find($id);
-        //dd($text->formattedText());
         return view('admin.sites.texts_edit',[
-            'text' => $text
+            'text' => Text::find($id)
         ]);
     }
 

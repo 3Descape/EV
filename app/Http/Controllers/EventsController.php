@@ -2,38 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\User;
 use App\Event;
 use App\Category;
 use Carbon\Carbon;
-use App\User;
+use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
-    /**
-    * Display a listing of the resource.
-    *
-    * @return \Illuminate\Http\Response
-    */
 
     public function events_future()
     {
         $this->authorize('can_access_events', User::class);
         $events = Event::with('category')->futureEvents()->get();
-        $categories = Category::all();
-        return view('admin.sites.events',
-        [
+        return view('admin.sites.events.events',[
             'events' => $events,
-            'categories' => $categories
+            'categories' => Category::all(),
         ]);
     }
 
     public function events_archived()
     {
         $this->authorize('can_access_events', User::class);
-        $events = Event::pastEvents()->get();
-        return view('admin.sites.events_archived',[
-            'events' => $events,
+        return view('admin.sites.events.events_archived',[
+            'events' => Event::pastEvents()->get(),
         ]);
     }
 
@@ -61,32 +53,17 @@ class EventsController extends Controller
         return back();
     }
 
-    /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function edit($id)
     {
         $this->authorize('can_access_events', User::class);
-        $categories = Category::all();
         $event = Event::with('images', 'category')->find($id);
 
-        //dd($event);
-        return view('admin.sites.event_edit',[
+        return view('admin.sites.events.event_edit',[
             'event' => $event,
-            'categories' => $categories,
+            'categories' => Category::all(),
         ]);
     }
 
-    /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function update(Request $request, $id)
     {
         $this->authorize('can_access_events', User::class);
@@ -98,10 +75,7 @@ class EventsController extends Controller
             return back();
         }
 
-        //dd($request->date);
-
         if($request->has('date')){
-
             $this->validate($request,[
                 'name' => 'required|min:5|max:255',
                 'description' => 'required|min:10',
@@ -112,8 +86,8 @@ class EventsController extends Controller
                 'date_format' => 'Datum entspricht nicht dem gültigen Format für dd.MM.yyyy HH:mm'
             ]);
 
-
             $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
+
             Event::find($id)->update([
                 'name' => $request->name,
                 'category_id' => $request->category,
@@ -121,7 +95,8 @@ class EventsController extends Controller
                 'date' => $date,
                 'location' => $request->location
             ]);
-        }else{
+        }else
+        {
             $this->validate($request,[
                 'name' => 'required|min:5|max:255',
                 'description' => 'required|min:10',
@@ -137,20 +112,12 @@ class EventsController extends Controller
             ]);
         }
 
-
-
         if(request('redirect') == 'archived'){
             return redirect()->route('admin_events_archived');
         }
         return redirect()->route('admin_events_future');
     }
 
-    /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
     public function destroy($id)
     {
         $this->authorize('can_access_events', User::class);

@@ -22,7 +22,9 @@ SGA
                 <div class="card col-md-12" style="background-color: #FFFFFF">
                   <div class="card-body">
                     <h4 class="card-title">{{$person->name}}</h4>
-                    <p class="card-text">{{$person->description}}</p>
+                    @if($person->description)
+                        <p class="card-text">{{$person->description}}</p>
+                    @endif
                   </div>
                 </div>
             @endforeach

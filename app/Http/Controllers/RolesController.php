@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Role;
 use App\Permission;
+use Illuminate\Http\Request;
+
 class RolesController extends Controller
 {
     public function index()
     {
-        $roles = Role::with('permissions')->get();
-        $permissions = Permission::where('name', '!=', 'admin')->get();
         return view('admin.sites.roles.show', [
-            'roles' => $roles,
-            'permissions' => $permissions,
+            'roles' => Role::with('permissions')->get(),
+            'permissions' => Permission::where('name', '!=', 'admin')->get(),
         ]);
     }
 
@@ -29,15 +28,13 @@ class RolesController extends Controller
         $this->validate($request, [
             'name' => 'required|string|unique:roles|max:20',
             'label' => 'required|string|max:50',
-        ],
-        ['name.required' => 'Die Berechtigung muss einen Namen haben',
-        'label.required' => 'Die Berechtigung muss eine kurze Beschreibung haben',
-        ]
-
-        );
+        ], [
+            'name.required' => 'Die Berechtigung muss einen Namen haben',
+            'label.required' => 'Die Berechtigung muss eine kurze Beschreibung haben'
+        ]);
 
         Role::create([
-            'name' => strtolower($request->name),
+            'name' => $request->name,
             'label' => $request->label,
         ]);
         return back();
@@ -51,7 +48,6 @@ class RolesController extends Controller
 
     public function destroy_permission(Role $role, $permission_id)
     {
-
         $role->permissions()->detach($permission_id);
         return back();
     }

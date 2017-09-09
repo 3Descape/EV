@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Person extends Model
 {
     protected $table = "people";
-    protected $fillable = ['name', 'description', 'category'];
 
+    protected $fillable = ['name', 'description', 'category'];
 
     public function scopeEVMitglieder($query)
     {

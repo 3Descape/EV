@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Session;
+use App\Mail\EvMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Mail\EvMail;
-use Session;
 
 class MailController extends Controller
 {

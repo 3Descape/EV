@@ -1,22 +1,27 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Text;
 use App\Event;
 use App\Person;
+use App\Holiday;
 use App\Category;
 use App\Traits\AnalythicTrait;
-use App\Holiday;
 
 class FrontendController extends Controller
 {
     use AnalythicTrait;
+
     public function index()
     {
         $this->add_analythic();
         $future_events = Event::futureEvents()->take(3)->get();
         $past_events = Event::pastEvents()->take(3)->get();
-        return view('sites.home',['future_events' => $future_events, 'past_events' => $past_events]);
+        return view('sites.home', [
+            'future_events' => $future_events,
+            'past_events' => $past_events
+        ]);
     }
 
     public function download_pdf()
@@ -51,12 +56,10 @@ class FrontendController extends Controller
             $events = Event::futureEvents()->paginate(10);
         }
 
-        $categories = Category::all();
-
         return view('sites.events', [
             'events' => $events,
             'text' => $text,
-            'categories' => $categories
+            'categories' => Category::all(),
         ]);
     }
 
@@ -88,12 +91,10 @@ class FrontendController extends Controller
                 $events = Event::with('images')->pastEvents()->paginate(10);
             }
 
-            $categories = Category::all();
-
             return view('sites.events_archive', [
                 'events' => $events,
                 'text' => $text,
-                'categories' => $categories
+                'categories' => Category::all()
             ]);
         }
     }
@@ -101,11 +102,10 @@ class FrontendController extends Controller
     public function sga()
     {
         $this->add_analythic();
-        $people = Person::SGAMitglieder()->get();
         $texts = Text::where('category', 2)->orderBy('order')->get();
 
-        return view('sites.sga',[
-            'people' => $people,
+        return view('sites.sga', [
+            'people' => Person::SGAMitglieder()->get(),
             'texts' => $texts
         ]);
     }
@@ -113,13 +113,13 @@ class FrontendController extends Controller
     public function info()
     {
         $this->add_analythic();
-        $schulfrei = Holiday::where('category', 'ferien')->get();
-        $autonom = Holiday::where('category', 'schulautonom')->get();
+        $schoolfree = Holiday::schoolFree();
+        $autonomous = Holiday::schoolAutonomous();
         $texts = Text::where('category', 3)->orderBy('order')->get();
         return view('sites.info', [
             'texts' => $texts,
-            'schulfrei' => $schulfrei,
-            'autonom' => $autonom
+            'schulfrei' => $schoolfree,
+            'autonom' => $autonomous
         ]);
     }
 

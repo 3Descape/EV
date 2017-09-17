@@ -7,9 +7,6 @@
         @include('admin.layouts.errors')
 
         <form class="form-group" method="POST" action="{{route('admin_categories_update', $category->id)}}">
-            {{ csrf_field() }}
-            {{method_field('PUT')}}
-
             <div class="form-group row">
                 <div class="col-md-1">
                     Name:
@@ -20,6 +17,8 @@
             </div>
 
             <input type="submit" class="form-control btn btn-success" value="Hinzufügen">
+            {{method_field('PUT')}}
+            {{ csrf_field() }}
         </form>
     </div>
 @endsection

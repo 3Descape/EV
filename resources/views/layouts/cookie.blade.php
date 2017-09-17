@@ -8,23 +8,23 @@
 </div>
 
 <script type="text/javascript">
-console.log(document.cookie.indexOf("ev_allow_cookies="))
-var btn = document.getElementById('accept')
+    console.log(document.cookie.indexOf("ev_allow_cookies="))
+    var btn = document.getElementById('accept')
 
-if (document.cookie.indexOf("ev_allow_cookies") >= 0) {
-    btn.parentElement.remove()
-}
+    if (document.cookie.indexOf("ev_allow_cookies") >= 0) {
+        btn.parentElement.remove()
+    }
 
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
 
-btn.addEventListener('click', function(){
-    btn.parentElement.remove()
-    setCookie('ev_allow_cookies', 'true', 366)
-    console.log("clicked")
-});
+    btn.addEventListener('click', function(){
+        btn.parentElement.remove()
+        setCookie('ev_allow_cookies', 'true', 366)
+        console.log("clicked")
+    });
 </script>

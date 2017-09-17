@@ -20,7 +20,6 @@
         </div>
     </div>
 
-
     <div class="container-fluid" id="featured">
         <div class="row">
             <div class="col-md-9 mx-auto row">
@@ -69,11 +68,14 @@
             <div class="col-md-12">
                 <h1 class="text-center">Förderansuchen:</h1>
             </div>
+
             <div class="card col-md-12">
                 <div class="row">
+
                     <div class="col-md-6">
                         <a href="{{route('pdf_start_download')}}" class="btn btn-danger"><i class="fa fa-download"></i> Download</a>
                     </div>
+
                     <div class="col-md-6">
                         <a href="#" class="btn btn-info mt-sm-4 mt-md-0"><i class="fa fa-globe"></i> Online</a>
                     </div>
@@ -87,15 +89,19 @@
             <div class="row">
                 <div class="col-md-10 mx-auto">
                     <div class="row">
+
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i> YouTube</a>
                         </div>
+
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <a href="#"><i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter</a>
                         </div>
+
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <a href="#"><i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook</a>
                         </div>
+
                         <div class="col-lg-3 col-md-6 col-sm-12">
                             <a href="#"><i class="fa fa-graduation-cap" aria-hidden="true"></i> BG Weiz</a>
                         </div>
@@ -105,5 +111,4 @@
         </div>
     </div>
 </div>
-
 @endsection

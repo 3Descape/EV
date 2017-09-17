@@ -9,7 +9,6 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
-
     <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
     @yield('header')
 </head>

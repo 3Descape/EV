@@ -42,8 +42,6 @@
                 @endcan
             </div>
         @endif
-
     </div>
-
 </body>
 </html>

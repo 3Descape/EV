@@ -6,13 +6,10 @@
 
 @section('content')
     <div class="container-fluid menu">@include('layouts.menu')</div>
-
     <div>
         <div class="col-md-10 mx-auto bg-wrp space">
             @foreach ($texts as $text)
-                @if($text->title == 'Vorstand')
-                @endif
-                <div class="col-md-6 col-sm-12 mx-auto " id="{{$text->title}}">
+                <div class="col-md-6 col-sm-12 mx-auto " id="{{strtolower($text->title)}}">
                     <h1 class="text-center">{{$text->title}}</h1>
                     @if($text->title == 'Vorstand')
                         <div class="row">
@@ -28,7 +25,6 @@
                     @endif
                 </div>
             @endforeach
-
         </div>
     </div>
 @endsection

@@ -119,7 +119,7 @@ return [
     'attributes' => [
         'username' => 'Benutzername',
         'password' => 'Passwort',
-        'email'    => 'E-Mail-Adresse',
+        'email'    => 'E-Mail Adresse',
         'date' => 'Datum',
         'name' => 'Name',
         'description' => 'Beschreibung'

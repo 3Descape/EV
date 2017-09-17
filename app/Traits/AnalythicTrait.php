@@ -12,7 +12,6 @@ trait AnalythicTrait{
                 'hash' =>Cookie::get('ev_hash'),
                 'browser_info' => request()->header('User-Agent'),
             ]);
-            \Log::info('logged');
         }
         else{
             $hash = hash('md5', date('Y/m/d/H:i:s'));
@@ -22,7 +21,6 @@ trait AnalythicTrait{
                 'hash' => $hash,
                 'browser_info' => request()->header('User-Agent'),
             ]);
-            \Log::info('logged');
         }
 
 

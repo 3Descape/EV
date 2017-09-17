@@ -19,7 +19,6 @@
     </div>
 
     <footer>
-        {{-- <script src="{{asset('ev/public/js/ckeditor/ckeditor.js')}}"></script> --}}
         <script src="{{asset('/js/admin.js')}}"></script>
         @yield('footer')
     </footer>

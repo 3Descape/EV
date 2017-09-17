@@ -22,8 +22,6 @@ trait AnalythicTrait{
                 'browser_info' => request()->header('User-Agent'),
             ]);
         }
-
-
     }
 
 }

@@ -11,16 +11,32 @@ class User extends Authenticatable
 
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * Returns all associated roles for a user
+     * @method roles
+     * @return Illuminate\Database\Eloquent\Collection
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
+    /**
+     * Checks if user has a role associated
+     * @method isDefaultUser
+     * @return boolean
+     */
     public function isDefaultUser()
     {
         return !! !$this->roles()->count();
     }
 
+    /**
+     * Associates a given role with a user
+     * @method assignRole
+     * @param  App\Role
+     * @return App\Role
+     */
     public function assignRole($role)
     {
         return $this->roles()->save(
@@ -28,6 +44,12 @@ class User extends Authenticatable
         );
     }
 
+    /**
+     * Checks if the user has a certain role
+     * @method hasRole
+     * @param  App\Role or string
+     * @return boolean
+     */
     public function hasRole($role)
     {
         if(is_string($role)){
@@ -36,6 +58,12 @@ class User extends Authenticatable
         return !! $role->intersection($this->roles)->count();
     }
 
+    /**
+     * Checks if the user has a certain permission associated
+     * @method hasPermission
+     * @param string
+     * @return boolean
+     */
     public function hasPermission($permission)
     {
         $contains = $this->roles()

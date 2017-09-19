@@ -22,7 +22,7 @@ class DashboardController extends Controller
     public function index()
     {
         $this->authorize('can_access_dashboard', User::class);
-        return view('admin.sites.home');
+        return view('admin.sites.dashboard');
     }
 
     public function getAnalythics()

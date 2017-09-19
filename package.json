@@ -14,14 +14,14 @@
     "bootstrap": "^4.0.0-beta",
     "cross-env": "^5.0.5",
     "jquery": "^3.1.1",
-    "laravel-mix": "^1.0",
+    "laravel-mix": "^1.4.4",
     "lodash": "^4.17.4",
     "popper.js": "^1.12.3",
-    "vue": "^2.4.2",
-    "vue-chartjs": "^2.8.2"
+    "vue": "^2.4.3",
+    "vue-chartjs": "^2.8.7"
   },
   "dependencies": {
-    "chart.js": "^2.6.0",
+    "chart.js": "^2.7.0",
     "dropzone": "^5.1.1",
     "font-awesome": "^4.7.0",
     "moment": "^2.18.1",

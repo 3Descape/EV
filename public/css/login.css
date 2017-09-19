@@ -2072,10 +2072,6 @@ tbody.collapse.show {
   color: #868e96;
 }
 
-.tab-content > .active {
-  display: block;
-}
-
 .navbar {
   position: relative;
   display: -webkit-box;
@@ -2720,14 +2716,6 @@ tbody.collapse.show {
 
 .alert-link {
   font-weight: bold;
-}
-
-.alert-dismissible .close {
-  position: relative;
-  top: -0.75rem;
-  right: -1.25rem;
-  padding: 0.75rem 1.25rem;
-  color: inherit;
 }
 
 .alert-primary {
@@ -5122,10 +5110,6 @@ a.bg-danger:focus,a.bg-danger:hover {
 
 .font-weight-bold {
   font-weight: bold !important;
-}
-
-.font-italic {
-  font-style: italic !important;
 }
 
 .text-white {

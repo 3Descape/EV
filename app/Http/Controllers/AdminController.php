@@ -9,12 +9,6 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index()
-    {
-        $this->authorize('can_access_dashboard', User::class);
-        return view('admin.sites.home');
-    }
-
     public function people_frontend_sga()
     {
         $this->authorize('can_access_people', User::class);

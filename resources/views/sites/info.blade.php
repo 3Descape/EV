@@ -11,7 +11,7 @@
         @foreach ($texts as $text)
             <div class="col-md-6 col-sm-12 mx-auto" id="{{str_slug($text->title, "-")}}">
                 <h1 class="text-center">{{$text->title}}</h1>
-                <p>{!!$text->text!!}</p>
+                <p>{!!$text->html!!}</p>
             </div>
         @endforeach
 

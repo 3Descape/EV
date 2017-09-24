@@ -17,11 +17,11 @@
                                 <img src="http://www.hwsc.net/wp-content/uploads/2016/03/Unknown-person.gif" class="img-fluid">
                             </div>
                             <div class="col-md-8 col-sm-12">
-                                <p>{!!$text->text!!}</p>
+                                <p>{!!$text->html!!}</p>
                             </div>
                         </div>
                     @else
-                        <p>{!!$text->text!!}</p>
+                        <p>{!!$text->html!!}</p>
                     @endif
                 </div>
             @endforeach

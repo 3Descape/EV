@@ -16,6 +16,11 @@
     text-decoration: underline;
   }
 
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
   thead {
     display: table-header-group;
   }
@@ -117,6 +122,10 @@ dd {
   margin-left: 0;
 }
 
+blockquote {
+  margin: 0 0 1rem;
+}
+
 b,strong {
   font-weight: bolder;
 }
@@ -214,6 +223,13 @@ textarea {
   resize: vertical;
 }
 
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
 [type="number"]::-webkit-inner-spin-button,[type="number"]::-webkit-outer-spin-button {
   height: auto;
 }
@@ -307,6 +323,21 @@ h6,.h6 {
 
 .list-inline-item:not(:last-child) {
   margin-right: 5px;
+}
+
+.blockquote {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+.blockquote-footer {
+  display: block;
+  font-size: 80%;
+  color: #868e96;
+}
+
+.blockquote-footer::before {
+  content: "\2014   \A0";
 }
 
 .img-fluid {
@@ -1503,7 +1534,7 @@ select.form-control-lg:not([size]):not([multiple]),.input-group-lg > select.form
   background-image: none;
 }
 
-a.btn.disabled {
+a.btn.disabled,fieldset[disabled] a.btn {
   pointer-events: none;
 }
 

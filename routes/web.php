@@ -47,8 +47,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/sites/info', 'SitesController@info')->name('admin_info');
     Route::get('/sites/impress', 'SitesController@imprint')->name('admin_imprint');
 
-    Route::get('/sites/{id}/edit', 'SitesController@edit')->name('admin_sites_edit');
-    Route::put('/sites/{id}', 'SitesController@update')->name('admin_sites_update');
+    Route::post('/sites/update/{site}/body', 'SitesController@update_body')->name('admin_sites_update_body');
+    Route::post('/sites/update/{site}/title', 'SitesController@update_title')->name('admin_sites_update_title');
 
     Route::get('/ferien', 'HolidayController@index')->name('holiday_index');
     Route::post('/ferien', 'HolidayController@store')->name('holiday_store');

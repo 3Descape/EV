@@ -11,7 +11,7 @@ SGA
         @foreach ($texts as $text)
         <div class="col-md-6 col-sm-12 mx-auto " id="{{$text->title}}">
           <h1 class="text-center">{{$text->title}}</h1>
-          <p>{!!$text->text!!}</p>
+          <p>{!!$text->html!!}</p>
         </div>
         @endforeach
 
@@ -30,7 +30,7 @@ SGA
                 @endforeach
             </div>
         </div>
-        
+
     </div>
 </div>
 @endsection

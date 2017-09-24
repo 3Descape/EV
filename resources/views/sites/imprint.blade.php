@@ -12,7 +12,7 @@ Impressum
             <div class="col-md-10 col-sm-12 mx-auto" id="{{$text->title}}">
                 <h1 class="text-center">{{$text->title}}</h1>
                 <div class="text-center mt-4">
-                    {!!$text->text!!}
+                    {!!$text->html!!}
                 </div>
             </div>
         </div>

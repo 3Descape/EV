@@ -1,22 +1,71 @@
 <template>
-    <div class="container-fluid">
-        <textarea name="name" class="form-control" v-model="input" row="10"></textarea>
-        <div v-html="compiledMarkdown"></div>
+    <div class="card mb-4">
+        <div class="card-body">
+            <fieldset class="mb-2" :disabled="updatingBody || updatingTitle">
+                <form class="input-group mb-2" @submit.prevent="updateTitle">
+                    <input type="text" class="form-control" placeholder="Titel" v-model="site.title">
+                    <button type="submit" class="input-group-addon bg-warning">
+                        <i v-if="!updatingTitle" class="fa fa-refresh"></i>
+                        <i v-if="updatingTitle" class="fa fa-spinner fa-pulse"></i>
+                    </button>
+                </form>
+
+                <form @submit.prevent="updateBody">
+                    <textarea name="name" class="form-control" v-model="site.markup" rows="7"></textarea>
+                    <button class="btn btn-warning form-control mt-2" type="submit">
+                        <i v-if="!updatingBody" class="fa fa-edit">Text aktualisieren</i>
+                        <i v-if="updatingBody" class="fa fa-spinner fa-pulse" disabled></i>
+                    </button>
+                </form>
+            </fieldset>
+
+            <h3>Vorschau:</h3>
+            <div v-html="compiledMarkdown"></div>
+        </div>
     </div>
 </template>
 
 <script>
     export default {
+        props: ['siteProp'],
         data(){
             return{
-                input: "",
+                site: this.siteProp,
+                updatingBody: false,
+                updatingTitle: false,
             }
         },
         computed: {
             compiledMarkdown: function(){
-                var test = marked(this.input);
-                console.log(test);
-                return test;
+                return marked(this.site.markup);
+            }
+        },
+        methods:{
+            updateBody () {
+                this.updatingBody = true;
+                let vue = this;
+                axios.post('/admin/sites/update/' + vue.site.id + '/body', {
+                    rawData: vue.site.markup,
+                    compiledData: vue.compiledMarkdown
+                }).then((response)=>{
+                    this.updatingBody = false;
+                    //console.log(response.data.status);
+                }).catch((errors)=>{
+                    console.log(errors);
+                });
+            },
+            updateTitle (){
+                //console.log(this.site.title);
+                this.updatingTitle = true;
+                let vue = this;
+                axios.post('/admin/sites/update/' + vue.site.id + '/title', {
+                    title: vue.site.title,
+                }).then((response)=>{
+                    this.updatingTitle = false;
+                    console.log(response.data.status);
+                }).catch((errors)=>{
+                    console.log(errors);
+                });
             }
         },
         created: function(){

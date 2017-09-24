@@ -3,14 +3,22 @@
 @import "/palettes/palette_4.scss";
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 //admin section
+//
+blockquote {
+    border-left: 5px solid hsl(0, 0%, 80%) !important;
+    p{
+        padding-left: 0.5em;
+    }
+}
+
 .width {
     width: 0%;
     transition: width .15s ease;
-     
+
     &.show {
       width: 100%;
     }
-  }
+}
 
 $bg-sitebar: rgb(29, 29, 37);
 #app{

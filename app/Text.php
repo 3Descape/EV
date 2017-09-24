@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Text extends Model
 {
-    protected $fillable = ['title', 'text'];
+    protected $fillable = ['title', 'html', 'markup'];
 
     /**
      * Converts textarea input to valid html linebreaks

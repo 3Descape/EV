@@ -29,7 +29,7 @@ let mix = require('laravel-mix');
      purifyCss: {
             purifyOptions: {
                 purifyCss: false,
-                whitelist: ['collapsing', 'callapse', 'show', 'collapsed', 'fa', '*fa*']
+                whitelist: ['collapsing', 'callapse', 'show', 'collapsed', 'fa', '*fa*', 'blockquote']
         },
     }
  });

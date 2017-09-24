@@ -39,20 +39,20 @@ class SitesController extends Controller
         ]);
     }
 
-    public function edit($id)
+    public function update_body(Request $request, Text  $site)
     {
-        return view('admin.sites.texts_edit',[
-            'text' => Text::find($id)
+        $site->update([
+            'html' => $request->compiledData,
+            'markup' => $request->rawData
         ]);
+        return response()->json(['status' => 'Updated body'], 200);
     }
 
-    public function update(Request $request, $text_id)
+    public function update_title(Request $request, Text  $site)
     {
-        Text::find($text_id)->update([
+        $site->update([
             'title' => $request->title,
-            'text' => $request->text
         ]);
-
-        return redirect()->route('admin_about');
+        return response()->json(['status' => 'Updated title'], 200);
     }
 }

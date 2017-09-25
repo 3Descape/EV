@@ -10,7 +10,7 @@
     <div class="col-md-9 mx-auto bg-wrp">
         <div class="row">
             <div class="col-lg-10 col-md-12 order-2 order-lg-1 ">
-                <h1 class="text-center">Veranstaltungen</h1>
+                <h1 class="text-center">Kommende Veranstaltungen</h1>
                 @foreach ($events as $event)
                     <div class="col-md-12 mx-auto mt-4">
                         <div class="card">
@@ -34,7 +34,11 @@
                         </div>
                     </div>
                 @endforeach
-                {{ $events->links('layouts.paginator')}}
+                @if($events->count())
+                    {{ $events->links('layouts.paginator')}}
+                @else
+                    <p class="mt-4 text-center">Es gibt leider keine Veranstaltungen in dieser Kategorie.</p>
+                @endif
             </div>
 
             <div class="col-lg-2 col-md-12 mb-4 mb-md-0 order-1 order-lg-1">

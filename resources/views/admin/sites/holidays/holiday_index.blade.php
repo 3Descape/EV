@@ -20,7 +20,7 @@
             <label>Kategorie</label>
             <select name="category" class="form-control">
                 <option value="ferien" {{old('category') === 'ferien' ? 'selected=selected' : ''}}>Ferien</option>
-                <option value="schulautonom" {{old('category') === 'schulautonom' ? 'selected=selected' : ''}}>Schulautonom frei</option>
+                <option value="schulautonom" {{old('category') === 'schulautonom' ? 'selected=selected' : ''}}>Schulautonome Tage</option>
             </select>
         </div>
         <button type="submit" class="form-control btn-success"><i class="fa fa-plus"></i> Hinzugügen</button>

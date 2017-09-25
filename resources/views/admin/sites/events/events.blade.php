@@ -46,7 +46,7 @@
                 Beschreibung:
             </div>
             <div class="col-md-11">
-                <input type="text" value="{{ old('description') }}" class="form-control" name="description">
+                <input type="text" value="{{ old('markup') }}" class="form-control" name="markup">
             </div>
         </div>
 

@@ -33,8 +33,8 @@ class EventsController extends Controller
     {
         $this->authorize('can_access_events', User::class);
         $this->validate($request,[
-            'name' => 'required|min:5|max:255',
-            'description' => 'required|min:5',
+            'name' => 'required|max:255',
+            'markup' => 'required',
             'date' => 'required|date_format:d.m.Y H:i',
             'location' => 'required|min:5',
             'category_id' => 'exists:categories,id',
@@ -44,7 +44,8 @@ class EventsController extends Controller
 
         Event::create([
             'name' => $request->name,
-            'description' => $request->description,
+            'html' => $request->markup,
+            'markup' => $request->markup,
             'date' => $date,
             'location' => $request->location,
             'category_id' => intval($request->category),
@@ -66,7 +67,6 @@ class EventsController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->authorize('can_access_events', User::class);
         if(request('type') && request('type') == 'conflict')
         {
             Event::find($id)->update([
@@ -75,47 +75,27 @@ class EventsController extends Controller
             return back();
         }
 
-        if($request->has('date')){
-            $this->validate($request,[
-                'name' => 'required|min:5|max:255',
-                'description' => 'required|min:10',
-                'location' => 'required|min:5',
-                'date' => 'required|date_format:d.m.Y H:i',
-                'category_id' => 'exists:categories,id',
-            ],[
-                'date_format' => 'Datum entspricht nicht dem gültigen Format für dd.MM.yyyy HH:mm'
-            ]);
+        $this->validate($request,[
+            'name' => 'required|max:255',
+            'location' => 'required',
+            'date' => 'required|date_format:d.m.Y H:i',
+            'category_id' => 'exists:categories,id',
+        ],[
+            'date_format' => 'Datum entspricht nicht dem gültigen Format für dd.MM.yyyy HH:mm'
+        ]);
 
-            $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
+        $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
 
-            Event::find($id)->update([
-                'name' => $request->name,
-                'category_id' => $request->category,
-                'description' => $request->description,
-                'date' => $date,
-                'location' => $request->location
-            ]);
-        }else
-        {
-            $this->validate($request,[
-                'name' => 'required|min:5|max:255',
-                'description' => 'required|min:10',
-                'location' => 'required|min:5',
-                'category_id' => 'exists:categories,id',
-            ]);
+        Event::find($id)->update([
+            'name' => $request->name,
+            'category_id' => $request->category,
+            'markup' => $request->markup,
+            'html' => $request->html,
+            'date' => $date,
+            'location' => $request->location
+        ]);
 
-            Event::find($id)->update([
-                'name' => $request->name,
-                'category_id' => $request->category,
-                'description' => $request->description,
-                'location' => $request->location
-            ]);
-        }
-
-        if(request('redirect') == 'archived'){
-            return redirect()->route('admin_events_archived');
-        }
-        return redirect()->route('admin_events_future');
+        return response()->json(['status' => 'Updated event'], 200);
     }
 
     public function destroy($id)

@@ -17,7 +17,8 @@ class CreateEventsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('category_id')->unsigned();
-            $table->text('description');
+            $table->text('html')->nullable();
+            $table->text('markup')->nullable();
             $table->dateTime('date');
             $table->string('location');
             $table->timestamps();

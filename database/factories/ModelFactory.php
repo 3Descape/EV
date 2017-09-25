@@ -30,10 +30,12 @@ $factory->define(App\Event::class, function (Faker\Generator $faker) {
         ['name' => 'Leichtathletik', 'location' => 'am Sportplatz', 'category' => 2],
         ['name' => 'Gesundes Frühstück', 'location' => 'beim Bleykolm Weiz', 'category' => 3],
     ]);
+    $sentence = $faker->sentences($nb = 3,$asText = true);
     return [
         'name' => $cont['name'],
         'category_id' => $cont['category'],
-        'description' => $faker->sentences($nb = 3,$asText = true),
+        'markup' => $sentence,
+        'html' => $sentence,
         'date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = '+3 years', $timezone = date_default_timezone_get()),
         'location' => $cont['location'],
     ];

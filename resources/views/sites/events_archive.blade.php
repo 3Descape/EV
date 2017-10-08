@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-fluid menu">@include('layouts.menu')</div>
 <div>
-    <div class="col-md-9 mx-auto bg-wrp">
+    <div class="col-md-9 mx-auto">
         <div class="row">
             <div class="col-lg-10 col-md-12 order-2 order-lg-1">
                 <h1 class="text-center">Veranstaltungen Archiv</h1>

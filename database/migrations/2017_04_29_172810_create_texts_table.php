@@ -16,8 +16,8 @@ class CreateTextsTable extends Migration
         Schema::create('texts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title');
-            $table->text('html');
-            $table->text('markup');
+            $table->text('html')->nullable();
+            $table->text('markup')->nullable();
             $table->integer('category');
             $table->integer('order');
             $table->timestamps();

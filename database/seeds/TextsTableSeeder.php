@@ -12,6 +12,12 @@ class TextsTableSeeder extends Seeder
     public function run()
     {
         Text::create([
+            'title' => '',
+            'category' => '1',
+            'order' => '0',
+        ]);
+
+        Text::create([
             'title' => 'Vorstand',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',

@@ -25,11 +25,11 @@ let mix = require('laravel-mix');
 
  .copy('node_modules/dropzone/dist/dropzone.js', 'public/js/dropzone.js')
  .copy('node_modules/dropzone/dist/min/dropzone.min.css', 'public/css/dropzone.min.css')
- .options({
-     purifyCss: {
-            purifyOptions: {
-                purifyCss: false,
-                whitelist: ['collapsing', 'callapse', 'show', 'collapsed', 'fa', '*fa*', 'blockquote']
-        },
-    }
- });
+ // .options({
+ //     purifyCss: {
+ //            purifyOptions: {
+ //                purifyCss: false,
+ //                whitelist: ['collapsing', 'callapse', 'show', 'collapsed', 'fa', '*fa*', 'blockquote']
+ //        },
+ //    }
+ // });

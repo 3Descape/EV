@@ -102,11 +102,16 @@
                 @endcan
 
                 @can('can_access_roles', \App\User::class)
-                    <a href="{{route('roles_show')}}" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
+                    <a href="{{route('roles_show')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
                         <i class="fa fa-globe"></i>
                         <span class="d-none d-md-inline-block">Berechtigungen</span>
                     </a>
                 @endcan
+
+                <a href="{{route('pictures')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
+                    <i class="fa fa-image"></i>
+                    <span class="d-none d-md-inline-block">Bilder</span>
+                </a>
 
                 <form action="{{route('logout')}}" method="POST">
                     <button type="submit" class="list-group-item d-inline-block">

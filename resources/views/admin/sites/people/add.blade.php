@@ -1,6 +1,5 @@
 @extends('admin.layouts.sitebar')
 
-
 @section('sitebar_inner')
 <div class="container-fluid">
     <div class="row">
@@ -15,7 +14,7 @@
               <label for="description">Beschreibung</label>
               <input type="text" class="form-control" id="description" name="description">
             </div>
-            
+
             <div class="form-group">
                 <label for="category">Kategory</label>
                 <select name="category" class="form-control" id="category">

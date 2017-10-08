@@ -12,7 +12,6 @@ Vue.component('dashboard', Dashboard);
 Vue.component('roles', Roles);
 Vue.component('sites-edit', SitesEdit);
 Vue.component('event-edit', EventEdit);
-
 const app = new Vue({
     el: '#app',
 });

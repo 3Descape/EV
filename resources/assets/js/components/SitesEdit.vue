@@ -15,11 +15,6 @@ export default {
         return{
             sites: this.sitesProp
         }
-    },
-    methods: {
-    },
-    mounted (){
-        console.log(this.sites)
     }
 }
 </script>

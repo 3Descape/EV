@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-fluid menu">@include('layouts.menu')</div>
     <div>
-        <div class="col-md-10 mx-auto bg-wrp space">
+        <div class="col-md-10 mx-auto space">
         @foreach ($texts as $text)
             <div class="col-md-6 col-sm-12 mx-auto" id="{{str_slug($text->title, "-")}}">
                 <h1 class="text-center">{{$text->title}}</h1>
@@ -15,7 +15,7 @@
             </div>
         @endforeach
 
-        <div class="col-md-6 col-sm-12 mx-auto " id="info">
+        <div class="col-md-6 col-sm-12 mx-auto space" id="info">
             <h1 class="text-center">Ferien und schulautonome Tage</h1>
             <div class="row">
 

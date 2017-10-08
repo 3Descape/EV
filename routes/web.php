@@ -55,8 +55,14 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/ferien/{holiday}/edit', 'HolidayController@edit')->name('holiday_edit');
     Route::put('/ferien/{holiday}', 'HolidayController@update')->name('holiday_update');
     Route::delete('/ferien/{holiday}', 'HolidayController@destroy')->name('holiday_destroy');
-});
 
+    Route::get('/bilder', 'ImagesController@pictures')->name('pictures');
+    Route::post('/sites/über_uns/uploud', 'ImagesController@uploud_group_image')->name('uploud_group_image');
+    Route::delete('sites/über_uns', 'ImagesController@remove_group_image')->name('remove_group_image');
+
+    Route::post('/sites/vorstand/uploud', 'ImagesController@uploud_vorstand_image')->name('uploud_vorstand_image');
+    Route::delete('sites/vorstand', 'ImagesController@remove_vorstand_image')->name('remove_vorstand_image');
+});
 
 Route::get('/', 'FrontendController@index')->name('home');
 Route::get('/förderansuchen', 'FrontendController@download_pdf')->name('pdf_start_download');

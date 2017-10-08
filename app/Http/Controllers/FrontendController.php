@@ -32,7 +32,7 @@ class FrontendController extends Controller
     public function about()
     {
         $this->add_analythic();
-        $texts = Text::where('category', 1)->orderBy('order')->get();
+        $texts = Text::where('category', 1)->with('images')->orderBy('order')->get();
         return view('sites.about', [
             'texts' => $texts
         ]);

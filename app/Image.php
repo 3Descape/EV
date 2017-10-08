@@ -8,13 +8,8 @@ class Image extends Model
 {
     protected $fillable = ['path', 'thump', 'name', 'description'];
 
-    /**
-     * Returns the event the image belongs to.
-     * @method event
-     * @return Illumiante\Database\Eloquent\Model
-     */
-    public function event()
+    public function image()
     {
-        return $this->belongsTo(Event::class);
+        return $this->morphTo();
     }
 }

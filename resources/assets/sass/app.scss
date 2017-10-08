@@ -151,17 +151,11 @@ body{
             }
         }
     }
-
-    div{
-        .bg-wrp{
+    div.space{
+        .col-md-6{
             padding-top: 4em;
-        }
-        .space{
-            .col-md-6{
-                padding-bottom: 5em;
-                h2{
-                    padding-bottom: 0.5em;
-                }
+            h2{
+                padding-bottom: 0.5em;
             }
         }
     }

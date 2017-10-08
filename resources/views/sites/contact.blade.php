@@ -7,7 +7,7 @@
 @section('content')
 <div class="container-fluid menu">@include('layouts.menu')</div>
 <div>
-    <div class="col-md-10 col-sm-12 mx-auto bg-wrp">
+    <div class="col-md-10 col-sm-12 mx-auto">
         <div class="col-md-6 col-sm-12 mx-auto" id="contact">
             <h1 class="text-center">Kontakt</h1>
             <p>Möchten Sie mit uns in kontakt treten? Schreiben Sie uns doch!</p>
@@ -53,7 +53,7 @@
 
                         <label for="obmann_message">Nachricht:</label>
                         <textarea class="form-control" name="text" id="obmann_message" rows="5" required placeholder="Text.."></textarea>
-                        
+
                         <input type="submit" class="form-control btn-primary mt-2" value="Senden">
                         {{ csrf_field() }}
                     </div>

@@ -22,13 +22,13 @@
             <div class="card">
                 <div class="card-header" role="tab" id="headingOne">
                     <h5 class="mb-0">
-                        <a data-toggle="collapse" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="text-dark">
+                        <a data-toggle="collapse" :href="'#collapse' + site.id" aria-expanded="false" aria-controls="'collapse' + site.id" class="text-dark">
                             Vorschau <i class="fa fa-caret-down"></i>
                         </a>
                     </h5>
                 </div>
 
-                <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" data-parent="#accordion">
+                <div :id="'collapse' + site.id" class="collapse" role="tabpanel">
                     <div class="card-body" v-html="compiledMarkdown">
                     </div>
                 </div>
@@ -38,6 +38,18 @@
 </template>
 
 <script>
+    let marked = require('marked');
+    let renderer = new marked.Renderer();
+
+    renderer.image = function(href, title, text) {
+      var out = '<img class="img-fluid" style="max-height: 400px;" src="' + href + '" alt="' + text + '"';
+      if (title) {
+        out += ' title="' + title + '"';
+      }
+      out += this.options.xhtml ? '/>' : '>';
+      return out;
+    };
+
     export default {
         props: ['siteProp'],
         data(){
@@ -49,7 +61,12 @@
         },
         computed: {
             compiledMarkdown: function(){
-                return marked(this.site.markup);
+                if(this.site.markup){
+                    return marked(this.site.markup, {renderer: renderer});
+                }
+                else{
+                    return "";
+                }
             }
         },
         methods:{

@@ -8,7 +8,6 @@
 </div>
 
 <script type="text/javascript">
-    console.log(document.cookie.indexOf("ev_allow_cookies="))
     var btn = document.getElementById('accept')
 
     if (document.cookie.indexOf("ev_allow_cookies") >= 0) {
@@ -25,6 +24,5 @@
     btn.addEventListener('click', function(){
         btn.parentElement.remove()
         setCookie('ev_allow_cookies', 'true', 366)
-        console.log("clicked")
     });
 </script>

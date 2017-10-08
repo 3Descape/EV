@@ -9,7 +9,7 @@ class SitesController extends Controller
 {
     public function about()
     {
-        $texts = Text::where('category', '1')->get();
+        $texts = Text::where('category', '1')->with('images')->get();
         return view('admin.sites.texts_show', [
             'texts' => $texts,
         ]);

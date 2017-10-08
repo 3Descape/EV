@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 176);
+/******/ 	return __webpack_require__(__webpack_require__.s = 177);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -428,36 +428,27 @@ module.exports = function createError(message, config, code, request, response) 
 
 /***/ }),
 
-/***/ 176:
+/***/ 177:
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(177);
 __webpack_require__(178);
 __webpack_require__(179);
-module.exports = __webpack_require__(180);
+__webpack_require__(180);
+module.exports = __webpack_require__(181);
 
 
 /***/ }),
 
-/***/ 177:
+/***/ 178:
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(24);
 window.$ = window.jQuery = __webpack_require__(21);
 // window.Vue = require('vue');
-
-// Vue.component('vue-people', require('./components/PeopleList.vue'));
 //
 // const app = new Vue({
-//     el: '#app',
+//     el: '#vue',
 // });
-
-/***/ }),
-
-/***/ 178:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -482,6 +473,13 @@ module.exports = function isCancel(value) {
 /***/ }),
 
 /***/ 180:
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
+/***/ 181:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

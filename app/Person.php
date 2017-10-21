@@ -8,7 +8,7 @@ class Person extends Model
 {
     protected $table = "people";
 
-    protected $fillable = ['name', 'description', 'category'];
+    protected $fillable = ['name', 'description', 'category', 'image_path', 'thump_path'];
 
     /**
      * Filter people for Ev members

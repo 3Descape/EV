@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-10 mx-auto">
-            <form action="{{route('api_person_update', $person->id)}}" method="POST">
+            <form action="{{route('api_person_update', $person->id)}}" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$person->name}}">
@@ -21,6 +21,14 @@
                         <option {{("1" == $person->category ? 'selected=selected' : '' )}} value="1">SGA</option>
                         <option {{("0" == $person->category ? 'selected=selected' : '' )}} value="0">Elternvertreter</option>
                     </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Bild:</label>
+                    <label class="custom-file" style="width: 100%;">
+                        <input type="file" id="file" class="custom-file-input" name="file">
+                        <span class="custom-file-control"> <i class="fa fa-upload"></i> Bild hochladen..</span>
+                    </label>
                 </div>
 
                 <input class="btn btn-success" type="submit" value="Bearbeiten">

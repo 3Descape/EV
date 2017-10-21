@@ -12421,11 +12421,11 @@ body * {
   text-align: center;
 }
 
-#app div.space .col-md-6 {
+#app div.space div.col-sm-11 {
   padding-top: 4em;
 }
 
-#app div.space .col-md-6 h2 {
+#app div.space div.col-sm-11 h2 {
   padding-bottom: 0.5em;
 }
 

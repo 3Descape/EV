@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use Illuminate\Http\Request;
-
+use App\Traits\StoreImageTrait;
 class PersonController extends Controller
 {
+    use StoreImageTrait;
     public function add($type = 'default')
     {
         return view('admin.sites.people.add', [
@@ -21,8 +22,19 @@ class PersonController extends Controller
             'description' => 'nullable',
             'category' => 'required'
         ]);
+        //dd($request->file('file'));
+        $paths = ['main' => Null, 'thump' => Null];
+        if($request->file('file')){
+            $paths = $this->store_image($request, 'images/sga', true);
+        }
 
-        Person::create($request->all());
+        Person::create([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category' => $request->category,
+            'image_path' => $paths['main'],
+            'thump_path' => $paths['thump']
+        ]);
 
         if($request->category == '1')
             return redirect()->route('admin_people_frontend_sga');
@@ -39,10 +51,22 @@ class PersonController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'description' => 'nullable',
-            'category' => 'required'
+            'category' => 'required',
+        ]);
+        $paths = ['main' => '', 'thump' => ''];
+        if($request->file('file')){
+            $paths = $this->store_image($request, 'images/sga', true);
+        }
+        //dd($paths['main'] ? $paths['main'] : $person->image_path);
+
+        $person->update([
+            'name' => $request->name,
+            'description' => $request->description,
+            'category' => $request->category,
+            'image_path' => $paths['main'] ? $paths['main'] : $person->image_path,
+            'thump_path' => $paths['thump'] ? $paths['thump'] : $person->thump_path
         ]);
 
-        $person->update($request->all());
         if($request->category)
             return redirect()->route('admin_people_frontend_sga');
         return redirect()->route('admin_people_frontend_ev');

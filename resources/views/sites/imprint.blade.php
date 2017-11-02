@@ -1,21 +1,16 @@
 @extends('master')
 
 @section('title')
-Impressum
+    Impressum
 @endsection
 
 @section('content')
-<div class="container-fluid menu">@include('layouts.menu')</div>
-    <div>
-        <div class="col-md-10 mx-auto">
-          <div class="col-md-12">
-            <div class="col-md-10 col-sm-12 mx-auto" id="{{$text->title}}">
-                <h1 class="text-center">{{$text->title}}</h1>
-                <div class="text-center mt-4">
-                    {!!$text->html!!}
-                </div>
+    <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto">
+        <div class="col-md-10 col-sm-12 mx-auto" id="{{$text->title}}">
+            <h1 class="text-center">{{$text->title}}</h1>
+            <div class="text-center mt-4">
+                {!!$text->html!!}
             </div>
         </div>
     </div>
-</div>
 @endsection

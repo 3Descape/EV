@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
         <title>@yield('title')</title>
         <script>
         window.Laravel = <?php echo json_encode([
@@ -19,7 +18,13 @@
                 @include('layouts.cookie')
             @endif
 
-            @yield('content')
+            <div class="container-fluid menu">@include('layouts.menu')</div>
+
+            <div>
+                <div class="col-md-9 mx-auto">
+                    @yield('content')
+                </div>
+            </div>
         </div>
 
         <footer>

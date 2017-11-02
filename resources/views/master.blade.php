@@ -19,12 +19,8 @@
             @endif
 
             <div class="container-fluid menu">@include('layouts.menu')</div>
-
-            <div>
-                <div class="col-md-9 mx-auto">
-                    @yield('content')
-                </div>
-            </div>
+            
+            @yield('content')
         </div>
 
         <footer>

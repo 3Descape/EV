@@ -1,4 +1,4 @@
-@extends('master')
+@extends('sites.sites_master')
 
 @section('title')
     Info

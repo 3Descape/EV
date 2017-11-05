@@ -65,17 +65,19 @@ class EventsController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Event $event)
     {
+        //if a category had this event associated on delete we
+        //update the category of this event to a new one
         if(request('type') && request('type') == 'conflict')
         {
-            Event::find($id)->update([
+            $event->update([
                 'category_id' => $request->category
             ]);
             return back();
         }
 
-        $this->validate($request,[
+        $request->validate([
             'name' => 'required|max:255',
             'location' => 'required',
             'date' => 'required|date_format:d.m.Y H:i',
@@ -86,7 +88,7 @@ class EventsController extends Controller
 
         $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
 
-        Event::find($id)->update([
+        $event->update([
             'name' => $request->name,
             'category_id' => $request->category,
             'markup' => $request->markup,
@@ -98,10 +100,10 @@ class EventsController extends Controller
         return response()->json(['status' => 'Updated event'], 200);
     }
 
-    public function destroy($id)
+    public function destroy(Event $event)
     {
         $this->authorize('can_access_events', User::class);
-        Event::find($id)->delete();
+        $event->delete();
         return back();
     }
 }

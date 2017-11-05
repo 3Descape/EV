@@ -12336,23 +12336,23 @@ body * {
   color: #333333;
 }
 
-#app #home_t {
+#app #header {
   background-color: #f2f2f2;
   padding: 0px;
 }
 
-#app #home_t .header {
+#app #header .header {
   min-height: 100vh;
   background-color: #3dd6d0;
   position: relative;
 }
 
-#app #home_t .header .image {
+#app #header .header .image {
   position: relative;
   width: 100%;
 }
 
-#app #home_t .header .image > div {
+#app #header .header .image > div {
   min-height: 100vh;
   width: 100%;
   background-image: url("/images/preview.jpg");
@@ -12360,7 +12360,7 @@ body * {
   opacity: 0.1;
 }
 
-#app #home_t .header .content {
+#app #header .header .content {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -12368,7 +12368,7 @@ body * {
   right: 0px;
 }
 
-#app #home_t .header .content h1 {
+#app #header .header .content h1 {
   opacity: 1;
   z-index: 6;
   font-weight: 700;
@@ -12382,36 +12382,36 @@ body * {
           text-decoration-color: #fbcd4d;
 }
 
-#app #home_t #featured {
+#app #header #featured {
   padding-top: 50px;
   padding-bottom: 50px;
 }
 
-#app #home_t #download {
+#app #header #download {
   padding-top: 50px;
   padding-bottom: 50px;
   background-color: #71f79f;
 }
 
-#app #home_t #download .card {
+#app #header #download .card {
   padding: 20px;
 }
 
-#app #home_t #download .card a {
+#app #header #download .card a {
   width: 100%;
   padding: 10px;
 }
 
-#app #home_t #social-media {
+#app #header #social-media {
   background-color: #292D39;
 }
 
-#app #home_t #social-media .row .col-lg-3 {
+#app #header #social-media .row .col-lg-3 {
   height: 8vh;
   display: table;
 }
 
-#app #home_t #social-media .row .col-lg-3 a {
+#app #header #social-media .row .col-lg-3 a {
   padding: 15px;
   display: table-cell;
   vertical-align: middle;
@@ -12439,14 +12439,14 @@ body * {
   text-align: center;
 }
 
-.event_thump {
+#app .event_thumb {
   width: 100%;
   padding: 0px;
   text-align: center;
   overflow: hidden;
 }
 
-.event_thump img {
+#app .event_thumb img {
   height: 100%;
   width: auto;
 }
@@ -12465,9 +12465,5 @@ body * {
 .cookie button {
   background-color: white;
   color: black;
-}
-
-.hidden {
-  display: hidden !important;
 }
 

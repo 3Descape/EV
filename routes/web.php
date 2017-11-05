@@ -9,18 +9,18 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/events', 'EventsController@events_future')->name('admin_events_future');
     Route::get('/events/archived', 'EventsController@events_archived')->name('admin_events_archived');
     Route::post('/events', 'EventsController@store')->name('admin_events_store');
-    Route::put('/events/{id}', 'EventsController@update')->name('admin_events_update');
-    Route::get('/events/{id}/edit', 'EventsController@edit')->name('admin_events_edit');
+    Route::put('/events/{event}', 'EventsController@update')->name('admin_events_update');
+    Route::get('/events/{event}/edit', 'EventsController@edit')->name('admin_events_edit');
     Route::post('/events/{id}/image', 'ImagesController@store')->name('admin_events_store_image');
     Route::delete('/events/{event}/image/{image}', 'ImagesController@destroy')->name('admin_events_destroy_image');
-    Route::delete('/events/{id}', 'EventsController@destroy')->name('admin_events_destroy');
+    Route::delete('/events/{event}', 'EventsController@destroy')->name('admin_events_destroy');
 
     Route::get('/categories', 'CategoriesController@index')->name('admin_categories');
     Route::get('/categories/{id}/edit', 'CategoriesController@edit')->name('admin_categories_edit');
-    Route::put('/categories/{id}', 'CategoriesController@update')->name('admin_categories_update');
     Route::post('/categories', 'CategoriesController@store')->name('admin_categories_store');
-    Route::get('/categories/{id}/delte', 'CategoriesController@pre_delete')->name('adming_categories_pre_delete');
-    Route::delete('/categories/{id}', 'CategoriesController@destroy')->name('admin_categories_destroy');
+    Route::put('/categories/{category}', 'CategoriesController@update')->name('admin_categories_update');
+    Route::get('/categories/{category}/delte', 'CategoriesController@pre_delete')->name('adming_categories_pre_delete');
+    Route::delete('/categories/{category}', 'CategoriesController@destroy')->name('admin_categories_destroy');
 
     Route::get('/people/frontend/sga', 'AdminController@people_frontend_sga')->name('admin_people_frontend_sga');
     Route::get('/people/frontend/ev', 'AdminController@people_frontend_ev')->name('admin_people_frontend_ev');

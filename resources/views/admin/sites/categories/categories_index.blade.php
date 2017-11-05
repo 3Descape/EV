@@ -13,7 +13,7 @@
                 Name:
             </div>
             <div class="col-md-11">
-                <input value="{{ old('name') }}" type="text" class="form-control" name="name">
+                <input value="{{ old('name') }}" type="text" class="form-control" name="name" required>
             </div>
         </div>
 

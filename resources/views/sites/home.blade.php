@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid" id="home_t">
+    <div class="container-fluid" id="header">
         <div>
             <div class="header">
                 <div class="image">

@@ -14,7 +14,7 @@
                         <div class="card-body">
                             <div class="row">
                                 @if($event->thump_path)
-                                    <div class="col-lg-2 col-md-12 event_thump">
+                                    <div class="col-lg-2 col-md-12 event_thumb">
                                         <img src="{{asset($event->thump_path)}}" alt="" class="img-responsive">
                                     </div>
                                 @endif

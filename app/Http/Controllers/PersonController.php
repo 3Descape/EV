@@ -22,7 +22,7 @@ class PersonController extends Controller
             'description' => 'nullable',
             'category' => 'required'
         ]);
-        //dd($request->file('file'));
+
         $paths = ['main' => Null, 'thump' => Null];
         if($request->file('file')){
             $paths = $this->store_image($request, 'images/sga', true);
@@ -57,7 +57,6 @@ class PersonController extends Controller
         if($request->file('file')){
             $paths = $this->store_image($request, 'images/sga', true);
         }
-        //dd($paths['main'] ? $paths['main'] : $person->image_path);
 
         $person->update([
             'name' => $request->name,

@@ -10,35 +10,30 @@ body{
     transition: 0.5s;
     background-color: #FFFFFF;
     color: #333333;
-    *{
-        font-family: 'Montserrat', sans-serif;
-    }
+    *{font-family: 'Montserrat', sans-serif;}
 }
 
-// .bg-dark{
-//     background-color: $color6;
-//     transition: 0.5s;
-// }
 .menu{
     background-color: $color6 ;
     padding: 0px;
     z-index: 10;
     nav{
         padding: 0px;
-        .navbar-light{
-            color: $color1;
-        }
+        .navbar-light{color: $color1;}
+
         div.navbar-collapse > ul > li{
             a{
                 padding-top: 16px;
                 padding-bottom: 16px;
-                @include media-breakpoint-down(md) {
+                @include media-breakpoint-down(md){
                     padding-left: 35px;
                 }
+
                 &.active{
                     color: lighten($color1, 10%) !important;
                     background-color: lighten($color6, 10%) !important;
                 }
+
                 &:hover{
                     color: darken($color1, 10%) !important;
                     background-color: darken($color6, 2%) !important;
@@ -46,28 +41,30 @@ body{
             }
         }
     }
+
     *{
         color: $color1 !important;
         font-weight: 600;
     }
+
     button.navbar-toggler-right{
         margin-top: 16px;
         margin-bottom: 16px;
         right: 0px;
     }
+
     a.navbar-brand{
         margin-left: 35px;
         padding-top: 16px;
         padding-bottom: 16px;
-        &:hover{
-            color: darken($color1, 10%);
-        }
+
+        &:hover{color: darken($color1, 10%);}
     }
 }
 
-
 #app{
     font-family: Popins;
+
     h1, h2{
         text-align: left;
         font-weight: 700;
@@ -77,16 +74,19 @@ body{
         color: #333333;
     }
 
-    #home_t{
+    #header{
         background-color: darken(white, 5%);
         padding: 0px;
+
         .header{
             min-height: 100vh;
             background-color: $color3;
             position: relative;
+
             .image{
                 position: relative;
                 width: 100%;
+
                 &>div{
                     min-height: 100vh;
                     width: 100%;
@@ -95,12 +95,14 @@ body{
                     opacity : 0.1;
                 }
             }
+
             .content{
                 position: absolute;
                 top: 0px;
                 left: 0px;
                 bottom: 0px;
                 right: 0px;
+
                 h1{
                     opacity: 1;
                     z-index: 6;
@@ -115,14 +117,17 @@ body{
                 }
             }
         }
+
         #featured{
             padding-top: 50px;
             padding-bottom: 50px;
         }
+
         #download{
             padding-top: 50px;
             padding-bottom: 50px;
             background-color: $color2;
+
             .card{
                 padding: 20px;
                 a{
@@ -131,12 +136,15 @@ body{
                 }
             }
         }
+
         #social-media{
             background-color: $color6;
+
             .row{
                 .col-lg-3{
                     height: 8vh;
                     display: table;
+
                     a{
                         padding: 15px;
                         display: table-cell;
@@ -145,7 +153,6 @@ body{
                         font-size: 1.4em;
                         font-weight: 600;
                         text-align: center;
-
                     }
                 }
             }
@@ -154,16 +161,13 @@ body{
 
     .text-block{
         padding-top: 4em;
-        h2{
-            padding-bottom: 0.5em;
-        }
+
+        h2{padding-bottom: 0.5em;}
     }
 
     #personen{
         div{
-            .card{
-                height:100%;
-            }
+            .card{height:100%;}
         }
     }
 
@@ -172,19 +176,20 @@ body{
         width: calc(100% - 30px);
         text-align: center;
     }
-}
 
-.event_thump{
-    width:100%;
-    padding: 0px;
-    text-align: center;
-    overflow: hidden;
+    .event_thumb{
+        width:100%;
+        padding: 0px;
+        text-align: center;
+        overflow: hidden;
 
-    img{
-        height: 100%;
-        width: auto;
+        img{
+            height: 100%;
+            width: auto;
+        }
     }
 }
+
 .cookie{
     background-color: black;
     color: white;
@@ -197,7 +202,4 @@ body{
         background-color: white;
         color: black;
     }
-}
-.hidden{
-    display: hidden !important;
 }

@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 class HolidayController extends Controller
 {
-
     public function index()
     {
         $school = Holiday::schoolFree();
@@ -19,12 +18,6 @@ class HolidayController extends Controller
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $this->validate($request,[
@@ -37,12 +30,6 @@ class HolidayController extends Controller
         return back();
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Holiday  $holiday
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Holiday $holiday)
     {
         return view('admin.sites.holidays.holiday_edit', [
@@ -50,13 +37,6 @@ class HolidayController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Holiday  $holiday
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Holiday $holiday)
     {
         $this->validate($request,[
@@ -69,12 +49,6 @@ class HolidayController extends Controller
         return redirect()->route('holiday_index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Holiday  $holiday
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Holiday $holiday)
     {
         $holiday->delete();

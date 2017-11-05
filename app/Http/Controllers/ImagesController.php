@@ -14,6 +14,7 @@ class ImagesController extends Controller
     {
         return view('admin.sites.images.images');
     }
+
     public function remove_group_image()
     {
         Text::find(1)->update([
@@ -103,6 +104,4 @@ class ImagesController extends Controller
         }
 
     }
-
-
 }

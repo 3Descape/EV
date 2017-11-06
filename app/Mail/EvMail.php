@@ -32,6 +32,6 @@ class EvMail extends Mailable
      */
     public function build()
     {
-        return $this->from('miclack30@gmail.com')->view('emails.contact');
+        return $this->from($this->from_address)->view('emails.contact');
     }
 }

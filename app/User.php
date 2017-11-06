@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Notifications\PasswordResetNotification;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -75,5 +76,10 @@ class User extends Authenticatable
         });
 
         return in_array(true, $contains->toArray());
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordResetNotification($token));
     }
 }

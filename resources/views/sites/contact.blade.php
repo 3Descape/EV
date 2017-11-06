@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-    <div class="col-md-6 col-sm-12 mx-auto" id="contact">
+    <div class="col-md-6 col-sm-12 mx-auto mt-4" id="contact">
         <h1 class="text-center">Kontakt</h1>
         <p>Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</p>
         <div class="col-md-12 mb-4">
@@ -32,7 +32,7 @@
             </form>
         </div>
 
-        <div class="col-md-12">
+        <div class="col-md-12 mt-2">
             <h3>Obmann</h3>
             @if($msg = session('obmann_mail'))
                 <div class="alert alert-success" role="alert">

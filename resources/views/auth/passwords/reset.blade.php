@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row full-height">
-            <div class="col-md-4 mx-auto my-auto">
+            <div class="col-xl-5 col-lg-10 col-md-10 col-sm-11 mx-auto my-auto">
                 <div class="card">
                     <div class="card-body">
                         @if (session('status'))
@@ -56,7 +56,7 @@
                             {{ csrf_field() }}
                         </form>
                     </div>
-                </div>      
+                </div>
             </div>
         </div>
     </div>

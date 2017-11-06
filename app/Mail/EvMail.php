@@ -17,12 +17,15 @@ class EvMail extends Mailable
      */
 
     public $from_address;
-    public $data;
+    public $intro;
+    public $body;
+    public $greeting;
     public function __construct($from, $data)
     {
         $this->from_address = $from;
-        $this->data = $data;
-        //dd($this->from_address);
+        $this->greeting="Hallo!";
+        $this->intro = '<b>'. $data['name'] . '</b> hat Ihnen folgendes geschrieben.';
+        $this->body = $data['text'];
     }
 
     /**
@@ -32,6 +35,6 @@ class EvMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->from_address)->view('emails.contact');
+        return $this->from($this->from_address)->markdown('emails.contact');
     }
 }

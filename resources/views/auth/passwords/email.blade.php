@@ -7,7 +7,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="row full-height">
-            <div class="col-md-4 mx-auto my-auto">
+            <div class="col-xl-5 col-lg-10 col-md-10 col-sm-11 mx-auto my-auto">
             <div class="card">
                 <div class="card-body">
                     @if (session('status'))
@@ -20,7 +20,7 @@
                         <div class="form-group {{ $errors->has('email') ? 'bg-danger' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Adresse</label>
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-                            
+
                             <div class="ml-2">
                                 @component('admin.components.error', ['name' => 'email'])
                                 @endcomponent

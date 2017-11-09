@@ -6,17 +6,20 @@ use App\Event;
 use Illuminate\Http\Request;
 use App\Text;
 use App\Traits\StoreImageTrait;
+use App\User;
 class ImagesController extends Controller
 {
     use StoreImageTrait;
 
     public function pictures()
     {
+        $this->authorize('can_access_pictures', User::class);
         return view('admin.sites.images.images');
     }
 
     public function remove_group_image()
     {
+        $this->authorize('can_access_pictures', User::class);
         Text::find(1)->update([
             'html' => ''
         ]);
@@ -26,6 +29,7 @@ class ImagesController extends Controller
 
     public function remove_vorstand_image()
     {
+        $this->authorize('can_access_pictures', User::class);
         Text::find(2)->images()->delete();
         session()->flash('group_image', 'Bild wurde entfernt.');
         return back();
@@ -33,6 +37,7 @@ class ImagesController extends Controller
 
     public function store(Request $request, $event_id)
     {
+        $this->authorize('can_access_pictures', User::class);
         $this->validate($request, [
             'file' => 'required|image|mimes:jpeg,png,jpg,JPG,PNG,JPEG',
         ]);
@@ -52,6 +57,7 @@ class ImagesController extends Controller
 
     public function destroy(Event $event, $image_id)
     {
+        $this->authorize('can_access_pictures', User::class);
         $image = $event->images()->find($image_id);
         File::delete($image->path);
         $image->delete();
@@ -60,6 +66,7 @@ class ImagesController extends Controller
 
     public function uploud_group_image(Request $request)
     {
+        $this->authorize('can_access_pictures', User::class);
         $this->validate($request, [
             'file' => 'required|image|mimes:jpeg,png,jpg,JPG,PNG,JPEG',
         ]);
@@ -85,6 +92,7 @@ class ImagesController extends Controller
 
     public function uploud_vorstand_image(Request $request)
     {
+        $this->authorize('can_access_pictures', User::class);
         $this->validate($request, [
             'file' => 'required|image|mimes:jpeg,png,jpg,JPG,PNG,JPEG',
         ]);

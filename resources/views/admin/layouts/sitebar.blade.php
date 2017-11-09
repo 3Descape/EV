@@ -107,11 +107,12 @@
                         <span class="d-none d-md-inline-block">Berechtigungen</span>
                     </a>
                 @endcan
-
-                <a href="{{route('pictures')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
-                    <i class="fa fa-image"></i>
-                    <span class="d-none d-md-inline-block">Bilder</span>
-                </a>
+                @can ('can_access_pictures', \App\User::class)
+                    <a href="{{route('pictures')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
+                        <i class="fa fa-image"></i>
+                        <span class="d-none d-md-inline-block">Bilder</span>
+                    </a>
+                @endcan
 
                 <form action="{{route('logout')}}" method="POST">
                     <button type="submit" class="list-group-item d-inline-block">

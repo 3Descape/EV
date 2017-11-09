@@ -48,6 +48,11 @@ class RolePolicy
         return $user->hasPermission('access_people');
     }
 
+    public function can_access_pictures(User $user)
+    {
+        return $user->hasPermission('access_pictures');
+    }
+
     public function can_access_dashboard(User $user)
     {
         \Log::info('has permission');

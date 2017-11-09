@@ -19,17 +19,22 @@ class PermissionsTableSeeder extends Seeder
 
         $role->permissions()->create([
             'name' => 'admin',
-            'label' => 'administrator',
+            'label' => 'Administrator',
         ]);
 
         Permission::create([
             'name' => 'access_events',
-            'label' => 'veranstaltungen',
+            'label' => 'Veranstaltungen',
         ]);
 
         Permission::create([
             'name' => 'access_sites',
-            'label' => 'seiten',
+            'label' => 'Seiten',
+        ]);
+
+        Permission::create([
+            'name' => 'access_pictures',
+            'label' => 'Bilder',
         ]);
 
         Permission::create([

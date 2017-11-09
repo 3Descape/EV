@@ -18,7 +18,7 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <h3 class="card-title">{{ucfirst($event->name)}}</h3>
-                                                <p class="card-text">{{$event->description}}</p>
+                                                <p class="card-text">{!!$event->html!!}</p>
                                             </div>
                                             <div class="col-md-12 mt-4">
                                                 <h4 class="card-title">Wo und Wann?</h4>

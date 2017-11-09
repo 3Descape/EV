@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Text;
 use App\Traits\StoreImageTrait;
 use App\User;
+use File;
 class ImagesController extends Controller
 {
     use StoreImageTrait;

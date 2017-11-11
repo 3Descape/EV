@@ -11,7 +11,7 @@
         <h3>{{$user->name}} hat derzeit folgende Berechtigungen:</h3>
         <ul class="list-group">
             @foreach ($user->roles as $role)
-            <li class="list-group-item clearfix">
+            <li class="list-group-item d-flex">
                 <span class="mr-auto">{{ucfirst($role->name)}}</span>
                 <form action="{{route('api_user_role_detach' , [$user->id, $role->id])}}" method="post" class="align-self-end mx-1">
                     <button class="btn btn-danger">

@@ -67,7 +67,7 @@ class EventsController extends Controller
 
     public function update(Request $request, Event $event)
     {
-        //if a category had this event associated on delete we
+        //if a category has this event associated on delete we
         //update the category of this event to a new one
         if(request('type') && request('type') == 'conflict')
         {
@@ -80,7 +80,7 @@ class EventsController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'location' => 'required',
-            'date' => 'required|date_format:d.m.Y H:i',
+            'date' => 'required|date_format:"d.m.Y H:i"',
             'category_id' => 'exists:categories,id',
         ],[
             'date_format' => 'Datum entspricht nicht dem gültigen Format für dd.MM.yyyy HH:mm'

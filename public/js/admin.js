@@ -82678,7 +82678,7 @@ exports = module.exports = __webpack_require__(11)(undefined);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -82691,6 +82691,17 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Markdown_vue__ = __webpack_require__(176);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Markdown_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Markdown_vue__);
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -82755,25 +82766,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 
-function Errors() {
-    var _this = this;
 
-    var errors = {};
-    setErrors: (function (errors) {
-        _this.errors = errors;
-    });
+var Errors = function () {
+    function Errors() {
+        _classCallCheck(this, Errors);
 
-    clearErrors: (function () {
-        _this.errors = {};
-    });
+        this.errors = {};
+    }
 
-    hasError: (function (name) {
-        if (_this.errors.indexOf(name)) {
-            return _this.errors[name];
+    _createClass(Errors, [{
+        key: 'setErrors',
+        value: function setErrors(errors) {
+            this.errors = errors;
         }
-        return {};
-    });
-}
+    }, {
+        key: 'clearErrors',
+        value: function clearErrors() {
+            this.errors = {};
+        }
+    }, {
+        key: 'hasError',
+        value: function hasError(name) {
+            if (this.errors.indexOf(name)) {
+                return this.errors[name];
+            }
+            return {};
+        }
+    }]);
+
+    return Errors;
+}();
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['eventProp', 'categories'],
     data: function data() {
@@ -82793,17 +82816,17 @@ function Errors() {
     },
     methods: {
         dateFormat: function dateFormat(value) {
-            return ('0' + (value.getDate() + 1)).slice(-2) + '.' + ('0' + (value.getMonth() + 1)).slice(-2) + '.' + value.getFullYear() + ' ' + ('0' + (value.getHours() + 1)).slice(-2) + ':' + ('0' + (value.getMinutes() + 1)).slice(-2);
+            return ('0' + (value.getDate() + 1)).slice(-2) + '.' + ('0' + (value.getMonth() + 1)).slice(-2) + '.' + value.getFullYear() + ' ' + ('0' + value.getHours()).slice(-2) + ':' + ('0' + (value.getMinutes() + 1)).slice(-2);
         },
         updateEvent: function updateEvent() {
-            var _this2 = this;
+            var _this = this;
 
             var vue = this;
             vue.isUpdating = true;
             axios.put('/admin/events/' + vue.event.id, {
                 name: vue.event.name,
                 location: vue.event.location,
-                date: vue.event.date,
+                date: this.event.date,
                 markup: vue.event.markup,
                 html: vue.compiledMarkdown,
                 category: vue.event.category_id
@@ -82811,7 +82834,7 @@ function Errors() {
                 vue.isUpdating = false;
                 console.log(response.data.status);
             }).catch(function (errors) {
-                _this2.errors.setErrors(errors);
+                _this.errors.setErrors(errors);
                 console.log(errors);
             });
         }
@@ -82826,9 +82849,10 @@ function Errors() {
         var now = new Date();
         var eventDate = new Date(this.event.date);
         console.log(eventDate);
-        console.log(now);
+        // console.log(now)
         this.showDate = eventDate > now;
         this.event.date = this.dateFormat(eventDate);
+        console.log(this.event.date);
     }
 });
 
@@ -82840,7 +82864,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", {}, [
+  return _c("div", [
     _c("h2", { staticClass: "text-center" }, [_vm._v("Bearbeiten")]),
     _vm._v(" "),
     _c("fieldset", { attrs: { disabled: _vm.isUpdating } }, [
@@ -82857,11 +82881,11 @@ var render = function() {
         },
         [
           _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-md-1" }, [
+            _c("div", { staticClass: "col-md-3 col-lg-2 col-xl-1" }, [
               _vm._v("\n                    Name:\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-11" }, [
+            _c("div", { staticClass: "col-md-9 col-lg-10 col-xl-11" }, [
               _c("input", {
                 directives: [
                   {
@@ -82887,11 +82911,11 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-md-1" }, [
+            _c("div", { staticClass: "col-md-3 col-lg-2 col-xl-1" }, [
               _vm._v("\n                    Ort:\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-11" }, [
+            _c("div", { staticClass: "col-md-9 col-lg-10 col-xl-11" }, [
               _c("input", {
                 directives: [
                   {
@@ -82918,11 +82942,11 @@ var render = function() {
           _vm._v(" "),
           _vm.showDate
             ? _c("div", { staticClass: "form-group row" }, [
-                _c("div", { staticClass: "col-md-1" }, [
+                _c("div", { staticClass: "col-md-3 col-lg-2 col-xl-1" }, [
                   _vm._v("\n                    Datum:\n                ")
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-11" }, [
+                _c("div", { staticClass: "col-md-9 col-lg-10 col-xl-11" }, [
                   _c("input", {
                     directives: [
                       {
@@ -82953,11 +82977,11 @@ var render = function() {
             : _vm._e(),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-md-1" }, [
+            _c("div", { staticClass: "col-md-3 col-lg-2 col-xl-1" }, [
               _vm._v("\n                    Beschreibung:\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-11" }, [
+            _c("div", { staticClass: "col-md-9 col-lg-10 col-xl-11" }, [
               _c("textarea", {
                 directives: [
                   {
@@ -83008,11 +83032,11 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row" }, [
-            _c("div", { staticClass: "col-md-1" }, [
-              _vm._v("\n                    Kategorie\n                ")
+            _c("div", { staticClass: "col-md-3 col-lg-2 col-xl-1" }, [
+              _vm._v("\n                    Kategorie:\n                ")
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-11" }, [
+            _c("div", { staticClass: "col-md-9 col-lg-10 col-xl-11" }, [
               _c(
                 "select",
                 {
@@ -83059,16 +83083,29 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control btn btn-success",
-            attrs: { type: "submit", value: "Aktualisieren" }
-          })
+          _vm._m(0)
         ]
       )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row" }, [
+      _c("div", { staticClass: "col-md-3 col-lg-2 col-xl-1" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-9 col-lg-10 col-xl-11" }, [
+        _c("input", {
+          staticClass: "form-control btn btn-success",
+          attrs: { type: "submit", value: "Aktualisieren" }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {

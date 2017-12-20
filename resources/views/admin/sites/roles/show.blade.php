@@ -4,65 +4,68 @@
 <roles :options="{{json_encode($permissions)}}" :roles="{{json_encode($roles)}}" inline-template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10 mx-auto">
+            <div class="col-lg-10 col-md-12 mx-auto">
                 @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                    </ul>
-                </div>
+                    <div class="alert alert-danger">
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
                 @endif
+                {{-- Button for adding a role --}}
                 <h3>Berechtigungen:</h3>
                 <button type="button" class="btn btn-success my-2"  data-toggle="modal" data-target="#myModal">
                     <i class="fa fa-plus"></i> Berechtigung
                 </button>
+
                 @foreach ($roles as $role)
-                <div class="card mb-5">
-                    <div class="card-header" id="{{$role->name}}">
-                        <div class="d-flex">
-                            <div class="mr-auto d-flex">
-                                <h4>{{ucfirst($role->name)}}</h4>
-                                <p class="text-muted ml-2">{{ucfirst($role->label)}}</p>
-                            </div>
-                            @if ($role->name !== 'administrator')
-                                <form action="{{route('api_role_delete', $role->id)}}" method="POST">
-                                    <button type="submit" class="btn btn-danger float-left mx-1">
-                                        <i class="fa fa-trash-o"></i> Löschen
-                                    </button>
-                                    {{method_field('DELETE')}}
-                                    {{ csrf_field() }}
-                                </form>
-                            @endif
-                        </div>
-                    </div>
-                    @if ($role->name !== 'administrator')
-                    <div class="card-body">
-                        <div class="d-flex justify-content-end mb-2">
-                            <h5 class="mr-auto">Rechte:</h5>
-                            <button class="btn btn-success" @click="modal({{$role->id}})"><i class="fa fa-plus"></i> Recht</button>
-                        </div>
-                        @foreach ($role->permissions as $permission)
-                        <div class="card mb-1">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item d-flex justify-content-end">
-                                    <span class="mr-auto">{{$permission->label}}</span>
-                                    <form action="{{route('api_role_permission_destroy', [$role->id, $permission->id])}}" method="POST">
-                                        <button class="btn btn-danger mx-1">
+                    <div class="card mb-5">
+                        <div class="card-header" id="{{$role->name}}">
+                            <div class="d-flex">
+                                <div class="mr-auto d-flex">
+                                    <h4>{{ucfirst($role->name)}}</h4>
+                                    <p class="text-muted ml-2">{{ucfirst($role->label)}}</p>
+                                </div>
+                                @if ($role->name !== 'administrator')
+                                    <form action="{{route('api_role_delete', $role->id)}}" method="POST">
+                                        <button type="submit" class="btn btn-danger float-left mx-1">
                                             <i class="fa fa-trash-o"></i> Löschen
                                         </button>
-                                        {{ csrf_field() }}
                                         {{method_field('DELETE')}}
+                                        {{ csrf_field() }}
                                     </form>
-                                </li>
-                            </ul>
+                                @endif
+                            </div>
                         </div>
-                        @endforeach
+
+                        @if ($role->name !== 'administrator')
+                            <div class="card-body">
+                                <div class="d-flex justify-content-end mb-2">
+                                    <h5 class="mr-auto">Rechte:</h5>
+                                    <button class="btn btn-success" @click="modal({{$role->id}})"><i class="fa fa-plus"></i> Recht</button>
+                                </div>
+                                @foreach ($role->permissions as $permission)
+                                    <div class="card mb-1">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item d-flex justify-content-end">
+                                                <span class="mr-auto">{{$permission->label}}</span>
+                                                <form action="{{route('api_role_permission_destroy', [$role->id, $permission->id])}}" method="POST">
+                                                    <button class="btn btn-danger mx-1">
+                                                        <i class="fa fa-trash-o"></i> Löschen
+                                                    </button>
+                                                    {{ csrf_field() }}
+                                                    {{method_field('DELETE')}}
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                @endforeach
+                            </div>
+                            @endif
                     </div>
-                    @endif
-                </div>
-                @endforeach
+                    @endforeach
             </div>
         </div>
 

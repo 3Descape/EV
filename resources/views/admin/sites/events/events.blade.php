@@ -5,7 +5,7 @@
 @endsection
 
 @section('sitebar_inner')
-<div class="col-md-10 mx-auto">
+<div class="col-lg-10 col-md-12 mx-auto">
 
     <h2 class="text-center">Veranstaltungen</h2>
     @include('admin.layouts.errors')
@@ -14,47 +14,47 @@
         {{ csrf_field() }}
 
         <div class="form-group row">
-            <div class="col-md-1">
+            <div class="col-lg-2 col-md-3 col-sm-12">
                 Name:
             </div>
-            <div class="col-md-11">
+            <div class="col-lg-10 col-md-9 col-sm-12">
                 <input value="{{ old('name') }}" type="text" class="form-control" name="name">
             </div>
         </div>
 
         <div class="form-group row">
-            <div class="col-md-1">
+            <div class="col-lg-2 col-md-3 col-sm-12">
                 Datum:
             </div>
-            <div class="col-md-11">
+            <div class="col-lg-10 col-md-9 col-sm-12">
                 <input type="text" name="date" id="" class="form-control" placeholder="dd.MM.yyyy HH:mm" value="{{ old('date') }}">
             </div>
         </div>
 
 
         <div class="form-group row">
-            <div class="col-md-1">
+            <div class="col-lg-2 col-md-3 col-sm-12">
                 Ort:
             </div>
-            <div class="col-md-11">
+            <div class="col-lg-10 col-md-9 col-sm-12">
                 <input type="text" value="{{ old('location') }}" class="form-control" name="location">
             </div>
         </div>
 
         <div class="form-group row">
-            <div class="col-md-1">
+            <div class="col-lg-2 col-md-3 col-sm-12">
                 Beschreibung:
             </div>
-            <div class="col-md-11">
+            <div class="col-lg-10 col-md-9 col-sm-12">
                 <input type="text" value="{{ old('markup') }}" class="form-control" name="markup">
             </div>
         </div>
 
         <div class="form-group row">
-            <div class="col-md-1">
+            <div class="col-lg-2 col-md-3 col-sm-12">
                 Kategorie
             </div>
-            <div class="col-md-11">
+            <div class="col-lg-10 col-md-9 col-sm-12">
                 <select class="form-control" name="category">
                     @foreach ($categories as $category)
                         <option
@@ -69,30 +69,29 @@
         <input type="submit" class="form-control btn btn-success" value="Hinzufügen">
     </form>
 
-    <table class="table">
+    <table class="table overflow">
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Datum</th>
-                <th>Ort</th>
-                <th>Kategorie</th>
+                <th class="d-none d-sm-table-cell">Datum</th>
+                <th class="d-none d-md-table-cell">Ort</th>
+                <th class="d-none d-md-table-cell">Kategorie</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($events as $event)
                 <tr>
                     <td>{{$event->name}}</td>
-                    <td>{{$event->date->format('d.m.Y H:i')}}</td>
-                    <td>{{$event->location}}</td>
-                    <td>{{$event->category->name}}</td>
-                    <td class="clearfix">
-
-                        <form class="float-right" action="{{route('admin_events_destroy',$event->id)}}" method="POST">
+                    <td class="d-none d-sm-table-cell">{{$event->date->format('d.m.Y H:i')}}</td>
+                    <td class="d-none d-md-table-cell">{{$event->location}}</td>
+                    <td class="d-none d-md-table-cell">{{$event->category->name}}</td>
+                    <td class="d-flex">
+                        <form class="ml-auto" action="{{route('admin_events_destroy',$event->id)}}" method="POST">
                             <button type="submit" class="btn btn-danger mx-1"><i class="fa fa-trash"></i></button>
                             {{ csrf_field() }}
                             {{method_field('DELETE')}}
                         </form>
-                        <a href="{{route('admin_events_edit', $event->id)}}" class="btn btn-warning mx-1 float-right"><i class="fa fa-edit" aria-hidden="true"></i></a>
+                        <a href="{{route('admin_events_edit', $event->id)}}" class="btn btn-warning mx-1"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             @endforeach

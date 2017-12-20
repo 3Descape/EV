@@ -3,7 +3,7 @@
 @section('sitebar_inner')
 <div class="container-fluid">
     <div class="row">
-    <div class="col-md-10 mx-auto">
+    <div class="col-lg-10 col-md-12 mx-auto">
         <form action="{{route('api_person_store')}}" method="POST" enctype="multipart/form-data">
             <div class="form-group">
               <label for="name">Name</label>
@@ -15,9 +15,9 @@
               <input type="text" class="form-control" id="description" name="description">
             </div>
 
-            <input type="text" hidden="true" name="category" value="{{$selected == 'ev' ? '0' : '1'}}">
+            <input type="text" hidden="true" name="people_category_id" value="{{$category->id}}">
 
-            @if($selected == 'sga')
+            @if($category->has_image)
                 <div class="form-group">
                     <label for="image">Bild:</label>
                     <label class="custom-file" style="width: 100%;">
@@ -27,7 +27,7 @@
                 </div>
             @endif
             <input class="btn btn-success" type="submit" value="Hinzufügen">
-            <a href="{{route('admin_people_frontend_sga')}}" class="btn btn-primary">Abbrechen</a>
+            <a href="{{route('admin_people_frontend', $category->name)}}" class="btn btn-primary">Abbrechen</a>
 
             {{ csrf_field() }}
         </form>

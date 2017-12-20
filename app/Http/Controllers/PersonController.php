@@ -4,14 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use Illuminate\Http\Request;
-use App\Traits\StoreImageTrait;
+#use App\Traits\StoreImageTrait;
+use App\PeopleCategory;
+use App\User;
+use App\Htttp\Helpers\StoreImage;
+use Illuminate\Support\Facades\Storage;
 class PersonController extends Controller
 {
-    use StoreImageTrait;
-    public function add($type = 'default')
+    public function index(PeopleCategory $category)
+    {
+        $this->authorize('can_access_people', User::class);
+        $people = $category->people()->get();
+        return view('admin.sites.people.show', [
+            'people' => $people,
+            'category' => $category
+        ]);
+    }
+
+    public function add(PeopleCategory $category)
     {
         return view('admin.sites.people.add', [
-            'selected' => $type
+            'category' => $category
         ]);
     }
 
@@ -20,25 +33,23 @@ class PersonController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'description' => 'nullable',
-            'category' => 'required'
+            'people_category_id' => 'required'
         ]);
 
-        $paths = ['main' => Null, 'thump' => Null];
-        if($request->file('file')){
-            $paths = $this->store_image($request, 'images/sga', true);
-        }
+        $image = new StoreImage();
+        
+        $saved = $image->store($request->file('file'), 'people', false);
 
         Person::create([
             'name' => $request->name,
             'description' => $request->description,
-            'category' => $request->category,
-            'image_path' => $paths['main'],
-            'thump_path' => $paths['thump']
+            'people_category_id' => $request->people_category_id,
+            'image_path' => $saved->mainPath
         ]);
 
-        if($request->category == '1')
-            return redirect()->route('admin_people_frontend_sga');
-        return redirect()->route('admin_people_frontend_ev');
+        return redirect()->route('admin_people_frontend', 
+            PeopleCategory::find($request->people_category_id)->name
+        );
     }
 
     public function edit(Person $person)
@@ -53,22 +64,22 @@ class PersonController extends Controller
             'description' => 'nullable',
             'category' => 'required',
         ]);
-        $paths = ['main' => '', 'thump' => ''];
-        if($request->file('file')){
-            $paths = $this->store_image($request, 'images/sga', true);
+        if($person->image_path){
+            Storage::delete('public/'. $person->image_path);
         }
+
+        $image = new StoreImage();
+        $saved = $image->store($request->file('file'), 'people/', false);
 
         $person->update([
             'name' => $request->name,
             'description' => $request->description,
             'category' => $request->category,
-            'image_path' => $paths['main'] ? $paths['main'] : $person->image_path,
-            'thump_path' => $paths['thump'] ? $paths['thump'] : $person->thump_path
+            'image_path' => $saved->mainPath
         ]);
-
-        if($request->category)
-            return redirect()->route('admin_people_frontend_sga');
-        return redirect()->route('admin_people_frontend_ev');
+        return redirect()->route('a_people_frontend', 
+            $person->category->name
+        );
     }
 
     public function delete(Person $person)

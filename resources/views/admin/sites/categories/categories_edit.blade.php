@@ -1,7 +1,7 @@
 @extends('admin.layouts.sitebar')
 
 @section('sitebar_inner')
-    <div class="col-md-10 mx-auto">
+    <div class="col-lg-10 col-md-12 mx-auto">
         @include('admin.layouts.errors')
 
         <form class="form-group" method="POST" action="{{route('admin_categories_update', $category->id)}}">

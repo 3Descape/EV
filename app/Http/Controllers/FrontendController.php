@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Text;
 use App\Event;
-use App\Person;
+use App\PeopleCategory;
 use App\Holiday;
 use App\Category;
 use App\Traits\AnalythicTrait;
@@ -33,9 +33,11 @@ class FrontendController extends Controller
     {
         $this->add_analythic();
         $texts = Text::where('category', 1)->with('images')->orderBy('order')->get();
-        return view('sites.about', [
-            'texts' => $texts
-        ]);
+        $committe = PeopleCategory::where('name', 'vorstand')->first()->people()->get();
+        return view('sites.about', compact(
+            'texts',
+            'committe'
+        ));
     }
 
     public function events_future($type = null)
@@ -105,7 +107,7 @@ class FrontendController extends Controller
         $texts = Text::where('category', 2)->orderBy('order')->get();
 
         return view('sites.sga', [
-            'people' => Person::SGAMitglieder()->get(),
+            'people' => PeopleCategory::where('name', 'sga')->first()->people()->get(),
             'texts' => $texts
         ]);
     }

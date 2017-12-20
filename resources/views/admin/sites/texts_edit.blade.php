@@ -1,7 +1,7 @@
 @extends('admin.layouts.sitebar')
 
 @section('sitebar_inner')
-<div class="col-md-8 mx-auto">
+<div class="col-lg-10 col-md-12 mx-auto">
     <form  action="{{route('admin_sites_update', $text->id)}}" method="POST">
         <div class="form-group">
             <label for="title">Überschrift:</label>

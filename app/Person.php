@@ -8,27 +8,9 @@ class Person extends Model
 {
     protected $table = "people";
 
-    protected $fillable = ['name', 'description', 'category', 'image_path', 'thump_path'];
+    protected $fillable = ['name', 'description', 'people_category_id', 'image_path'];
 
-    /**
-     * Filter people for Ev members
-     * @method scopeEVMitglieder
-     * @param  Illuminate\Database\Query\Builder $query
-     * @return Illuminte\Database\Query\Builder
-     */
-    public function scopeEVMitglieder($query)
-    {
-        return $query->where('category', '0')->orderBy('name');
-    }
-
-    /**
-     * Filter people for SGA members
-     * @method scopeSGAMitglieder
-     * @param  Illuminate\Database\Query\Builder $query
-     * @return Illuminte\Database\Query\Builder
-     */
-    public function scopeSGAMitglieder($query)
-    {
-        return $query->where('category', '1')->orderBy('name');
+    public function category(){
+        return $this->belongsTo('App\PeopleCategory', 'people_category_id', 'id');
     }
 }

@@ -26,7 +26,7 @@
                             @endif
                         </div>
                         <div class="col-sm-12 col-lg-2">
-                            <img src="{{$person->thump_path}}" alt="" class="img-fluid">
+                            <img src="{{asset($person->image_path)}}" alt="" class="img-fluid">
                         </div>
                     </div>
                 </div>

@@ -21,7 +21,7 @@ class UserRoleController extends Controller
     public function detach_role(User $user, Role $role)
     {
         $this->authorize('can_access_roles', User::class);
-        if($role->name == 'admin'){
+        if($role->name == 'administrator'){
             $count = $role->users()->count();
             if($count <= 1){
                 return back()->with('exeption', 'Es muss immer mindestens ein Administrator bestehen. Bitte geben Sie mindestens einem anderen Nutzer zuerst diese Berechtigung, bevor Sie diese löschen.');

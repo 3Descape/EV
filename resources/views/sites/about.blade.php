@@ -5,11 +5,29 @@
 @endsection
 
 @section('content')
+    <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="vorstand">
+        <h1 class="text-center">Vorstand</h1>
+        @foreach($committe as $person)
+            <div class="card my-1">
+                <div class="card-body py-2">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img src="{{asset('storage/'. $person->image_path)}}" alt="" class="img-fluid">
+                        </div>
+                        <div class="col-md-9 mt-3">
+                            <h5>{{$person->name}}</h5>
+                            <p>{{$person->description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
     @foreach ($texts as $text)
         @if($text->html)
             <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="{{strtolower($text->title)}}">
                 <h1 class="text-center">{{$text->title}}</h1>
-                @if($text->title == 'Vorstand')
+                {{-- @if($text->title == 'Vorstand')
                     <div class="row">
                         @if($text->images->first())
                             <div class="col-md-4 col-sm-12 text-center">
@@ -21,9 +39,11 @@
                             <p>{!!$text->html!!}</p>
                         </div>
                     </div>
-                @else
-                    <p>{!!$text->html!!}</p>
-                @endif
+                @else --}}
+
+                <p>{!!$text->html!!}</p>
+
+                {{-- @endif --}}
             </div>
         @endif
     @endforeach

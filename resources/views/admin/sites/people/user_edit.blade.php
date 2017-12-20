@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-10 mx-auto">
+    <div class="col-lg-10 col-md-12 mx-auto">
         <form action="{{route('api_user_role_update', $user->id)}}" method="POST">
             <div class="form-group">
                 <label for="role">Role</label>

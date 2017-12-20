@@ -21,13 +21,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::put('/categories/{category}', 'CategoriesController@update')->name('admin_categories_update');
     Route::get('/categories/{category}/delte', 'CategoriesController@pre_delete')->name('adming_categories_pre_delete');
     Route::delete('/categories/{category}', 'CategoriesController@destroy')->name('admin_categories_destroy');
-
-    Route::get('/people/frontend/sga', 'AdminController@people_frontend_sga')->name('admin_people_frontend_sga');
-    Route::get('/people/frontend/ev', 'AdminController@people_frontend_ev')->name('admin_people_frontend_ev');
+    
     Route::get('/people/backend', 'AdminController@people_backend')->name('admin_people_backend');
-    Route::get('/people/add/{type?}', 'PersonController@add')->name('person_add');
+
+    
+    Route::get('/people/frontend/{category}', 'PersonController@index')->name('a_people_frontend');
+    Route::get('/people/add/{category}', 'PersonController@add')->name('person_add');
+    Route::get('/people/edit/{person}', 'PersonController@edit')->name('person_edit');
+
+
     Route::post('/people/add', 'PersonController@store')->name('api_person_store');
-    Route::get('/people/{person}/edit', 'PersonController@edit')->name('api_person_edit');
+    #Route::get('/people/{person}/edit', 'PersonController@edit')->name('api_person_edit');
     Route::put('/people/{person}', 'PersonController@update')->name('api_person_update');
     Route::get('/people/{person}/delete', 'PersonController@delete')->name('api_person_delete');
 
@@ -65,7 +69,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 
 Route::get('/', 'FrontendController@index')->name('home');
-Route::get('/förderansuchen', 'FrontendController@download_pdf')->name('pdf_start_download');
 
 Route::get('/über_uns', 'FrontendController@about')->name('about');
 Route::get('/veranstaltungen/archiv/{type?}', 'FrontendController@events_archived')->name('events_archive');
@@ -78,3 +81,7 @@ Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
 
 Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
 Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
+
+Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
+Route::get('/förderansuchen', 'FrontendController@download_pdf')->name('pdf_download');
+

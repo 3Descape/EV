@@ -21,6 +21,7 @@ class RolePolicy
     {
 
     }
+
     public function before(User $user)
     {
         if($user->hasRole('administrator')){
@@ -55,7 +56,6 @@ class RolePolicy
 
     public function can_access_dashboard(User $user)
     {
-        \Log::info('has permission');
         return $user->hasPermission('access_dashboard');
     }
 

@@ -59,7 +59,7 @@ class EventsController extends Controller
         $this->authorize('can_access_events', User::class);
         $event = Event::with('images', 'category')->find($id);
 
-        return view('admin.sites.events.event_edit',[
+        return view('admin.sites.events.event_edit', [
             'event' => $event,
             'categories' => Category::all(),
         ]);

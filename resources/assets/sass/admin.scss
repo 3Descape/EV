@@ -25,10 +25,13 @@ $bg-sitebar: rgb(29, 29, 37);
     display: flex;
     .sitebar-wrp{
         position: relative;
-        margin-right: 4rem;
+        margin-right: 0rem;
         transform: translateX(-20px);
         align-items: stretch;
         min-height: 100vh;
+        @include media-breakpoint-up(md) {
+            margin-right: 1.5rem;
+        }
         &>a.data-toggle{
             position: absolute;
             top: 0;
@@ -90,13 +93,18 @@ $bg-sitebar: rgb(29, 29, 37);
     .content{
         flex:1;
         padding-top: 50px;
-    }
-}
 
-.card.person{
-    tr{
-        td:last-child(){
-            width: 135px;
+        .overflow{
+            tbody{
+                tr{
+                    td {
+                        max-width: 100px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+            }
         }
     }
 }

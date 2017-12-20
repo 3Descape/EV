@@ -1,7 +1,7 @@
 @extends('admin.layouts.sitebar')
 
 @section('sitebar_inner')
-    <div class="col-md-10 mx-auto row">
+    <div class="col-lg-10 col-md-12 mx-auto row">
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">

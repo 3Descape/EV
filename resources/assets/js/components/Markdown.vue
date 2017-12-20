@@ -42,7 +42,7 @@
     let renderer = new marked.Renderer();
 
     renderer.image = function(href, title, text) {
-      var out = '<img class="img-fluid" style="max-height: 400px;" src="' + href + '" alt="' + text + '"';
+      var out = '<img class="img-fluid d-block mx-auto" style="max-height: 400px;" src="' + href + '" alt="' + text + '"';
       if (title) {
         out += ' title="' + title + '"';
       }

@@ -45,7 +45,7 @@ $factory->define(App\Person::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'description' => $faker->sentences($nb = 1,$asText = true),
-        'category' => $faker->numberBetween($min = 0, $max = 3),
+        'people_category_id' => $faker->numberBetween($min = 1, $max = 3),
     ];
 });
 

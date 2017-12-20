@@ -72,18 +72,19 @@
         <div class="container-fluid" id="download">
             <div class="col-md-9 mx-auto row" id="download">
                 <div class="col-md-12">
-                    <h1 class="text-center">Förderansuchen:</h1>
+                    <h1 class="text-center">Förderansuchen und Ähnliches:</h1>
                 </div>
                 <div class="card col-md-12">
                     <div class="row">
-                        <div class="col-md-6">
+                        {{--  <div class="col-md-6">
                             <a href="{{route('pdf_start_download')}}" class="btn btn-danger">
                                 <i class="fa fa-download"></i> Download
                             </a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="#" class="btn btn-info mt-sm-4 mt-md-0">
-                                <i class="fa fa-globe"></i> Online
+                        </div>  --}}
+            
+                        <div class="col-md-12">
+                            <a href="{{route('downloads_view')}}" class="btn btn-info mt-sm-4 mt-md-0">
+                                <i class="fa fa-download"></i> Downloads
                             </a>
                         </div>
                     </div>

@@ -2,7 +2,7 @@
 
 @section('sitebar_inner')
 <div class="row">
-    <div class="col-md-10 mx-auto">
+    <div class="col-lg-10 col-md-12 mx-auto">
         @if (session('exeption'))
         <div class="alert alert-danger">
             {{ session('exeption') }}

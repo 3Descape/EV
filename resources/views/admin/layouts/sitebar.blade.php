@@ -90,8 +90,9 @@
                         </a>
 
                         <div class="collapse" id="frontend">
-                            <a href="{{route('admin_people_frontend_sga')}}" class="list-group-item" data-parent="#frontend">SGA</a>
-                            <a href="{{route('admin_people_frontend_ev')}}" class="list-group-item" data-parent="#frontend">Elternvertreter</a>
+                            <a href="{{route('a_people_frontend', 'sga')}}" class="list-group-item" data-parent="#frontend">SGA</a>
+                            <a href="{{route('a_people_frontend', 'ev')}}" class="list-group-item" data-parent="#frontend">Elternvertreter</a>
+                            <a href="{{route('a_people_frontend', 'vorstand')}}" class="list-group-item" data-parent="#frontend">Vorstände</a>
                         </div>
 
                         <a href="{{route('admin_people_backend')}}" class="list-group-item">

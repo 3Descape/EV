@@ -12278,13 +12278,19 @@ blockquote p {
 
 #app .sitebar-wrp {
   position: relative;
-  margin-right: 4rem;
+  margin-right: 0rem;
   -webkit-transform: translateX(-20px);
           transform: translateX(-20px);
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
   min-height: 100vh;
+}
+
+@media (min-width: 768px) {
+  #app .sitebar-wrp {
+    margin-right: 1.5rem;
+  }
 }
 
 #app .sitebar-wrp > a.data-toggle {
@@ -12357,8 +12363,11 @@ blockquote p {
   padding-top: 50px;
 }
 
-.card.person tr td:last-child {
-  width: 135px;
+#app .content .overflow tbody tr td {
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .role {

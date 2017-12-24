@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Person;
-use Illuminate\Http\Request;
-use App\PeopleCategory;
 use App\User;
+use App\Person;
+use App\PeopleCategory;
+use Illuminate\Http\Request;
 use App\Htttp\Helpers\StoreImage;
 use Illuminate\Support\Facades\Storage;
+
 class PersonController extends Controller
 {
     public function index(PeopleCategory $category)
     {
         $this->authorize('can_access_people', User::class);
         $people = $category->people()->get();
+
         return view('admin.sites.people.show', [
             'people' => $people,
             'category' => $category
@@ -36,7 +38,7 @@ class PersonController extends Controller
         ]);
 
         $image = new StoreImage();
-        
+
         $saved = $image->store($request->file('file'), 'people', false);
 
         Person::create([
@@ -46,14 +48,15 @@ class PersonController extends Controller
             'image_path' => $saved->mainPath
         ]);
 
-        return redirect()->route('admin_people_frontend', 
+        return redirect()->route(
+            'admin_people_frontend',
             PeopleCategory::find($request->people_category_id)->name
         );
     }
 
     public function edit(Person $person)
     {
-        return view('admin.sites.people.edit', ['person' =>$person]);
+        return view('admin.sites.people.edit', ['person' => $person]);
     }
 
     public function update(Person $person, Request $request)
@@ -63,8 +66,8 @@ class PersonController extends Controller
             'description' => 'nullable',
             'category' => 'required',
         ]);
-        if($person->image_path){
-            Storage::delete('public/'. $person->image_path);
+        if ($person->image_path) {
+            Storage::delete('public/' . $person->image_path);
         }
 
         $image = new StoreImage();
@@ -76,7 +79,9 @@ class PersonController extends Controller
             'category' => $request->category,
             'image_path' => $saved->mainPath
         ]);
-        return redirect()->route('a_people_frontend', 
+
+        return redirect()->route(
+            'a_people_frontend',
             $person->category->name
         );
     }
@@ -84,6 +89,7 @@ class PersonController extends Controller
     public function delete(Person $person)
     {
         Person::destroy($person->id);
+
         return back();
     }
 }

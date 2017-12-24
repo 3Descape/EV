@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Text;
 use App\Event;
-use App\PeopleCategory;
 use App\Holiday;
 use App\Category;
+use App\PeopleCategory;
 use App\Traits\AnalythicTrait;
 
 class FrontendController extends Controller
@@ -18,6 +18,7 @@ class FrontendController extends Controller
         $this->add_analythic();
         $future_events = Event::futureEvents()->take(3)->get();
         $past_events = Event::pastEvents()->take(3)->get();
+
         return view('sites.home', [
             'future_events' => $future_events,
             'past_events' => $past_events
@@ -29,6 +30,7 @@ class FrontendController extends Controller
         $this->add_analythic();
         $texts = Text::where('category', 1)->with('images')->orderBy('order')->get();
         $committe = PeopleCategory::where('name', 'vorstand')->first()->people()->get();
+
         return view('sites.about', compact(
             'texts',
             'committe'
@@ -39,17 +41,14 @@ class FrontendController extends Controller
     {
         $this->add_analythic();
         $text = 'Alle';
-        if($type)
-        {
+        if ($type) {
             $text = ucfirst($type);
             $events = Category::where('name', $type)
             ->first()
             ->events()
             ->futureEvents()
             ->paginate(10);
-        }
-        else
-        {
+        } else {
             $events = Event::futureEvents()->paginate(10);
         }
 
@@ -63,18 +62,15 @@ class FrontendController extends Controller
     public function events_archived($type = null)
     {
         $this->add_analythic();
-        if(request('event'))
-        {
+        if (request('event')) {
             $event = Event::with('images')->find(request('event'));
+
             return view('sites.event_view', [
                 'event' => $event,
             ]);
-
-        }
-        else {
+        } else {
             $text = 'Alle';
-            if($type)
-            {
+            if ($type) {
                 $text = ucfirst($type);
                 $events = Category::where('name', $type)
                 ->first()
@@ -82,9 +78,7 @@ class FrontendController extends Controller
                 ->with('images')
                 ->pastEvents()
                 ->paginate(10);
-            }
-            else
-            {
+            } else {
                 $events = Event::with('images')->pastEvents()->paginate(10);
             }
 
@@ -113,6 +107,7 @@ class FrontendController extends Controller
         $schoolfree = Holiday::schoolFree();
         $autonomous = Holiday::schoolAutonomous();
         $texts = Text::where('category', 3)->orderBy('order')->get();
+
         return view('sites.info', [
             'texts' => $texts,
             'schulfrei' => $schoolfree,
@@ -123,6 +118,7 @@ class FrontendController extends Controller
     public function contact()
     {
         $this->add_analythic();
+
         return view('sites.contact');
     }
 
@@ -130,6 +126,7 @@ class FrontendController extends Controller
     {
         $this->add_analythic();
         $text = Text::where('category', 4)->orderBy('order')->first();
+
         return view('sites.imprint', [
             'text' => $text
         ]);

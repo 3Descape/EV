@@ -20,6 +20,7 @@ class RolesController extends Controller
     {
         $permission = Permission::find($request->permission);
         Role::find($request->role_id)->permissions()->save($permission);
+
         return back();
     }
 
@@ -37,18 +38,21 @@ class RolesController extends Controller
             'name' => $request->name,
             'label' => $request->label,
         ]);
+
         return back();
     }
 
     public function destroy($id)
     {
         Role::destroy($id);
+
         return back();
     }
 
     public function destroy_permission(Role $role, $permission_id)
     {
         $role->permissions()->detach($permission_id);
+
         return back();
     }
 }

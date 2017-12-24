@@ -10,6 +10,7 @@ class SitesController extends Controller
     public function about()
     {
         $texts = Text::where('category', '1')->with('images')->get();
+
         return view('admin.sites.texts_show', [
             'texts' => $texts,
         ]);
@@ -18,6 +19,7 @@ class SitesController extends Controller
     public function sga()
     {
         $texts = Text::where('category', '2')->get();
+
         return view('admin.sites.texts_show', [
             'texts' => $texts,
         ]);
@@ -26,6 +28,7 @@ class SitesController extends Controller
     public function info()
     {
         $texts = Text::where('category', '3')->get();
+
         return view('admin.sites.texts_show', [
             'texts' => $texts,
         ]);
@@ -34,6 +37,7 @@ class SitesController extends Controller
     public function imprint()
     {
         $texts = Text::where('category', '4')->get();
+
         return view('admin.sites.texts_show', [
             'texts' => $texts,
         ]);
@@ -45,6 +49,7 @@ class SitesController extends Controller
             'html' => $request->compiledData,
             'markup' => $request->rawData
         ]);
+
         return response()->json(['status' => 'Updated body'], 200);
     }
 
@@ -53,6 +58,7 @@ class SitesController extends Controller
         $site->update([
             'title' => $request->title,
         ]);
+
         return response()->json(['status' => 'Updated title'], 200);
     }
 }

@@ -10,12 +10,11 @@ use Illuminate\Http\Request;
 
 class EventsController extends Controller
 {
-
     public function events_future()
     {
         $this->authorize('can_access_events', User::class);
         $events = Event::with('category')->futureEvents()->get();
-        return view('admin.sites.events.events',[
+        return view('admin.sites.events.events', [
             'events' => $events,
             'categories' => Category::all(),
         ]);
@@ -24,7 +23,7 @@ class EventsController extends Controller
     public function events_archived()
     {
         $this->authorize('can_access_events', User::class);
-        return view('admin.sites.events.events_archived',[
+        return view('admin.sites.events.events_archived', [
             'events' => Event::pastEvents()->get(),
         ]);
     }
@@ -32,7 +31,7 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $this->authorize('can_access_events', User::class);
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required|max:255',
             'markup' => 'required',
             'date' => 'required|date_format:d.m.Y H:i',
@@ -69,8 +68,7 @@ class EventsController extends Controller
     {
         //if a category has this event associated on delete we
         //update the category of this event to a new one
-        if(request('type') && request('type') == 'conflict')
-        {
+        if (request('type') && request('type') == 'conflict') {
             $event->update([
                 'category_id' => $request->category
             ]);
@@ -82,7 +80,7 @@ class EventsController extends Controller
             'location' => 'required',
             'date' => 'required|date_format:"d.m.Y H:i"',
             'category_id' => 'exists:categories,id',
-        ],[
+        ], [
             'date_format' => 'Datum entspricht nicht dem gültigen Format für dd.MM.yyyy HH:mm'
         ]);
 

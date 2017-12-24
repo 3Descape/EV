@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Category;
 use App\User;
+use App\Category;
+use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
@@ -12,7 +12,8 @@ class CategoriesController extends Controller
     {
         $this->authorize('can_access_events', User::class);
         $categories = Category::all();
-        return view('admin.sites.categories.categories_index',[
+
+        return view('admin.sites.categories.categories_index', [
             'categories' => $categories,
         ]);
     }
@@ -26,6 +27,7 @@ class CategoriesController extends Controller
         $test = Category::create([
             'name' => $request->name
         ]);
+
         return back();
     }
 
@@ -33,6 +35,7 @@ class CategoriesController extends Controller
     {
         $this->authorize('can_access_events', User::class);
         $category = Category::find($id);
+
         return view('admin.sites.categories.categories_edit', [
             'category' => $category
         ]);
@@ -47,6 +50,7 @@ class CategoriesController extends Controller
         $category->update([
             'name' => $request->name,
         ]);
+
         return redirect()->route('admin_categories');
     }
 
@@ -56,13 +60,14 @@ class CategoriesController extends Controller
         $events = $category->events()->get();
         //only if no event is associated with this category we can redirect
         //to actually delete it
-        if($events->count() == 0){
+        if ($events->count() == 0) {
             return redirect()->route('admin_categories');
         }
         //othervise we get all other categories and associated events
         //and return a view where the user can change the category for the
         //associated events
         $categories = Category::where('id', '!=', $category->id)->get();
+
         return view('admin.sites.categories.categories_pre_delete', [
             'events' => $events,
             'categories' => $categories,
@@ -73,11 +78,11 @@ class CategoriesController extends Controller
     public function destroy(Category $category)
     {
         $this->authorize('can_access_events', User::class);
-        if($category->events()->count() != 0)
-        {
+        if ($category->events()->count() != 0) {
             return redirect()->route('adming_categories_pre_delete', $category->id);
         }
         $category->delete();
+
         return back();
     }
 }

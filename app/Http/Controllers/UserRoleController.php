@@ -12,6 +12,7 @@ class UserRoleController extends Controller
     {
         $this->authorize('can_access_roles', User::class);
         $roles = Role::whereNotIn('id', $user->roles()->pluck('id'))->get();
+
         return view('admin.sites.roles.edit', [
             'user' => $user->load('roles'),
             'roles' => $roles,
@@ -21,13 +22,14 @@ class UserRoleController extends Controller
     public function detach_role(User $user, Role $role)
     {
         $this->authorize('can_access_roles', User::class);
-        if($role->name == 'administrator'){
+        if ($role->name == 'administrator') {
             $count = $role->users()->count();
-            if($count <= 1){
+            if ($count <= 1) {
                 return back()->with('exeption', 'Es muss immer mindestens ein Administrator bestehen. Bitte geben Sie mindestens einem anderen Nutzer zuerst diese Berechtigung, bevor Sie diese löschen.');
             }
         }
         $user->roles()->detach($role->id);
+
         return back();
     }
 
@@ -35,6 +37,7 @@ class UserRoleController extends Controller
     {
         $this->authorize('can_access_roles', User::class);
         $user->roles()->save(Role::whereName($request->role)->first());
+
         return redirect()->route('admin_people_backend');
     }
 }

@@ -8,7 +8,8 @@ class PeopleCategory extends Model
 {
     protected $fillable = ['name', 'has_image'];
 
-    public function people(){
+    public function people()
+    {
         return $this->hasMany('App\Person');
     }
 

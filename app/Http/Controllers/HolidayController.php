@@ -12,7 +12,7 @@ class HolidayController extends Controller
         $school = Holiday::schoolFree();
         $autonomous = Holiday::schoolAutonomous();
 
-        return view('admin.sites.holidays.holiday_index',[
+        return view('admin.sites.holidays.holiday_index', [
             'ferien' => $school,
             'schulautonom' => $autonomous,
         ]);
@@ -20,13 +20,14 @@ class HolidayController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required',
             'date' => 'required',
             'category' => 'required'
         ]);
 
         Holiday::create($request->all());
+
         return back();
     }
 
@@ -39,19 +40,21 @@ class HolidayController extends Controller
 
     public function update(Request $request, Holiday $holiday)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required|min:5',
             'date' => 'required',
             'category' => 'required'
         ]);
 
         $holiday->update($request->all());
+
         return redirect()->route('holiday_index');
     }
 
     public function destroy(Holiday $holiday)
     {
         $holiday->delete();
+
         return back();
     }
 }

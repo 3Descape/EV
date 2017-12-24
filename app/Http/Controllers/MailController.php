@@ -13,12 +13,15 @@ class MailController extends Controller
     {
         Mail::to(env('APP_EV_ADDRESS', ''))->queue(new EvMail($request->mail, ['name' => $request->name, 'text' => $request->text]));
         session()->flash('ev_mail', 'E-Mail wurde gesendet...');
+
         return redirect()->back();
     }
+
     public function send_obmann(Request $request)
     {
         Mail::to(env('APP_OBMANN_ADDRESS', ''))->queue(new EvMail($request->mail, ['name' => $request->name, 'text' => $request->text]));
         session()->flash('obmann_mail', 'E-Mail wurde gesendet...');
+
         return redirect()->back();
     }
 }

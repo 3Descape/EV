@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
@@ -75,6 +75,7 @@ class Event extends Model
     public function getThumpPathAttribute()
     {
         $image = $this->images->first();
+
         return  $image ? $image->thump : false;
     }
 }

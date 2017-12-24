@@ -2,9 +2,10 @@
 
 namespace App;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Notifications\PasswordResetNotification;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -29,7 +30,7 @@ class User extends Authenticatable
      */
     public function isDefaultUser()
     {
-        return !! !$this->roles()->count();
+        return !!!$this->roles()->count();
     }
 
     /**
@@ -53,10 +54,11 @@ class User extends Authenticatable
      */
     public function hasRole($role)
     {
-        if(is_string($role)){
+        if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
-        return !! $role->intersection($this->roles)->count();
+
+        return !!$role->intersection($this->roles)->count();
     }
 
     /**
@@ -70,7 +72,7 @@ class User extends Authenticatable
         $contains = $this->roles()
         ->with('permissions')
         ->get()
-        ->map(function($item) use ($permission){
+        ->map(function ($item) use ($permission) {
             return $item->permissions
             ->contains('name', $permission);
         });

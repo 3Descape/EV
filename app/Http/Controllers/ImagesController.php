@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use File;
+use App\Text;
+use App\User;
 use App\Event;
 use Illuminate\Http\Request;
-use App\Text;
 use App\Traits\StoreImageTrait;
-use App\User;
-use File;
+
 class ImagesController extends Controller
 {
     use StoreImageTrait;
@@ -15,6 +16,7 @@ class ImagesController extends Controller
     public function pictures()
     {
         $this->authorize('can_access_pictures', User::class);
+
         return view('admin.sites.images.images');
     }
 
@@ -25,6 +27,7 @@ class ImagesController extends Controller
             'html' => ''
         ]);
         session()->flash('group_image', 'Bild wurde entfernt.');
+
         return back();
     }
 
@@ -33,6 +36,7 @@ class ImagesController extends Controller
         $this->authorize('can_access_pictures', User::class);
         Text::find(2)->images()->delete();
         session()->flash('group_image', 'Bild wurde entfernt.');
+
         return back();
     }
 
@@ -44,14 +48,14 @@ class ImagesController extends Controller
         ]);
 
         $paths = $this->store_image($request, 'images/', true);
-        if($paths){
+        if ($paths) {
             Event::find($event_id)->images()->create([
                 'path' => $paths['main'],
                 'thump' => $paths['thump'],
             ]);
+
             return response('Saved', 200);
-        }
-        else{
+        } else {
             return response('No a valid file', 501);
         }
     }
@@ -62,6 +66,7 @@ class ImagesController extends Controller
         $image = $event->images()->find($image_id);
         File::delete($image->path);
         $image->delete();
+
         return back();
     }
 
@@ -73,7 +78,7 @@ class ImagesController extends Controller
         ]);
 
         $paths = $this->store_image($request, 'images/', true);
-        if($paths){
+        if ($paths) {
             $text = Text::where('id', '1')->first();
             $text->images()->where('image_type', 'App\Text')->delete();
             $text->images()->create([
@@ -82,11 +87,12 @@ class ImagesController extends Controller
             ]);
 
             $text->update([
-                'html' => "<div class=\"text-center\"><img src=\"". asset($paths['main']). "\" class=\"img-fluid\" style=\"max-height: 50vh\"></div>"
+                'html' => '<div class="text-center"><img src="' . asset($paths['main']) . '" class="img-fluid" style="max-height: 50vh"></div>'
             ]);
             session()->flash('group_image', 'Bild wurde hinzugefügt.');
+
             return back();
-        }else{
+        } else {
             return response('No a valid file', 501);
         }
     }
@@ -99,7 +105,7 @@ class ImagesController extends Controller
         ]);
 
         $paths = $this->store_image($request, 'images/');
-        if($paths){
+        if ($paths) {
             $text = Text::where('id', '2')->first();
             $text->images()->where('image_type', 'App\Text')->delete();
             $text->images()->create([
@@ -107,10 +113,10 @@ class ImagesController extends Controller
                 'thump' => $paths['thump'],
             ]);
             session()->flash('group_image', 'Bild wurde hinzugefügt.');
+
             return back();
-        }else{
+        } else {
             return response('No a valid file', 501);
         }
-
     }
 }

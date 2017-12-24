@@ -2,45 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
+use App\Analythic;
+use Carbon\Carbon;
 use http\Env\Response;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Analythic;
-use App\User;
 
 class DashboardController extends Controller
 {
     private function generateDateRange(Carbon $start_date, Carbon $end_date, $format, $type)
     {
         $dates = [];
-        for($date = $start_date; $date->lte($end_date); $date->$type() ){
+        for ($date = $start_date; $date->lte($end_date); $date->$type()) {
             array_push($dates, $date->format($format));
         }
+
         return $dates;
     }
 
     public function index()
     {
         $this->authorize('can_access_dashboard', User::class);
+
         return view('admin.sites.dashboard');
     }
 
     public function getAnalythics()
     {
         $options = [
-            'year' => ['format' => 'o', 'Add' => 'addYears','increment' => 'addYear', 'Sub' => 'subYear'],
-            'month' => ['format' => 'M.o', 'Add' => 'addMonths','increment' => 'addMonth', 'Sub' => 'subMonth'],
-            'week' => ['format' => 'W M.o', 'Add' => 'addWeeks','increment' => 'addWeek', 'Sub' => 'subWeek'],
-            'day' => ['format' => 'd.M.o', 'Add' => 'addDays','increment' => 'addDay', 'Sub' => 'subDays'],
-            'hour' => ['format' => 'G:00 \U\h\r d.M.o', 'Add' => 'addHours','increment' => 'addHour', 'Sub' => 'subHour'],
-            'minute' => ['format' => 'G:i d.M.o', 'Add' => 'addMinutes','increment' => 'addMinute', 'Sub' => 'subMinute'],
+            'year' => ['format' => 'o', 'Add' => 'addYears', 'increment' => 'addYear', 'Sub' => 'subYear'],
+            'month' => ['format' => 'M.o', 'Add' => 'addMonths', 'increment' => 'addMonth', 'Sub' => 'subMonth'],
+            'week' => ['format' => 'W M.o', 'Add' => 'addWeeks', 'increment' => 'addWeek', 'Sub' => 'subWeek'],
+            'day' => ['format' => 'd.M.o', 'Add' => 'addDays', 'increment' => 'addDay', 'Sub' => 'subDays'],
+            'hour' => ['format' => 'G:00 \U\h\r d.M.o', 'Add' => 'addHours', 'increment' => 'addHour', 'Sub' => 'subHour'],
+            'minute' => ['format' => 'G:i d.M.o', 'Add' => 'addMinutes', 'increment' => 'addMinute', 'Sub' => 'subMinute'],
         ];
         $type = request('type');
-        if(!request('type')){
+        if (!request('type')) {
             $type = 'day';
         }
         $range = request('range');
-        if(!request('range')){
+        if (!request('range')) {
             $range = 7;
         }
         $sub_time = $options[$type]['Sub'];
@@ -48,17 +50,17 @@ class DashboardController extends Controller
         $format = $options[$type]['format'];
         $increment = $options[$type]['increment'];
 
-        $start_date = Carbon::now()->$sub_time($range-1);
+        $start_date = Carbon::now()->$sub_time($range - 1);
 
         $data = Analythic::whereBetween('created_at', [$start_date, Carbon::now()->$increment()])
         ->orderBy('created_at')->get()
-        ->groupBy(function($date) use($format){
+        ->groupBy(function ($date) use ($format) {
             return Carbon::parse($date->created_at)->format($format);
         })
-        ->transform(function($item, $k) {
+        ->transform(function ($item, $k) {
             return $item->groupBy('hash');
         })
-        ->map(function ($item, $key){
+        ->map(function ($item, $key) {
             return $item->count();
         });
 

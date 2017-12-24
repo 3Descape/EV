@@ -57,5 +57,10 @@ class PermissionsTableSeeder extends Seeder
             'label' => 'Ferien und schulautonome Tage',
         ]);
 
+        Permission::create([
+            'name' => 'access_files',
+            'label' => 'Kann Dateien für den Download verwalten',
+        ]);
+
     }
 }

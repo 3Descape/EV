@@ -27,7 +27,7 @@
                 </div>
             @endif
             <input class="btn btn-success" type="submit" value="Hinzufügen">
-            <a href="{{route('admin_people_frontend', $category->name)}}" class="btn btn-primary">Abbrechen</a>
+            <a href="{{route('a_people_frontend', $category->name)}}" class="btn btn-primary">Abbrechen</a>
 
             {{ csrf_field() }}
         </form>

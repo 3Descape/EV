@@ -11,23 +11,22 @@
   },
   "devDependencies": {
     "axios": "^0.16.2",
-    "bootstrap": "^4.0.0-beta",
-    "cross-env": "^5.0.5",
+    "bootstrap": "^4.0.0-beta.2",
+    "cross-env": "^5.1.3",
     "jquery": "^3.1.1",
-    "laravel-mix": "^1.4.5",
+    "laravel-mix": "^1.7.2",
     "lodash": "^4.17.4",
-    "popper.js": "^1.12.3",
-    "vue": "^2.4.3",
+    "popper.js": "^1.13.0",
+    "vue": "^2.5.13",
     "vue-chartjs": "^2.8.7"
   },
   "dependencies": {
-    "chart.js": "^2.7.0",
+    "chart.js": "^2.7.1",
     "dropzone": "^5.2.0",
     "font-awesome": "^4.7.0",
-    "marked": "^0.3.6",
-    "moment": "^2.18.1",
+    "marked": "^0.3.7",
+    "moment": "^2.20.1",
     "purify-css": "^1.2.6",
-    "purifycss-webpack": "^0.7.0",
-    "tempusdominus-bootstrap-4": "^5.0.0-alpha9"
+    "purifycss-webpack": "^0.7.0"
   }
 }

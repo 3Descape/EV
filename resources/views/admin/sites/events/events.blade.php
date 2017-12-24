@@ -86,12 +86,16 @@
                     <td class="d-none d-md-table-cell">{{$event->location}}</td>
                     <td class="d-none d-md-table-cell">{{$event->category->name}}</td>
                     <td class="d-flex">
-                        <form class="ml-auto" action="{{route('admin_events_destroy',$event->id)}}" method="POST">
-                            <button type="submit" class="btn btn-danger mx-1"><i class="fa fa-trash"></i></button>
+                        <a href="{{route('admin_events_edit', $event->id)}}" class="btn btn-warning ml-auto">
+                            <i class="fa fa-edit" aria-hidden="true"></i>
+                        </a>
+                        <form class="mx-1" action="{{route('admin_events_destroy',$event->id)}}" method="POST">
+                            <button type="submit" class="btn btn-danger mx-1">
+                                <i class="fa fa-trash"></i>
+                            </button>
                             {{ csrf_field() }}
                             {{method_field('DELETE')}}
                         </form>
-                        <a href="{{route('admin_events_edit', $event->id)}}" class="btn btn-warning mx-1"><i class="fa fa-edit" aria-hidden="true"></i></a>
                     </td>
                 </tr>
             @endforeach

@@ -102,19 +102,26 @@
                     </div>
                 @endcan
 
+                @can ('can_access_files', \App\User::class)
+                    <a href="{{route('files')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
+                        <i class="fa fa-download"></i>
+                        <span class="d-none d-md-inline-block">Downloads</span>
+                    </a>
+                @endcan
+
+                @can ('can_access_pictures', \App\User::class)
+                    <a href="{{route('pictures')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
+                        <i class="fa fa-picture-o"></i>
+                        <span class="d-none d-md-inline-block">Bilder</span>
+                    </a>
+                @endcan
+
                 @can('can_access_roles', \App\User::class)
                     <a href="{{route('roles_show')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
                         <i class="fa fa-globe"></i>
                         <span class="d-none d-md-inline-block">Berechtigungen</span>
                     </a>
                 @endcan
-                @can ('can_access_pictures', \App\User::class)
-                    <a href="{{route('pictures')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
-                        <i class="fa fa-image"></i>
-                        <span class="d-none d-md-inline-block">Bilder</span>
-                    </a>
-                @endcan
-
                 <form action="{{route('logout')}}" method="POST">
                     <button type="submit" class="list-group-item d-inline-block">
                         <i class="fa fa-sign-out"></i>

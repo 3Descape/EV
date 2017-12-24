@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Person;
 use Illuminate\Http\Request;
-#use App\Traits\StoreImageTrait;
 use App\PeopleCategory;
 use App\User;
 use App\Htttp\Helpers\StoreImage;

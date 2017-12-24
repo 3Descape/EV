@@ -23,14 +23,12 @@ class StoreImage{
         if($this->file->isValid()){
             $image = $this->mainImage();
             $path = $this->saveTo . '/main/' . $this->generateHasName($image). '.jpg';
-            $this->mainPath = $path;
-            Storage::put('public/'.$path, $image);
+            $this->mainPath = Storage::disk('public')->put($path, $image, 'public');
 
             if($this->generateThumbnail){
                 $image = $this->thumbnail();
                 $path = $this->saveTo . '/thumbnail/' . $this->generateHasName($image). '.jpg';
-                $this->thumbnailPath = $path;
-                Storage::put('public/'. $path, $image, 'public');
+                $this->thumbnailPath = Storage::disk('public')->put($path, $image, 'public');
             }
         }
         return $this;

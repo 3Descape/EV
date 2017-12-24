@@ -68,4 +68,8 @@ class RolePolicy
     {
         return $user->hasPermission('access_holiday');
     }
+
+    public function can_access_files(User $user){
+        return $user->hasPermission('access_files');
+    }
 }

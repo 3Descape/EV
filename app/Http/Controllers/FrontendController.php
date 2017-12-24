@@ -24,11 +24,6 @@ class FrontendController extends Controller
         ]);
     }
 
-    public function download_pdf()
-    {
-        return response()->download('pdf/file.txt');
-    }
-
     public function about()
     {
         $this->add_analythic();

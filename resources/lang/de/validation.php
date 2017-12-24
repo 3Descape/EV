@@ -122,7 +122,8 @@ return [
         'email'    => 'E-Mail Adresse',
         'date' => 'Datum',
         'name' => 'Name',
-        'description' => 'Beschreibung'
+        'description' => 'Beschreibung',
+        'file' => 'Datei'
     ],
 
 ];

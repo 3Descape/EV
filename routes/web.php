@@ -64,6 +64,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/sites/über_uns/uploud', 'ImagesController@uploud_group_image')->name('uploud_group_image');
     Route::delete('sites/über_uns', 'ImagesController@remove_group_image')->name('remove_group_image');
 
+    Route::get('/dateien', 'FileController@index')->name('files');
+    Route::post('/dateien', 'FileController@store')->name('store_file');
+
     Route::post('/sites/vorstand/uploud', 'ImagesController@uploud_vorstand_image')->name('uploud_vorstand_image');
     Route::delete('sites/vorstand', 'ImagesController@remove_vorstand_image')->name('remove_vorstand_image');
 });
@@ -83,5 +86,6 @@ Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
 Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
 
 Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
-Route::get('/förderansuchen', 'FrontendController@download_pdf')->name('pdf_download');
+
+Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
 

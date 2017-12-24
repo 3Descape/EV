@@ -66,6 +66,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/dateien', 'FileController@index')->name('files');
     Route::post('/dateien', 'FileController@store')->name('store_file');
+    Route::delete('/dateien/{file}', 'FileController@delete')->name('a_delete_file');
 
     Route::post('/sites/vorstand/uploud', 'ImagesController@uploud_vorstand_image')->name('uploud_vorstand_image');
     Route::delete('sites/vorstand', 'ImagesController@remove_vorstand_image')->name('remove_vorstand_image');

@@ -116,7 +116,8 @@ export default {
           };
 
 
-          axios.post('/admin/dateien', data, config).then((msg)=>{
+          axios.post('/admin/dateien', data, config)
+          .then((msg)=>{
               vue.file.name = "";
               vue.file.description = "";
               vue.file.file = {};
@@ -124,7 +125,7 @@ export default {
               vue.$refs.form.reset();
               vue.errors.clearErrors();
               vue.uploud = -1;
-              EventBus.$emit('msg-event', "Datei wurde hinzugefürt");
+              EventBus.$emit('msg-event', msg.data.status);
           })
           .catch((errors)=>{
               vue.errors.setErrors(errors.response.data.errors)

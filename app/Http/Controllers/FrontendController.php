@@ -29,7 +29,7 @@ class FrontendController extends Controller
     {
         $this->add_analythic();
         $texts = Text::where('category', 1)->with('images')->orderBy('order')->get();
-        $committe = PeopleCategory::where('name', 'vorstand')->first()->people()->get();
+        $committe = PeopleCategory::where('name', 'vorstand')->first()->people()->orderBy('name')->get();
 
         return view('sites.about', compact(
             'texts',

@@ -23,10 +23,10 @@
                                 <td scope="row">{{$person->name}}</td>
                                 <td class="d-none d-md-table-cell">{{$person->description}}</td>
                                 <td class="d-flex">
-                                    <a href="{{route('person_edit', $person->id)}}" class="btn btn-warning mx-1">
+                                    <a href="{{route('person_edit', $person->id)}}" class="btn btn-warning ml-auto">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{{route('api_person_delete', $person->id)}}" class="btn btn-danger mx-1 ml-auto">
+                                    <a href="{{route('api_person_delete', $person->id)}}" class="btn btn-danger mx-1">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>

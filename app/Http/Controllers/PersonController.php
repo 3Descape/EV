@@ -14,7 +14,7 @@ class PersonController extends Controller
     public function index(PeopleCategory $category)
     {
         $this->authorize('can_access_people', User::class);
-        $people = $category->people()->get();
+        $people = $category->people()->orderBy('people.name')->get();
 
         return view('admin.sites.people.show', [
             'people' => $people,
@@ -39,7 +39,7 @@ class PersonController extends Controller
 
         $image = new StoreImage();
 
-        $saved = $image->store($request->file('file'), 'people', false);
+        $saved = $image->store($request->file('file'), 'people/', false);
 
         Person::create([
             'name' => $request->name,
@@ -49,7 +49,7 @@ class PersonController extends Controller
         ]);
 
         return redirect()->route(
-            'admin_people_frontend',
+            'a_people_frontend',
             PeopleCategory::find($request->people_category_id)->name
         );
     }
@@ -65,19 +65,24 @@ class PersonController extends Controller
             'name' => 'required|string',
             'description' => 'nullable',
             'category' => 'required',
+            'file' => 'image',
         ]);
-        if ($person->image_path) {
-            Storage::delete('public/' . $person->image_path);
-        }
 
-        $image = new StoreImage();
-        $saved = $image->store($request->file('file'), 'people/', false);
+        if ($request->hasFile('file')) {
+            if ($person->image_path) {
+                Storage::disk('public')->delete($person->image_path);
+            }
+            $image = new StoreImage();
+            $saved = $image->store($request->file, 'people/', false);
+            $person->update([
+                'image_path' => $saved->mainPath
+            ]);
+        }
 
         $person->update([
             'name' => $request->name,
             'description' => $request->description,
             'category' => $request->category,
-            'image_path' => $saved->mainPath
         ]);
 
         return redirect()->route(

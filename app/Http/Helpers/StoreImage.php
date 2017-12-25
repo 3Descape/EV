@@ -3,14 +3,11 @@
 namespace App\Htttp\Helpers;
 
 use Image;
-use Storage;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 
 class StoreImage
 {
-    protected $file;
-    protected $saveTo;
-    protected $generateThumbnail;
     public $extention;
     public $mainPath;
     public $thumbnailPath;
@@ -27,13 +24,13 @@ class StoreImage
         $this->generateThumbnail = $generateThumbnail;
         if ($this->file->isValid()) {
             $image = $this->mainImage();
-            $path = $this->saveTo . '/main/' . $this->generateHasName($image) . '.jpg';
-            $this->mainPath = Storage::disk('public')->put($path, $image, 'public');
+            $this->mainPath = $file->hashName($saveTo . 'main');
+            Storage::disk('public')->put($this->mainPath, $image);
 
             if ($this->generateThumbnail) {
                 $image = $this->thumbnail();
-                $path = $this->saveTo . '/thumbnail/' . $this->generateHasName($image) . '.jpg';
-                $this->thumbnailPath = Storage::disk('public')->put($path, $image, 'public');
+                $this->thumbnailPath = $file->hashName($saveTo . 'thumbnail');
+                Storage::disk('public')->put($this->thumbnailPath, $image);
             }
         }
 

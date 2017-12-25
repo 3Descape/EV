@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 col-md-12 mx-auto">
-            <form action="{{route('api_person_update', $person->id)}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('api_person_update', $person->id)}}" method="POST" enctype='multipart/form-data'>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{$person->name}}">

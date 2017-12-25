@@ -9,16 +9,16 @@
         <h1 class="text-center">Vorstand</h1>
         @foreach($committe as $person)
             <div class="card my-1">
-                <div class="card-body py-2">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <img src="{{asset('storage/'. $person->image_path)}}" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-md-9 mt-3">
-                            <h5>{{$person->name}}</h5>
-                            <p>{{$person->description}}</p>
-                        </div>
+                <div class="card-body py-2 people flex-wrap d-flex">
+                    <div class="text order-2 order-lg-1">
+                        <h5>{{$person->name}}</h5>
+                        <p>{{$person->description}}</p>
                     </div>
+                    @if($person->image_path)
+                        <div class="image mb-3 mb-lg-0 ml-0 ml-lg-2 order-1 order-lg-2">
+                            <img src="{{asset("storage/{$person->image_path}")}}" class="img-fluid">
+                        </div>
+                    @endif
                 </div>
             </div>
         @endforeach
@@ -27,23 +27,7 @@
         @if($text->html)
             <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="{{strtolower($text->title)}}">
                 <h1 class="text-center">{{$text->title}}</h1>
-                {{-- @if($text->title == 'Vorstand')
-                    <div class="row">
-                        @if($text->images->first())
-                            <div class="col-md-4 col-sm-12 text-center">
-                                <img src="{{asset($text->images->first()->path)}}" class="img-fluid">
-                            </div>
-                        @endif
-
-                        <div class="col-md-{{$text->images->first() ? '8' : '12'}} col-sm-12">
-                            <p>{!!$text->html!!}</p>
-                        </div>
-                    </div>
-                @else --}}
-
                 <p>{!!$text->html!!}</p>
-
-                {{-- @endif --}}
             </div>
         @endif
     @endforeach

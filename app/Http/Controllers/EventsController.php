@@ -14,6 +14,7 @@ class EventsController extends Controller
     {
         $this->authorize('can_access_events', User::class);
         $events = Event::with('category')->futureEvents()->get();
+
         return view('admin.sites.events.events', [
             'events' => $events,
             'categories' => Category::all(),
@@ -23,6 +24,7 @@ class EventsController extends Controller
     public function events_archived()
     {
         $this->authorize('can_access_events', User::class);
+
         return view('admin.sites.events.events_archived', [
             'events' => Event::pastEvents()->get(),
         ]);
@@ -72,6 +74,7 @@ class EventsController extends Controller
             $event->update([
                 'category_id' => $request->category
             ]);
+
             return back();
         }
 
@@ -102,6 +105,7 @@ class EventsController extends Controller
     {
         $this->authorize('can_access_events', User::class);
         $event->delete();
+
         return back();
     }
 }

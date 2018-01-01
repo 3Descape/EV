@@ -21,17 +21,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::put('/categories/{category}', 'CategoriesController@update')->name('admin_categories_update');
     Route::get('/categories/{category}/delte', 'CategoriesController@pre_delete')->name('adming_categories_pre_delete');
     Route::delete('/categories/{category}', 'CategoriesController@destroy')->name('admin_categories_destroy');
-    
+
     Route::get('/people/backend', 'AdminController@people_backend')->name('admin_people_backend');
 
-    
     Route::get('/people/frontend/{category}', 'PersonController@index')->name('a_people_frontend');
     Route::get('/people/add/{category}', 'PersonController@add')->name('person_add');
     Route::get('/people/edit/{person}', 'PersonController@edit')->name('person_edit');
 
-
     Route::post('/people/add', 'PersonController@store')->name('api_person_store');
-    #Route::get('/people/{person}/edit', 'PersonController@edit')->name('api_person_edit');
+    //Route::get('/people/{person}/edit', 'PersonController@edit')->name('api_person_edit');
     Route::put('/people/{person}', 'PersonController@update')->name('api_person_update');
     Route::get('/people/{person}/delete', 'PersonController@delete')->name('api_person_delete');
 
@@ -43,7 +41,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/roles', 'RolesController@index')->name('roles_show');
     Route::post('/roles', 'RolesController@store')->name('api_role_add');
     Route::post('/roles/permission/add', 'RolesController@add_permission')->name('api_role_permission_add');
-    Route::delete('/roles/{role}/permission/{permission}','RolesController@destroy_permission')->name('api_role_permission_destroy');
+    Route::delete('/roles/{role}/permission/{permission}', 'RolesController@destroy_permission')->name('api_role_permission_destroy');
     Route::delete('/roles/{role}/delete', 'RolesController@destroy')->name('api_role_delete');
 
     Route::get('/sites/über_uns', 'SitesController@about')->name('admin_about');
@@ -66,7 +64,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/dateien', 'FileController@index')->name('files');
     Route::post('/dateien', 'FileController@store')->name('store_file');
-    Route::delete('/dateien/{file}', 'FileController@delete')->name('a_delete_file');
+    Route::delete('/dateien/{id}', 'FileController@delete')->name('a_delete_file');
 
     Route::post('/sites/vorstand/uploud', 'ImagesController@uploud_vorstand_image')->name('uploud_vorstand_image');
     Route::delete('sites/vorstand', 'ImagesController@remove_vorstand_image')->name('remove_vorstand_image');
@@ -89,4 +87,3 @@ Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
 Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
 
 Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
-

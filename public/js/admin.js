@@ -84289,12 +84289,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['files'],
     data: function data() {
         return {
             file: {
@@ -84303,7 +84329,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 file: {}
             },
             errors: new __WEBPACK_IMPORTED_MODULE_2__Errors_js__["a" /* default */](),
-            uploud: -1
+            uploud: -1,
+            objects: {}
         };
     },
     components: {
@@ -84334,10 +84361,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 vue.$refs.form.reset();
                 vue.errors.clearErrors();
                 vue.uploud = -1;
+                vue.objects.push(msg.data.file);
+                console.log(vue.objects);
                 __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit('msg-event', msg.data.status);
             }).catch(function (errors) {
                 vue.errors.setErrors(errors.response.data.errors);
                 vue.uploud = -1;
+                __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit('msg-event', 'Es ist ein Fehler aufgetreten.', 'danger');
+            });
+        },
+        remove: function remove(file) {
+            var vue = this;
+            axios.delete('/admin/dateien/' + file.id).then(function (msg) {
+                vue.objects.splice(vue.objects.indexOf(file), 1);
+                __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit('msg-event', msg.data.status);
+            }).catch(function (errors) {
+                __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit('msg-event', 'Es ist ein Fehler aufgetreten.', 'danger');
             });
         }
     },
@@ -84351,6 +84390,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         width: function width() {
             return "width:" + this.uploud + '%';
         }
+    },
+
+    created: function created() {
+        this.objects = this.files;
     }
 });
 
@@ -84807,7 +84850,36 @@ var render = function() {
           _vm._v(" "),
           _vm._m(4)
         ]
-      )
+      ),
+      _vm._v(" "),
+      _c("table", { staticClass: "table overflow" }, [
+        _vm._m(5),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.objects, function(file) {
+            return _c("tr", { key: file.id }, [
+              _c("td", [_vm._v(_vm._s(file.name))]),
+              _vm._v(" "),
+              _c("td", { staticClass: "d-flex" }, [
+                _c(
+                  "form",
+                  {
+                    staticClass: "ml-auto",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        _vm.remove(file)
+                      }
+                    }
+                  },
+                  [_vm._m(6, true)]
+                )
+              ])
+            ])
+          })
+        )
+      ])
     ],
     1
   )
@@ -84867,6 +84939,24 @@ var staticRenderFns = [
         )
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [_c("th", [_vm._v("Name")]), _vm._v(" "), _c("th")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "btn btn-danger mx-1", attrs: { type: "submit" } },
+      [_c("i", { staticClass: "fa fa-trash" })]
+    )
   }
 ]
 render._withStripped = true

@@ -75,6 +75,31 @@
             </div>
         </div>
     </form>
+
+
+    <table class="table overflow">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            
+                <tr v-for="file in objects" v-bind:key="file.id">
+                    <td>{{file.name}}</td>
+                
+                    <td class="d-flex">
+                        <form class="ml-auto" @submit.prevent="remove(file)">
+                            <button type="submit" class="btn btn-danger mx-1">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+
+        </tbody>
+    </table>
 </div>
 </template>
 
@@ -84,6 +109,7 @@ import {EventBus} from './EventBus.js';
 import Errors from './Errors.js';
 
 export default {
+    props:['files'],
   data: ()=> {
       return {
           file: {
@@ -92,7 +118,8 @@ export default {
               file: {}
           },
           errors: new Errors(),
-          uploud: -1
+          uploud: -1,
+          objects: {},
       }
   },
   components: {
@@ -115,7 +142,6 @@ export default {
             }
           };
 
-
           axios.post('/admin/dateien', data, config)
           .then((msg)=>{
               vue.file.name = "";
@@ -125,11 +151,24 @@ export default {
               vue.$refs.form.reset();
               vue.errors.clearErrors();
               vue.uploud = -1;
+              vue.objects.push(msg.data.file);
+              console.log(vue.objects);
               EventBus.$emit('msg-event', msg.data.status);
           })
           .catch((errors)=>{
               vue.errors.setErrors(errors.response.data.errors)
               vue.uploud = -1;
+              EventBus.$emit('msg-event', 'Es ist ein Fehler aufgetreten.', 'danger');
+          });
+      },
+      remove(file){
+          let vue = this;
+          axios.delete(`/admin/dateien/${file.id}`)
+          .then((msg)=>{
+              vue.objects.splice(vue.objects.indexOf(file),1);
+              EventBus.$emit('msg-event', msg.data.status);
+          }).catch((errors)=>{
+              EventBus.$emit('msg-event', 'Es ist ein Fehler aufgetreten.', 'danger');
           });
       }
   },
@@ -143,6 +182,10 @@ export default {
       width(){
           return "width:" + this.uploud + '%';
       }
+  },
+
+  created: function(){
+      this.objects = this.files;
   }
 }
 </script>

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\User;
-use Illuminate\Support\Facades\Storage;
 use App\File;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
 {
@@ -13,6 +13,7 @@ class FileController extends Controller
     {
         $this->authorize('can_access_files', User::class);
         $files = File::all();
+
         return view('admin.sites.files.index', compact(
             'files'
         ));
@@ -29,20 +30,25 @@ class FileController extends Controller
         $file = $request->file('file');
         if ($file->isValid()) {
             $path = Storage::disk('public')->putFileAs('files', $file, $data['name'] . '.' . $file->getClientOriginalExtension(), 'public');
-            File::create([
+            $file = File::create([
                 'name' => $data['name'],
                 'description' => $data['description'],
                 'path' => $path,
                 'size' => $file->getClientSize()
             ]);
+
+            return response()->json([
+                'status' => 'Datei wurde hinzugefügt',
+                'file' => $file
+            ], 200);
         }
-        return response()->json(['status' => 'Datei wurde hinzugefügt'], 200);
     }
 
-    public function delete(File $file)
+    public function delete(File $id)
     {
-        Storage::disk('public')->delete($file->path);
-        $file->delete();
-        return back();
+        Storage::disk('public')->delete($id->path);
+        $id->delete();
+
+        return response()->json(['status' => 'Datei wurde gelöscht.']);
     }
 }

@@ -63,6 +63,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::delete('sites/über_uns', 'ImagesController@remove_group_image')->name('remove_group_image');
 
     Route::get('/dateien', 'FileController@index')->name('files');
+    Route::get('/dateien/edit/{file}', 'FileController@edit')->name('files_edit');
+    Route::put('/dateien/{file}', 'FileController@update')->name('files_update');
     Route::post('/dateien', 'FileController@store')->name('store_file');
     Route::delete('/dateien/{id}', 'FileController@delete')->name('a_delete_file');
 

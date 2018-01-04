@@ -90,7 +90,11 @@
                     <td>{{file.name}}</td>
                 
                     <td class="d-flex">
-                        <form class="ml-auto" @submit.prevent="remove(file)">
+                        <a :href="'/admin/dateien/edit/' + file.id" class="btn btn-warning ml-auto">
+                            <i class="fa fa-edit"></i>
+                        </a>
+
+                        <form @submit.prevent="remove(file)">
                             <button type="submit" class="btn btn-danger mx-1">
                                 <i class="fa fa-trash"></i>
                             </button>

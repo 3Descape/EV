@@ -84314,6 +84314,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -84863,9 +84867,17 @@ var render = function() {
               _vm._v(" "),
               _c("td", { staticClass: "d-flex" }, [
                 _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-warning ml-auto",
+                    attrs: { href: "/admin/dateien/edit/" + file.id }
+                  },
+                  [_c("i", { staticClass: "fa fa-edit" })]
+                ),
+                _vm._v(" "),
+                _c(
                   "form",
                   {
-                    staticClass: "ml-auto",
                     on: {
                       submit: function($event) {
                         $event.preventDefault()

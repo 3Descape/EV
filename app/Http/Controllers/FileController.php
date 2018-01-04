@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\File;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 
 class FileController extends Controller
@@ -17,6 +18,32 @@ class FileController extends Controller
         return view('admin.sites.files.index', compact(
             'files'
         ));
+    }
+
+    public function edit(File $file)
+    {
+        return view('admin.sites.files.edit', compact(
+            'file'
+        ));
+    }
+
+    public function update(Request $request, File $file)
+    {
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                Rule::unique('files')->ignore($file->name, 'name')
+            ],
+            'description' => 'required|string'
+        ]);
+
+        $file->update([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect()->route('files');
     }
 
     public function store(Request $request)

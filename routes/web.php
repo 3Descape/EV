@@ -67,9 +67,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::put('/dateien/{file}', 'FileController@update')->name('files_update');
     Route::post('/dateien', 'FileController@store')->name('store_file');
     Route::delete('/dateien/{id}', 'FileController@delete')->name('a_delete_file');
-
-    Route::post('/sites/vorstand/uploud', 'ImagesController@uploud_vorstand_image')->name('uploud_vorstand_image');
-    Route::delete('sites/vorstand', 'ImagesController@remove_vorstand_image')->name('remove_vorstand_image');
 });
 
 Route::get('/', 'FrontendController@index')->name('home');
@@ -89,3 +86,5 @@ Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
 Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
 
 Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
+
+Route::post('/images/{image}', 'ImagesController@getImage');

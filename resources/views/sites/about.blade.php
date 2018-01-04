@@ -5,6 +5,12 @@
 @endsection
 
 @section('content')
+    @if ($gruppenbild)
+    <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block text-center">
+        <img src="{{asset('storage/'. $gruppenbild->path)}}" class="img-fluid">
+    </div>
+    @endif
+
     <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="vorstand">
         <h1 class="text-center">Vorstand</h1>
         @foreach($committe as $person)
@@ -16,16 +22,17 @@
                     </div>
                     @if($person->image_path)
                         <div class="image mb-3 mb-lg-0 ml-0 ml-lg-2 order-1 order-lg-2">
-                            <img src="{{asset("storage/{$person->image_path}")}}" class="img-fluid">
+                            <img src="{{asset('storage/'. $person->image_path)}}" class="img-fluid">
                         </div>
                     @endif
                 </div>
             </div>
         @endforeach
     </div>
+
     @foreach ($texts as $text)
         @if($text->html)
-            <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="{{strtolower($text->title)}}">
+            <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="test">
                 <h1 class="text-center">{{$text->title}}</h1>
                 <p>{!!$text->html!!}</p>
             </div>

@@ -6,7 +6,7 @@ use App\User;
 use App\Person;
 use App\PeopleCategory;
 use Illuminate\Http\Request;
-use App\Htttp\Helpers\StoreImage;
+use App\Http\Helpers\StoreImage;
 use Illuminate\Support\Facades\Storage;
 
 class PersonController extends Controller

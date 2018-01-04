@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Text;
 use App\Event;
+use App\Image;
 use App\Holiday;
 use App\Category;
 use App\PeopleCategory;
@@ -28,12 +29,14 @@ class FrontendController extends Controller
     public function about()
     {
         $this->add_analythic();
-        $texts = Text::where('category', 1)->with('images')->orderBy('order')->get();
         $committe = PeopleCategory::where('name', 'vorstand')->first()->people()->orderBy('name')->get();
+        $texts = Text::where('category', 1)->orderBy('order')->get();
+        $gruppenbild = Image::where('name', 'gruppenbild')->first();
 
         return view('sites.about', compact(
-            'texts',
-            'committe'
+            'gruppenbild',
+            'committe',
+            'texts'
         ));
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Htttp\Helpers;
+namespace App\Http\Helpers;
 
 use Image;
 use Illuminate\Support\Carbon;

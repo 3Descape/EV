@@ -6,8 +6,8 @@ window.Vue = require('vue');
 //     el: '#vue',
 // });
 
-Vue.component('test', require('./components/Test.vue'));
+Vue.component('bild', require('./components/Image.vue'));
 
 const app = new Vue({
-    el: '#test',
+    el: '#app',
 });

@@ -78,13 +78,11 @@
                     compiledData: vue.compiledMarkdown
                 }).then((response)=>{
                     this.updatingBody = false;
-                    //console.log(response.data.status);
                 }).catch((errors)=>{
                     console.log(errors);
                 });
             },
             updateTitle (){
-                //console.log(this.site.title);
                 this.updatingTitle = true;
                 let vue = this;
                 axios.post('/admin/sites/update/' + vue.site.id + '/title', {

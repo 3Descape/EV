@@ -13,10 +13,11 @@
         <link rel="stylesheet" href="{{asset('/css/app.css')}}">
     </head>
     <body>
+        @if(! Cookie::get('ev_allow_cookies'))
+            @include('layouts.cookie')
+        @endif
         <div class="container-fuid" id="app">
-            @if(! Cookie::get('ev_allow_cookies'))
-                @include('layouts.cookie')
-            @endif
+
 
             <div class="container-fluid menu">@include('layouts.menu')</div>
             

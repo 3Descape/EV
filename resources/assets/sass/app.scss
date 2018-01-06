@@ -79,7 +79,7 @@ body{
         padding: 0px;
 
         .header{
-            min-height: 100vh;
+            min-height: 70vh;
             background-color: $color3;
             position: relative;
 
@@ -88,7 +88,7 @@ body{
                 width: 100%;
 
                 &>div{
-                    min-height: 100vh;
+                    min-height: 70vh;
                     width: 100%;
                     background-image: url('/images/preview.jpg');
                     background-blend-mode: multiply;
@@ -158,7 +158,7 @@ body{
             }
         }
     }
-    
+    //in about section 
     .people{
         .text{
             flex: 1;
@@ -170,10 +170,15 @@ body{
 
         .image{
             flex-basis: 20%;
-
+            text-align: center;
             @include media-breakpoint-down(md){
                 flex-basis: 100%;
             }
+        }
+
+        img{
+            max-height: 15rem;
+            width: auto;
         }
     }
     

@@ -19,7 +19,7 @@ Vue.component('roles', require('./components/Roles.vue'));
 Vue.component('sites-edit', require('./components/SitesEdit.vue'));
 Vue.component('event-edit', require('./components/EventEdit.vue'));
 Vue.component('file-uploud', require('./components/FileUploud.vue'));
-Vue.component('test', require('./components/Test.vue'));
+Vue.component('bild', require('./components/Image.vue'));
 
 const app = new Vue({
     el: '#app',

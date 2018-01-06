@@ -17,23 +17,19 @@ export default {
       },
   data: ()=>{
       return {
-          image: {},
+          path: "",
           state: false,
-      }
-  },
-  computed: {
-      path: function(){
-          return "/storage/" + this.image.path;
       }
   },
   mounted: function(){
       if(this.url !== ''){
-          this.image.path = this.url;
+          this.path = this.url;
+          this.state = true;
       }else{
         let vue = this;
         axios.post("/images/" + this.id)
         .then((data)=>{
-            vue.image = data.data.image
+            vue.path = "/storage/" + data.data.path;
             vue.state = true;
         });
       }
@@ -42,3 +38,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+img{
+    max-height: 15rem;
+    width: auto;
+}
+</style>

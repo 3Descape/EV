@@ -18,9 +18,9 @@ class ImagesController extends Controller
         return view('admin.sites.images.images');
     }
 
-    public function getImage($image)
+    public function getImage(Image $image)
     {
-        return $image;
+        return response()->json(['path' => $image->path], 200);
     }
 
     public function uploud_group_image(Request $request)

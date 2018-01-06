@@ -12868,7 +12868,7 @@ body * {
 }
 
 #app #header .header {
-  min-height: 100vh;
+  min-height: 70vh;
   background-color: #3dd6d0;
   position: relative;
 }
@@ -12879,7 +12879,7 @@ body * {
 }
 
 #app #header .header .image > div {
-  min-height: 100vh;
+  min-height: 70vh;
   width: 100%;
   background-image: url("/images/preview.jpg");
   background-blend-mode: multiply;
@@ -12962,6 +12962,7 @@ body * {
 #app .people .image {
   -ms-flex-preferred-size: 20%;
       flex-basis: 20%;
+  text-align: center;
 }
 
 @media (max-width: 991px) {
@@ -12969,6 +12970,11 @@ body * {
     -ms-flex-preferred-size: 100%;
         flex-basis: 100%;
   }
+}
+
+#app .people img {
+  max-height: 15rem;
+  width: auto;
 }
 
 #app .text-block {

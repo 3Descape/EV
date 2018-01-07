@@ -156,7 +156,6 @@ export default {
               vue.errors.clearErrors();
               vue.uploud = -1;
               vue.objects.push(msg.data.file);
-              console.log(vue.objects);
               EventBus.$emit('msg-event', msg.data.status);
           })
           .catch((errors)=>{

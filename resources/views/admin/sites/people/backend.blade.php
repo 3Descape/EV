@@ -40,11 +40,11 @@
                                 </td>
                                 <td class="d-flex">
                                     <a href="{{route('user_role', $user->id)}}"
-                                        class="btn btn-warning mx-1">
+                                        class="btn btn-warning ml-auto">
                                         <i class="fa fa-pencil"></i>
                                     </a>
                                     <a href="{{route('api_user_delete', $user->id)}}"
-                                        class="btn btn-danger mx-1 ml-auto">
+                                        class="btn btn-danger mx-1">
                                         <i class="fa fa-trash-o"></i>
                                     </a>
                                 </td>

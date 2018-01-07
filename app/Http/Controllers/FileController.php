@@ -71,10 +71,10 @@ class FileController extends Controller
         }
     }
 
-    public function delete(File $id)
+    public function delete(File $file)
     {
-        Storage::disk('public')->delete($id->path);
-        $id->delete();
+        Storage::disk('public')->delete($file->path);
+        $file->delete();
 
         return response()->json(['status' => 'Datei wurde gelöscht.']);
     }

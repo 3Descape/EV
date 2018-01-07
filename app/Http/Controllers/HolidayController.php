@@ -9,6 +9,7 @@ class HolidayController extends Controller
 {
     public function index()
     {
+        $this->authorize('can_access_holiday', User::class);
         $school = Holiday::schoolFree();
         $autonomous = Holiday::schoolAutonomous();
 
@@ -20,6 +21,7 @@ class HolidayController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('can_access_holiday', User::class);
         $this->validate($request, [
             'name' => 'required',
             'date' => 'required',
@@ -33,6 +35,8 @@ class HolidayController extends Controller
 
     public function edit(Holiday $holiday)
     {
+        $this->authorize('can_access_holiday', User::class);
+
         return view('admin.sites.holidays.holiday_edit', [
             'holiday' => $holiday,
         ]);
@@ -40,6 +44,7 @@ class HolidayController extends Controller
 
     public function update(Request $request, Holiday $holiday)
     {
+        $this->authorize('can_access_holiday', User::class);
         $this->validate($request, [
             'name' => 'required|min:5',
             'date' => 'required',
@@ -53,6 +58,7 @@ class HolidayController extends Controller
 
     public function destroy(Holiday $holiday)
     {
+        $this->authorize('can_access_holiday', User::class);
         $holiday->delete();
 
         return back();

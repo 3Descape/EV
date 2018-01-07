@@ -4,10 +4,6 @@
     "/css/app.css": "/css/app.css",
     "/css/admin.css": "/css/admin.css",
     "/css/login.css": "/css/login.css",
-    "/js/de.js": "/js/de.js",
-    "/js/moment.min.js": "/js/moment.min.js",
-    "/js/tempusdominus-bootstrap-4.min.js": "/js/tempusdominus-bootstrap-4.min.js",
-    "/css/tempusdominus-bootstrap-4.min.css": "/css/tempusdominus-bootstrap-4.min.css",
     "/js/dropzone.js": "/js/dropzone.js",
     "/css/dropzone.min.css": "/css/dropzone.min.css"
 }

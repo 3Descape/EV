@@ -19,8 +19,8 @@
                 <div class="row col-md-9 col-lg-10 col-xl-11 mx-auto mt-2">
                     @foreach ($event->images as $image)
                         <div class="thumbnail">
-                            <img src="{{asset($image->path)}}">
-                            <form action="{{route('admin_events_destroy_image', [$event->id, $image->id])}}" method="POST">
+                            <img src="{{asset('storage/'.$image->path)}}">
+                            <form action="{{route('image_delete', [$image->id])}}" method="POST">
                                 <div class="d-flex justify-content-center align-items-center">
                                     <button class=""><i class="fa fa-times fa-2x"></i></button>
                                 </div>

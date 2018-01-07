@@ -11,8 +11,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/events', 'EventsController@store')->name('admin_events_store');
     Route::put('/events/{event}', 'EventsController@update')->name('admin_events_update');
     Route::get('/events/{event}/edit', 'EventsController@edit')->name('admin_events_edit');
-    Route::post('/events/{id}/image', 'ImagesController@store')->name('admin_events_store_image');
-    Route::delete('/events/{event}/image/{image}', 'ImagesController@destroy')->name('admin_events_destroy_image');
+    Route::post('/events/{id}/image', 'EventImageController@store')->name('admin_events_store_image');
+    Route::delete('/events/{event}/image/{image}', 'EventImageController@destroy')->name('admin_events_destroy_image');
     Route::delete('/events/{event}', 'EventsController@destroy')->name('admin_events_destroy');
 
     Route::get('/categories', 'CategoriesController@index')->name('admin_categories');
@@ -58,7 +58,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::put('/ferien/{holiday}', 'HolidayController@update')->name('holiday_update');
     Route::delete('/ferien/{holiday}', 'HolidayController@destroy')->name('holiday_destroy');
 
-    Route::get('/bilder', 'ImagesController@pictures')->name('pictures');
+    Route::get('/bilder', 'ImagesController@index')->name('pictures');
+    Route::post('/bilder', 'ImagesController@store')->name('image_store');
+    Route::delete('/bilder/{image}', 'ImagesController@destroy')->name('image_delete');
+
     Route::post('/sites/über_uns/uploud', 'ImagesController@uploud_group_image')->name('uploud_group_image');
     Route::delete('sites/über_uns', 'ImagesController@remove_group_image')->name('remove_group_image');
 
@@ -66,7 +69,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/dateien/edit/{file}', 'FileController@edit')->name('files_edit');
     Route::put('/dateien/{file}', 'FileController@update')->name('files_update');
     Route::post('/dateien', 'FileController@store')->name('store_file');
-    Route::delete('/dateien/{id}', 'FileController@delete')->name('a_delete_file');
+    Route::delete('/dateien/{file}', 'FileController@delete')->name('a_delete_file');
 });
 
 Route::get('/', 'FrontendController@index')->name('home');

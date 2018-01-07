@@ -85435,8 +85435,8 @@ var render = function() {
     "div",
     { staticClass: "row" },
     _vm._l(_vm.images, function(image) {
-      return _c("div", { key: image.id, staticClass: "col-lg-3" }, [
-        _c("div", { staticClass: "card m-1 h-100" }, [
+      return _c("div", { key: image.id, staticClass: "col-lg-3 mb-3 px-2" }, [
+        _c("div", { staticClass: "card h-100" }, [
           _c("div", { staticClass: "card-body row" }, [
             _c("div", { staticClass: "col-lg-3" }, [
               _c("img", {

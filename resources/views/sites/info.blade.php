@@ -13,8 +13,8 @@
             </div>
         @endforeach
 
-        <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="ferien">
-            <h1 class="text-center">Ferien und schulautonome Tage</h1>
+        <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="thermine">
+            <h1 class="text-center">Thermine</h1>
             <div class="row">
                 <div class="col-md-12">
                     <h3>Ferien:</h3>

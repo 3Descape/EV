@@ -52,12 +52,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/sites/update/{site}/body', 'SitesController@update_body')->name('admin_sites_update_body');
     Route::post('/sites/update/{site}/title', 'SitesController@update_title')->name('admin_sites_update_title');
 
-    Route::get('/ferien', 'HolidayController@index')->name('holiday_index');
-    Route::post('/ferien', 'HolidayController@store')->name('holiday_store');
-    Route::get('/ferien/{holiday}/edit', 'HolidayController@edit')->name('holiday_edit');
-    Route::put('/ferien/{holiday}', 'HolidayController@update')->name('holiday_update');
-    Route::delete('/ferien/{holiday}', 'HolidayController@destroy')->name('holiday_destroy');
-
     Route::get('/bilder', 'ImagesController@index')->name('pictures');
     Route::post('/bilder', 'ImagesController@store')->name('image_store');
     Route::delete('/bilder/{image}', 'ImagesController@destroy')->name('image_delete');
@@ -70,6 +64,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::put('/dateien/{file}', 'FileController@update')->name('files_update');
     Route::post('/dateien', 'FileController@store')->name('store_file');
     Route::delete('/dateien/{file}', 'FileController@delete')->name('a_delete_file');
+
+    Route::get('/thermine', 'FixtureController@index')->name('fixture_index');
+    Route::post('/thermine', 'FixtureController@store')->name('fixture_store');
+    Route::put('/thermine/{fixture}', 'FixtureController@update')->name('fixture_update');
+    Route::delete('/thermine/{fixture}', 'FixtureController@destroy')->name('fixture_destroy');
+
+    Route::get('/thermine-kategorie', 'FixtureCategoryController@index')->name('fixture_category_index');
+    Route::post('/thermine-kategorie', 'FixtureCategoryController@store')->name('fixture_category_store');
+    Route::put('/thermine-kategorie/{fixturecategory}', 'FixtureCategoryController@update')->name('fixture_category_update');
+    Route::delete('/thermine-ketegorie/{fixturecategory}', 'FixtureCategoryController@destroy')->name('fixture_category_destroy');
 });
 
 Route::get('/', 'FrontendController@index')->name('home');

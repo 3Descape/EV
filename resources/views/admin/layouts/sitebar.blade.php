@@ -70,12 +70,24 @@
                     </div>
                 @endcan
 
-                @can('can_access_holiday', \App\User::class)
-                    <a href="{{route('holiday_index')}}" class="list-group-item d-inline-block collapsed" data-parent="#sidebar">
-                        <i class="fa fa-refresh"></i>
-                        <span class="d-none d-md-inline-block">Ferien</span>
+                {{--  @can('', \App\User::class)  --}}
+                    <a href="#fixture" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
+                        <i class="fa fa-clock-o"></i>
+                        <span class="d-none d-md-inline-block">Thermine</span>
                     </a>
-                @endcan
+
+                    <div class="collapse" id="fixture">
+                        <a href="{{route('fixture_index')}}" class="list-group-item">
+                            <i class="fa fa-clock-o"></i>
+                            <span class="d-none d-md-inline-block">Thermine</span>
+                        </a>
+
+                        <a href="{{route('fixture_category_index')}}" class="list-group-item">
+                            <i class="fa fa-filter"></i>
+                            <span class="d-none d-md-inline-block">Kategorien</span>
+                        </a>
+                    </div>
+                {{--  @endcan  --}}
 
                 @can('can_access_people', \App\User::class)
                     <a href="#personen" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">

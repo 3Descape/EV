@@ -1,7 +1,7 @@
 <template>
     <div class="row">
-        <div class="col-lg-3" v-for="image in images" v-bind:key="image.id">
-            <div class="card m-1 h-100">
+        <div class="col-lg-3 mb-3 px-2" v-for="image in images" v-bind:key="image.id">
+            <div class="card h-100">
                 <div class="card-body row">
                     <div class="col-lg-3">
                         <img :src="`/storage/${image.path}`" class="img-fluid">

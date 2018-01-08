@@ -67,13 +67,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/thermine', 'FixtureController@index')->name('fixture_index');
     Route::post('/thermine', 'FixtureController@store')->name('fixture_store');
+    Route::get('/thermine/{fixture}/edit', 'FixtureController@edit')->name('fixture_edit');
     Route::put('/thermine/{fixture}', 'FixtureController@update')->name('fixture_update');
     Route::delete('/thermine/{fixture}', 'FixtureController@destroy')->name('fixture_destroy');
 
     Route::get('/thermine-kategorie', 'FixtureCategoryController@index')->name('fixture_category_index');
     Route::post('/thermine-kategorie', 'FixtureCategoryController@store')->name('fixture_category_store');
+    Route::get('/thermine-kategorie/{fixturecategory}/edit', 'FixtureCategoryController@edit')->name('fixture_category_edit');
     Route::put('/thermine-kategorie/{fixturecategory}', 'FixtureCategoryController@update')->name('fixture_category_update');
-    Route::delete('/thermine-ketegorie/{fixturecategory}', 'FixtureCategoryController@destroy')->name('fixture_category_destroy');
+    Route::delete('/thermine-kategorie/{fixturecategory}', 'FixtureCategoryController@destroy')->name('fixture_category_destroy');
 });
 
 Route::get('/', 'FrontendController@index')->name('home');

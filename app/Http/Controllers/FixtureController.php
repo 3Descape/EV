@@ -10,10 +10,12 @@ class FixtureController extends Controller
 {
     public function index()
     {
-        $fixturecategories = FixtureCategory::with('fixtures')->get();
+        $fixturecategories = FixtureCategory::all();
+        $fixtures = Fixture::with('category')->get();
 
-        return view('admin.sites.fixture.index', compact(
-            'fixturecategories'
+        return view('admin.sites.fixtures.index', compact(
+            'fixturecategories',
+            'fixtures'
         ));
     }
 
@@ -34,23 +36,31 @@ class FixtureController extends Controller
         return back();
     }
 
-    public function edit()
+    public function edit(Fixture $fixture)
     {
+        $fixturecategories = FixtureCategory::all();
+
+        return view('admin.sites.fixtures.edit', compact(
+            'fixturecategories',
+            'fixture'
+        ));
     }
 
     public function update(Request $request, Fixture $fixture)
     {
-        $this->validate([
+        $request->validate([
             'name' => 'required|string',
-            'description' => 'required'
+            'description' => 'required',
+            'fixture_category' => 'required|exists:fixture_categories,id'
         ]);
 
         $fixture->update([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'fixture_category_id' => $request->fixture_category
         ]);
 
-        return back();
+        return redirect()->route('fixture_index');
     }
 
     public function destroy(Fixture $fixture)

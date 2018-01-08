@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body">
                     <a href="{{route('person_add', $category->name)}}" class="btn btn-success mb-3"><i class="fa fa-plus"></i> Hinzufügen</a>
-                    <table class="table overflow">
+                    <table class="table">
                         <thead>
                             <tr>
                                 <th>Name</th>
@@ -21,7 +21,7 @@
                             @foreach ($people as $person)
                             <tr>
                                 <td scope="row">{{$person->name}}</td>
-                                <td class="d-none d-md-table-cell">{{$person->description}}</td>
+                                <td class="d-none d-md-table-cell overflow-text">{{$person->description}}</td>
                                 <td class="d-flex">
                                     <a href="{{route('person_edit', $person->id)}}" class="btn btn-warning ml-auto">
                                         <i class="fa fa-pencil"></i>

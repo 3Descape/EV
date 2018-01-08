@@ -10,6 +10,6 @@ class FixtureCategory extends Model
 
     public function fixtures()
     {
-        return $this->hasMany(Fixture::class);
+        return $this->hasMany('App\Fixture');
     }
 }

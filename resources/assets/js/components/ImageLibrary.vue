@@ -39,9 +39,11 @@
                         </div>
 
                         <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
-                            <ul class="m-0">
-                                <li  v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
+
+                            <ul class="m-0" v-if="isJSON(errors.getError('file'))">
+                                <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
                             </ul>
+                            <p v-else>{{errors.getError('file')}}</p>
                         </div>
                     </div>
                 </div>
@@ -114,6 +116,7 @@ export default {
           EventBus.$emit("image-added", msg.data.image);
         })
         .catch(errors => {
+            console.log(errors.response.data);
           vue.errors.setErrors(errors.response.data);
           vue.uploud = -1;
           EventBus.$emit(
@@ -122,6 +125,15 @@ export default {
             "danger"
           );
         });
+    },
+    isJSON(data) {
+        let ret = true;
+        try {
+            JSON.parse(data);
+        }catch(e) {
+            ret = false;
+        }
+        return ret;
     }
   },
   components: {

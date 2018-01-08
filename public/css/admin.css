@@ -12895,6 +12895,13 @@ blockquote p {
   white-space: nowrap;
 }
 
+.overflow-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 6rem;
+}
+
 .role {
   text-decoration: none !important;
 }

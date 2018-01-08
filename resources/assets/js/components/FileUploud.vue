@@ -78,30 +78,32 @@
 
 
     <table class="table overflow">
+        <col span="1" style="width: 25%;">
+        <col span="1" style="width: 65%;">
+        <col span="1" style="width: 10%;">
         <thead>
             <tr>
                 <th>Name</th>
-                <th></th>
+                <th class="d-none d-md-table-cell">Beschreibung</th>
             </tr>
         </thead>
         <tbody>
+            <tr v-for="file in objects" v-bind:key="file.id">
+                <td>{{file.name}}</td>
+                <td class="overflow-text d-none d-md-table-cell">{{file.description}}</td>
             
-                <tr v-for="file in objects" v-bind:key="file.id">
-                    <td>{{file.name}}</td>
-                
-                    <td class="d-flex">
-                        <a :href="'/admin/dateien/edit/' + file.id" class="btn btn-warning ml-auto">
-                            <i class="fa fa-edit"></i>
-                        </a>
+                <td class="d-flex">
+                    <a :href="'/admin/dateien/edit/' + file.id" class="btn btn-warning ml-auto">
+                        <i class="fa fa-edit"></i>
+                    </a>
 
-                        <form @submit.prevent="remove(file)">
-                            <button type="submit" class="btn btn-danger mx-1">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-
+                    <form @submit.prevent="remove(file)">
+                        <button type="submit" class="btn btn-danger mx-1">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

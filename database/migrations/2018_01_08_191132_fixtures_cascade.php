@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFixturesTable extends Migration
+class FixtureCascade extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateFixturesTable extends Migration
      */
     public function up()
     {
-        Schema::create('fixtures', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->text('description');
-            $table->integer('fixture_category_id')->unsigned();
-            $table->timestamps();
+        Schema::table('fixtures', function (Blueprint $table) {
+            $table->foreign('fixture_category_id')
+            ->references('id')
+            ->on('fixture_categories')
+            ->onDelete('cascade');
         });
     }
 
@@ -29,6 +28,7 @@ class CreateFixturesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fixtures');
+        Schema::table('fixtures', function (Blueprint $table) {
+        });
     }
 }

@@ -84565,6 +84565,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -85006,6 +85008,12 @@ var render = function() {
       ),
       _vm._v(" "),
       _c("table", { staticClass: "table overflow" }, [
+        _c("col", { staticStyle: { width: "25%" }, attrs: { span: "1" } }),
+        _vm._v(" "),
+        _c("col", { staticStyle: { width: "65%" }, attrs: { span: "1" } }),
+        _vm._v(" "),
+        _c("col", { staticStyle: { width: "10%" }, attrs: { span: "1" } }),
+        _vm._v(" "),
         _vm._m(5),
         _vm._v(" "),
         _c(
@@ -85013,6 +85021,12 @@ var render = function() {
           _vm._l(_vm.objects, function(file) {
             return _c("tr", { key: file.id }, [
               _c("td", [_vm._v(_vm._s(file.name))]),
+              _vm._v(" "),
+              _c(
+                "td",
+                { staticClass: "overflow-text d-none d-md-table-cell" },
+                [_vm._v(_vm._s(file.description))]
+              ),
               _vm._v(" "),
               _c("td", { staticClass: "d-flex" }, [
                 _c(
@@ -85106,7 +85120,13 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("thead", [
-      _c("tr", [_c("th", [_vm._v("Name")]), _vm._v(" "), _c("th")])
+      _c("tr", [
+        _c("th", [_vm._v("Name")]),
+        _vm._v(" "),
+        _c("th", { staticClass: "d-none d-md-table-cell" }, [
+          _vm._v("Beschreibung")
+        ])
+      ])
     ])
   },
   function() {
@@ -85256,6 +85276,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -85302,10 +85324,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         vue.progress = -1;
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("image-added", msg.data.image);
       }).catch(function (errors) {
+        console.log(errors.response.data);
         vue.errors.setErrors(errors.response.data);
         vue.uploud = -1;
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
       });
+    },
+    isJSON: function isJSON(data) {
+      var ret = true;
+      try {
+        JSON.parse(data);
+      } catch (e) {
+        ret = false;
+      }
+      return ret;
     }
   },
   components: {
@@ -85636,15 +85668,21 @@ var render = function() {
                         attrs: { role: "alert" }
                       },
                       [
-                        _c(
-                          "ul",
-                          { staticClass: "m-0" },
-                          _vm._l(_vm.errors.getError("file"), function(error) {
-                            return _c("li", { key: error.file }, [
-                              _vm._v(_vm._s(error))
+                        _vm.isJSON(_vm.errors.getError("file"))
+                          ? _c(
+                              "ul",
+                              { staticClass: "m-0" },
+                              _vm._l(_vm.errors.getError("file"), function(
+                                error
+                              ) {
+                                return _c("li", { key: error.file }, [
+                                  _vm._v(_vm._s(error))
+                                ])
+                              })
+                            )
+                          : _c("p", [
+                              _vm._v(_vm._s(_vm.errors.getError("file")))
                             ])
-                          })
-                        )
                       ]
                     )
                   : _vm._e()

@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Text;
 use App\Event;
 use App\Image;
-use App\Holiday;
 use App\Category;
 use App\PeopleCategory;
+use App\FixtureCategory;
 use App\Traits\AnalythicTrait;
 
 class FrontendController extends Controller
@@ -107,15 +107,13 @@ class FrontendController extends Controller
     public function info()
     {
         $this->add_analythic();
-        $schoolfree = Holiday::schoolFree();
-        $autonomous = Holiday::schoolAutonomous();
         $texts = Text::where('category', 3)->orderBy('order')->get();
+        $fixturecategories = FixtureCategory::with('fixtures')->get();
 
-        return view('sites.info', [
-            'texts' => $texts,
-            'schulfrei' => $schoolfree,
-            'autonom' => $autonomous
-        ]);
+        return view('sites.info', compact(
+            'texts',
+            'fixturecategories'
+        ));
     }
 
     public function contact()

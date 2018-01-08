@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Fixture;
 use App\FixtureCategory;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class FixtureCategoryController extends Controller
 {
@@ -12,8 +12,8 @@ class FixtureCategoryController extends Controller
     {
         $fixturecategories = FixtureCategory::all();
 
-        return view('admin.sites.fixturekategory.index', compact(
-            '$fixturecategories'
+        return view('admin.sites.fixturecategory.index', compact(
+            'fixturecategories'
         ));
     }
 
@@ -30,17 +30,27 @@ class FixtureCategoryController extends Controller
         return back();
     }
 
+    public function edit(FixtureCategory $fixturecategory)
+    {
+        return view('admin.sites.fixturecategory.edit', compact(
+            'fixturecategory'
+        ));
+    }
+
     public function update(Request $request, FixtureCategory $fixturecategory)
     {
         $request->validate([
-            'name' => 'required|string|unique:fixture, name'
+            'name' => [
+                'required',
+                'string',
+                Rule::unique('fixture_categories')->ignore($fixturecategory->name, 'name')
+            ]
         ]);
-
         $fixturecategory->update([
             'name' => $request->name
         ]);
 
-        return back();
+        return redirect()->route('fixture_category_index');
     }
 
     public function destroy(FixtureCategory $fixturecategory)

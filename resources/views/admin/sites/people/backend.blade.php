@@ -27,8 +27,8 @@
                         <tbody>
                             @foreach ($users as $user)
                             <tr>
-                                <td scope="row">{{$user->name}}</td>
-                                <td class="d-none d-md-table-cell">{{$user->email}}</td>
+                                <td scope="row" class="overflow-text">{{$user->name}}</td>
+                                <td class="d-none d-md-table-cell overflow-text">{{$user->email}}</td>
                                 <td class="d-none d-md-table-cell">
                                     @foreach ($user->roles as $role)
                                     <a href="{{route('roles_show') .'#' . $role->name}}" class="role">

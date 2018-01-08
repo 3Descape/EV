@@ -43,8 +43,8 @@
                     Abbrechen <i class="fa fa-times"></i>
                 </a>
             </div>
-        </div
-        
+        </div>
+
         {{ csrf_field() }}
         {{method_field('PUT')}}
         

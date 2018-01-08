@@ -13,35 +13,30 @@
             </div>
         @endforeach
 
-        <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="thermine">
-            <h1 class="text-center">Thermine</h1>
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>Ferien:</h3>
-                    <table class="table">
-                        <tbody>
-                            @foreach ($schulfrei as $frei)
-                                <tr>
-                                    <td>{{$frei->name}}</td>
-                                    <td>{{$frei->date}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-                <div class="col-md-12">
-                    <h3>Schulautonome Tage:</h3>
-                    <table class="table">
-                        <tbody>
-                            @foreach ($autonom as $frei)
-                                <tr>
-                                    <td>{{$frei->name}}</td>
-                                    <td>{{$frei->date}}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+        @if(!$fixturecategories->isEmpty())
+            <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="thermine">
+                <h1 class="text-center">Thermine</h1>
+                <div class="row">
+                    @foreach ($fixturecategories as $category)
+                        @if(!$category->fixtures->isEmpty())
+                            <div class="col-md-12 card mb-2">
+                                <div class="card-body">
+                                    <h3>{{$category->name}}</h3>
+                                    <div class="list-group">
+                                        @foreach ($category->fixtures as $fixture)
+                                            <div class="list-group-item flex-column align-items-start">
+                                                <div class="d-flex w-100 justify-content-between">
+                                                <h4 class="mb-1">{{$fixture->name}}</h4>
+                                                </div>
+                                                <p class="mb-0">{{$fixture->description}}</p>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
-        </div>
+        @endif
 @endsection

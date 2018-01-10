@@ -85277,7 +85277,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -85300,9 +85299,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     fileChange: function fileChange(e) {
       this.userImage.image = e.target.files[0];
     },
+    reset: function reset() {
+      this.userImage.name = "";
+      this.userImage.image = {};
+      this.$refs.name.focus();
+      this.$refs.form.reset();
+      this.progress = -1;
+    },
     uploud: function uploud() {
-      var _this = this;
-
       var vue = this;
       var data = new FormData();
       data.append("name", this.userImage.name);
@@ -85313,31 +85317,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           vue.progress = Math.round(progressEvent.loaded * 100 / progressEvent.total);
         }
       };
-
+      this.errors.clearErrors();
       axios.post("/admin/bilder", data, config).then(function (msg) {
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
-        _this.userImage.name = "";
-        _this.userImage.image = {};
-        vue.$refs.name.focus();
-        vue.$refs.form.reset();
-        vue.errors.clearErrors();
-        vue.progress = -1;
+        vue.reset();
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("image-added", msg.data.image);
       }).catch(function (errors) {
-        console.log(errors.response.data);
         vue.errors.setErrors(errors.response.data);
-        vue.uploud = -1;
+        vue.reset();
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
       });
     },
-    isJSON: function isJSON(data) {
-      var ret = true;
+    isJSON: function isJSON(str) {
       try {
-        JSON.parse(data);
+        return JSON.parse(str) && !!str;
       } catch (e) {
-        ret = false;
+        return false;
       }
-      return ret;
     }
   },
   components: {
@@ -85668,21 +85664,15 @@ var render = function() {
                         attrs: { role: "alert" }
                       },
                       [
-                        _vm.isJSON(_vm.errors.getError("file"))
-                          ? _c(
-                              "ul",
-                              { staticClass: "m-0" },
-                              _vm._l(_vm.errors.getError("file"), function(
-                                error
-                              ) {
-                                return _c("li", { key: error.file }, [
-                                  _vm._v(_vm._s(error))
-                                ])
-                              })
-                            )
-                          : _c("p", [
-                              _vm._v(_vm._s(_vm.errors.getError("file")))
+                        _c(
+                          "ul",
+                          { staticClass: "m-0" },
+                          _vm._l(_vm.errors.getError("file"), function(error) {
+                            return _c("li", { key: error.file }, [
+                              _vm._v(_vm._s(error))
                             ])
+                          })
+                        )
                       ]
                     )
                   : _vm._e()

@@ -40,10 +40,9 @@
 
                         <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
 
-                            <ul class="m-0" v-if="isJSON(errors.getError('file'))">
+                            <ul class="m-0">
                                 <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
                             </ul>
-                            <p v-else>{{errors.getError('file')}}</p>
                         </div>
                     </div>
                 </div>
@@ -90,6 +89,13 @@ export default {
     fileChange(e) {
       this.userImage.image = e.target.files[0];
     },
+    reset() {
+      this.userImage.name = "";
+      this.userImage.image = {};
+      this.$refs.name.focus();
+      this.$refs.form.reset();
+      this.progress = -1;
+    },
     uploud() {
       let vue = this;
       let data = new FormData();
@@ -103,22 +109,17 @@ export default {
           );
         }
       };
-
-      axios.post("/admin/bilder", data, config)
+      this.errors.clearErrors();
+      axios
+        .post("/admin/bilder", data, config)
         .then(msg => {
           EventBus.$emit("msg-event", msg.data.status);
-          this.userImage.name = "";
-          this.userImage.image = {};
-          vue.$refs.name.focus();
-          vue.$refs.form.reset();
-          vue.errors.clearErrors();
-          vue.progress = -1;
+          vue.reset();
           EventBus.$emit("image-added", msg.data.image);
         })
         .catch(errors => {
-            console.log(errors.response.data);
           vue.errors.setErrors(errors.response.data);
-          vue.uploud = -1;
+          vue.reset();
           EventBus.$emit(
             "msg-event",
             "Es ist ein Fehler aufgetreten.",
@@ -126,14 +127,12 @@ export default {
           );
         });
     },
-    isJSON(data) {
-        let ret = true;
-        try {
-            JSON.parse(data);
-        }catch(e) {
-            ret = false;
-        }
-        return ret;
+    isJSON(str) {
+      try {
+        return JSON.parse(str) && !!str;
+      } catch (e) {
+        return false;
+      }
     }
   },
   components: {

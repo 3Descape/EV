@@ -19,16 +19,22 @@
             <div class="carousel-inner" role="listbox">
                 @foreach ($event->images as $key => $image)
                     <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
-                        <img class="d-block w-100 img-fluid" src="{{asset($image->path)}}" alt="First slide">
+                        <div class="w-100 text-center" alt="First slide">
+                                <img style="height: auto; max-width: 90vw; max-height: 50vh;" src="{{asset('storage/'. $image->path)}}">
+                        </div>
+
                     </div>
                 @endforeach
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span aria-hidden="true">
+                    <i class="fa fa-angle-left fa-3x" style="color:black"></i>
+                </span>
                 <span class="sr-only">Vorheriges</span>
             </a>
             <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                    <i class="fa fa-angle-right fa-3x" style="color:black"></i>
                 <span class="sr-only">Nächstes</span>
             </a>
         </div>

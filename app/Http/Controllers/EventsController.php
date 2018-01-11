@@ -26,7 +26,7 @@ class EventsController extends Controller
         $this->authorize('can_access_events', User::class);
 
         return view('admin.sites.events.events_archived', [
-            'events' => Event::pastEvents()->get(),
+            'events' => Event::pastEvents()->paginate(20),
         ]);
     }
 
@@ -98,7 +98,7 @@ class EventsController extends Controller
             'location' => $request->location
         ]);
 
-        return response()->json(['status' => 'Updated event'], 200);
+        return response()->json(['status' => 'Veranstaltung wurde aktualisiert.'], 200);
     }
 
     public function destroy(Event $event)

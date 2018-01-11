@@ -1,149 +1,271 @@
 <template lang="html">
     <div>
+        <msg></msg>
         <h2 class="text-center">Bearbeiten</h2>
         <fieldset :disabled="isUpdating">
-            <form class="form-group" @submit.prevent="updateEvent">
-                <div class="form-group row">
-                    <div class="col-md-3 col-lg-2 col-xl-1">
-                        Name:
-                    </div>
-                    <div class="col-md-9 col-lg-10 col-xl-11">
-                        <input type="text" v-model="event.name" class="form-control" name="name" required>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-3 col-lg-2 col-xl-1">
-                        Ort:
-                    </div>
-                    <div class="col-md-9 col-lg-10 col-xl-11">
-                        <input type="text" v-model="event.location" class="form-control" name="location" required>
+            <form class="form-group" @submit.prevent="update">
+                <div class="form-group">
+                    <label for="name">Name:</label>
+                    <input type="text" v-model="event.name" class="form-control" name="name" id="name" required>
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
+                        <ul class="m-0">
+                            <li v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="form-group row" v-if="showDate">
-                    <div class="col-md-3 col-lg-2 col-xl-1">
-                        Datum:
-                    </div>
-                    <div class="col-md-9 col-lg-10 col-xl-11">
-                        <input type="text" name="date" class="form-control" placeholder="dd.MM.yyyy HH:mm" v-model="event.date">
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-3 col-lg-2 col-xl-1">
-                        Beschreibung:
-                    </div>
-                    <div class="col-md-9 col-lg-10 col-xl-11">
-                        <textarea type="text" v-model="event.markup" class="form-control" name="markup" required></textarea>
-
-                        <div v-html="compiledMarkdown"></div>
-
-                        <input type="text" hidden v-model="compiledMarkdown" name="markup">
+                <div class="form-group">
+                    <label for="location">Ort:</label>
+                    <input type="text" v-model="event.location" class="form-control" name="location" id="location" required>
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('location')">
+                        <ul class="m-0">
+                            <li v-bind:key="error.location" v-for="error in errors.getError('location')">{{error}}</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-md-3 col-lg-2 col-xl-1">
-                        Kategorie:
-                    </div>
-                    <div class="col-md-9 col-lg-10 col-xl-11">
-                        <select class="form-control" name="category" v-model="event.category_id">
-                            <option v-for="category in categories" :value="category.id" :key="category.id" :selected="category.id == event.category.id">{{category.name}}</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <div class="col-md-3 col-lg-2 col-xl-1">
-                    </div>
-                    <div class="col-md-9 col-lg-10 col-xl-11">
-                        <input type="submit" class="form-control btn btn-success" value="Aktualisieren">
+                <div class="form-group" v-if="showDate">
+                    <label for="date">Datum:</label>
+                    <input type="text" name="date" class="form-control" placeholder="dd.MM.yyyy HH:mm" v-model="event.date" id="date" required>
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('date')">
+                        <ul class="m-0">
+                            <li v-bind:key="error.date" v-for="error in errors.getError('date')">{{error}}</li>
+                        </ul>
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="description">Beschreibung:</label>
+                    <textarea type="text" v-model="event.markup" class="form-control" name="markup" required id="description"></textarea>
+
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('markup')">
+                        <ul class="m-0">
+                            <li v-bind:key="error.markup" v-for="error in errors.getError('markup')">{{error}}</li>
+                        </ul>
+                    </div>
+
+                    <input type="text" hidden v-model="compiledMarkdown" name="markup">
+
+                    <div class="card-header mt-2" role="tab">
+                        <h5 class="mb-0">
+                            <a data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" class="text-dark">
+                                Vorschau <i class="fa fa-caret-down"></i>
+                            </a>
+                        </h5>
+                    </div>
+
+                    <div id="collapse" class="collapse" role="tabpanel">
+                        <div class="card-body" v-html="compiledMarkdown">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Kategorie:</label>
+                    <select class="form-control" name="category" v-model="event.category_id">
+                        <option v-for="category in categories" :value="category.id" :key="category.id" :selected="category.id == event.category.id">{{category.name}}</option>
+                    </select>
+
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('category')">
+                        <ul class="m-0">
+                            <li v-bind:key="error.category" v-for="error in errors.getError('category')">{{error}}</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <button class="btn btn-warning">
+                        <i class="fa fa-edit"></i> Bearbeiten
+                    </button>
+                </div>
             </form>
         </fieldset>
+
+        
+        <div class="form-group">
+            <label class="custom-file" style="width: 100%;">
+                <input type="file" id="file" class="custom-file-input" name="file" @change="fileChange" multiple>
+                <span class="custom-file-control">
+                    <i class="fa fa-upload"></i> Bilder hochladen..
+                </span>
+            </label>
+
+            <div class="progress mt-2" v-show="progress.length > 0">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="`width:${prog}%`" :aria-valuenow="prog" aria-valuemin="0" aria-valuemax="100">
+                    {{prog}}%
+                </div>
+            </div>
+
+            <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
+                <ul class="m-0">
+                    <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row" v-if="event.images.length">
+            <div class="col-lg-3 mb-1" v-for="image in event.images" v-bind:key="image.id">
+                <div class="card h-100">
+                    <div class="card-body row">
+                        <div class="col-lg-3">
+                            <img :src="`/storage/${image.thump}`" class="img-fluid">
+                        </div>
+                        <div class="col-lg-9 d-flex">
+                            <div>
+                                <h4 v-if="image.name">{{image.name}}</h4>
+                                <p>Bild ID: {{image.id}}</p>
+                            </div>
+                            <form @submit.prevent="destroy(image)" class="ml-auto">
+                                <button type="submit" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-else>
+            <p>Es gibt noch keine Bilder für diese Veranstaltung.</p>
+        </div>
+        
+
     </div>
 </template>
 
 <script>
-import Markdown from './Markdown.vue';
-class Errors {
-    constructor(){
-        this.errors = {};
-    }
-    setErrors(errors){
-        this.errors = errors
-    }
-
-    clearErrors() {
-        this.errors = {}
-    }
-
-    hasError(name){
-        if(this.errors.indexOf(name)){
-            return this.errors[name];
-        }
-        return {}
-    }
-}
+import Errors from './Errors.js';
+import {EventBus} from './EventBus.js';
+import Message from './Message.vue';
 export default {
-    props: ['eventProp', 'categories'],
-    data (){
-        return{
-            event: this.eventProp,
-            isPast: false,
-            showDate: true,
-            isUpdating: false,
-            errors: new Errors(),
-        }
+  props: ["eventProp", "categories"],
+  data() {
+    return {
+      event: this.eventProp,
+      showDate: true,
+      isUpdating: false,
+      errors: new Errors(),
+      images: [],
+      progress: [],
+      imageErrors: []
+    };
+  },
+  components: {
+      'msg': Message
+  },
+  methods: {
+    FormatDate: date => {
+      let day = ("0" + (date.getDate() + 1)).slice(-2);
+      let month = ("0" + (date.getMonth() + 1)).slice(-2);
+      let year = date.getFullYear();
+      let hour = ("0" + date.getHours()).slice(-2);
+      let minute = ("0" + (date.getMinutes() + 1)).slice(-2);
+      return `${day}.${month}.${year} ${hour}:${minute}`;
+    },
+    update: function() {
+      let vue = this;
+      vue.isUpdating = true;
+      axios.put("/admin/events/" + vue.event.id, {
+          name: vue.event.name,
+          location: vue.event.location,
+          date: this.event.date,
+          markup: vue.event.markup,
+          html: vue.compiledMarkdown,
+          category: vue.event.category_id
+        }).then(msg => {
+          vue.isUpdating = false;
+          EventBus.$emit("msg-event", msg.data.status);
+        }).catch(errors => {
+          vue.errors.setErrors(errors.response.data.errors);
+          EventBus.$emit("msg-event", "Es ist ein Fehler aufgetreten.", 'danger');
+          vue.isUpdating = false;
+        });
+    },
+    fileChange(e) {
+      this.images = e.target.files;
+      this.uploudImages();
+    },
+    postImage(data, index){
+        let vue = this;
+        return new Promise(
+            function(resolve, reject){
+                let config = {
+                    onUploadProgress: function(progressEvent) {
+                        
+                        vue.$set(vue.progress, index,Math.round(
+                            progressEvent.loaded * 100 / progressEvent.total
+                        ));
+                    }
+                };
+                axios.post(`/admin/events/${vue.event.id}/image`, data, config)
+                .then(msg => {
+                    console.log('postImage then');
+                    vue.event.images.push(msg.data.image)
+                    resolve();
+                })
+                .catch(errors => {
+                    console.log('reject');
+                    reject(errors);
+                });
+            }
+        );
+        
+    },
+    uploudImages: async function() {
+      let vue = this;
+      let jobs = [];
+      for (var i = 0; i < vue.images.length; i++) {
+        let data = new FormData();
+        data.append("file", vue.images[i]);
+        jobs.push(await this.postImage(data, i).catch((errors)=>{
+            vue.errors.setErrors(errors.response.data);
+        }));
+        vue.$forceUpdate();
+      }
+
+      Promise.all([jobs]).then(msg =>{
+          console.log('promise all');
+          if(vue.errors.length===0){
+              EventBus.$emit('msg-event', 'Bilder wurden hinzugefügt');
+          }
+          vue.progress = [];
+          vue.images = [];
+      }).catch((errors)=>{
+          console.log(errors);
+      });
+    },
+    destroy(image){
+        let vue = this;
+        axios.delete(`/admin/bilder/${image.id}`)
+        .then(msg => {
+            vue.event.images.splice(vue.event.images.indexOf(image), 1);
+            EventBus.$emit("msg-event", msg.data.status);
+        }).catch(errors => {
+            EventBus.$emit(
+                "msg-event", "Es ist ein Fehler aufgetreten.", "danger");
+        });
+      }
     },
     computed: {
-        compiledMarkdown: function(){
-            return this.event.markup ? marked(this.event.markup) : '';
+        compiledMarkdown: function() {
+            return this.event.markup ? marked(this.event.markup) : "";
+        },        
+        prog: function(){
+            return Math.round(this.progress.reduce(function(a,b){return a+b}, 0)/this.images.length, 0);
         }
     },
-    methods: {
-        dateFormat: (value) => {
-            return ('0'+(value.getDate()+1)).slice(-2) + '.' + ('0'+(value.getMonth()+1)).slice(-2) + '.' + value.getFullYear() + ' ' + ('0'+(value.getHours())).slice(-2) + ':' + ('0'+(value.getMinutes()+1)).slice(-2);
-        },
-        updateEvent: function(){
-            let vue = this;
-            vue.isUpdating = true;
-            axios.put('/admin/events/' + vue.event.id,{
-                name: vue.event.name,
-                location: vue.event.location,
-                date: this.event.date,
-                markup: vue.event.markup,
-                html: vue.compiledMarkdown,
-                category: vue.event.category_id
-            }).then((response)=>{
-                vue.isUpdating = false;
-                console.log(response.data.status)
-            }).catch((errors)=>{
-                this.errors.setErrors(errors)
-                console.log(errors);
-            })
-        }
-    },
-    created(){
+    created() {
         marked.setOptions({
-            gfm: true,
-            breaks: true,
-            tables: true,
+        gfm: true,
+        breaks: true,
+        tables: true
         });
 
         let now = new Date();
         let eventDate = new Date(this.event.date);
-        console.log(eventDate);
-        // console.log(now)
         this.showDate = eventDate > now;
-        this.event.date = this.dateFormat(eventDate);
-        console.log(this.event.date);
+        this.event.date = this.FormatDate(eventDate);
     }
 }
 </script>
-
-<style lang="css">
-</style>

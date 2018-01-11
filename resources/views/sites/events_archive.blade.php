@@ -16,7 +16,7 @@
                                 <div class="row">
                                     @if($event->thump_path)
                                         <div class="col-lg-2 col-md-12 event_thumb">
-                                            <img src="{{asset($event->thump_path)}}" alt="" class="img-responsive">
+                                            <img src="{{asset('storage/'. $event->thump_path)}}" alt="" class="img-responsive">
                                         </div>
                                     @endif
                                     <div class="{{$event->thump_path ? 'col-lg-10 col-md-12' : 'col-lg-12'}}">

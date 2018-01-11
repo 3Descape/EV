@@ -10,7 +10,7 @@
     <event-edit :event-prop="{{$event}}" :categories="{{$categories}}"></event-edit>
 
     <div>
-        @if (request('type')=='archive')
+        {{--  @if (request('type')=='archive')
             <form action="{{route('admin_events_store_image', $event->id)}}" class="dropzone">
                 {{ csrf_field() }}
             </form>
@@ -31,25 +31,21 @@
                     @endforeach
                 </div>
             @endif
-        @endif
+        @endif  --}}
     </div>
 </div>
 @endsection
 
 @section('footer')
-    <script src="{{asset('/js/moment.min.js')}}"></script>
-    <script src="{{asset('/js/de.js')}}"></script>
-    <script src="{{asset('/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-    <script src="{{asset('/js/dropzone.js')}}"></script>
+    {{--  <script src="{{asset('/js/dropzone.js')}}"></script>  --}}
 
-    <script type="text/javascript">
+    {{--  <script type="text/javascript">
     $(function () {
-        moment().locale('de')
         $('#datetimepicker1').datetimepicker({
             locale : 'de',
             useCurrent: true,
         });
         $('#field').val('{{old('date')}}');
     });
-    </script>
+    </script>  --}}
 @endsection

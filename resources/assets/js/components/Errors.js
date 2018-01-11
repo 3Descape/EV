@@ -4,11 +4,11 @@ export default class Errors{
     }
 
     setErrors(errors){
-        this.errors = errors
+        this.errors = errors;
     }
 
     clearErrors(){
-        this.errors = {}
+        this.errors = {};
     }
 
     getError(name){

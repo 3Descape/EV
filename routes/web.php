@@ -11,8 +11,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/events', 'EventsController@store')->name('admin_events_store');
     Route::put('/events/{event}', 'EventsController@update')->name('admin_events_update');
     Route::get('/events/{event}/edit', 'EventsController@edit')->name('admin_events_edit');
-    Route::post('/events/{id}/image', 'EventImageController@store')->name('admin_events_store_image');
-    Route::delete('/events/{event}/image/{image}', 'EventImageController@destroy')->name('admin_events_destroy_image');
+    Route::post('/events/{event}/image', 'EventImageController@store')->name('admin_events_store_image');
     Route::delete('/events/{event}', 'EventsController@destroy')->name('admin_events_destroy');
 
     Route::get('/categories', 'CategoriesController@index')->name('admin_categories');

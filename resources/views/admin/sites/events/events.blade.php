@@ -8,65 +8,58 @@
 <div class="col-lg-10 col-md-12 mx-auto">
 
     <h2 class="text-center">Veranstaltungen</h2>
-    @include('admin.layouts.errors')
 
-    <form class="form-group" method="POST" action="{{route('admin_events_store')}}">
+    <form class="mb-5" method="POST" action="{{route('admin_events_store')}}">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input value="{{ old('name') }}" type="text" class="form-control" name="name" id="name">
+            @component('admin.components.error', ['name' => 'name', 'class' => 'mt-1'])
+            @endcomponent
+        </div>
+
+        <div class="form-group">
+            <label for="description">Datum:</label>
+            <input type="text" name="date" id="date" class="form-control" placeholder="dd.MM.yyyy HH:mm" value="{{ old('date') }}">
+            @component('admin.components.error', ['name' => 'date', 'class' => 'mt-1'])
+            @endcomponent
+        </div>
+
+
+        <div class="form-group">
+            <label for="location">Ort:</label>
+            <input type="text" id="location" value="{{ old('location') }}" class="form-control" name="location">
+            @component('admin.components.error', ['name' => 'location', 'class' => 'mt-1'])
+            @endcomponent
+        </div>
+
+        <div class="form-group">
+            <label for="location">Beschreibung:</label>
+            <input type="text" id="description" value="{{ old('markup') }}" class="form-control" name="markup">
+            @component('admin.components.error', ['name' => 'markup', 'class' => 'mt-1'])
+            @endcomponent
+        </div>
+
+        <div class="form-group">
+            <label for="category">Kategorie:</label>
+            <select class="form-control" name="category" id="category">
+                @foreach ($categories as $category)
+                    <option
+                    {{old('category') ? old('category') == $category->name ? 'selected=selected' : '' : ''}}
+                        value="{{$category->id}}">
+                            {{ucfirst($category->name)}}
+                    </option>
+                @endforeach
+            </select>
+            @component('admin.components.error', ['name' => 'category', 'class' => 'mt-1'])
+            @endcomponent
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">
+                <i class="fa fa-plus"></i> Hinzufügen
+            </button>
+        </div>
         {{ csrf_field() }}
-
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12">
-                Name:
-            </div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <input value="{{ old('name') }}" type="text" class="form-control" name="name">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12">
-                Datum:
-            </div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <input type="text" name="date" id="" class="form-control" placeholder="dd.MM.yyyy HH:mm" value="{{ old('date') }}">
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12">
-                Ort:
-            </div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <input type="text" value="{{ old('location') }}" class="form-control" name="location">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12">
-                Beschreibung:
-            </div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <input type="text" value="{{ old('markup') }}" class="form-control" name="markup">
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12">
-                Kategorie
-            </div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <select class="form-control" name="category">
-                    @foreach ($categories as $category)
-                        <option
-                        {{old('category') ? old('category') == $category->name ? 'selected=selected' : '' : ''}}
-                            value="{{$category->id}}">{{ucfirst($category->name)}}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-
-        <input type="submit" class="form-control btn btn-success" value="Hinzufügen">
     </form>
 
     <table class="table overflow">
@@ -82,9 +75,9 @@
             @foreach ($events as $event)
                 <tr>
                     <td>{{$event->name}}</td>
-                    <td class="d-none d-sm-table-cell">{{$event->date->format('d.m.Y H:i')}}</td>
-                    <td class="d-none d-md-table-cell">{{$event->location}}</td>
-                    <td class="d-none d-md-table-cell">{{$event->category->name}}</td>
+                    <td class="d-none d-sm-table-cell overflow-text">{{$event->date->format('d.m.Y H:i')}}</td>
+                    <td class="d-none d-md-table-cell overflow-text">{{$event->location}}</td>
+                    <td class="d-none d-md-table-cell overflow-text">{{$event->category->name}}</td>
                     <td class="d-flex">
                         <a href="{{route('admin_events_edit', $event->id)}}" class="btn btn-warning ml-auto">
                             <i class="fa fa-edit" aria-hidden="true"></i>

@@ -11,7 +11,7 @@ class SitesController extends Controller
     {
         $texts = Site::where('category', '1')->with('images')->get();
 
-        return view('admin.sites.texts_show', [
+        return view('admin.sites.sites.site_show', [
             'texts' => $texts,
         ]);
     }
@@ -20,7 +20,7 @@ class SitesController extends Controller
     {
         $texts = Site::where('category', '2')->get();
 
-        return view('admin.sites.texts_show', [
+        return view('admin.sites.sites.site_show', [
             'texts' => $texts,
         ]);
     }
@@ -29,7 +29,7 @@ class SitesController extends Controller
     {
         $texts = Site::where('category', '3')->get();
 
-        return view('admin.sites.texts_show', [
+        return view('admin.sites.sites.site_show', [
             'texts' => $texts,
         ]);
     }
@@ -38,7 +38,7 @@ class SitesController extends Controller
     {
         $texts = Site::where('category', '4')->get();
 
-        return view('admin.sites.texts_show', [
+        return view('admin.sites.sites.site_show', [
             'texts' => $texts,
         ]);
     }

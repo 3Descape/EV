@@ -14,12 +14,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/events/{event}/image', 'EventImageController@store')->name('admin_events_store_image');
     Route::delete('/events/{event}', 'EventsController@destroy')->name('admin_events_destroy');
 
-    Route::get('/categories', 'CategoriesController@index')->name('admin_categories');
-    Route::get('/categories/{id}/edit', 'CategoriesController@edit')->name('admin_categories_edit');
-    Route::post('/categories', 'CategoriesController@store')->name('admin_categories_store');
-    Route::put('/categories/{category}', 'CategoriesController@update')->name('admin_categories_update');
-    Route::get('/categories/{category}/delte', 'CategoriesController@pre_delete')->name('adming_categories_pre_delete');
-    Route::delete('/categories/{category}', 'CategoriesController@destroy')->name('admin_categories_destroy');
+    Route::get('/categories', 'SiteCategoriesController@index')->name('admin_categories');
+    Route::get('/categories/{id}/edit', 'SiteCategoriesController@edit')->name('admin_categories_edit');
+    Route::post('/categories', 'SiteCategoriesController@store')->name('admin_categories_store');
+    Route::put('/categories/{category}', 'SiteCategoriesController@update')->name('admin_categories_update');
+    Route::get('/categories/{category}/delte', 'SiteCategoriesController@pre_delete')->name('adming_categories_pre_delete');
+    Route::delete('/categories/{category}', 'SiteCategoriesController@destroy')->name('admin_categories_destroy');
 
     Route::get('/people/backend', 'AdminController@people_backend')->name('admin_people_backend');
 

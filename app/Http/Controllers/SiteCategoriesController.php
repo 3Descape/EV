@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Category;
+use App\SiteCategory;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class SiteCategoriesController extends Controller
 {
     public function index()
     {
         $this->authorize('can_access_events', User::class);
-        $categories = Category::all();
+        $categories = SiteCategory::all();
 
-        return view('admin.sites.categories.categories_index', [
+        return view('admin.sites.sites_categories.sites_categories_index', [
             'categories' => $categories,
         ]);
     }
@@ -24,7 +24,7 @@ class CategoriesController extends Controller
         $this->validate($request, [
             'name' => 'required|max:30|unique:categories,name'
         ]);
-        $test = Category::create([
+        $test = SiteCategory::create([
             'name' => $request->name
         ]);
 
@@ -34,14 +34,14 @@ class CategoriesController extends Controller
     public function edit($id)
     {
         $this->authorize('can_access_events', User::class);
-        $category = Category::find($id);
+        $category = SiteCategory::find($id);
 
-        return view('admin.sites.categories.categories_edit', [
+        return view('admin.sites.sites_categories.sites_categories_edit', [
             'category' => $category
         ]);
     }
 
-    public function update(Request $request, Category $category)
+    public function update(Request $request, SiteCategory $category)
     {
         $this->authorize('can_access_events', User::class);
         $this->validate($request, [
@@ -54,7 +54,7 @@ class CategoriesController extends Controller
         return redirect()->route('admin_categories');
     }
 
-    public function pre_delete(Category $category)
+    public function pre_delete(SiteCategory $category)
     {
         $this->authorize('can_access_events', User::class);
         $events = $category->events()->get();
@@ -66,16 +66,16 @@ class CategoriesController extends Controller
         //othervise we get all other categories and associated events
         //and return a view where the user can change the category for the
         //associated events
-        $categories = Category::where('id', '!=', $category->id)->get();
+        $categories = SiteCategory::where('id', '!=', $category->id)->get();
 
-        return view('admin.sites.categories.categories_pre_delete', [
+        return view('admin.sites.sites_categories.sites_categories_pre_delete', [
             'events' => $events,
             'categories' => $categories,
             'category' => $category
         ]);
     }
 
-    public function destroy(Category $category)
+    public function destroy(SiteCategory $category)
     {
         $this->authorize('can_access_events', User::class);
         if ($category->events()->count() != 0) {

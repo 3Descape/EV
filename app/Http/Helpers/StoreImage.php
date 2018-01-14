@@ -26,7 +26,6 @@ class StoreImage
             $image = $this->mainImage();
             $this->mainPath = $file->hashName($saveTo . 'main');
             Storage::disk('public')->put($this->mainPath, $image);
-
             if ($this->generateThumbnail) {
                 $image = $this->thumbnail();
                 $this->thumbnailPath = $file->hashName($saveTo . 'thumbnail');

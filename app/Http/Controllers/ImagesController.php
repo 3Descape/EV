@@ -98,6 +98,7 @@ class ImagesController extends Controller
     public function destroy(Image $image)
     {
         $image->deleteImage();
+
         if (request()->expectsJson()) {
             return response()->json(['status' => 'Bild wurde gelöscht.'], 200);
         }

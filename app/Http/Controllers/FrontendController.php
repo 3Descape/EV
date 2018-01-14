@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Text;
+use App\Site;
 use App\Event;
 use App\Image;
 use App\Category;
@@ -30,7 +30,7 @@ class FrontendController extends Controller
     {
         $this->add_analythic();
         $committe = PeopleCategory::where('name', 'vorstand')->first()->people()->orderBy('name')->get();
-        $texts = Text::where('category', 1)->orderBy('order')->get();
+        $texts = Site::where('category', 1)->orderBy('order')->get();
         $gruppenbild = Image::where('name', 'gruppenbild')->first();
 
         return view('sites.about', compact(
@@ -96,7 +96,7 @@ class FrontendController extends Controller
     public function sga()
     {
         $this->add_analythic();
-        $texts = Text::where('category', 2)->orderBy('order')->get();
+        $texts = Site::where('category', 2)->orderBy('order')->get();
 
         return view('sites.sga', [
             'people' => PeopleCategory::where('name', 'sga')->first()->people()->get(),
@@ -107,7 +107,7 @@ class FrontendController extends Controller
     public function info()
     {
         $this->add_analythic();
-        $texts = Text::where('category', 3)->orderBy('order')->get();
+        $texts = Site::where('category', 3)->orderBy('order')->get();
         $fixturecategories = FixtureCategory::with('fixtures')->get();
 
         return view('sites.info', compact(
@@ -126,7 +126,7 @@ class FrontendController extends Controller
     public function imprint()
     {
         $this->add_analythic();
-        $text = Text::where('category', 4)->orderBy('order')->first();
+        $text = Site::where('category', 4)->orderBy('order')->first();
 
         return view('sites.imprint', [
             'text' => $text

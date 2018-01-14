@@ -18,6 +18,13 @@ class CreateFixtureCategoriesTable extends Migration
             $table->string('name');
             $table->timestamps();
         });
+
+        Schema::table('fixtures', function (Blueprint $table) {
+            $table->foreign('fixture_category_id')
+            ->references('id')
+            ->on('fixture_categories')
+            ->onDelete('cascade');
+        });
     }
 
     /**

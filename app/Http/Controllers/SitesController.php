@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Text;
+use App\Site;
 use Illuminate\Http\Request;
 
 class SitesController extends Controller
 {
     public function about()
     {
-        $texts = Text::where('category', '1')->with('images')->get();
+        $texts = Site::where('category', '1')->with('images')->get();
 
         return view('admin.sites.texts_show', [
             'texts' => $texts,
@@ -18,7 +18,7 @@ class SitesController extends Controller
 
     public function sga()
     {
-        $texts = Text::where('category', '2')->get();
+        $texts = Site::where('category', '2')->get();
 
         return view('admin.sites.texts_show', [
             'texts' => $texts,
@@ -27,7 +27,7 @@ class SitesController extends Controller
 
     public function info()
     {
-        $texts = Text::where('category', '3')->get();
+        $texts = Site::where('category', '3')->get();
 
         return view('admin.sites.texts_show', [
             'texts' => $texts,
@@ -36,14 +36,14 @@ class SitesController extends Controller
 
     public function imprint()
     {
-        $texts = Text::where('category', '4')->get();
+        $texts = Site::where('category', '4')->get();
 
         return view('admin.sites.texts_show', [
             'texts' => $texts,
         ]);
     }
 
-    public function update_body(Request $request, Text  $site)
+    public function update_body(Request $request, Site $site)
     {
         $site->update([
             'html' => $request->compiledData,
@@ -53,7 +53,7 @@ class SitesController extends Controller
         return response()->json(['status' => 'Updated body'], 200);
     }
 
-    public function update_title(Request $request, Text  $site)
+    public function update_title(Request $request, Site $site)
     {
         $site->update([
             'title' => $request->title,

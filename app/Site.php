@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Text extends Model
+class Site extends Model
 {
     protected $fillable = ['title', 'html', 'markup'];
 

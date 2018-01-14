@@ -1,9 +1,9 @@
 <?php
 
-use App\SiteCategory;
+use App\EventCategory;
 use Illuminate\Database\Seeder;
 
-class SiteCategoriesTableSeeder extends Seeder
+class EventCategoriesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,15 +12,15 @@ class SiteCategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        SiteCategory::create([
+        EventCategory::create([
             'name' => 'bälle'
         ]);
 
-        SiteCategory::create([
+        EventCategory::create([
             'name' => 'sport'
         ]);
 
-        SiteCategory::create([
+        EventCategory::create([
             'name' => 'sonstige'
         ]);
     }

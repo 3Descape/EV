@@ -3,43 +3,42 @@
 @section('sitebar_inner')
     <div class="col-lg-10 col-md-12 mx-auto">
 
-        <h2 class="text-center">Konflikte beim Löschen der Kategorie {{$category->name}}</h2>
-        @include('admin.layouts.errors')
+        <h2 class="text-center">Konflikte beim Löschen der Kategorie {{$event_category->name}}</h2>
 
         <table class="table">
             <thead>
                 <tr>
                     <th>Name</th>
                     <th>Kategorie derzeit</th>
-                    <th>Neue Kategorie</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($events as $event)
                 <tr>
                     <td>{{$event->name}}</td>
-                    <td class="bg-danger">{{$event->category->name}}</td>
-                    <td class="clearfix">
-                        <form class="float-right" action="{{route('admin_events_update', $event->id)}}?type=conflict" method="POST">
-                            <div class="input-group">
-                                <select class="form-control" aria-describedby="btnGroupAddon" name="category">
-                                    @foreach ($categories as $category)
+                    <td class="">{{$event->category->name}}</td>
+                    <td class="d-flex">
+                        <form class="ml-auto d-flex" action="{{route('event_update', $event->id)}}?type=conflict" method="POST">
+                            
+                            <select class="custom-select mr-2" name="category">
+                                @foreach ($categories as $category)
                                     <option
                                     {{old('category') ? old('category') == $category->name ? 'selected=selected' : '' : ''}}
                                         value="{{$category->id}}">{{ucfirst($category->name)}}
                                     </option>
-                                    @endforeach
-                                </select>
+                                @endforeach
+                            </select>
 
-                                <button type="submit" class="input-group-addon bg-success" id="btnGroupAddon"><i class="fa fa-refresh"></i></button>
-                            </div>
+                            <button type="submit" class="btn btn-info">
+                                <div class="fa fa-refresh"></div>
+                            </button>
+                            
                             {{method_field('PUT')}}
                             {{ csrf_field() }}
                         </form>
                     </td>
                 </tr>
                 @endforeach
-
             </tbody>
         </table>
     </div>

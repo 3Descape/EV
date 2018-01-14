@@ -9,7 +9,9 @@
                     {{ucfirst($category->name)}}
                 </div>
                 <div class="card-body">
-                    <a href="{{route('person_add', $category->name)}}" class="btn btn-success mb-3"><i class="fa fa-plus"></i> Hinzufügen</a>
+                    <a href="{{route('person_create', $category->name)}}" class="btn btn-success mb-3">
+                        <i class="fa fa-plus"></i> Hinzufügen
+                    </a>
                     <table class="table">
                         <thead>
                             <tr>
@@ -26,9 +28,13 @@
                                     <a href="{{route('person_edit', $person->id)}}" class="btn btn-warning ml-auto">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{{route('api_person_delete', $person->id)}}" class="btn btn-danger mx-1">
-                                        <i class="fa fa-trash-o"></i>
-                                    </a>
+                                    <form action="{{route('person_destroy', $person->id)}}" method="post">
+                                        <button href="{{route('person_destroy', $person->id)}}" class="btn btn-danger mx-1">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                        {{method_field('DELETE')}}
+                                        {{ csrf_field() }}
+                                    </form>
                                 </td>
                             </tr>
                             @endforeach

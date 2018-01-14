@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\Permission;
 use App\Role;
+use App\Permission;
+use Illuminate\Database\Seeder;
+
 class PermissionsTableSeeder extends Seeder
 {
     /**
@@ -43,24 +44,18 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name' => 'access_dashboard',
-            'label' => 'Dashboard',
-        ]);
-
-        Permission::create([
             'name' => 'access_roles',
             'label' => 'Berechtigungen',
         ]);
 
         Permission::create([
-            'name' => 'access_holiday',
-            'label' => 'Ferien und schulautonome Tage',
+            'name' => 'access_files',
+            'label' => 'Downloads',
         ]);
 
         Permission::create([
-            'name' => 'access_files',
-            'label' => 'Kann Dateien für den Download verwalten',
+            'name' => 'access_fixtures',
+            'label' => 'Thermine',
         ]);
-
     }
 }

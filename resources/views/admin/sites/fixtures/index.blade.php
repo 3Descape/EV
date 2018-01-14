@@ -22,7 +22,7 @@
 
                     <div class="form-group">
                         <label for="fixture_category">Kategorie:</label>
-                        <select class="form-control" name="fixture_category">
+                        <select class="custom-select" name="fixture_category">
                             @foreach ($fixturecategories as $category)
                                 <option
                                 {{old("fixture_category") ? old("fixture_category") == $category->name ? 'selected=selected' : "" : ""}}

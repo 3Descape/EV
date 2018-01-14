@@ -16,21 +16,36 @@ class PersonController extends Controller
         $this->authorize('can_access_people', User::class);
         $people = $category->people()->orderBy('people.name')->get();
 
-        return view('admin.sites.people.show', [
+        return view('admin.sites.people.person_index', [
             'people' => $people,
             'category' => $category
         ]);
     }
 
-    public function add(PeopleCategory $category)
+    public function create(PeopleCategory $category)
     {
-        return view('admin.sites.people.add', [
+        $this->authorize('can_access_people', User::class);
+
+        return view('admin.sites.people.person_create', [
             'category' => $category
         ]);
     }
 
+    public function edit(Person $person)
+    {
+        $this->authorize('can_access_people', User::class);
+
+        $categories = PeopleCategory::all();
+
+        return view('admin.sites.people.person_edit', compact(
+            'person',
+            'categories'
+        ));
+    }
+
     public function store(Request $request)
     {
+        $this->authorize('can_access_people', User::class);
         $this->validate($request, [
             'name' => 'required|string',
             'description' => 'nullable',
@@ -54,17 +69,13 @@ class PersonController extends Controller
         );
     }
 
-    public function edit(Person $person)
-    {
-        return view('admin.sites.people.edit', ['person' => $person]);
-    }
-
     public function update(Person $person, Request $request)
     {
+        $this->authorize('can_access_people', User::class);
         $this->validate($request, [
             'name' => 'required|string',
             'description' => 'nullable',
-            'category' => 'required',
+            'people_category_id' => 'required|exists:people_categories,id',
             'file' => 'image',
         ]);
 
@@ -82,17 +93,15 @@ class PersonController extends Controller
         $person->update([
             'name' => $request->name,
             'description' => $request->description,
-            'category' => $request->category,
+            'people_category_id' => $request->people_category_id,
         ]);
 
-        return redirect()->route(
-            'a_people_frontend',
-            $person->category->name
-        );
+        return redirect()->route('a_people_frontend', $person->category->name);
     }
 
-    public function delete(Person $person)
+    public function destroy(Person $person)
     {
+        $this->authorize('can_access_people', User::class);
         Person::destroy($person->id);
 
         return back();

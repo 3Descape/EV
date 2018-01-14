@@ -1,15 +1,9 @@
 @extends('admin.layouts.sitebar')
 
-@section('header')
-    <link rel="stylesheet" href="{{asset('/css/tempusdominus-bootstrap-4.min.css')}}">
-@endsection
-
 @section('sitebar_inner')
 <div class="col-lg-10 col-md-12 mx-auto">
-
     <h2 class="text-center">Veranstaltungen</h2>
-
-    <form class="mb-5" method="POST" action="{{route('admin_events_store')}}">
+    <form class="mb-5" method="POST" action="{{route('event_store')}}">
         <div class="form-group">
             <label for="name">Name:</label>
             <input value="{{ old('name') }}" type="text" class="form-control" name="name" id="name">
@@ -41,7 +35,7 @@
 
         <div class="form-group">
             <label for="category">Kategorie:</label>
-            <select class="form-control" name="category" id="category">
+            <select class="custom-select" name="category" id="category">
                 @foreach ($categories as $category)
                     <option
                     {{old('category') ? old('category') == $category->name ? 'selected=selected' : '' : ''}}
@@ -79,10 +73,10 @@
                     <td class="d-none d-md-table-cell overflow-text">{{$event->location}}</td>
                     <td class="d-none d-md-table-cell overflow-text">{{$event->category->name}}</td>
                     <td class="d-flex">
-                        <a href="{{route('admin_events_edit', $event->id)}}" class="btn btn-warning ml-auto">
+                        <a href="{{route('event_edit', $event->id)}}" class="btn btn-warning ml-auto">
                             <i class="fa fa-edit" aria-hidden="true"></i>
                         </a>
-                        <form class="mx-1" action="{{route('admin_events_destroy',$event->id)}}" method="POST">
+                        <form class="mx-1" action="{{route('event_destroy',$event->id)}}" method="POST">
                             <button type="submit" class="btn btn-danger mx-1">
                                 <i class="fa fa-trash"></i>
                             </button>
@@ -96,30 +90,4 @@
         </tbody>
     </table>
 </div>
-@endsection
-
-@section('footer')
-<script src="{{asset('/js/moment.min.js')}}"></script>
-<script src="{{asset('/js/de.js')}}"></script>
-<script src="{{asset('/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-
-<script type="text/javascript">
-$(function () {
-    $(function () {
-        moment().locale('de')
-        $('#datetimepicker1').datetimepicker({
-            locale : 'de',
-            useCurrent: true
-        });
-        $('#field').val('{{old('date')}}');
-    });
-});
-
-    $(function () {
-        $('#datetimepicker13').datetimepicker({
-            inline: true,
-            sideBySide: true
-        });
-    });
-</script>
 @endsection

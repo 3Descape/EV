@@ -20,11 +20,11 @@
                     <td class="d-none d-md-table-cell overflow-text">{{$event->location}}</td>
                     <td class="d-none d-md-table-cell overflow-text">{{ucfirst($event->category->name)}}</td>
                     <td class="d-flex">
-                        <a href="{{route('admin_events_edit', $event->id)}}?type=archive" class="btn btn-warning ml-auto">
+                        <a href="{{route('event_edit', $event->id)}}?type=archive" class="btn btn-warning ml-auto">
                             <i class="fa fa-edit" aria-hidden="true"></i>
                         </a>
 
-                        <form action="{{route('admin_events_destroy',$event->id)}}" method="POST">
+                        <form action="{{route('event_destroy', $event->id)}}" method="POST">
                             <button type="submit" class="btn btn-danger ml-1">
                                 <i class="fa fa-trash"></i>
                             </button>

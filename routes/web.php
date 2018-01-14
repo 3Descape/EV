@@ -3,66 +3,67 @@
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
-    Route::get('/', 'DashboardController@index')->name('admin_dashboard');
+    Route::get('/', 'DashboardController@index')->name('dashboard');
+
     Route::post('/getAnalythics', 'DashboardController@getAnalythics');
 
-    Route::get('/events', 'EventsController@events_future')->name('admin_events_future');
-    Route::get('/events/archived', 'EventsController@events_archived')->name('admin_events_archived');
-    Route::post('/events', 'EventsController@store')->name('admin_events_store');
-    Route::put('/events/{event}', 'EventsController@update')->name('admin_events_update');
-    Route::get('/events/{event}/edit', 'EventsController@edit')->name('admin_events_edit');
-    Route::post('/events/{event}/image', 'EventImageController@store')->name('admin_events_store_image');
-    Route::delete('/events/{event}', 'EventsController@destroy')->name('admin_events_destroy');
+    Route::get('/veranstaltungen', 'EventsController@events_future')->name('event_future_index');
+    Route::get('/veranstaltungen/archiv', 'EventsController@events_archived')->name('event_archived_index');
+    Route::post('/veranstaltungen', 'EventsController@store')->name('event_store');
+    Route::get('/veranstaltungen/{event}/edit', 'EventsController@edit')->name('event_edit');
+    Route::put('/veranstaltungen/{event}', 'EventsController@update')->name('event_update');
+    Route::delete('/veranstaltungen/{event}', 'EventsController@destroy')->name('event_destroy');
 
-    Route::get('/categories', 'SiteCategoriesController@index')->name('admin_categories');
-    Route::get('/categories/{id}/edit', 'SiteCategoriesController@edit')->name('admin_categories_edit');
-    Route::post('/categories', 'SiteCategoriesController@store')->name('admin_categories_store');
-    Route::put('/categories/{category}', 'SiteCategoriesController@update')->name('admin_categories_update');
-    Route::get('/categories/{category}/delte', 'SiteCategoriesController@pre_delete')->name('adming_categories_pre_delete');
-    Route::delete('/categories/{category}', 'SiteCategoriesController@destroy')->name('admin_categories_destroy');
+    Route::post('/veranstaltungen/{event}/bild', 'EventImageController@store')->name('event_image_store');
 
-    Route::get('/people/backend', 'AdminController@people_backend')->name('admin_people_backend');
+    Route::get('/veranstaltung-kategorien', 'EventCategoriesController@index')->name('event_category_index');
+    Route::post('/veranstaltung-kategorien', 'EventCategoriesController@store')->name('event_category_store');
+    Route::get('/veranstaltung-kategorien/{event_category}/add', 'EventCategoriesController@edit')->name('event_category_edit');
+    Route::put('/veranstaltung-kategorien/{event_category}', 'EventCategoriesController@update')->name('event_category_update');
+    Route::get('/veranstaltung-kategorien/{event_category}/konflikt', 'EventCategoriesController@conflict')->name('event_category_conflict');
+    Route::delete('/veranstaltung-kategorien/{event_category}', 'EventCategoriesController@destroy')->name('event_category_destroy');
 
-    Route::get('/people/frontend/{category}', 'PersonController@index')->name('a_people_frontend');
-    Route::get('/people/add/{category}', 'PersonController@add')->name('person_add');
-    Route::get('/people/edit/{person}', 'PersonController@edit')->name('person_edit');
+    Route::get('/person/frontend/{category}', 'PersonController@index')->name('person_frontend_index');
+    Route::get('/person/{category}/add', 'PersonController@create')->name('person_create');
+    Route::post('/person/add', 'PersonController@store')->name('person_store');
+    Route::get('/person/{person}/edit', 'PersonController@edit')->name('person_edit');
+    Route::put('/person/{person}', 'PersonController@update')->name('person_update');
+    Route::delete('/person/{person}/edit', 'PersonController@destroy')->name('person_destroy');
 
-    Route::post('/people/add', 'PersonController@store')->name('api_person_store');
-    //Route::get('/people/{person}/edit', 'PersonController@edit')->name('api_person_edit');
-    Route::put('/people/{person}', 'PersonController@update')->name('api_person_update');
-    Route::get('/people/{person}/delete', 'PersonController@delete')->name('api_person_delete');
+    Route::get('/nutzer', 'UserController@index')->name('user_index');
+    Route::get('/nutzer/{user}/edit', 'UserRoleController@edit')->name('user_role_edit');
+    Route::put('/nutzer/{user}', 'UserRoleController@update')->name('user_role_update');
+    Route::delete('/nutzer/{user}/rolle/{role}', 'UserRoleController@destroy')->name('user_role_destroy');
 
-    Route::get('/users/{user}/edit', 'UserRoleController@edit_user_roles')->name('user_role');
-    Route::put('/users/{user}', 'UserRoleController@user_roles_update')->name('api_user_role_update');
-    Route::get('/users/{user}/delete', 'UserController@user_delete')->name('api_user_delete');
-    Route::delete('/users/{user}/role/{role}', 'UserRoleController@detach_role')->name('api_user_role_detach');
+    Route::get('/nutzer/{user}/delete', 'UserController@user_delete')->name('user_delete');
 
-    Route::get('/roles', 'RolesController@index')->name('roles_show');
-    Route::post('/roles', 'RolesController@store')->name('api_role_add');
-    Route::post('/roles/permission/add', 'RolesController@add_permission')->name('api_role_permission_add');
-    Route::delete('/roles/{role}/permission/{permission}', 'RolesController@destroy_permission')->name('api_role_permission_destroy');
-    Route::delete('/roles/{role}/delete', 'RolesController@destroy')->name('api_role_delete');
+    Route::get('/rolle', 'RolesController@index')->name('role_index');
+    Route::post('/rolle', 'RolesController@store')->name('role_store');
+    Route::delete('/rolle/{role}/berechtigung/{permission}', 'RolesController@destroy_permission')->name('role_permission_destroy');
+    Route::delete('/rolle/{role}/delete', 'RolesController@destroy')->name('role_delete');
 
-    Route::get('/sites/über_uns', 'SitesController@about')->name('admin_about');
-    Route::get('/sites/sga', 'SitesController@sga')->name('admin_sga');
-    Route::get('/sites/info', 'SitesController@info')->name('admin_info');
-    Route::get('/sites/impress', 'SitesController@imprint')->name('admin_imprint');
+    Route::post('/rolle/berechtigung/add', 'PermissionRoleController@store')->name('permission_role_store');
 
-    Route::post('/sites/update/{site}/body', 'SitesController@update_body')->name('admin_sites_update_body');
-    Route::post('/sites/update/{site}/title', 'SitesController@update_title')->name('admin_sites_update_title');
+    Route::get('/seite/über_uns', 'SitesController@about')->name('about_edit');
+    Route::get('/seite/sga', 'SitesController@sga')->name('sga_edit');
+    Route::get('/seite/info', 'SitesController@info')->name('info_edit');
+    Route::get('/seite/impress', 'SitesController@imprint')->name('imprint_edit');
 
-    Route::get('/bilder', 'ImagesController@index')->name('pictures');
+    Route::post('/seite/update/{site}/body', 'SitesController@update_body')->name('site_body_update');
+    Route::post('/seite/update/{site}/title', 'SitesController@update_title')->name('site_title_update');
+
+    Route::post('/seite/über_uns/hochladen', 'ImagesController@uploud_group_image')->name('group_image_store');
+    Route::delete('seite/über_uns', 'ImagesController@remove_group_image')->name('group_image_destroy');
+
+    Route::get('/bilder', 'ImagesController@index')->name('image_index');
     Route::post('/bilder', 'ImagesController@store')->name('image_store');
-    Route::delete('/bilder/{image}', 'ImagesController@destroy')->name('image_delete');
+    Route::delete('/bilder/{image}', 'ImagesController@destroy')->name('image_destroy');
 
-    Route::post('/sites/über_uns/uploud', 'ImagesController@uploud_group_image')->name('uploud_group_image');
-    Route::delete('sites/über_uns', 'ImagesController@remove_group_image')->name('remove_group_image');
-
-    Route::get('/dateien', 'FileController@index')->name('files');
-    Route::get('/dateien/edit/{file}', 'FileController@edit')->name('files_edit');
-    Route::put('/dateien/{file}', 'FileController@update')->name('files_update');
-    Route::post('/dateien', 'FileController@store')->name('store_file');
-    Route::delete('/dateien/{file}', 'FileController@delete')->name('a_delete_file');
+    Route::get('/dateien', 'FileController@index')->name('file_index');
+    Route::get('/dateien/edit/{file}', 'FileController@edit')->name('file_edit');
+    Route::put('/dateien/{file}', 'FileController@update')->name('file_update');
+    Route::post('/dateien', 'FileController@store')->name('file_store');
+    Route::delete('/dateien/{file}', 'FileController@delete')->name('file_destroy');
 
     Route::get('/thermine', 'FixtureController@index')->name('fixture_index');
     Route::post('/thermine', 'FixtureController@store')->name('fixture_store');

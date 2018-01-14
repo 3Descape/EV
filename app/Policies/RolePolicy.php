@@ -19,12 +19,11 @@ class RolePolicy
      */
     public function __construct()
     {
-
     }
 
     public function before(User $user)
     {
-        if($user->hasRole('administrator')){
+        if ($user->hasRole('administrator')) {
             return true;
         }
     }
@@ -56,7 +55,7 @@ class RolePolicy
 
     public function can_access_dashboard(User $user)
     {
-        return $user->hasPermission('access_dashboard');
+        return !$user->isDefaultUser();
     }
 
     public function can_access_roles(User $user)
@@ -64,12 +63,13 @@ class RolePolicy
         return $user->hasPermission('access_roles');
     }
 
-    public function can_access_holiday(User $user)
+    public function can_access_files(User $user)
     {
-        return $user->hasPermission('access_holiday');
+        return $user->hasPermission('access_files');
     }
 
-    public function can_access_files(User $user){
-        return $user->hasPermission('access_files');
+    public function can_access_fixtures(User $user)
+    {
+        return $user->hasPermission('access_fixtures');
     }
 }

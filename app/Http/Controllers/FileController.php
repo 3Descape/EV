@@ -22,6 +22,8 @@ class FileController extends Controller
 
     public function edit(File $file)
     {
+        $this->authorize('can_access_files', User::class);
+
         return view('admin.sites.files.edit', compact(
             'file'
         ));
@@ -29,6 +31,7 @@ class FileController extends Controller
 
     public function update(Request $request, File $file)
     {
+        $this->authorize('can_access_files', User::class);
         $request->validate([
             'name' => [
                 'required',
@@ -48,6 +51,7 @@ class FileController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('can_access_files', User::class);
         $data = $request->validate([
             'name' => 'required|string|unique:files,name',
             'description' => 'required|string',
@@ -73,6 +77,7 @@ class FileController extends Controller
 
     public function delete(File $file)
     {
+        $this->authorize('can_access_files', User::class);
         Storage::disk('public')->delete($file->path);
         $file->delete();
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Fixture;
 use App\FixtureCategory;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ class FixtureController extends Controller
 {
     public function index()
     {
+        $this->authorize('can_access_fixtures', User::class);
         $fixturecategories = FixtureCategory::all();
         $fixtures = Fixture::with('category')->get();
 
@@ -21,6 +23,7 @@ class FixtureController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('can_access_fixtures', User::class);
         $request->validate([
             'name' => 'required|string',
             'description' => 'required',
@@ -38,6 +41,7 @@ class FixtureController extends Controller
 
     public function edit(Fixture $fixture)
     {
+        $this->authorize('can_access_fixtures', User::class);
         $fixturecategories = FixtureCategory::all();
 
         return view('admin.sites.fixtures.edit', compact(
@@ -48,6 +52,7 @@ class FixtureController extends Controller
 
     public function update(Request $request, Fixture $fixture)
     {
+        $this->authorize('can_access_fixtures', User::class);
         $request->validate([
             'name' => 'required|string',
             'description' => 'required',
@@ -65,6 +70,7 @@ class FixtureController extends Controller
 
     public function destroy(Fixture $fixture)
     {
+        $this->authorize('can_access_fixtures', User::class);
         $fixture->delete();
 
         return back();

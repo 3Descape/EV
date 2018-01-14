@@ -9,7 +9,7 @@ class Event extends Model
 {
     protected $fillable = [
         'name',
-        'category_id',
+        'event_category_id',
         'html',
         'markup',
         'date',
@@ -64,7 +64,7 @@ class Event extends Model
      */
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(EventCategory::class, 'event_category_id');
     }
 
     /**

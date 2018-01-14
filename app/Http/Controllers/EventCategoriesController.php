@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\SiteCategory;
+use App\EventCategory;
 use Illuminate\Http\Request;
 
-class SiteCategoriesController extends Controller
+class EventCategoriesController extends Controller
 {
     public function index()
     {
         $this->authorize('can_access_events', User::class);
-        $categories = SiteCategory::all();
+        $categories = EventCategory::all();
 
-        return view('admin.sites.sites_categories.sites_categories_index', [
+        return view('admin.sites.event_categories.event_categories_index', [
             'categories' => $categories,
         ]);
     }
@@ -24,64 +24,64 @@ class SiteCategoriesController extends Controller
         $this->validate($request, [
             'name' => 'required|max:30|unique:categories,name'
         ]);
-        $test = SiteCategory::create([
+        $test = EventCategory::create([
             'name' => $request->name
         ]);
 
         return back();
     }
 
-    public function edit($id)
+    public function edit(EventCategory $event_category)
     {
         $this->authorize('can_access_events', User::class);
-        $category = SiteCategory::find($id);
 
-        return view('admin.sites.sites_categories.sites_categories_edit', [
-            'category' => $category
-        ]);
+        return view('admin.sites.event_categories.event_categories_edit', compact(
+            'event_category'
+        ));
     }
 
-    public function update(Request $request, SiteCategory $category)
+    public function update(Request $request, EventCategory $event_category)
     {
         $this->authorize('can_access_events', User::class);
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required|max:30|unique:categories,name'
         ]);
-        $category->update([
+
+        $event_category->update([
             'name' => $request->name,
         ]);
 
-        return redirect()->route('admin_categories');
+        return redirect()->route('event_categories_index');
     }
 
-    public function pre_delete(SiteCategory $category)
+    public function conflict(EventCategory $event_category)
     {
         $this->authorize('can_access_events', User::class);
-        $events = $category->events()->get();
+        $events = $event_category->events()->get();
         //only if no event is associated with this category we can redirect
         //to actually delete it
         if ($events->count() == 0) {
-            return redirect()->route('admin_categories');
+            return redirect()->route('event_category_index');
         }
         //othervise we get all other categories and associated events
         //and return a view where the user can change the category for the
         //associated events
-        $categories = SiteCategory::where('id', '!=', $category->id)->get();
+        $categories = EventCategory::where('id', '!=', $event_category->id)->get();
 
-        return view('admin.sites.sites_categories.sites_categories_pre_delete', [
-            'events' => $events,
-            'categories' => $categories,
-            'category' => $category
-        ]);
+        return view('admin.sites.event_categories.event_categories_pre_delete', compact(
+            'events',
+            'categories',
+            'event_category'
+        ));
     }
 
-    public function destroy(SiteCategory $category)
+    public function destroy(EventCategory $event_category)
     {
         $this->authorize('can_access_events', User::class);
-        if ($category->events()->count() != 0) {
-            return redirect()->route('adming_categories_pre_delete', $category->id);
+        if ($event_category->events()->count() != 0) {
+            return redirect()->route('event_category_conflict', $event_category->id);
         }
-        $category->delete();
+        $event_category->delete();
 
         return back();
     }

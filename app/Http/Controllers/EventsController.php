@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Event;
-use App\Category;
 use Carbon\Carbon;
+use App\EventCategory;
 use Illuminate\Http\Request;
 
 class EventsController extends Controller
@@ -17,7 +17,7 @@ class EventsController extends Controller
 
         return view('admin.sites.events.events', [
             'events' => $events,
-            'categories' => Category::all(),
+            'categories' => EventCategory::all(),
         ]);
     }
 
@@ -62,17 +62,18 @@ class EventsController extends Controller
 
         return view('admin.sites.events.event_edit', [
             'event' => $event,
-            'categories' => Category::all(),
+            'categories' => EventCategory::all(),
         ]);
     }
 
     public function update(Request $request, Event $event)
     {
+        $this->authorize('can_access_events', User::class);
         //if a category has this event associated on delete we
         //update the category of this event to a new one
         if (request('type') && request('type') == 'conflict') {
             $event->update([
-                'category_id' => $request->category
+                'event_category_id' => $request->category
             ]);
 
             return back();

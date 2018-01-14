@@ -14,9 +14,9 @@
                         </ul>
                     </div>
                 @endif
-                {{-- Button for adding a role --}}
+
                 <h3>Berechtigungen:</h3>
-                <button type="button" class="btn btn-success my-2"  data-toggle="modal" data-target="#myModal">
+                <button type="button" class="btn btn-success my-2"  data-toggle="modal" data-target="#role_add_modal">
                     <i class="fa fa-plus"></i> Berechtigung
                 </button>
 
@@ -29,7 +29,7 @@
                                     <p class="text-muted ml-2">{{ucfirst($role->label)}}</p>
                                 </div>
                                 @if ($role->name !== 'administrator')
-                                    <form action="{{route('api_role_delete', $role->id)}}" method="POST">
+                                    <form action="{{route('role_delete', $role->id)}}" method="POST">
                                         <button type="submit" class="btn btn-danger float-left mx-1">
                                             <i class="fa fa-trash-o"></i> Löschen
                                         </button>
@@ -44,14 +44,16 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-end mb-2">
                                     <h5 class="mr-auto">Rechte:</h5>
-                                    <button class="btn btn-success" @click="modal({{$role->id}})"><i class="fa fa-plus"></i> Recht</button>
+                                    <button class="btn btn-success" @click="modal({{$role->id}})">
+                                        <i class="fa fa-plus"></i> Recht
+                                    </button>
                                 </div>
                                 @foreach ($role->permissions as $permission)
                                     <div class="card mb-1">
                                         <ul class="list-group list-group-flush">
                                             <li class="list-group-item d-flex justify-content-end">
                                                 <span class="mr-auto">{{$permission->label}}</span>
-                                                <form action="{{route('api_role_permission_destroy', [$role->id, $permission->id])}}" method="POST">
+                                                <form action="{{route('role_permission_destroy', [$role->id, $permission->id])}}" method="POST">
                                                     <button class="btn btn-danger mx-1">
                                                         <i class="fa fa-trash-o"></i> Löschen
                                                     </button>
@@ -69,16 +71,17 @@
             </div>
         </div>
 
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{--  Modal for adding a role --}}
+        <div class="modal fade" id="role_add_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Berechtigung hinzufügen</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" action="{{route('api_role_add')}}">
+                    <form method="POST" action="{{route('role_store')}}">
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="role_name">Name:</label>
@@ -91,8 +94,12 @@
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal"> Abbrechen</button>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Hinzufügen</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-plus"></i> Hinzufügen
+                            </button>
+                            <button type="button" class="btn btn-light border border-dark" data-dismiss="modal">
+                                <i class="fa fa-times"></i> Abbrechen
+                            </button>
                         </div>
                         {{ csrf_field() }}
                     </form>
@@ -100,19 +107,20 @@
             </div>
         </div>
 
-        <div class="modal fade" id="permissionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        {{--  Modal for adding a permission to a role  --}}
+        <div class="modal fade" id="permission_add_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Recht hinzufügen..</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form method="POST" action="/admin/roles/permission/add">
+                    <form method="POST" action="{{route('permission_role_store')}}">
                         <div class="modal-body">
                             <div class="form-group">
-                                <label for="permission_add"></label>
+                                <label for="permission_add">Recht:</label>
                                 <select id="permission_add" name="permission" class="form-control" name="">
                                     <option v-for="option in select_options" :value="option.id">@{{option.label}}</option>
                                 </select>
@@ -120,8 +128,12 @@
                             <input type="text" hidden v-bind:value="role_id"  name="role_id">
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-warning" data-dismiss="modal"> Abbrechen</button>
-                            <button type="submit" class="btn btn-success"><i class="fa fa-plus"></i> Hinzufügen</button>
+                            <button type="submit" class="btn btn-success">
+                                <i class="fa fa-plus"></i> Hinzufügen
+                            </button>
+                            <button type="button" class="btn btn-light border border-dark" data-dismiss="modal">
+                                <i class="fa fa-times"></i> Abbrechen
+                            </button>
                         </div>
                         {{ csrf_field() }}
                     </form>

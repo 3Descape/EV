@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SiteCategory extends Model
+class EventCategory extends Model
 {
     protected $fillable = ['name'];
 

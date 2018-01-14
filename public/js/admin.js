@@ -83331,10 +83331,6 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
-function injectStyle (ssrContext) {
-  if (disposed) return
-  __webpack_require__(296)
-}
 var normalizeComponent = __webpack_require__(5)
 /* script */
 var __vue_script__ = __webpack_require__(298)
@@ -83343,7 +83339,7 @@ var __vue_template__ = null
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = injectStyle
+var __vue_styles__ = null
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -83378,46 +83374,8 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 296 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(297);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(9)("fa99a7ce", content, false);
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7d74cb56\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Roles.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7d74cb56\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Roles.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 297 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(8)(undefined);
-// imports
-
-
-// module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
-
-// exports
-
-
-/***/ }),
+/* 296 */,
+/* 297 */,
 /* 298 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -83425,35 +83383,35 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['options', 'roles'],
-    data: function data() {
-        return {
-            role_id: null,
-            select_options: []
-        };
+  props: ["options", "roles"],
+  data: function data() {
+    return {
+      role_id: null,
+      select_options: []
+    };
+  },
+
+  methods: {
+    getOptions: function getOptions(id) {
+      var role = this.roles.find(function (role) {
+        return role.id === id;
+      });
+
+      var ids = role.permissions.map(function (permission) {
+        return permission.id;
+      });
+
+      var options = this.options.filter(function (option) {
+        return !ids.includes(option.id);
+      });
+      return options;
     },
-
-    methods: {
-        getOptions: function getOptions(id) {
-            var role = this.roles.find(function (role) {
-                return role.id === id;
-            });
-
-            var ids = role.permissions.map(function (permission) {
-                return permission.id;
-            });
-
-            var options = this.options.filter(function (option) {
-                return !ids.includes(option.id);
-            });
-            return options;
-        },
-        modal: function modal(id) {
-            this.role_id = id;
-            this.select_options = this.getOptions(id);
-            $('#permissionModal').modal('show');
-        }
+    modal: function modal(id) {
+      this.role_id = id;
+      this.select_options = this.getOptions(id);
+      $("#permission_add_modal").modal("show");
     }
+  }
 });
 
 /***/ }),
@@ -85479,7 +85437,7 @@ var render = function() {
                       expression: "event.category_id"
                     }
                   ],
-                  staticClass: "form-control",
+                  staticClass: "custom-select",
                   attrs: { name: "category" },
                   on: {
                     change: function($event) {

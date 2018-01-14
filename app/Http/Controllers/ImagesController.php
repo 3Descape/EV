@@ -97,6 +97,7 @@ class ImagesController extends Controller
 
     public function destroy(Image $image)
     {
+        $this->authorize('can_access_pictures', User::class);
         $image->deleteImage();
 
         if (request()->expectsJson()) {

@@ -31,7 +31,7 @@
                                 <td class="d-none d-md-table-cell overflow-text">{{$user->email}}</td>
                                 <td class="d-none d-md-table-cell">
                                     @foreach ($user->roles as $role)
-                                    <a href="{{route('roles_show') .'#' . $role->name}}" class="role">
+                                    <a href="{{route('role_index') . '#' . $role->name}}" class="role">
                                         <span class="badge badge-secondary">
                                             {{ucfirst($role->name)}}
                                         </span>
@@ -39,11 +39,11 @@
                                     @endforeach
                                 </td>
                                 <td class="d-flex">
-                                    <a href="{{route('user_role', $user->id)}}"
+                                    <a href="{{route('user_index', $user->id)}}"
                                         class="btn btn-warning ml-auto">
                                         <i class="fa fa-pencil"></i>
                                     </a>
-                                    <a href="{{route('api_user_delete', $user->id)}}"
+                                    <a href="{{route('user_delete', $user->id)}}"
                                         class="btn btn-danger mx-1">
                                         <i class="fa fa-trash-o"></i>
                                     </a>

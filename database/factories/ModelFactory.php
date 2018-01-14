@@ -30,10 +30,11 @@ $factory->define(App\Event::class, function (Faker\Generator $faker) {
         ['name' => 'Leichtathletik', 'location' => 'am Sportplatz', 'category' => 2],
         ['name' => 'Gesundes Frühstück', 'location' => 'beim Bleykolm Weiz', 'category' => 3],
     ]);
-    $sentence = $faker->sentences($nb = 3,$asText = true);
+    $sentence = $faker->sentences($nb = 3, $asText = true);
+
     return [
         'name' => $cont['name'],
-        'category_id' => $cont['category'],
+        'event_category_id' => $cont['category'],
         'markup' => $sentence,
         'html' => $sentence,
         'date' => $faker->dateTimeBetween($startDate = '-5 years', $endDate = '+3 years', $timezone = date_default_timezone_get()),
@@ -44,7 +45,7 @@ $factory->define(App\Event::class, function (Faker\Generator $faker) {
 $factory->define(App\Person::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
-        'description' => $faker->sentences($nb = 1,$asText = true),
+        'description' => $faker->sentences($nb = 1, $asText = true),
         'people_category_id' => $faker->numberBetween($min = 1, $max = 3),
     ];
 });
@@ -53,6 +54,6 @@ $factory->define(App\Analythic::class, function (Faker\Generator $faker) {
     return [
         'hash' => hash('md5', date('Y/m/d/H:i:s')),
         'created_at' => $faker->dateTimeBetween($startDate = '-4 months', $endDate = 'now'),
-        'browser_info' => "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0"
+        'browser_info' => 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:54.0) Gecko/20100101 Firefox/54.0'
     ];
 });

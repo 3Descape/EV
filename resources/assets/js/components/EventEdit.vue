@@ -62,7 +62,7 @@
 
                 <div class="form-group">
                     <label for="category">Kategorie:</label>
-                    <select class="form-control" name="category" v-model="event.category_id">
+                    <select class="custom-select" name="category" v-model="event.category_id">
                         <option v-for="category in categories" :value="category.id" :key="category.id" :selected="category.id == event.category.id">{{category.name}}</option>
                     </select>
 

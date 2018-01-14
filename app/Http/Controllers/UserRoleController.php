@@ -8,18 +8,26 @@ use Illuminate\Http\Request;
 
 class UserRoleController extends Controller
 {
-    public function edit_user_roles(User $user)
+    public function edit(User $user)
     {
         $this->authorize('can_access_roles', User::class);
         $roles = Role::whereNotIn('id', $user->roles()->pluck('id'))->get();
 
-        return view('admin.sites.roles.edit', [
+        return view('admin.sites.roles.role_edit', [
             'user' => $user->load('roles'),
             'roles' => $roles,
         ]);
     }
 
-    public function detach_role(User $user, Role $role)
+    public function update(Request $request, User $user)
+    {
+        $this->authorize('can_access_roles', User::class);
+        $user->roles()->save(Role::find($request->role));
+
+        return redirect()->route('user_index');
+    }
+
+    public function destroy(User $user, Role $role)
     {
         $this->authorize('can_access_roles', User::class);
         if ($role->name == 'administrator') {
@@ -31,13 +39,5 @@ class UserRoleController extends Controller
         $user->roles()->detach($role->id);
 
         return back();
-    }
-
-    public function user_roles_update(User $user, Request $request)
-    {
-        $this->authorize('can_access_roles', User::class);
-        $user->roles()->save(Role::whereName($request->role)->first());
-
-        return redirect()->route('admin_people_backend');
     }
 }

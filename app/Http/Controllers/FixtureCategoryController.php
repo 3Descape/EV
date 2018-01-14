@@ -12,7 +12,7 @@ class FixtureCategoryController extends Controller
     {
         $fixturecategories = FixtureCategory::all();
 
-        return view('admin.sites.fixturecategory.index', compact(
+        return view('admin.sites.fixture_categories.index', compact(
             'fixturecategories'
         ));
     }
@@ -32,7 +32,7 @@ class FixtureCategoryController extends Controller
 
     public function edit(FixtureCategory $fixturecategory)
     {
-        return view('admin.sites.fixturecategory.edit', compact(
+        return view('admin.sites.fixture_categories.edit', compact(
             'fixturecategory'
         ));
     }

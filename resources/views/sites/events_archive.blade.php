@@ -23,14 +23,16 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="d-flex justify-content-end">
-                                                    <h3 class="mr-auto">{{ucfirst($event->name)}}</h3>
-                                                    <a href="{{route('events_archive')}}?event={{$event->id}}" class="btn btn-success float-right"><i class="fa fa-arrow-right"></i> Ansehen</a>
+                                                    <h3>{{ucfirst($event->name)}}</h3>
+                                                    <a href="{{route('events_archive')}}?event={{$event->id}}" class="btn btn-success ml-auto align-self-start">
+                                                        <i class="fa fa-arrow-right"></i> Ansehen
+                                                    </a>
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12 mt-4">
-                                                <p class="card-text">{{ucfirst($event->date->diffForHumans())}}</p>
-                                                <span class="badge badge-info float-right">
+                                            <div class="col-md-12 mt-4 d-flex">
+                                                <p class="mb-0">{{ucfirst($event->date->diffForHumans())}}</p>
+                                                <span class="badge badge-info ml-auto align-self-start">
                                                     {{ ucfirst($event->category->name)}}
                                                 </span>
                                             </div>

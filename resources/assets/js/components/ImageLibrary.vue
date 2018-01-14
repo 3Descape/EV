@@ -4,55 +4,46 @@
             <msg></msg>
             <form @submit.prevent="uploud" ref="form">
 
-                <div class="form-group row">
-                    <div class="col-lg-2 col-md-3 col-sm-12 d-flex">
+                <div class="form-group">
+                    <div class="d-flex">
                         <label for="name">Name:</label>
                         <p class="text-muted ml-1">(Optional)</p>
                     </div>
 
-                    <div class="col-lg-10 col-md-9 col-sm-12">
-                        <input ref="name" v-model="userImage.name" type="text" id="name" class="form-control" name="name" >
-                        <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
-                            <ul class="m-0">
-                                <li  v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
-                            </ul>
-                        </div>
+                    <input ref="name" v-model="userImage.name" type="text" id="name" class="form-control" name="name" >
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
+                        <ul class="m-0">
+                            <li  v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-lg-2 col-md-3 col-sm-12">
-                        <label for="file">Datei:</label>
-                    </div>
-                    <div class="col-lg-10 col-md-9 col-sm-12">
-                        <label class="custom-file" style="width: 100%;">
-                            <input type="file" id="file" class="custom-file-input" name="file" @change="fileChange" >
-                            <span class="custom-file-control">
-                                <i class="fa fa-upload"></i> Datei hochladen..
-                            </span>
+                <div class="form-group">
+                    <label for="file">Datei:</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="file" @change="fileChange" multiple>
+                        <label class="custom-file-label" for="customFile">
+                            <i class="fa fa-upload"></i> Bild hochladen..
                         </label>
+                    </div>
 
-                        <div class="progress mt-2" v-show="progress > -1">
-                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="`width:${progress}%`" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">
-                                {{progress}}%
-                            </div>
+                    <div class="progress mt-2" v-show="progress > -1">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="`width:${progress}%`" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">
+                            {{progress}}%
                         </div>
+                    </div>
 
-                        <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
-                            <ul class="m-0">
-                                <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
-                            </ul>
-                        </div>
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
+                        <ul class="m-0">
+                            <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
+                        </ul>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-lg-2 col-md-3 col-sm-12"></div>
-                    <div class="col-lg-10 col-md-9 col-sm-12">
-                        <button class="form-control btn btn-success" type="submit">
-                            <i class="fa fa-plus"></i> Hochladen
-                        </button>
-                    </div>
+                <div class="form-group">
+                    <button class="form-control btn btn-success" type="submit">
+                        <i class="fa fa-plus"></i> Hochladen
+                    </button>
                 </div>
             </form>
         </div>

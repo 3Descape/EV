@@ -1,6 +1,6 @@
 <template lang="html">
     <div>
-        <markdown v-for="site in sites" :key="site.id" :site-prop="site"></markdown>
+        <markdown v-for="site in sitesProp" :key="site.id" :site-prop="site"></markdown>
     </div>
 </template>
 
@@ -10,14 +10,6 @@ export default {
     props: ['sitesProp'],
     components:{
         "markdown": Markdown
-    },
-    data (){
-        return{
-            sites: this.sitesProp
-        }
     }
 }
 </script>
-
-<style lang="css">
-</style>

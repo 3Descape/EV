@@ -24,7 +24,7 @@
                     </div>
                 </div>
 
-                <div class="form-group" v-if="showDate">
+                <div class="form-group" v-if="!isArchived">
                     <label for="date">Datum:</label>
                     <input type="text" name="date" class="form-control" placeholder="dd.MM.yyyy HH:mm" v-model="event.date" id="date" required>
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('date')">
@@ -73,64 +73,67 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <button class="btn btn-warning">
+                <div class="form-group d-flex">
+                    <button class="btn btn-info ml-auto mr-2">
                         <i class="fa fa-edit"></i> Bearbeiten
                     </button>
+                    <a :href="isArchived ? '/admin/events/archived' : '/admin/events'" class="btn btn-light border border-dark">
+                        <i class="fa fa-times"></i> Abbrechen
+                    </a>
                 </div>
             </form>
         </fieldset>
 
-        
-        <div class="form-group">
-            <label class="custom-file" style="width: 100%;">
-                <input type="file" id="file" class="custom-file-input" name="file" @change="fileChange" multiple>
-                <span class="custom-file-control">
-                    <i class="fa fa-upload"></i> Bilder hochladen..
-                </span>
-            </label>
+        <div v-if="isArchived" class="mt-5">
+            <hr>
+            <div class="form-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="customFile" name="file" @change="fileChange" multiple>
+                    <label class="custom-file-label" for="customFile">
+                        <i class="fa fa-upload"></i> Bilder hochladen..
+                    </label>
+                </div>
 
-            <div class="progress mt-2" v-show="progress.length > 0">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="`width:${prog}%`" :aria-valuenow="prog" aria-valuemin="0" aria-valuemax="100">
-                    {{prog}}%
+                <div class="progress mt-2" v-show="progress.length > 0">
+                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="`width:${prog}%`" :aria-valuenow="prog" aria-valuemin="0" aria-valuemax="100">
+                        {{prog}}%
+                    </div>
+                </div>
+
+                <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
+                    <ul class="m-0">
+                        <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
+                    </ul>
                 </div>
             </div>
 
-            <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
-                <ul class="m-0">
-                    <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="row" v-if="event.images.length">
-            <div class="col-lg-3 mb-1" v-for="image in event.images" v-bind:key="image.id">
-                <div class="card h-100">
-                    <div class="card-body row">
-                        <div class="col-lg-3">
-                            <img :src="`/storage/${image.thump}`" class="img-fluid">
-                        </div>
-                        <div class="col-lg-9 d-flex">
-                            <div>
-                                <h4 v-if="image.name">{{image.name}}</h4>
-                                <p>Bild ID: {{image.id}}</p>
+            <div class="row" v-if="event.images.length">
+                <div class="col-lg-3 mb-1" v-for="image in event.images" v-bind:key="image.id">
+                    <div class="card h-100">
+                        <div class="card-body row">
+                            <div class="col-lg-3">
+                                <img :src="`/storage/${image.thump}`" class="img-fluid">
                             </div>
-                            <form @submit.prevent="destroy(image)" class="ml-auto">
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
+                            <div class="col-lg-9 d-flex">
+                                <div>
+                                    <h4 v-if="image.name">{{image.name}}</h4>
+                                    <p>Bild ID: {{image.id}}</p>
+                                </div>
+                                <form @submit.prevent="destroy(image)" class="ml-auto">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div v-else>
-            <p>Es gibt noch keine Bilder für diese Veranstaltung.</p>
+            <div v-else>
+                <p>Es gibt noch keine Bilder für diese Veranstaltung.</p>
+            </div>
         </div>
-        
-
     </div>
 </template>
 
@@ -143,7 +146,7 @@ export default {
   data() {
     return {
       event: this.eventProp,
-      showDate: true,
+      isArchived: false,
       isUpdating: false,
       errors: new Errors(),
       images: [],
@@ -264,7 +267,7 @@ export default {
 
         let now = new Date();
         let eventDate = new Date(this.event.date);
-        this.showDate = eventDate > now;
+        this.isArchived = eventDate < now;
         this.event.date = this.FormatDate(eventDate);
     }
 }

@@ -2,77 +2,59 @@
 <div>
     <msg></msg>
     <form @submit.prevent="submit" ref="form">
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12">
-                <label for="name">Name:</label>
-            </div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <input ref="name" v-model="file.name" type="text" id="name" class="form-control" name="name" >
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input ref="name" v-model="file.name" type="text" id="name" class="form-control" name="name" >
 
-                 <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
-                    <ul class="m-0">
-                        <li  v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
-                    </ul>
-                </div>
+            <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
+                <ul class="m-0">
+                    <li  v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
+                </ul>
             </div>
-           
-
         </div>
 
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12">
-                <label for="description">Beschreibung:</label>
-            </div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <input v-model="file.description" class="form-control" type="text" id="description" name="description" >
+        <div class="form-group">
+            <label for="description">Beschreibung:</label>
+            <input v-model="file.description" class="form-control" type="text" id="description" name="description" >
 
-                <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('description')">
-                    <ul class="m-0">
-                        <li  v-bind:key="error.description" v-for="error in errors.getError('description')">{{error}}</li>
-                    </ul>
-                </div>
-            </div> 
+            <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('description')">
+                <ul class="m-0">
+                    <li  v-bind:key="error.description" v-for="error in errors.getError('description')">{{error}}</li>
+                </ul>
+            </div>
         </div>
 
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12">
-                <label for="file">Datei:</label>
-            </div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <label class="custom-file" style="width: 100%;">
-                    <input type="file" id="file" class="custom-file-input" name="file" @change="fileChange" >
-                    <span class="custom-file-control">
-                        <i class="fa fa-upload"></i> Datei hochladen..
-                    </span>
+        <div class="form-group">
+            <label for="file">Datei:</label>
+
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" name="file" @change="fileChange" multiple>
+                <label class="custom-file-label" for="customFile">
+                    <i class="fa fa-upload"></i> Datei hochladen..
                 </label>
+            </div>
 
-                <div class="progress mt-2" v-show="uploud > -1">
-                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="width" :aria-valuenow="uploud" aria-valuemin="0" aria-valuemax="100">
-                        {{uploud}}%
-                    </div>
-                </div>
-
-                <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
-                    <ul class="m-0">
-                        <li  v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
-                    </ul>
+            <div class="progress mt-2" v-show="uploud > -1">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="width" :aria-valuenow="uploud" aria-valuemin="0" aria-valuemax="100">
+                    {{uploud}}%
                 </div>
             </div>
-        </div>
-        <div v-show="fileSize" class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12"></div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <p v-text="fileSize"></p>
+
+            <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
+                <ul class="m-0">
+                    <li  v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
+                </ul>
             </div>
         </div>
 
-        <div class="form-group row">
-            <div class="col-lg-2 col-md-3 col-sm-12"></div>
-            <div class="col-lg-10 col-md-9 col-sm-12">
-                <button class="form-control btn btn-success" type="submit">
-                    <i class="fa fa-plus"></i> Hinzufügen
-                </button>
-            </div>
+        <div v-show="fileSize" class="form-group">
+            <p v-text="fileSize"></p>
+        </div>
+
+        <div class="form-group">
+            <button class="form-control btn btn-success" type="submit">
+                <i class="fa fa-plus"></i> Hinzufügen
+            </button>
         </div>
     </form>
 

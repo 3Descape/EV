@@ -1,7 +1,6 @@
 @extends('admin.layouts.sitebar')
 
 @section('sitebar_inner')
-
 <div class="col-lg-10 col-md-12 mx-auto row">
     <div class="col-lg-12">
         <form action="{{route('fixture_category_update', $fixturecategory->id)}}" method="post">
@@ -12,10 +11,13 @@
                 @endcomponent
             </div>
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-success">
+            <div class="form-group d-flex">
+                <button type="submit" class="btn btn-info ml-auto mr-2">
                     <i class="fa fa-edit"></i> Bearbeiten
                 </button>
+                <a href="{{route('fixture_category_index')}}" class="btn btn-light border border-dark">
+                    <i class="fa fa-times"></i> Abbrechen
+                </a>
             </div>
 
             {{ csrf_field() }}

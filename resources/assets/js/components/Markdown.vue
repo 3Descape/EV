@@ -4,16 +4,19 @@
             <fieldset class="mb-2" :disabled="updatingBody || updatingTitle">
                 <form class="input-group mb-2" @submit.prevent="updateTitle">
                     <input type="text" class="form-control" placeholder="Titel" v-model="site.title">
-                    <button type="submit" class="input-group-addon bg-warning">
-                        <i v-if="!updatingTitle" class="fa fa-refresh"></i>
-                        <i v-if="updatingTitle" class="fa fa-spinner fa-pulse"></i>
-                    </button>
+                    <div class="input-group-prepend">
+                        <button type="submit" class="input-group-text bg-light">
+                            <div v-if="!updatingTitle" class="fa fa-refresh"></div>
+                            <div v-if="updatingTitle" class="fa fa-spinner fa-pulse"></div>
+                        </button>
+                    </div>
+
                 </form>
 
                 <form @submit.prevent="updateBody">
-                    <textarea name="name" class="form-control" v-model="site.markup" rows="7"></textarea>
-                    <button class="btn btn-warning form-control mt-2" type="submit">
-                        <i v-if="!updatingBody" class="fa fa-edit">Text aktualisieren</i>
+                    <textarea name="name" class="form-control" v-model="site.markup" rows="5"></textarea>
+                    <button class="btn btn-info form-control mt-2" type="submit">
+                        <i v-if="!updatingBody" class="fa fa-edit"></i> Text aktualisieren..
                         <i v-if="updatingBody" class="fa fa-spinner fa-pulse" disabled></i>
                     </button>
                 </form>

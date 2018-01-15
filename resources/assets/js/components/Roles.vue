@@ -126,77 +126,6 @@
       </form>
     </modal>
   </div>
-
-  <!-- Modal for adding a role
-        <div class="modal fade" id="role_add_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Berechtigung hinzufügen</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="POST" action="{{route('role_store')}}">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="role_name">Name:</label>
-                                <input class="form-control" type="text" name="name" id="role_name" required>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="label">Beschreibung:</label>
-                                <input class="form-control" type="text" name="label" id="label" >
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa fa-plus"></i> Hinzufügen
-                            </button>
-                            <button type="button" class="btn btn-light border border-dark" data-dismiss="modal">
-                                <i class="fa fa-times"></i> Abbrechen
-                            </button>
-                        </div>
-                        {{ csrf_field() }}
-                    </form>
-                </div>
-            </div>
-        </div> -->
-
-  <!-- Modal for adding a permission to a role
-        <div class="modal fade" id="permission_add_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Recht hinzufügen..</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form method="POST" action="{{route('permission_role_store')}}">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="permission_add">Recht:</label>
-                                <select id="permission_add" name="permission" class="form-control" name="">
-                                    <option v-for="option in select_options" :value="option.id">@{{option.label}}</option>
-                                </select>
-                            </div>
-                            <input type="text" hidden v-bind:value="role_id"  name="role_id">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-success">
-                                <i class="fa fa-plus"></i> Hinzufügen
-                            </button>
-                            <button type="button" class="btn btn-light border border-dark" data-dismiss="modal">
-                                <i class="fa fa-times"></i> Abbrechen
-                            </button>
-                        </div>
-                        {{ csrf_field() }}
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div> -->
 </template>
 
 <script>
@@ -296,8 +225,6 @@ export default {
     },
     permission_role_destroy(role, role_index, permission, permission_index) {
       let vue = this;
-      console.log(role_index);
-      console.log(permission_index);
       axios
         .post(`/admin/rolle/${role.id}/berechtigung/${permission.id}`, {
           _method: "delete"
@@ -313,7 +240,6 @@ export default {
             "danger"
           );
         });
-      console.log(role.id + permission.id);
     },
     is_admin_role(role) {
       return role.name === "administrator";

@@ -83515,77 +83515,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -83652,8 +83581,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     permission_role_destroy: function permission_role_destroy(role, role_index, permission, permission_index) {
       var vue = this;
-      console.log(role_index);
-      console.log(permission_index);
       axios.post("/admin/rolle/" + role.id + "/berechtigung/" + permission.id, {
         _method: "delete"
       }).then(function (msg) {
@@ -83662,7 +83589,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).catch(function (errors) {
         __WEBPACK_IMPORTED_MODULE_3__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
       });
-      console.log(role.id + permission.id);
     },
     is_admin_role: function is_admin_role(role) {
       return role.name === "administrator";

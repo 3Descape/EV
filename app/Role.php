@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $fillable = ['name', 'label'];
+    protected $with = ['permissions'];
 
     /**
      * Returns the permissions that are associated with this role

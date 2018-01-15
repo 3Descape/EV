@@ -30,10 +30,17 @@ class RolesController extends Controller
             'label.required' => 'Die Berechtigung muss eine kurze Beschreibung haben'
         ]);
 
-        Role::create([
+        $role = Role::create([
             'name' => $request->name,
             'label' => $request->label,
         ]);
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'status' => 'Rolle wurde hinzugefügt.',
+                'role' => Role::with('permissions')->find($role->id)
+            ], 200);
+        }
 
         return back();
     }
@@ -43,13 +50,11 @@ class RolesController extends Controller
         $this->authorize('admin', User::class);
         Role::destroy($id);
 
-        return back();
-    }
-
-    public function destroy_permission(Role $role, $permission_id)
-    {
-        $this->authorize('admin', User::class);
-        $role->permissions()->detach($permission_id);
+        if (request()->expectsJson()) {
+            return response()->json([
+                'status' => 'Rolle wurde gelöscht.'
+            ], 200);
+        }
 
         return back();
     }

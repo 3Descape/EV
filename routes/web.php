@@ -39,10 +39,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/rolle', 'RolesController@index')->name('role_index');
     Route::post('/rolle', 'RolesController@store')->name('role_store');
-    Route::delete('/rolle/{role}/berechtigung/{permission}', 'RolesController@destroy_permission')->name('role_permission_destroy');
-    Route::delete('/rolle/{role}/delete', 'RolesController@destroy')->name('role_delete');
+    Route::delete('/rolle/{role}', 'RolesController@destroy')->name('role_destroy');
 
-    Route::post('/rolle/berechtigung/add', 'PermissionRoleController@store')->name('permission_role_store');
+    Route::post('/rolle/{role}/berechtigung/{permission}', 'PermissionRoleController@store')->name('permission_role_store');
+    Route::delete('/rolle/{role}/berechtigung/{permission_id}', 'PermissionRoleController@destroy')->name('permission_role_destroy');
 
     Route::get('/seite/über_uns', 'SitesController@about')->name('about_edit');
     Route::get('/seite/sga', 'SitesController@sga')->name('sga_edit');

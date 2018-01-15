@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Permission extends Model
 {
     protected $fillable = ['name', 'label'];
+    protected $hidden = ['pivot'];
 
     /**
      * Returns the roles this permission is associated with

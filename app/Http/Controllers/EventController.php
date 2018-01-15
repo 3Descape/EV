@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use App\EventCategory;
 use Illuminate\Http\Request;
 
-class EventsController extends Controller
+class EventController extends Controller
 {
     public function events_future()
     {

@@ -6,7 +6,7 @@ use App\Site;
 use App\User;
 use Illuminate\Http\Request;
 
-class SitesController extends Controller
+class SiteController extends Controller
 {
     public function about()
     {

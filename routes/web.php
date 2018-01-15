@@ -7,21 +7,21 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::post('/getAnalythics', 'DashboardController@getAnalythics');
 
-    Route::get('/veranstaltungen', 'EventsController@events_future')->name('event_future_index');
-    Route::get('/veranstaltungen/archiv', 'EventsController@events_archived')->name('event_archived_index');
-    Route::post('/veranstaltungen', 'EventsController@store')->name('event_store');
-    Route::get('/veranstaltungen/{event}/edit', 'EventsController@edit')->name('event_edit');
-    Route::put('/veranstaltungen/{event}', 'EventsController@update')->name('event_update');
-    Route::delete('/veranstaltungen/{event}', 'EventsController@destroy')->name('event_destroy');
+    Route::get('/veranstaltungen', 'EventController@events_future')->name('event_future_index');
+    Route::get('/veranstaltungen/archiv', 'EventController@events_archived')->name('event_archived_index');
+    Route::post('/veranstaltungen', 'EventController@store')->name('event_store');
+    Route::get('/veranstaltungen/{event}/edit', 'EventController@edit')->name('event_edit');
+    Route::put('/veranstaltungen/{event}', 'EventController@update')->name('event_update');
+    Route::delete('/veranstaltungen/{event}', 'EventController@destroy')->name('event_destroy');
 
     Route::post('/veranstaltungen/{event}/bild', 'EventImageController@store')->name('event_image_store');
 
-    Route::get('/veranstaltung-kategorien', 'EventCategoriesController@index')->name('event_category_index');
-    Route::post('/veranstaltung-kategorien', 'EventCategoriesController@store')->name('event_category_store');
-    Route::get('/veranstaltung-kategorien/{event_category}/add', 'EventCategoriesController@edit')->name('event_category_edit');
-    Route::put('/veranstaltung-kategorien/{event_category}', 'EventCategoriesController@update')->name('event_category_update');
-    Route::get('/veranstaltung-kategorien/{event_category}/konflikt', 'EventCategoriesController@conflict')->name('event_category_conflict');
-    Route::delete('/veranstaltung-kategorien/{event_category}', 'EventCategoriesController@destroy')->name('event_category_destroy');
+    Route::get('/veranstaltung-kategorien', 'EventCategoryController@index')->name('event_category_index');
+    Route::post('/veranstaltung-kategorien', 'EventCategoryController@store')->name('event_category_store');
+    Route::get('/veranstaltung-kategorien/{event_category}/add', 'EventCategoryController@edit')->name('event_category_edit');
+    Route::put('/veranstaltung-kategorien/{event_category}', 'EventCategoryController@update')->name('event_category_update');
+    Route::get('/veranstaltung-kategorien/{event_category}/konflikt', 'EventCategoryController@conflict')->name('event_category_conflict');
+    Route::delete('/veranstaltung-kategorien/{event_category}', 'EventCategoryController@destroy')->name('event_category_destroy');
 
     Route::get('/person/frontend/{category}', 'PersonController@index')->name('person_frontend_index');
     Route::get('/person/{category}/add', 'PersonController@create')->name('person_create');
@@ -30,34 +30,34 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::put('/person/{person}', 'PersonController@update')->name('person_update');
     Route::delete('/person/{person}/edit', 'PersonController@destroy')->name('person_destroy');
 
-    Route::get('/nutzer', 'UserController@index')->name('user_index');
     Route::get('/nutzer/{user}/edit', 'UserRoleController@edit')->name('user_role_edit');
     Route::put('/nutzer/{user}', 'UserRoleController@update')->name('user_role_update');
     Route::delete('/nutzer/{user}/rolle/{role}', 'UserRoleController@destroy')->name('user_role_destroy');
 
+    Route::get('/nutzer', 'UserController@index')->name('user_index');
     Route::get('/nutzer/{user}/delete', 'UserController@user_delete')->name('user_delete');
 
-    Route::get('/rolle', 'RolesController@index')->name('role_index');
-    Route::post('/rolle', 'RolesController@store')->name('role_store');
-    Route::delete('/rolle/{role}', 'RolesController@destroy')->name('role_destroy');
+    Route::get('/rolle', 'RoleController@index')->name('role_index');
+    Route::post('/rolle', 'RoleController@store')->name('role_store');
+    Route::delete('/rolle/{role}', 'RoleController@destroy')->name('role_destroy');
 
     Route::post('/rolle/{role}/berechtigung/{permission}', 'PermissionRoleController@store')->name('permission_role_store');
     Route::delete('/rolle/{role}/berechtigung/{permission_id}', 'PermissionRoleController@destroy')->name('permission_role_destroy');
 
-    Route::get('/seite/über_uns', 'SitesController@about')->name('about_edit');
-    Route::get('/seite/sga', 'SitesController@sga')->name('sga_edit');
-    Route::get('/seite/info', 'SitesController@info')->name('info_edit');
-    Route::get('/seite/impress', 'SitesController@imprint')->name('imprint_edit');
+    Route::get('/seite/über_uns', 'SiteController@about')->name('about_edit');
+    Route::get('/seite/sga', 'SiteController@sga')->name('sga_edit');
+    Route::get('/seite/info', 'SiteController@info')->name('info_edit');
+    Route::get('/seite/impress', 'SiteController@imprint')->name('imprint_edit');
 
-    Route::post('/seite/update/{site}/body', 'SitesController@update_body')->name('site_body_update');
-    Route::post('/seite/update/{site}/title', 'SitesController@update_title')->name('site_title_update');
+    Route::post('/seite/update/{site}/body', 'SiteController@update_body')->name('site_body_update');
+    Route::post('/seite/update/{site}/title', 'SiteController@update_title')->name('site_title_update');
 
     Route::post('/seite/über_uns/hochladen', 'ImagesController@uploud_group_image')->name('group_image_store');
     Route::delete('seite/über_uns', 'ImagesController@remove_group_image')->name('group_image_destroy');
 
-    Route::get('/bilder', 'ImagesController@index')->name('image_index');
-    Route::post('/bilder', 'ImagesController@store')->name('image_store');
-    Route::delete('/bilder/{image}', 'ImagesController@destroy')->name('image_destroy');
+    Route::get('/bilder', 'ImageController@index')->name('image_index');
+    Route::post('/bilder', 'ImageController@store')->name('image_store');
+    Route::delete('/bilder/{image}', 'ImageController@destroy')->name('image_destroy');
 
     Route::get('/dateien', 'FileController@index')->name('file_index');
     Route::get('/dateien/edit/{file}', 'FileController@edit')->name('file_edit');
@@ -79,7 +79,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 });
 
 Route::get('/', 'FrontendController@index')->name('home');
-
 Route::get('/über_uns', 'FrontendController@about')->name('about');
 Route::get('/veranstaltungen/archiv/{type?}', 'FrontendController@events_archived')->name('events_archive');
 Route::get('/veranstaltungen/{type?}', 'FrontendController@events_future')->name('events');
@@ -93,7 +92,6 @@ Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
 Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
 
 Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
-
 Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
 
 Route::post('/images/{image}', 'ImagesController@getImage');

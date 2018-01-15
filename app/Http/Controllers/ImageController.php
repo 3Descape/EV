@@ -8,7 +8,7 @@ use App\Image;
 use Illuminate\Http\Request;
 use App\Http\Helpers\StoreImage;
 
-class ImagesController extends Controller
+class ImageController extends Controller
 {
     public function index()
     {

@@ -6,7 +6,7 @@ use App\User;
 use App\EventCategory;
 use Illuminate\Http\Request;
 
-class EventCategoriesController extends Controller
+class EventCategoryController extends Controller
 {
     public function index()
     {

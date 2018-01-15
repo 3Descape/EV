@@ -23,7 +23,7 @@ class FixtureCategoryController extends Controller
     {
         $this->authorize('can_access_fixtures', User::class);
         $request->validate([
-            'name' => 'required|string|unique:fixtures,name'
+            'name' => 'required|string|unique:fixture_categories,name'
         ]);
 
         FixtureCategory::create([

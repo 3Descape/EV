@@ -38,7 +38,7 @@ class EventController extends Controller
             'markup' => 'required',
             'date' => 'required|date_format:d.m.Y H:i',
             'location' => 'required|min:5',
-            'category_id' => 'exists:categories,id',
+            'event_category_id' => 'exists:event_categories,id',
         ]);
 
         $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
@@ -49,7 +49,7 @@ class EventController extends Controller
             'markup' => $request->markup,
             'date' => $date,
             'location' => $request->location,
-            'category_id' => intval($request->category),
+            'event_category_id' => $request->event_category_id,
         ]);
 
         return back();
@@ -66,24 +66,23 @@ class EventController extends Controller
         ]);
     }
 
-    public function update(Request $request, Event $event)
+    public function resolve_conflict(Request $request, Event $event)
     {
         $this->authorize('can_access_events', User::class);
-        //if a category has this event associated on delete we
-        //update the category of this event to a new one
-        if (request('type') && request('type') == 'conflict') {
-            $event->update([
-                'event_category_id' => $request->category
-            ]);
+        $event->update([
+            'event_category_id' => $request->event_category_id
+        ]);
 
-            return back();
-        }
+        return back();
+    }
 
+    public function update(Request $request, Event $event)
+    {
         $request->validate([
             'name' => 'required|max:255',
             'location' => 'required',
             'date' => 'required|date_format:"d.m.Y H:i"',
-            'category_id' => 'exists:categories,id',
+            'event_category_id' => 'required|exists:event_categories,id',
         ], [
             'date_format' => 'Datum entspricht nicht dem gültigen Format für dd.MM.yyyy HH:mm'
         ]);
@@ -92,14 +91,20 @@ class EventController extends Controller
 
         $event->update([
             'name' => $request->name,
-            'category_id' => $request->category,
+            'event_category_id' => $request->event_category_id,
             'markup' => $request->markup,
             'html' => $request->html,
             'date' => $date,
             'location' => $request->location
         ]);
 
-        return response()->json(['status' => 'Veranstaltung wurde aktualisiert.'], 200);
+        if (request()->expectsJson()) {
+            return response()->json([
+                'status' => 'Veranstaltung wurde aktualisiert.'
+            ], 200);
+        }
+
+        return back();
     }
 
     public function destroy(Event $event)

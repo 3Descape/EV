@@ -39,7 +39,7 @@
                                     @endforeach
                                 </td>
                                 <td class="d-flex">
-                                    <a href="{{route('user_index', $user->id)}}"
+                                    <a href="{{route('user_role_edit', $user->id)}}"
                                         class="btn btn-warning ml-auto">
                                         <i class="fa fa-pencil"></i>
                                     </a>

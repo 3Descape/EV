@@ -13169,9 +13169,16 @@ body * {
 
 #app .event_thumb {
   width: 100%;
+  max-height: 100%;
   padding: 0px;
   text-align: center;
   overflow: hidden;
+}
+
+@media (max-width: 991.99px) {
+  #app .event_thumb {
+    display: none;
+  }
 }
 
 #app .event_thumb img {

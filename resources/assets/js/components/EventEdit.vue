@@ -6,7 +6,7 @@
             <form class="form-group" @submit.prevent="update">
                 <div class="form-group">
                     <label for="name">Name:</label>
-                    <input type="text" v-model="event.name" class="form-control" name="name" id="name" required>
+                    <input type="text" v-model="event.name" class="form-control" id="name" required>
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
                         <ul class="m-0">
                             <li v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
@@ -16,7 +16,7 @@
 
                 <div class="form-group">
                     <label for="location">Ort:</label>
-                    <input type="text" v-model="event.location" class="form-control" name="location" id="location" required>
+                    <input type="text" v-model="event.location" class="form-control" id="location" required>
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('location')">
                         <ul class="m-0">
                             <li v-bind:key="error.location" v-for="error in errors.getError('location')">{{error}}</li>
@@ -26,7 +26,7 @@
 
                 <div class="form-group" v-if="!isArchived">
                     <label for="date">Datum:</label>
-                    <input type="text" name="date" class="form-control" placeholder="dd.MM.yyyy HH:mm" v-model="event.date" id="date" required>
+                    <input type="text" class="form-control" placeholder="dd.MM.yyyy HH:mm" v-model="event.date" id="date" required>
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('date')">
                         <ul class="m-0">
                             <li v-bind:key="error.date" v-for="error in errors.getError('date')">{{error}}</li>
@@ -36,7 +36,7 @@
 
                 <div class="form-group">
                     <label for="description">Beschreibung:</label>
-                    <textarea type="text" v-model="event.markup" class="form-control" name="markup" required id="description"></textarea>
+                    <textarea type="text" v-model="event.markup" class="form-control" required id="description"></textarea>
 
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('markup')">
                         <ul class="m-0">
@@ -62,13 +62,17 @@
 
                 <div class="form-group">
                     <label for="category">Kategorie:</label>
-                    <select class="custom-select" name="category" v-model="event.category_id">
-                        <option v-for="category in categories" :value="category.id" :key="category.id" :selected="category.id == event.category.id">{{category.name}}</option>
+                    <select class="custom-select" v-model="event.event_category_id">
+                        <option v-for="category in categories"
+                            :value="category.id"
+                            :key="category.id">
+                                {{category.name}}
+                            </option>
                     </select>
 
-                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('category')">
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('event_category_id')">
                         <ul class="m-0">
-                            <li v-bind:key="error.category" v-for="error in errors.getError('category')">{{error}}</li>
+                            <li v-bind:key="error.event_category_id" v-for="error in errors.getError('event_category_id')">{{error}}</li>
                         </ul>
                     </div>
                 </div>
@@ -77,7 +81,7 @@
                     <button class="btn btn-info ml-auto mr-2">
                         <i class="fa fa-edit"></i> Bearbeiten
                     </button>
-                    <a :href="isArchived ? '/admin/events/archived' : '/admin/events'" class="btn btn-light border border-dark">
+                    <a :href="isArchived ? '/admin/veranstaltungen/archiv' : '/admin/veranstaltungen'" class="btn btn-light border border-dark">
                         <i class="fa fa-times"></i> Abbrechen
                     </a>
                 </div>
@@ -176,21 +180,20 @@ export default {
           date: this.event.date,
           markup: vue.event.markup,
           html: vue.compiledMarkdown,
-          category: vue.event.category_id
+          event_category_id: vue.event.event_category_id
         })
         .then(msg => {
-          vue.isUpdating = false;
           EventBus.$emit("msg-event", msg.data.status);
         })
-        .catch(errors => {
+        .catch((errors) => {
           vue.errors.setErrors(errors.response.data.errors);
           EventBus.$emit(
             "msg-event",
             "Es ist ein Fehler aufgetreten.",
             "danger"
           );
-          vue.isUpdating = false;
         });
+        vue.isUpdating = false;
     },
     fileChange(e) {
       this.images = e.target.files;

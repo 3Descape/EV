@@ -84315,7 +84315,7 @@ renderer.image = function (href, title, text) {
 
       this.updatingTitle = true;
       var vue = this;
-      axios.post('/admin/sites/update/' + vue.site.id + '/titel', {
+      axios.post('/admin/seite/update/' + vue.site.id + '/titel', {
         title: vue.site.title
       }).then(function (response) {
         _this2.updatingTitle = false;
@@ -84745,6 +84745,10 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -84784,15 +84788,14 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         date: this.event.date,
         markup: vue.event.markup,
         html: vue.compiledMarkdown,
-        category: vue.event.category_id
+        event_category_id: vue.event.event_category_id
       }).then(function (msg) {
-        vue.isUpdating = false;
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
       }).catch(function (errors) {
         vue.errors.setErrors(errors.response.data.errors);
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
-        vue.isUpdating = false;
       });
+      vue.isUpdating = false;
     },
     fileChange: function fileChange(e) {
       this.images = e.target.files;
@@ -85860,7 +85863,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "text", name: "name", id: "name", required: "" },
+                attrs: { type: "text", id: "name", required: "" },
                 domProps: { value: _vm.event.name },
                 on: {
                   input: function($event) {
@@ -85907,12 +85910,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "location",
-                  id: "location",
-                  required: ""
-                },
+                attrs: { type: "text", id: "location", required: "" },
                 domProps: { value: _vm.event.location },
                 on: {
                   input: function($event) {
@@ -85964,7 +85962,6 @@ var render = function() {
                     staticClass: "form-control",
                     attrs: {
                       type: "text",
-                      name: "date",
                       placeholder: "dd.MM.yyyy HH:mm",
                       id: "date",
                       required: ""
@@ -86020,12 +86017,7 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "markup",
-                  required: "",
-                  id: "description"
-                },
+                attrs: { type: "text", required: "", id: "description" },
                 domProps: { value: _vm.event.markup },
                 on: {
                   input: function($event) {
@@ -86108,12 +86100,11 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.event.category_id,
-                      expression: "event.category_id"
+                      value: _vm.event.event_category_id,
+                      expression: "event.event_category_id"
                     }
                   ],
                   staticClass: "custom-select",
-                  attrs: { name: "category" },
                   on: {
                     change: function($event) {
                       var $$selectedVal = Array.prototype.filter
@@ -86126,7 +86117,7 @@ var render = function() {
                         })
                       _vm.$set(
                         _vm.event,
-                        "category_id",
+                        "event_category_id",
                         $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
@@ -86137,19 +86128,19 @@ var render = function() {
                 _vm._l(_vm.categories, function(category) {
                   return _c(
                     "option",
-                    {
-                      key: category.id,
-                      domProps: {
-                        value: category.id,
-                        selected: category.id == _vm.event.category.id
-                      }
-                    },
-                    [_vm._v(_vm._s(category.name))]
+                    { key: category.id, domProps: { value: category.id } },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(category.name) +
+                          "\n                        "
+                      )
+                    ]
                   )
                 })
               ),
               _vm._v(" "),
-              _vm.errors.hasError("category")
+              _vm.errors.hasError("event_category_id")
                 ? _c(
                     "div",
                     {
@@ -86160,13 +86151,14 @@ var render = function() {
                       _c(
                         "ul",
                         { staticClass: "m-0" },
-                        _vm._l(_vm.errors.getError("category"), function(
-                          error
-                        ) {
-                          return _c("li", { key: error.category }, [
-                            _vm._v(_vm._s(error))
-                          ])
-                        })
+                        _vm._l(
+                          _vm.errors.getError("event_category_id"),
+                          function(error) {
+                            return _c("li", { key: error.event_category_id }, [
+                              _vm._v(_vm._s(error))
+                            ])
+                          }
+                        )
                       )
                     ]
                   )
@@ -86182,8 +86174,8 @@ var render = function() {
                   staticClass: "btn btn-light border border-dark",
                   attrs: {
                     href: _vm.isArchived
-                      ? "/admin/events/archived"
-                      : "/admin/events"
+                      ? "/admin/veranstaltungen/archiv"
+                      : "/admin/veranstaltungen"
                   }
                 },
                 [
@@ -86887,7 +86879,7 @@ var render = function() {
                   "a",
                   {
                     staticClass: "btn btn-warning ml-auto",
-                    attrs: { href: "/admin/dateien/edit/" + file.id }
+                    attrs: { href: "/admin/datei/edit/" + file.id }
                   },
                   [_c("i", { staticClass: "fa fa-edit" })]
                 ),

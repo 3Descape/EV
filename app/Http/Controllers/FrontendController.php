@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Site;
 use App\Event;
 use App\Image;
-use App\Category;
+use App\EventCategory;
 use App\PeopleCategory;
 use App\FixtureCategory;
 use App\Traits\AnalythicTrait;
@@ -46,7 +46,7 @@ class FrontendController extends Controller
         $text = 'Alle';
         if ($type) {
             $text = ucfirst($type);
-            $events = Category::where('name', $type)
+            $events = EventCategory::where('name', $type)
             ->first()
             ->events()
             ->futureEvents()
@@ -58,7 +58,7 @@ class FrontendController extends Controller
         return view('sites.events', [
             'events' => $events,
             'text' => $text,
-            'categories' => Category::all(),
+            'categories' => EventCategory::all(),
         ]);
     }
 
@@ -75,7 +75,7 @@ class FrontendController extends Controller
             $text = 'Alle';
             if ($type) {
                 $text = ucfirst($type);
-                $events = Category::where('name', $type)
+                $events = EventCategory::where('name', $type)
                 ->first()
                 ->events()
                 ->with('images')
@@ -88,7 +88,7 @@ class FrontendController extends Controller
             return view('sites.events_archive', [
                 'events' => $events,
                 'text' => $text,
-                'categories' => Category::all()
+                'categories' => EventCategory::all()
             ]);
         }
     }

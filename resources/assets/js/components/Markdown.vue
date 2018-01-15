@@ -95,7 +95,7 @@ export default {
       this.updatingTitle = true;
       let vue = this;
       axios
-        .post(`/admin/sites/update/${vue.site.id}/titel`, {
+        .post(`/admin/seite/update/${vue.site.id}/titel`, {
           title: vue.site.title
         })
         .then(response => {

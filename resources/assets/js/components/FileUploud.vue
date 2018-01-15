@@ -74,7 +74,7 @@
                     <td class="overflow-text d-none d-md-table-cell">{{file.description}}</td>
 
                     <td class="d-flex">
-                        <a :href="'/admin/dateien/edit/' + file.id" class="btn btn-warning ml-auto">
+                        <a :href="`/admin/datei/edit/${file.id}`" class="btn btn-warning ml-auto">
                             <i class="fa fa-edit"></i>
                         </a>
 

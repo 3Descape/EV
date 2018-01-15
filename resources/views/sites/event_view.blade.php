@@ -13,16 +13,16 @@
             <ol class="carousel-indicators">
                 @foreach ($event->images as $key => $image)
                     <li data-target="#carouselExampleControls" data-slide-to="{{$key}}"
-                    {{$key==0 ? 'class="active"' : ''}}></li>
+                        {{$key==0 ? 'class="active"' : ''}}>
+                    </li>
                 @endforeach
             </ol>
             <div class="carousel-inner" role="listbox">
                 @foreach ($event->images as $key => $image)
                     <div class="carousel-item {{$key == 0 ? 'active' : ''}}">
                         <div class="w-100 text-center" alt="First slide">
-                                <img style="height: auto; max-width: 90vw; max-height: 50vh;" src="{{asset('storage/'. $image->path)}}">
+                            <img style="height: auto; max-width: 90vw; max-height: 50vh;" src="{{asset('storage/'. $image->path)}}">
                         </div>
-
                     </div>
                 @endforeach
             </div>

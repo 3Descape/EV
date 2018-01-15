@@ -12,6 +12,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/veranstaltungen', 'EventController@store')->name('event_store');
     Route::get('/veranstaltungen/{event}/edit', 'EventController@edit')->name('event_edit');
     Route::put('/veranstaltungen/{event}', 'EventController@update')->name('event_update');
+    Route::put('/veranstaltungen/{event}/konflikt', 'EventController@resolve_conflict')->name('event_resolve_conflict');
     Route::delete('/veranstaltungen/{event}', 'EventController@destroy')->name('event_destroy');
 
     Route::post('/veranstaltungen/{event}/bild', 'EventImageController@store')->name('event_image_store');

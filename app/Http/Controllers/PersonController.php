@@ -64,7 +64,7 @@ class PersonController extends Controller
         ]);
 
         return redirect()->route(
-            'a_people_frontend',
+            'person_frontend_index',
             PeopleCategory::find($request->people_category_id)->name
         );
     }
@@ -96,7 +96,7 @@ class PersonController extends Controller
             'people_category_id' => $request->people_category_id,
         ]);
 
-        return redirect()->route('a_people_frontend', $person->category->name);
+        return redirect()->route('person_frontend_index', $person->category->name);
     }
 
     public function destroy(Person $person)

@@ -15,38 +15,9 @@ class FileController extends Controller
         $this->authorize('can_access_files', User::class);
         $files = File::all();
 
-        return view('admin.sites.files.index', compact(
+        return view('admin.sites.files.file_index', compact(
             'files'
         ));
-    }
-
-    public function edit(File $file)
-    {
-        $this->authorize('can_access_files', User::class);
-
-        return view('admin.sites.files.edit', compact(
-            'file'
-        ));
-    }
-
-    public function update(Request $request, File $file)
-    {
-        $this->authorize('can_access_files', User::class);
-        $request->validate([
-            'name' => [
-                'required',
-                'string',
-                Rule::unique('files')->ignore($file->name, 'name')
-            ],
-            'description' => 'required|string'
-        ]);
-
-        $file->update([
-            'name' => $request->name,
-            'description' => $request->description
-        ]);
-
-        return redirect()->route('files');
     }
 
     public function store(Request $request)
@@ -73,6 +44,35 @@ class FileController extends Controller
                 'file' => $file
             ], 200);
         }
+    }
+
+    public function edit(File $file)
+    {
+        $this->authorize('can_access_files', User::class);
+
+        return view('admin.sites.files.file_edit', compact(
+            'file'
+        ));
+    }
+
+    public function update(Request $request, File $file)
+    {
+        $this->authorize('can_access_files', User::class);
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                Rule::unique('files')->ignore($file->name, 'name')
+            ],
+            'description' => 'required|string'
+        ]);
+
+        $file->update([
+            'name' => $request->name,
+            'description' => $request->description
+        ]);
+
+        return redirect()->route('file_index');
     }
 
     public function delete(File $file)

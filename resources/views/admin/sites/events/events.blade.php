@@ -34,8 +34,8 @@
         </div>
 
         <div class="form-group">
-            <label for="category">Kategorie:</label>
-            <select class="custom-select" name="category" id="category">
+            <label for="event_category_id">Kategorie:</label>
+            <select class="custom-select" name="event_category_id" id="event_category_id">
                 @foreach ($categories as $category)
                     <option
                     {{old('category') ? old('category') == $category->name ? 'selected=selected' : '' : ''}}

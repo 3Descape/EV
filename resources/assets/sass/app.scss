@@ -202,7 +202,11 @@ body{
     }
 
     .event_thumb{
+        @include media-breakpoint-down(md){
+            display: none;
+        }
         width:100%;
+        max-height: 100%;
         padding: 0px;
         text-align: center;
         overflow: hidden;

@@ -18,9 +18,9 @@
                     <td>{{$event->name}}</td>
                     <td class="">{{$event->category->name}}</td>
                     <td class="d-flex">
-                        <form class="ml-auto d-flex" action="{{route('event_update', $event->id)}}?type=conflict" method="POST">
+                        <form class="ml-auto d-flex" action="{{route('event_resolve_conflict', $event->id)}}" method="POST">
                             
-                            <select class="custom-select mr-2" name="category">
+                            <select class="custom-select mr-2" name="event_category_id">
                                 @foreach ($categories as $category)
                                     <option
                                     {{old('category') ? old('category') == $category->name ? 'selected=selected' : '' : ''}}

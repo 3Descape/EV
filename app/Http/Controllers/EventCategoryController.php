@@ -22,7 +22,7 @@ class EventCategoryController extends Controller
     {
         $this->authorize('can_access_events', User::class);
         $this->validate($request, [
-            'name' => 'required|max:30|unique:categories,name'
+            'name' => 'required|max:30|unique:event_categories,name'
         ]);
         $test = EventCategory::create([
             'name' => $request->name
@@ -44,14 +44,14 @@ class EventCategoryController extends Controller
     {
         $this->authorize('can_access_events', User::class);
         $request->validate([
-            'name' => 'required|max:30|unique:categories,name'
+            'name' => 'required|max:30|unique:event_categories,name'
         ]);
 
         $event_category->update([
             'name' => $request->name,
         ]);
 
-        return redirect()->route('event_categories_index');
+        return redirect()->route('event_category_index');
     }
 
     public function conflict(EventCategory $event_category)
@@ -65,10 +65,10 @@ class EventCategoryController extends Controller
         }
         //othervise we get all other categories and associated events
         //and return a view where the user can change the category for the
-        //associated events
+        //associated events to a new one
         $categories = EventCategory::where('id', '!=', $event_category->id)->get();
 
-        return view('admin.sites.event_categories.event_categories_pre_delete', compact(
+        return view('admin.sites.event_categories.event_categories_resolve_conflict', compact(
             'events',
             'categories',
             'event_category'

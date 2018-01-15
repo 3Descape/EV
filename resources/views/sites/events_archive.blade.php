@@ -46,7 +46,7 @@
                 {{ $events->links('layouts.paginator') }}
             </div>
 
-            <div class="col-lg-2 col-md-12 mb-4 mb-md-0 order-1 order-lg-1">
+            <div class="col-lg-2 col-md-12 mb-4 mb-lg-0 order-1 order-lg-1">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="row" role="group">

@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Markdown from './Markdown.vue';
+import Markdown from "./Markdown.vue";
 export default {
-    props: ['sitesProp'],
-    components:{
-        "markdown": Markdown
-    }
-}
+  props: ["sitesProp"],
+  components: {
+    markdown: Markdown
+  }
+};
 </script>

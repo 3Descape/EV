@@ -49,33 +49,33 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/seite/info', 'SiteController@info')->name('info_edit');
     Route::get('/seite/impress', 'SiteController@imprint')->name('imprint_edit');
 
-    Route::post('/seite/update/{site}/body', 'SiteController@update_body')->name('site_body_update');
-    Route::post('/seite/update/{site}/title', 'SiteController@update_title')->name('site_title_update');
+    Route::post('/seite/update/{site}/text', 'SiteController@update_body')->name('site_body_update');
+    Route::post('/seite/update/{site}/titel', 'SiteController@update_title')->name('site_title_update');
 
     Route::post('/seite/über_uns/hochladen', 'ImagesController@uploud_group_image')->name('group_image_store');
     Route::delete('seite/über_uns', 'ImagesController@remove_group_image')->name('group_image_destroy');
 
-    Route::get('/bilder', 'ImageController@index')->name('image_index');
-    Route::post('/bilder', 'ImageController@store')->name('image_store');
-    Route::delete('/bilder/{image}', 'ImageController@destroy')->name('image_destroy');
+    Route::get('/bild', 'ImageController@index')->name('image_index');
+    Route::post('/bild', 'ImageController@store')->name('image_store');
+    Route::delete('/bild/{image}', 'ImageController@destroy')->name('image_destroy');
 
-    Route::get('/dateien', 'FileController@index')->name('file_index');
-    Route::get('/dateien/edit/{file}', 'FileController@edit')->name('file_edit');
-    Route::put('/dateien/{file}', 'FileController@update')->name('file_update');
-    Route::post('/dateien', 'FileController@store')->name('file_store');
-    Route::delete('/dateien/{file}', 'FileController@delete')->name('file_destroy');
+    Route::get('/datei', 'FileController@index')->name('file_index');
+    Route::get('/datei/edit/{file}', 'FileController@edit')->name('file_edit');
+    Route::put('/datei/{file}', 'FileController@update')->name('file_update');
+    Route::post('/datei', 'FileController@store')->name('file_store');
+    Route::delete('/datei/{file}', 'FileController@delete')->name('file_destroy');
 
-    Route::get('/thermine', 'FixtureController@index')->name('fixture_index');
-    Route::post('/thermine', 'FixtureController@store')->name('fixture_store');
-    Route::get('/thermine/{fixture}/edit', 'FixtureController@edit')->name('fixture_edit');
-    Route::put('/thermine/{fixture}', 'FixtureController@update')->name('fixture_update');
-    Route::delete('/thermine/{fixture}', 'FixtureController@destroy')->name('fixture_destroy');
+    Route::get('/thermin', 'FixtureController@index')->name('fixture_index');
+    Route::post('/thermin', 'FixtureController@store')->name('fixture_store');
+    Route::get('/thermin/{fixture}/edit', 'FixtureController@edit')->name('fixture_edit');
+    Route::put('/thermin/{fixture}', 'FixtureController@update')->name('fixture_update');
+    Route::delete('/thermin/{fixture}', 'FixtureController@destroy')->name('fixture_destroy');
 
-    Route::get('/thermine-kategorie', 'FixtureCategoryController@index')->name('fixture_category_index');
-    Route::post('/thermine-kategorie', 'FixtureCategoryController@store')->name('fixture_category_store');
-    Route::get('/thermine-kategorie/{fixturecategory}/edit', 'FixtureCategoryController@edit')->name('fixture_category_edit');
-    Route::put('/thermine-kategorie/{fixturecategory}', 'FixtureCategoryController@update')->name('fixture_category_update');
-    Route::delete('/thermine-kategorie/{fixturecategory}', 'FixtureCategoryController@destroy')->name('fixture_category_destroy');
+    Route::get('/thermin-kategorie', 'FixtureCategoryController@index')->name('fixture_category_index');
+    Route::post('/thermin-kategorie', 'FixtureCategoryController@store')->name('fixture_category_store');
+    Route::get('/thermin-kategorie/{fixturecategory}/edit', 'FixtureCategoryController@edit')->name('fixture_category_edit');
+    Route::put('/thermin-kategorie/{fixturecategory}', 'FixtureCategoryController@update')->name('fixture_category_update');
+    Route::delete('/thermin-kategorie/{fixturecategory}', 'FixtureCategoryController@destroy')->name('fixture_category_destroy');
 });
 
 Route::get('/', 'FrontendController@index')->name('home');
@@ -94,4 +94,4 @@ Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
 Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
 Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
 
-Route::post('/images/{image}', 'ImagesController@getImage');
+Route::post('/bild/{image}', 'ImagesController@getImage');

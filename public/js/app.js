@@ -47179,7 +47179,7 @@ exports = module.exports = __webpack_require__(12)(undefined);
 
 
 // module
-exports.push([module.i, "\nimg[data-v-340a66f4]{\r\n    max-height: 15rem;\r\n    width: auto;\n}\r\n", ""]);
+exports.push([module.i, "\nimg[data-v-340a66f4] {\r\n  max-height: 15rem;\r\n  width: auto;\n}\r\n", ""]);
 
 // exports
 
@@ -47230,34 +47230,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        url: {
-            default: '',
-            type: String
-        },
-        id: {
-            default: -1
-        },
-        classes: [String]
+  props: {
+    url: {
+      default: "",
+      type: String
     },
-    data: function data() {
-        return {
-            path: "",
-            state: false
-        };
+    id: {
+      default: -1
     },
-    mounted: function mounted() {
-        if (this.url !== '') {
-            this.path = this.url;
-            this.state = true;
-        } else {
-            var vue = this;
-            axios.post("/images/" + this.id).then(function (data) {
-                vue.path = "/storage/" + data.data.path;
-                vue.state = true;
-            });
-        }
+    classes: [String]
+  },
+  data: function data() {
+    return {
+      path: "",
+      state: false
+    };
+  },
+  mounted: function mounted() {
+    if (this.url !== "") {
+      this.path = this.url;
+      this.state = true;
+    } else {
+      var vue = this;
+      axios.post("/bild/" + this.id).then(function (data) {
+        vue.path = "/storage/" + data.data.path;
+        vue.state = true;
+      });
     }
+  }
 });
 
 /***/ }),
@@ -47434,10 +47434,6 @@ module.exports = __webpack_require__(191);
 __webpack_require__(27);
 window.$ = window.jQuery = __webpack_require__(14);
 window.Vue = __webpack_require__(4);
-//
-// const app = new Vue({
-//     el: '#vue',
-// });
 
 Vue.component('bild', __webpack_require__(51));
 

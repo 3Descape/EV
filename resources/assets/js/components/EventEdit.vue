@@ -138,9 +138,9 @@
 </template>
 
 <script>
-import Errors from './Errors.js';
-import {EventBus} from './EventBus.js';
-import Message from './Message.vue';
+import Errors from "./Errors.js";
+import { EventBus } from "./EventBus.js";
+import Message from "./Message.vue";
 export default {
   props: ["eventProp", "categories"],
   data() {
@@ -155,7 +155,7 @@ export default {
     };
   },
   components: {
-      'msg': Message
+    msg: Message
   },
   methods: {
     FormatDate: date => {
@@ -169,19 +169,26 @@ export default {
     update: function() {
       let vue = this;
       vue.isUpdating = true;
-      axios.put("/admin/events/" + vue.event.id, {
+      axios
+        .put(`/admin/veranstaltungen/${vue.event.id}`, {
           name: vue.event.name,
           location: vue.event.location,
           date: this.event.date,
           markup: vue.event.markup,
           html: vue.compiledMarkdown,
           category: vue.event.category_id
-        }).then(msg => {
+        })
+        .then(msg => {
           vue.isUpdating = false;
           EventBus.$emit("msg-event", msg.data.status);
-        }).catch(errors => {
+        })
+        .catch(errors => {
           vue.errors.setErrors(errors.response.data.errors);
-          EventBus.$emit("msg-event", "Es ist ein Fehler aufgetreten.", 'danger');
+          EventBus.$emit(
+            "msg-event",
+            "Es ist ein Fehler aufgetreten.",
+            "danger"
+          );
           vue.isUpdating = false;
         });
     },
@@ -189,31 +196,28 @@ export default {
       this.images = e.target.files;
       this.uploudImages();
     },
-    postImage(data, index){
-        let vue = this;
-        return new Promise(
-            function(resolve, reject){
-                let config = {
-                    onUploadProgress: function(progressEvent) {
-                        
-                        vue.$set(vue.progress, index,Math.round(
-                            progressEvent.loaded * 100 / progressEvent.total
-                        ));
-                    }
-                };
-                axios.post(`/admin/events/${vue.event.id}/image`, data, config)
-                .then(msg => {
-                    console.log('postImage then');
-                    vue.event.images.push(msg.data.image)
-                    resolve();
-                })
-                .catch(errors => {
-                    console.log('reject');
-                    reject(errors);
-                });
-            }
-        );
-        
+    postImage(data, index) {
+      let vue = this;
+      return new Promise(function(resolve, reject) {
+        let config = {
+          onUploadProgress: function(progressEvent) {
+            vue.$set(
+              vue.progress,
+              index,
+              Math.round(progressEvent.loaded * 100 / progressEvent.total)
+            );
+          }
+        };
+        axios
+          .post(`/admin/veranstaltungen/${vue.event.id}/bild`, data, config)
+          .then(msg => {
+            vue.event.images.push(msg.data.image);
+            resolve();
+          })
+          .catch(errors => {
+            reject(errors);
+          });
+      });
     },
     uploudImages: async function() {
       let vue = this;
@@ -221,54 +225,65 @@ export default {
       for (var i = 0; i < vue.images.length; i++) {
         let data = new FormData();
         data.append("file", vue.images[i]);
-        jobs.push(await this.postImage(data, i).catch((errors)=>{
+        jobs.push(
+          await this.postImage(data, i).catch(errors => {
             vue.errors.setErrors(errors.response.data);
-        }));
+          })
+        );
         vue.$forceUpdate();
       }
 
-      Promise.all([jobs]).then(msg =>{
-          console.log('promise all');
-          if(vue.errors.length===0){
-              EventBus.$emit('msg-event', 'Bilder wurden hinzugefügt');
+      Promise.all([jobs])
+        .then(msg => {
+          if (vue.errors.length === 0) {
+            EventBus.$emit("msg-event", "Bilder wurden hinzugefügt");
           }
           vue.progress = [];
           vue.images = [];
-      }).catch((errors)=>{
-          console.log(errors);
-      });
+        })
+        .catch(errors => {});
     },
-    destroy(image){
-        let vue = this;
-        axios.delete(`/admin/bilder/${image.id}`)
+    destroy(image) {
+      let vue = this;
+      axios
+        .delete(`/admin/bilder/${image.id}`)
         .then(msg => {
-            vue.event.images.splice(vue.event.images.indexOf(image), 1);
-            EventBus.$emit("msg-event", msg.data.status);
-        }).catch(errors => {
-            EventBus.$emit(
-                "msg-event", "Es ist ein Fehler aufgetreten.", "danger");
+          vue.event.images.splice(vue.event.images.indexOf(image), 1);
+          EventBus.$emit("msg-event", msg.data.status);
+        })
+        .catch(errors => {
+          EventBus.$emit(
+            "msg-event",
+            "Es ist ein Fehler aufgetreten.",
+            "danger"
+          );
         });
-      }
-    },
-    computed: {
-        compiledMarkdown: function() {
-            return this.event.markup ? marked(this.event.markup) : "";
-        },        
-        prog: function(){
-            return Math.round(this.progress.reduce(function(a,b){return a+b}, 0)/this.images.length, 0);
-        }
-    },
-    created() {
-        marked.setOptions({
-        gfm: true,
-        breaks: true,
-        tables: true
-        });
-
-        let now = new Date();
-        let eventDate = new Date(this.event.date);
-        this.isArchived = eventDate < now;
-        this.event.date = this.FormatDate(eventDate);
     }
-}
+  },
+  computed: {
+    compiledMarkdown: function() {
+      return this.event.markup ? marked(this.event.markup) : "";
+    },
+    prog: function() {
+      return Math.round(
+        this.progress.reduce(function(a, b) {
+          return a + b;
+        }, 0) / this.images.length,
+        0
+      );
+    }
+  },
+  created() {
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      tables: true
+    });
+
+    let now = new Date();
+    let eventDate = new Date(this.event.date);
+    this.isArchived = eventDate < now;
+    this.event.date = this.FormatDate(eventDate);
+  }
+};
 </script>

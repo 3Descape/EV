@@ -20,7 +20,7 @@
                 </div>
             </div>
         </div>
-    </div> 
+    </div>
 </template>
 
 <script>
@@ -36,7 +36,7 @@ export default {
     destroy(image) {
       let vue = this;
       axios
-        .delete(`/admin/bilder/${image.id}`)
+        .delete(`/admin/bild/${image.id}`)
         .then(msg => {
           vue.images.splice(vue.images.indexOf(image), 1);
           EventBus.$emit("msg-event", msg.data.status);

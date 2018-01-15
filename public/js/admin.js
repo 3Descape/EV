@@ -52488,7 +52488,7 @@ exports = module.exports = __webpack_require__(12)(undefined);
 
 
 // module
-exports.push([module.i, "\nimg[data-v-340a66f4]{\r\n    max-height: 15rem;\r\n    width: auto;\n}\r\n", ""]);
+exports.push([module.i, "\nimg[data-v-340a66f4] {\r\n  max-height: 15rem;\r\n  width: auto;\n}\r\n", ""]);
 
 // exports
 
@@ -52539,34 +52539,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: {
-        url: {
-            default: '',
-            type: String
-        },
-        id: {
-            default: -1
-        },
-        classes: [String]
+  props: {
+    url: {
+      default: "",
+      type: String
     },
-    data: function data() {
-        return {
-            path: "",
-            state: false
-        };
+    id: {
+      default: -1
     },
-    mounted: function mounted() {
-        if (this.url !== '') {
-            this.path = this.url;
-            this.state = true;
-        } else {
-            var vue = this;
-            axios.post("/images/" + this.id).then(function (data) {
-                vue.path = "/storage/" + data.data.path;
-                vue.state = true;
-            });
-        }
+    classes: [String]
+  },
+  data: function data() {
+    return {
+      path: "",
+      state: false
+    };
+  },
+  mounted: function mounted() {
+    if (this.url !== "") {
+      this.path = this.url;
+      this.state = true;
+    } else {
+      var vue = this;
+      axios.post("/bild/" + this.id).then(function (data) {
+        vue.path = "/storage/" + data.data.path;
+        vue.state = true;
+      });
     }
+  }
 });
 
 /***/ }),
@@ -66120,17 +66120,6 @@ __webpack_require__(27);
 
 window.Vue = __webpack_require__(4);
 window.marked = __webpack_require__(63);
-
-// import Dashboard from './components/Dashboard.vue';
-// import Roles from './components/Roles.vue';
-// import SitesEdit from './components/SitesEdit.vue';
-// import EventEdit from './components/EventEdit.vue';
-// import FileUploud from './components/FileUploud'
-
-// Vue.component('dashboard', Dashboard);
-// Vue.component('roles', Roles);
-// Vue.component('sites-edit', SitesEdit);
-// Vue.component('event-edit', EventEdit);
 
 Vue.component('dashboard', __webpack_require__(194));
 Vue.component('roles', __webpack_require__(295));
@@ -84174,10 +84163,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['sitesProp'],
-    components: {
-        "markdown": __WEBPACK_IMPORTED_MODULE_0__Markdown_vue___default.a
-    }
+  props: ["sitesProp"],
+  components: {
+    markdown: __WEBPACK_IMPORTED_MODULE_0__Markdown_vue___default.a
+  }
 });
 
 /***/ }),
@@ -84275,75 +84264,71 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 var marked = __webpack_require__(63);
 var renderer = new marked.Renderer();
 
 renderer.image = function (href, title, text) {
-    var out = '<img class="img-fluid d-block mx-auto" style="max-height: 400px;" src="' + href + '" alt="' + text + '"';
-    if (title) {
-        out += ' title="' + title + '"';
-    }
-    out += this.options.xhtml ? '/>' : '>';
-    return out;
+  var out = '<img class="img-fluid d-block mx-auto" style="max-height: 400px;" src="' + href + '" alt="' + text + '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += this.options.xhtml ? "/>" : ">";
+  return out;
 };
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['siteProp'],
-    data: function data() {
-        return {
-            site: this.siteProp,
-            updatingBody: false,
-            updatingTitle: false
-        };
-    },
+  props: ["siteProp"],
+  data: function data() {
+    return {
+      site: this.siteProp,
+      updatingBody: false,
+      updatingTitle: false
+    };
+  },
 
-    computed: {
-        compiledMarkdown: function compiledMarkdown() {
-            if (this.site.markup) {
-                return marked(this.site.markup, { renderer: renderer });
-            } else {
-                return "";
-            }
-        }
-    },
-    methods: {
-        updateBody: function updateBody() {
-            var _this = this;
-
-            this.updatingBody = true;
-            var vue = this;
-            axios.post('/admin/sites/update/' + vue.site.id + '/body', {
-                rawData: vue.site.markup,
-                compiledData: vue.compiledMarkdown
-            }).then(function (response) {
-                _this.updatingBody = false;
-            }).catch(function (errors) {
-                console.log(errors);
-            });
-        },
-        updateTitle: function updateTitle() {
-            var _this2 = this;
-
-            this.updatingTitle = true;
-            var vue = this;
-            axios.post('/admin/sites/update/' + vue.site.id + '/title', {
-                title: vue.site.title
-            }).then(function (response) {
-                _this2.updatingTitle = false;
-                console.log(response.data.status);
-            }).catch(function (errors) {
-                console.log(errors);
-            });
-        }
-    },
-    created: function created() {
-        marked.setOptions({
-            gfm: true,
-            breaks: true,
-            tables: true
-        });
+  computed: {
+    compiledMarkdown: function compiledMarkdown() {
+      if (this.site.markup) {
+        return marked(this.site.markup, { renderer: renderer });
+      } else {
+        return "";
+      }
     }
+  },
+  methods: {
+    updateBody: function updateBody() {
+      var _this = this;
+
+      this.updatingBody = true;
+      var vue = this;
+      axios.post('/admin/seite/update/' + vue.site.id + '/text', {
+        rawData: vue.site.markup,
+        compiledData: vue.compiledMarkdown
+      }).then(function (response) {
+        _this.updatingBody = false;
+      }).catch(function (errors) {});
+    },
+    updateTitle: function updateTitle() {
+      var _this2 = this;
+
+      this.updatingTitle = true;
+      var vue = this;
+      axios.post('/admin/sites/update/' + vue.site.id + '/titel', {
+        title: vue.site.title
+      }).then(function (response) {
+        _this2.updatingTitle = false;
+      }).catch(function (errors) {});
+    }
+  },
+  created: function created() {
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      tables: true
+    });
+  }
 });
 
 /***/ }),
@@ -84496,7 +84481,9 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v("\n                        Vorschau "),
+                  _vm._v(
+                    "\n                        Vorschau\n                        "
+                  ),
                   _c("i", { staticClass: "fa fa-caret-down" })
                 ]
               )
@@ -84763,171 +84750,165 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ["eventProp", "categories"],
-    data: function data() {
-        return {
-            event: this.eventProp,
-            isArchived: false,
-            isUpdating: false,
-            errors: new __WEBPACK_IMPORTED_MODULE_1__Errors_js__["a" /* default */](),
-            images: [],
-            progress: [],
-            imageErrors: []
+  props: ["eventProp", "categories"],
+  data: function data() {
+    return {
+      event: this.eventProp,
+      isArchived: false,
+      isUpdating: false,
+      errors: new __WEBPACK_IMPORTED_MODULE_1__Errors_js__["a" /* default */](),
+      images: [],
+      progress: [],
+      imageErrors: []
+    };
+  },
+
+  components: {
+    msg: __WEBPACK_IMPORTED_MODULE_3__Message_vue___default.a
+  },
+  methods: {
+    FormatDate: function FormatDate(date) {
+      var day = ("0" + (date.getDate() + 1)).slice(-2);
+      var month = ("0" + (date.getMonth() + 1)).slice(-2);
+      var year = date.getFullYear();
+      var hour = ("0" + date.getHours()).slice(-2);
+      var minute = ("0" + (date.getMinutes() + 1)).slice(-2);
+      return day + "." + month + "." + year + " " + hour + ":" + minute;
+    },
+    update: function update() {
+      var vue = this;
+      vue.isUpdating = true;
+      axios.put("/admin/veranstaltungen/" + vue.event.id, {
+        name: vue.event.name,
+        location: vue.event.location,
+        date: this.event.date,
+        markup: vue.event.markup,
+        html: vue.compiledMarkdown,
+        category: vue.event.category_id
+      }).then(function (msg) {
+        vue.isUpdating = false;
+        __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+      }).catch(function (errors) {
+        vue.errors.setErrors(errors.response.data.errors);
+        __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
+        vue.isUpdating = false;
+      });
+    },
+    fileChange: function fileChange(e) {
+      this.images = e.target.files;
+      this.uploudImages();
+    },
+    postImage: function postImage(data, index) {
+      var vue = this;
+      return new Promise(function (resolve, reject) {
+        var config = {
+          onUploadProgress: function onUploadProgress(progressEvent) {
+            vue.$set(vue.progress, index, Math.round(progressEvent.loaded * 100 / progressEvent.total));
+          }
         };
-    },
-
-    components: {
-        'msg': __WEBPACK_IMPORTED_MODULE_3__Message_vue___default.a
-    },
-    methods: {
-        FormatDate: function FormatDate(date) {
-            var day = ("0" + (date.getDate() + 1)).slice(-2);
-            var month = ("0" + (date.getMonth() + 1)).slice(-2);
-            var year = date.getFullYear();
-            var hour = ("0" + date.getHours()).slice(-2);
-            var minute = ("0" + (date.getMinutes() + 1)).slice(-2);
-            return day + '.' + month + '.' + year + ' ' + hour + ':' + minute;
-        },
-        update: function update() {
-            var vue = this;
-            vue.isUpdating = true;
-            axios.put("/admin/events/" + vue.event.id, {
-                name: vue.event.name,
-                location: vue.event.location,
-                date: this.event.date,
-                markup: vue.event.markup,
-                html: vue.compiledMarkdown,
-                category: vue.event.category_id
-            }).then(function (msg) {
-                vue.isUpdating = false;
-                __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
-            }).catch(function (errors) {
-                vue.errors.setErrors(errors.response.data.errors);
-                __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", 'danger');
-                vue.isUpdating = false;
-            });
-        },
-        fileChange: function fileChange(e) {
-            this.images = e.target.files;
-            this.uploudImages();
-        },
-        postImage: function postImage(data, index) {
-            var vue = this;
-            return new Promise(function (resolve, reject) {
-                var config = {
-                    onUploadProgress: function onUploadProgress(progressEvent) {
-
-                        vue.$set(vue.progress, index, Math.round(progressEvent.loaded * 100 / progressEvent.total));
-                    }
-                };
-                axios.post('/admin/events/' + vue.event.id + '/image', data, config).then(function (msg) {
-                    console.log('postImage then');
-                    vue.event.images.push(msg.data.image);
-                    resolve();
-                }).catch(function (errors) {
-                    console.log('reject');
-                    reject(errors);
-                });
-            });
-        },
-
-        uploudImages: function () {
-            var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
-                var vue, jobs, i, data;
-                return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
-                    while (1) {
-                        switch (_context.prev = _context.next) {
-                            case 0:
-                                vue = this;
-                                jobs = [];
-                                i = 0;
-
-                            case 3:
-                                if (!(i < vue.images.length)) {
-                                    _context.next = 15;
-                                    break;
-                                }
-
-                                data = new FormData();
-
-                                data.append("file", vue.images[i]);
-                                _context.t0 = jobs;
-                                _context.next = 9;
-                                return this.postImage(data, i).catch(function (errors) {
-                                    vue.errors.setErrors(errors.response.data);
-                                });
-
-                            case 9:
-                                _context.t1 = _context.sent;
-
-                                _context.t0.push.call(_context.t0, _context.t1);
-
-                                vue.$forceUpdate();
-
-                            case 12:
-                                i++;
-                                _context.next = 3;
-                                break;
-
-                            case 15:
-
-                                Promise.all([jobs]).then(function (msg) {
-                                    console.log('promise all');
-                                    if (vue.errors.length === 0) {
-                                        __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit('msg-event', 'Bilder wurden hinzugefügt');
-                                    }
-                                    vue.progress = [];
-                                    vue.images = [];
-                                }).catch(function (errors) {
-                                    console.log(errors);
-                                });
-
-                            case 16:
-                            case 'end':
-                                return _context.stop();
-                        }
-                    }
-                }, _callee, this);
-            }));
-
-            function uploudImages() {
-                return _ref.apply(this, arguments);
-            }
-
-            return uploudImages;
-        }(),
-        destroy: function destroy(image) {
-            var vue = this;
-            axios.delete('/admin/bilder/' + image.id).then(function (msg) {
-                vue.event.images.splice(vue.event.images.indexOf(image), 1);
-                __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
-            }).catch(function (errors) {
-                __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
-            });
-        }
-    },
-    computed: {
-        compiledMarkdown: function compiledMarkdown() {
-            return this.event.markup ? marked(this.event.markup) : "";
-        },
-        prog: function prog() {
-            return Math.round(this.progress.reduce(function (a, b) {
-                return a + b;
-            }, 0) / this.images.length, 0);
-        }
-    },
-    created: function created() {
-        marked.setOptions({
-            gfm: true,
-            breaks: true,
-            tables: true
+        axios.post("/admin/veranstaltungen/" + vue.event.id + "/bild", data, config).then(function (msg) {
+          vue.event.images.push(msg.data.image);
+          resolve();
+        }).catch(function (errors) {
+          reject(errors);
         });
+      });
+    },
 
-        var now = new Date();
-        var eventDate = new Date(this.event.date);
-        this.isArchived = eventDate < now;
-        this.event.date = this.FormatDate(eventDate);
+    uploudImages: function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
+        var vue, jobs, i, data;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                vue = this;
+                jobs = [];
+                i = 0;
+
+              case 3:
+                if (!(i < vue.images.length)) {
+                  _context.next = 15;
+                  break;
+                }
+
+                data = new FormData();
+
+                data.append("file", vue.images[i]);
+                _context.t0 = jobs;
+                _context.next = 9;
+                return this.postImage(data, i).catch(function (errors) {
+                  vue.errors.setErrors(errors.response.data);
+                });
+
+              case 9:
+                _context.t1 = _context.sent;
+
+                _context.t0.push.call(_context.t0, _context.t1);
+
+                vue.$forceUpdate();
+
+              case 12:
+                i++;
+                _context.next = 3;
+                break;
+
+              case 15:
+
+                Promise.all([jobs]).then(function (msg) {
+                  if (vue.errors.length === 0) {
+                    __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Bilder wurden hinzugefügt");
+                  }
+                  vue.progress = [];
+                  vue.images = [];
+                }).catch(function (errors) {});
+
+              case 16:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+
+      function uploudImages() {
+        return _ref.apply(this, arguments);
+      }
+
+      return uploudImages;
+    }(),
+    destroy: function destroy(image) {
+      var vue = this;
+      axios.delete("/admin/bilder/" + image.id).then(function (msg) {
+        vue.event.images.splice(vue.event.images.indexOf(image), 1);
+        __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+      }).catch(function (errors) {
+        __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
+      });
     }
+  },
+  computed: {
+    compiledMarkdown: function compiledMarkdown() {
+      return this.event.markup ? marked(this.event.markup) : "";
+    },
+    prog: function prog() {
+      return Math.round(this.progress.reduce(function (a, b) {
+        return a + b;
+      }, 0) / this.images.length, 0);
+    }
+  },
+  created: function created() {
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      tables: true
+    });
+
+    var now = new Date();
+    var eventDate = new Date(this.event.date);
+    this.isArchived = eventDate < now;
+    this.event.date = this.FormatDate(eventDate);
+  }
 });
 
 /***/ }),
@@ -85746,7 +85727,7 @@ exports = module.exports = __webpack_require__(12)(undefined);
 
 
 // module
-exports.push([module.i, "\n.info[data-v-37652940]{\n    position: absolute;\n    top: 5px;\n    right: 0;\n    z-index: 20;\n}\n.fade-enter-active[data-v-37652940], .fade-leave-active[data-v-37652940]{\n    -webkit-transition: opacity 0.2s ease-out;\n    transition: opacity 0.2s ease-out;\n}\n.fade-enter[data-v-37652940], .fade-leave-to[data-v-37652940]{\n    opacity: 0;\n}\n", ""]);
+exports.push([module.i, "\n.info[data-v-37652940] {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 0;\r\n  z-index: 20;\n}\n.fade-enter-active[data-v-37652940],\r\n.fade-leave-active[data-v-37652940] {\r\n  -webkit-transition: opacity 0.2s ease-out;\r\n  transition: opacity 0.2s ease-out;\n}\n.fade-enter[data-v-37652940],\r\n.fade-leave-to[data-v-37652940] {\r\n  opacity: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -85770,31 +85751,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            show: false,
-            message: "",
-            type: "success"
-        };
-    },
-    computed: {
-        messageClass: function messageClass() {
-            return 'alert-' + this.type;
-        }
-    },
-    mounted: function mounted() {
-        var vue = this;
-        __WEBPACK_IMPORTED_MODULE_0__EventBus_js__["a" /* EventBus */].$on('msg-event', function (message) {
-            var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
-
-            vue.message = message;
-            vue.type = type;
-            vue.show = true;
-            setTimeout(function () {
-                vue.show = false;
-            }, 2000);
-        });
+  data: function data() {
+    return {
+      show: false,
+      message: "",
+      type: "success"
+    };
+  },
+  computed: {
+    messageClass: function messageClass() {
+      return "alert-" + this.type;
     }
+  },
+  mounted: function mounted() {
+    var vue = this;
+    __WEBPACK_IMPORTED_MODULE_0__EventBus_js__["a" /* EventBus */].$on("msg-event", function (message) {
+      var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
+
+      vue.message = message;
+      vue.type = type;
+      vue.show = true;
+      setTimeout(function () {
+        vue.show = false;
+      }, 2000);
+    });
+  }
 });
 
 /***/ }),
@@ -86576,87 +86557,86 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['files'],
-    data: function data() {
-        return {
-            file: {
-                name: "",
-                description: "",
-                file: {}
-            },
-            errors: new __WEBPACK_IMPORTED_MODULE_2__Errors_js__["a" /* default */](),
-            uploud: -1,
-            objects: {}
-        };
+  props: ["files"],
+  data: function data() {
+    return {
+      file: {
+        name: "",
+        description: "",
+        file: {}
+      },
+      errors: new __WEBPACK_IMPORTED_MODULE_2__Errors_js__["a" /* default */](),
+      uploud: -1,
+      objects: {}
+    };
+  },
+  components: {
+    msg: __WEBPACK_IMPORTED_MODULE_0__Message___default.a
+  },
+  methods: {
+    fileChange: function fileChange(e) {
+      this.file.file = e.target.files[0];
     },
-    components: {
-        'msg': __WEBPACK_IMPORTED_MODULE_0__Message___default.a
-    },
-    methods: {
-        fileChange: function fileChange(e) {
-            this.file.file = e.target.files[0];
-        },
-        submit: function submit() {
-            var vue = this;
-            var data = new FormData();
-            data.append('name', this.file.name);
-            data.append('description', this.file.description);
-            data.append('file', this.file.file);
+    submit: function submit() {
+      var vue = this;
+      var data = new FormData();
+      data.append("name", this.file.name);
+      data.append("description", this.file.description);
+      data.append("file", this.file.file);
 
-            var config = {
-                onUploadProgress: function onUploadProgress(progressEvent) {
-                    vue.uploud = Math.round(progressEvent.loaded * 100 / progressEvent.total);
-                }
-            };
-
-            axios.post('/admin/dateien', data, config).then(function (msg) {
-                vue.file.name = "";
-                vue.file.description = "";
-                vue.file.file = {};
-                vue.$refs.name.focus();
-                vue.$refs.form.reset();
-                vue.errors.clearErrors();
-                vue.uploud = -1;
-                vue.objects.push(msg.data.file);
-                __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit('msg-event', msg.data.status);
-            }).catch(function (errors) {
-                vue.errors.setErrors(errors.response.data.errors);
-                vue.uploud = -1;
-                __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit('msg-event', 'Es ist ein Fehler aufgetreten.', 'danger');
-            });
-        },
-        remove: function remove(file) {
-            var vue = this;
-            axios.delete('/admin/dateien/' + file.id).then(function (msg) {
-                vue.objects.splice(vue.objects.indexOf(file), 1);
-                __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit('msg-event', msg.data.status);
-            }).catch(function (errors) {
-                __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit('msg-event', 'Es ist ein Fehler aufgetreten.', 'danger');
-            });
+      var config = {
+        onUploadProgress: function onUploadProgress(progressEvent) {
+          vue.uploud = Math.round(progressEvent.loaded * 100 / progressEvent.total);
         }
-    },
-    computed: {
-        fileSize: function fileSize() {
-            if (this.file.file.size) {
-                return Math.round(this.file.file.size / (1024 * 1024) * 100, 3) / 100 + "MB";
-            }
-            return '';
-        },
-        width: function width() {
-            return "width:" + this.uploud + '%';
-        }
-    },
+      };
 
-    created: function created() {
-        this.objects = this.files;
+      axios.post("/admin/datei", data, config).then(function (msg) {
+        vue.file.name = "";
+        vue.file.description = "";
+        vue.file.file = {};
+        vue.$refs.name.focus();
+        vue.$refs.form.reset();
+        vue.errors.clearErrors();
+        vue.uploud = -1;
+        vue.objects.push(msg.data.file);
+        __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+      }).catch(function (errors) {
+        vue.errors.setErrors(errors.response.data.errors);
+        vue.uploud = -1;
+        __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
+      });
+    },
+    remove: function remove(file) {
+      var vue = this;
+      axios.delete("/admin/datei/" + file.id).then(function (msg) {
+        vue.objects.splice(vue.objects.indexOf(file), 1);
+        __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+      }).catch(function (errors) {
+        __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
+      });
     }
+  },
+  computed: {
+    fileSize: function fileSize() {
+      if (this.file.file.size) {
+        return Math.round(this.file.file.size / (1024 * 1024) * 100, 3) / 100 + "MB";
+      }
+      return "";
+    },
+    width: function width() {
+      return "width:" + this.uploud + "%";
+    }
+  },
+
+  created: function created() {
+    this.objects = this.files;
+  }
 });
 
 /***/ }),
@@ -86830,9 +86810,9 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\r\n                    " +
+                      "\n                    " +
                         _vm._s(_vm.uploud) +
-                        "%\r\n                "
+                        "%\n                "
                     )
                   ]
                 )
@@ -86943,7 +86923,7 @@ var staticRenderFns = [
       { staticClass: "custom-file-label", attrs: { for: "customFile" } },
       [
         _c("i", { staticClass: "fa fa-upload" }),
-        _vm._v(" Datei hochladen..\r\n                ")
+        _vm._v(" Datei hochladen..\n                ")
       ]
     )
   },
@@ -86960,7 +86940,7 @@ var staticRenderFns = [
         },
         [
           _c("i", { staticClass: "fa fa-plus" }),
-          _vm._v(" Hinzufügen\r\n            ")
+          _vm._v(" Hinzufügen\n            ")
         ]
       )
     ])
@@ -87156,7 +87136,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
       };
       this.errors.clearErrors();
-      axios.post("/admin/bilder", data, config).then(function (msg) {
+      axios.post("/admin/bild", data, config).then(function (msg) {
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
         vue.reset();
         __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("image-added", msg.data.image);
@@ -87264,7 +87244,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     destroy: function destroy(image) {
       var vue = this;
-      axios.delete("/admin/bilder/" + image.id).then(function (msg) {
+      axios.delete("/admin/bild/" + image.id).then(function (msg) {
         vue.images.splice(vue.images.indexOf(image), 1);
         __WEBPACK_IMPORTED_MODULE_0__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
       }).catch(function (errors) {
@@ -87647,7 +87627,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['id']
+  props: ["id"]
 });
 
 /***/ }),

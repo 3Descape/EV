@@ -10,10 +10,10 @@
                         <p class="text-muted ml-1">(Optional)</p>
                     </div>
 
-                    <input ref="name" v-model="userImage.name" type="text" id="name" class="form-control" name="name" >
+                    <input ref="name" v-model="userImage.name" type="text" id="name" class="form-control" name="name">
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
                         <ul class="m-0">
-                            <li  v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
+                            <li v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
                         </ul>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
             <image-gallery :images-prop="imagesProp"></image-gallery>
         </div>
     </div>
-    
+
 </template>
 
 <script>
@@ -99,7 +99,7 @@ export default {
       };
       this.errors.clearErrors();
       axios
-        .post("/admin/bilder", data, config)
+        .post("/admin/bild", data, config)
         .then(msg => {
           EventBus.$emit("msg-event", msg.data.status);
           vue.reset();

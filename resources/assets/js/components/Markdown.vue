@@ -26,7 +26,8 @@
                 <div class="card-header" role="tab" id="headingOne">
                     <h5 class="mb-0">
                         <a data-toggle="collapse" :href="'#collapse' + site.id" aria-expanded="false" aria-controls="'collapse' + site.id" class="text-dark">
-                            Vorschau <i class="fa fa-caret-down"></i>
+                            Vorschau
+                            <i class="fa fa-caret-down"></i>
                         </a>
                     </h5>
                 </div>
@@ -41,69 +42,74 @@
 </template>
 
 <script>
-    let marked = require('marked');
-    let renderer = new marked.Renderer();
+let marked = require("marked");
+let renderer = new marked.Renderer();
 
-    renderer.image = function(href, title, text) {
-      var out = '<img class="img-fluid d-block mx-auto" style="max-height: 400px;" src="' + href + '" alt="' + text + '"';
-      if (title) {
-        out += ' title="' + title + '"';
-      }
-      out += this.options.xhtml ? '/>' : '>';
-      return out;
+renderer.image = function(href, title, text) {
+  var out =
+    '<img class="img-fluid d-block mx-auto" style="max-height: 400px;" src="' +
+    href +
+    '" alt="' +
+    text +
+    '"';
+  if (title) {
+    out += ' title="' + title + '"';
+  }
+  out += this.options.xhtml ? "/>" : ">";
+  return out;
+};
+
+export default {
+  props: ["siteProp"],
+  data() {
+    return {
+      site: this.siteProp,
+      updatingBody: false,
+      updatingTitle: false
     };
-
-    export default {
-        props: ['siteProp'],
-        data(){
-            return{
-                site: this.siteProp,
-                updatingBody: false,
-                updatingTitle: false,
-            }
-        },
-        computed: {
-            compiledMarkdown: function(){
-                if(this.site.markup){
-                    return marked(this.site.markup, {renderer: renderer});
-                }
-                else{
-                    return "";
-                }
-            }
-        },
-        methods:{
-            updateBody () {
-                this.updatingBody = true;
-                let vue = this;
-                axios.post('/admin/sites/update/' + vue.site.id + '/body', {
-                    rawData: vue.site.markup,
-                    compiledData: vue.compiledMarkdown
-                }).then((response)=>{
-                    this.updatingBody = false;
-                }).catch((errors)=>{
-                    console.log(errors);
-                });
-            },
-            updateTitle (){
-                this.updatingTitle = true;
-                let vue = this;
-                axios.post('/admin/sites/update/' + vue.site.id + '/title', {
-                    title: vue.site.title,
-                }).then((response)=>{
-                    this.updatingTitle = false;
-                    console.log(response.data.status);
-                }).catch((errors)=>{
-                    console.log(errors);
-                });
-            }
-        },
-        created: function(){
-            marked.setOptions({
-                gfm: true,
-                breaks: true,
-                tables: true,
-            });
-        }
+  },
+  computed: {
+    compiledMarkdown: function() {
+      if (this.site.markup) {
+        return marked(this.site.markup, { renderer: renderer });
+      } else {
+        return "";
+      }
     }
+  },
+  methods: {
+    updateBody() {
+      this.updatingBody = true;
+      let vue = this;
+      axios
+        .post(`/admin/seite/update/${vue.site.id}/text`, {
+          rawData: vue.site.markup,
+          compiledData: vue.compiledMarkdown
+        })
+        .then(response => {
+          this.updatingBody = false;
+        })
+        .catch(errors => {});
+    },
+    updateTitle() {
+      this.updatingTitle = true;
+      let vue = this;
+      axios
+        .post(`/admin/sites/update/${vue.site.id}/titel`, {
+          title: vue.site.title
+        })
+        .then(response => {
+          this.updatingTitle = false;
+        })
+        .catch(errors => {});
+    }
+  },
+  created: function() {
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      tables: true
+    });
+  }
+};
 </script>

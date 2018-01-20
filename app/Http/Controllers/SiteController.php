@@ -68,4 +68,15 @@ class SiteController extends Controller
 
         return response()->json(['status' => 'Updated title'], 200);
     }
+
+    public function update_order(Request $request)
+    {
+        foreach ($request->sites as $site) {
+            Site::find($site['id'])->update([
+                'order' => $site['order']
+            ]);
+        }
+
+        return response()->json(['status' => 'Reihenfolge wurde geändert.']);
+    }
 }

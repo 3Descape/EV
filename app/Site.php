@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Site extends Model
 {
-    protected $fillable = ['title', 'html', 'markup'];
+    protected $fillable = ['title', 'html', 'markup', 'order'];
 
     /**
      * Returns the images associated with the event

@@ -1,7 +1,7 @@
 <template>
     <div class="col-lg-12">
         <div>
-            <msg></msg>
+            <msg />
             <form @submit.prevent="uploud" ref="form">
 
                 <div class="form-group">
@@ -13,7 +13,7 @@
                     <input ref="name" v-model="userImage.name" type="text" id="name" class="form-control" name="name">
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
                         <ul class="m-0">
-                            <li v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
+                            <li :key="error.name" v-for="error in errors.getError('name')">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
@@ -23,46 +23,56 @@
                     <div class="custom-file">
                         <input type="file" class="custom-file-input" id="customFile" name="file" @change="fileChange" multiple>
                         <label class="custom-file-label" for="customFile">
-                            <i class="fa fa-upload"></i> Bild hochladen..
+                            <i class="fa fa-upload" /> Bild hochladen..
                         </label>
                     </div>
 
                     <div class="progress mt-2" v-show="progress > -1">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="`width:${progress}%`" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">
-                            {{progress}}%
+                            {{ progress }}%
                         </div>
                     </div>
 
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
                         <ul class="m-0">
-                            <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
+                            <li :key="error.file" v-for="error in errors.getError('file')">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <button class="form-control btn btn-success" type="submit">
-                        <i class="fa fa-plus"></i> Hochladen
+                        <i class="fa fa-plus" /> Hochladen
                     </button>
                 </div>
             </form>
         </div>
 
         <div>
-            <image-gallery :images-prop="imagesProp"></image-gallery>
+            <image-gallery :images-prop="imagesProp" />
         </div>
     </div>
 
 </template>
 
 <script>
+/* global axios */
 import Message from "./Message";
 import ImageGallery from "./ImageGallery";
 import { EventBus } from "./EventBus.js";
 import Errors from "./Errors.js";
 
 export default {
-  props: ["images-prop"],
+  components: {
+    msg: Message,
+    "image-gallery": ImageGallery
+  },
+  props: {
+    imagesProp: {
+      type: Array,
+      required: true
+    }
+  },
   data: () => {
     return {
       errors: new Errors(),
@@ -115,10 +125,6 @@ export default {
           );
         });
     }
-  },
-  components: {
-    msg: Message,
-    "image-gallery": ImageGallery
   }
 };
 </script>

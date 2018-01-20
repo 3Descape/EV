@@ -1,6 +1,6 @@
 <template>
     <div>
-        <msg></msg>
+        <msg/>
         <form @submit.prevent="submit" ref="form">
             <div class="form-group">
                 <label for="name">Name:</label>
@@ -8,7 +8,7 @@
 
                 <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
                     <ul class="m-0">
-                        <li v-bind:key="error.name" v-for="error in errors.getError('name')">{{error}}</li>
+                        <li :key="error.name" v-for="error in errors.getError('name')">{{ error }}</li>
                     </ul>
                 </div>
             </div>
@@ -19,7 +19,7 @@
 
                 <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('description')">
                     <ul class="m-0">
-                        <li v-bind:key="error.description" v-for="error in errors.getError('description')">{{error}}</li>
+                        <li :key="error.description" v-for="error in errors.getError('description')">{{ error }}</li>
                     </ul>
                 </div>
             </div>
@@ -30,30 +30,30 @@
                 <div class="custom-file">
                     <input type="file" class="custom-file-input" id="customFile" name="file" @change="fileChange" multiple>
                     <label class="custom-file-label" for="customFile">
-                        <i class="fa fa-upload"></i> Datei hochladen..
+                        <i class="fa fa-upload" /> Datei hochladen..
                     </label>
                 </div>
 
                 <div class="progress mt-2" v-show="uploud > -1">
                     <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="width" :aria-valuenow="uploud" aria-valuemin="0" aria-valuemax="100">
-                        {{uploud}}%
+                        {{ uploud }}%
                     </div>
                 </div>
 
                 <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
                     <ul class="m-0">
-                        <li v-bind:key="error.file" v-for="error in errors.getError('file')">{{error}}</li>
+                        <li :key="error.file" v-for="error in errors.getError('file')">{{ error }}</li>
                     </ul>
                 </div>
             </div>
 
             <div v-show="fileSize" class="form-group">
-                <p v-text="fileSize"></p>
+                <p v-text="fileSize" />
             </div>
 
             <div class="form-group">
                 <button class="form-control btn btn-success" type="submit">
-                    <i class="fa fa-plus"></i> Hinzufügen
+                    <i class="fa fa-plus" /> Hinzufügen
                 </button>
             </div>
         </form>
@@ -69,18 +69,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="file in objects" v-bind:key="file.id">
-                    <td>{{file.name}}</td>
-                    <td class="overflow-text d-none d-md-table-cell">{{file.description}}</td>
+                <tr v-for="file in objects" :key="file.id">
+                    <td>{{ file.name }}</td>
+                    <td class="overflow-text d-none d-md-table-cell">{{ file.description }}</td>
 
                     <td class="d-flex">
                         <a :href="`/admin/datei/edit/${file.id}`" class="btn btn-warning ml-auto">
-                            <i class="fa fa-edit"></i>
+                            <i class="fa fa-edit" />
                         </a>
 
                         <form @submit.prevent="remove(file)">
                             <button type="submit" class="btn btn-danger mx-1">
-                                <i class="fa fa-trash"></i>
+                                <i class="fa fa-trash" />
                             </button>
                         </form>
                     </td>
@@ -91,12 +91,21 @@
 </template>
 
 <script>
+/* global axios*/
 import Message from "./Message";
 import { EventBus } from "./EventBus.js";
 import Errors from "./Errors.js";
 
 export default {
-  props: ["files"],
+  components: {
+    msg: Message
+  },
+  props: {
+    files: {
+      type: Array,
+      required: true
+    }
+  },
   data: () => {
     return {
       file: {
@@ -109,8 +118,21 @@ export default {
       objects: {}
     };
   },
-  components: {
-    msg: Message
+  computed: {
+    fileSize: function() {
+      if (this.file.file.size) {
+        return (
+          Math.round(this.file.file.size / (1024 * 1024) * 100, 3) / 100 + "MB"
+        );
+      }
+      return "";
+    },
+    width() {
+      return "width:" + this.uploud + "%";
+    }
+  },
+  created: function() {
+    this.objects = this.files;
   },
   methods: {
     fileChange(e) {
@@ -162,7 +184,7 @@ export default {
           vue.objects.splice(vue.objects.indexOf(file), 1);
           EventBus.$emit("msg-event", msg.data.status);
         })
-        .catch(errors => {
+        .catch(() => {
           EventBus.$emit(
             "msg-event",
             "Es ist ein Fehler aufgetreten.",
@@ -170,23 +192,6 @@ export default {
           );
         });
     }
-  },
-  computed: {
-    fileSize: function() {
-      if (this.file.file.size) {
-        return (
-          Math.round(this.file.file.size / (1024 * 1024) * 100, 3) / 100 + "MB"
-        );
-      }
-      return "";
-    },
-    width() {
-      return "width:" + this.uploud + "%";
-    }
-  },
-
-  created: function() {
-    this.objects = this.files;
   }
 };
 </script>

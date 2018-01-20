@@ -1,7 +1,7 @@
 <template>
     <transition name="fade">
         <div class="alert info" :class="messageClass" role="alert" v-show="show">
-            <i class="fa fa-info-circle"></i> {{message}}
+            <i class="fa fa-info-circle" /> {{ message }}
         </div>
     </transition>
 </template>

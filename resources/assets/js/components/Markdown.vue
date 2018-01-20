@@ -6,18 +6,18 @@
                     <input type="text" class="form-control" placeholder="Titel" v-model="site.title">
                     <div class="input-group-prepend">
                         <button type="submit" class="input-group-text bg-light">
-                            <div v-if="!updatingTitle" class="fa fa-refresh"></div>
-                            <div v-if="updatingTitle" class="fa fa-spinner fa-pulse"></div>
+                            <div v-if="!updatingTitle" class="fa fa-refresh" />
+                            <div v-if="updatingTitle" class="fa fa-spinner fa-pulse" />
                         </button>
                     </div>
 
                 </form>
 
                 <form @submit.prevent="updateBody">
-                    <textarea name="name" class="form-control" v-model="site.markup" rows="5"></textarea>
+                    <textarea name="name" class="form-control" v-model="site.markup" rows="5" />
                     <button class="btn btn-info form-control mt-2" type="submit">
-                        <i v-if="!updatingBody" class="fa fa-edit"></i> Text aktualisieren..
-                        <i v-if="updatingBody" class="fa fa-spinner fa-pulse" disabled></i>
+                        <i v-if="!updatingBody" class="fa fa-edit" /> Text aktualisieren..
+                        <i v-if="updatingBody" class="fa fa-spinner fa-pulse" disabled />
                     </button>
                 </form>
             </fieldset>
@@ -27,14 +27,13 @@
                     <h5 class="mb-0">
                         <a data-toggle="collapse" :href="'#collapse' + site.id" aria-expanded="false" aria-controls="'collapse' + site.id" class="text-dark">
                             Vorschau
-                            <i class="fa fa-caret-down"></i>
+                            <i class="fa fa-caret-down" />
                         </a>
                     </h5>
                 </div>
 
                 <div :id="'collapse' + site.id" class="collapse" role="tabpanel">
-                    <div class="card-body" v-html="compiledMarkdown">
-                    </div>
+                    <div class="card-body" v-html="compiledMarkdown" />
                 </div>
             </div>
         </div>
@@ -42,7 +41,8 @@
 </template>
 
 <script>
-let marked = require("marked");
+/* global axios */
+const marked = require("marked");
 let renderer = new marked.Renderer();
 
 renderer.image = function(href, title, text) {
@@ -60,7 +60,12 @@ renderer.image = function(href, title, text) {
 };
 
 export default {
-  props: ["siteProp"],
+  props: {
+    siteProp: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       site: this.siteProp,
@@ -77,6 +82,13 @@ export default {
       }
     }
   },
+  created: function() {
+    marked.setOptions({
+      gfm: true,
+      breaks: true,
+      tables: true
+    });
+  },
   methods: {
     updateBody() {
       this.updatingBody = true;
@@ -86,10 +98,10 @@ export default {
           rawData: vue.site.markup,
           compiledData: vue.compiledMarkdown
         })
-        .then(response => {
+        .then(() => {
           this.updatingBody = false;
         })
-        .catch(errors => {});
+        .catch(() => {});
     },
     updateTitle() {
       this.updatingTitle = true;
@@ -98,18 +110,11 @@ export default {
         .post(`/admin/seite/update/${vue.site.id}/titel`, {
           title: vue.site.title
         })
-        .then(response => {
+        .then(() => {
           this.updatingTitle = false;
         })
-        .catch(errors => {});
+        .catch(() => {});
     }
-  },
-  created: function() {
-    marked.setOptions({
-      gfm: true,
-      breaks: true,
-      tables: true
-    });
   }
 };
 </script>

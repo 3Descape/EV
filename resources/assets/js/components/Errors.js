@@ -1,22 +1,22 @@
-export default class Errors{
-    constructor(){
+export default class Errors {
+    constructor() {
         this.errors = {};
     }
 
-    setErrors(errors){
+    setErrors(errors) {
         this.errors = errors;
     }
 
-    clearErrors(){
+    clearErrors() {
         this.errors = {};
     }
 
-    getError(name){
+    getError(name) {
         return this.errors[name];
     }
 
-    hasError(name){
-        if(this.errors.hasOwnProperty(name)){
+    hasError(name) {
+        if (this.errors.hasOwnProperty(name)) {
             return this.errors[name];
         }
         return null;

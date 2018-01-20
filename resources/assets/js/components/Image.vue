@@ -4,6 +4,7 @@
     </div>
 </template>
 <script>
+/* global axios*/
 export default {
   props: {
     url: {
@@ -11,9 +12,13 @@ export default {
       type: String
     },
     id: {
+      type: Number,
       default: -1
     },
-    classes: [String]
+    classes: {
+      type: String,
+      default: ""
+    }
   },
   data: () => {
     return {

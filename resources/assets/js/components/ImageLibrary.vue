@@ -41,9 +41,12 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="form-control btn btn-success" type="submit">
+                    <button class="form-control btn btn-success" type="submit" v-show="!isLoading">
                         <i class="fa fa-plus" /> Hochladen
                     </button>
+                    <div class="form-control btn btn-success" type="submit" v-show="isLoading">
+                        <i class="fa fa-spinner fa-pulse" />
+                    </div>
                 </div>
             </form>
         </div>
@@ -80,7 +83,8 @@ export default {
         name: "",
         image: {}
       },
-      progress: -1
+      progress: -1,
+      isLoading: false
     };
   },
   methods: {
@@ -96,6 +100,7 @@ export default {
     },
     uploud() {
       let vue = this;
+      vue.isLoading = true;
       let data = new FormData();
       data.append("name", this.userImage.name);
       data.append("file", this.userImage.image);
@@ -107,15 +112,19 @@ export default {
           );
         }
       };
+
       this.errors.clearErrors();
+
       axios
         .post("/admin/bild", data, config)
         .then(msg => {
           EventBus.$emit("msg-event", msg.data.status);
           vue.reset();
           EventBus.$emit("image-added", msg.data.image);
+          this.isLoading = false;
         })
         .catch(errors => {
+          console.log(errors);
           vue.errors.setErrors(errors.response.data.errors);
           vue.reset();
           EventBus.$emit(
@@ -123,6 +132,7 @@ export default {
             "Es ist ein Fehler aufgetreten.",
             "danger"
           );
+          this.isLoading = false;
         });
     }
   }

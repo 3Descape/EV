@@ -27,6 +27,7 @@
     "font-awesome": "^4.7.0",
     "marked": "^0.3.12",
     "purify-css": "^1.2.6",
-    "purifycss-webpack": "^0.7.0"
+    "purifycss-webpack": "^0.7.0",
+    "vuedraggable": "^2.16.0"
   }
 }

@@ -11,6 +11,7 @@ class SiteController extends Controller
 {
     public function edit(SiteCategory $site_category)
     {
+        $this->authorize('can_access_sites', User::class);
         $sites = $site_category->sites()->get();
         return view('admin.sites.sites.site_edit', compact(
             'site_category',
@@ -20,6 +21,7 @@ class SiteController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('can_access_sites', User::class);
         $request->validate([
             'title' => 'required|string',
             'site_category_id' => 'required|exists:site_categories,id',
@@ -58,6 +60,7 @@ class SiteController extends Controller
 
     public function update_order(Request $request)
     {
+        $this->authorize('can_access_sites', User::class);
         foreach ($request->sites as $site) {
             Site::find($site['id'])->update([
                 'order' => $site['order']
@@ -69,6 +72,7 @@ class SiteController extends Controller
 
     public function destroy(Site $site)
     {
+        $this->authorize('can_access_sites', User::class);
         $site->delete();
         return response()->json(['status' => 'Wurde gelöscht.']);
     }

@@ -8,13 +8,13 @@
 
             <div class="card">
                 <div class="card-header">
-                    Users
+                    Benutzer
                 </div>
                 <div class="card-body">
                     @if (session('exeption'))
-                    <div class="alert alert-danger">
-                        {{ session('exeption') }}
-                    </div>
+                        <div class="alert alert-danger">
+                            {{ session('exeption') }}
+                        </div>
                     @endif
                     <table class="table overflow">
                         <thead>
@@ -26,29 +26,29 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
-                            <tr>
-                                <td scope="row" class="overflow-text">{{$user->name}}</td>
-                                <td class="d-none d-md-table-cell overflow-text">{{$user->email}}</td>
-                                <td class="d-none d-md-table-cell">
-                                    @foreach ($user->roles as $role)
-                                    <a href="{{route('role_index') . '#' . $role->name}}" class="role">
-                                        <span class="badge badge-secondary">
-                                            {{ucfirst($role->name)}}
-                                        </span>
-                                    </a>
-                                    @endforeach
-                                </td>
-                                <td class="d-flex">
-                                    <a href="{{route('user_role_edit', $user->id)}}"
-                                        class="btn btn-warning ml-auto">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a href="{{route('user_delete', $user->id)}}"
-                                        class="btn btn-danger mx-1">
-                                        <i class="fa fa-trash-o"></i>
-                                    </a>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td scope="row" class="overflow-text">{{$user->name}}</td>
+                                    <td class="d-none d-md-table-cell overflow-text">{{$user->email}}</td>
+                                    <td class="d-none d-md-table-cell">
+                                        @foreach ($user->roles as $role)
+                                            <a href="{{route('role_index') . '#' . $role->name}}" class="role">
+                                                <span class="badge badge-secondary">
+                                                    {{ucfirst($role->name)}}
+                                                </span>
+                                            </a>
+                                        @endforeach
+                                    </td>
+                                    <td class="d-flex">
+                                        <a href="{{route('user_role_edit', $user->id)}}"
+                                            class="btn btn-warning ml-auto">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="{{route('user_delete', $user->id)}}"
+                                            class="btn btn-danger mx-1">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </td>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

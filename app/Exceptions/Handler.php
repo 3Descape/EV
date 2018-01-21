@@ -48,7 +48,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $message = json_encode(['file' => ['Datei ist zu groß.']]);
+        $message = json_encode(['errors' => ['file' => ['Datei ist zu groß.']]]);
         if ($exception instanceof PostTooLargeException) {
             return response($message, 413);
         }

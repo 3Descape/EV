@@ -18,7 +18,7 @@
         </div>
 
         <div class="form-group d-flex">
-            <button type="submit" class="btn btn-success ml-auto mr-2">
+            <button type="submit" class="btn btn-info ml-auto mr-2">
                 Bearbeiten <i class="fa fa-edit"></i>
             </button>
 

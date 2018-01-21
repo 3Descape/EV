@@ -2,7 +2,7 @@
     <div>
         <div class="form-inline">
             <div class="form-group">
-                <select ref="type" class="form-control" @change="update">
+                <select ref="type" class="custom-select mr-2" @change="update">
                     <option value="year">Jahre</option>
                     <option value="month">Monate</option>
                     <option value="week">Wochen</option>
@@ -11,24 +11,26 @@
                 </select>
             </div>
             <div class="form-group">
-                <input class="form-control" ref="range" type="number" value="7" @change="update">
+                <input class="form-control" ref="range" type="text" value="7" @change="update">
             </div>
         </div>
-        <chart :chart-data="data" :options="options" />
+        <line-chart :chart-data="data" :options="options" class="chart"></line-chart>
     </div>
 </template>
 
 <script>
 /* global axios */
-import Chart from "./Chart.vue";
+import LineChart from "./LineChart.vue";
 export default {
   components: {
-    chart: Chart
+    lineChart: LineChart
   },
   data() {
     return {
       data: {},
       options: {
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
           yAxes: [
             {
@@ -43,9 +45,7 @@ export default {
             }
           ]
         }
-      },
-
-      counter: 0
+      }
     };
   },
   mounted() {
@@ -66,11 +66,8 @@ export default {
         datasets: [
           {
             label: "Seitenaufrufe",
-            backgroundColor: "#f87979",
-            data: this.data,
-            borderWidth: 1,
-            lineTension: 0,
-            data: data
+            data: data,
+            lineTension: 0
           }
         ]
       };
@@ -82,14 +79,15 @@ export default {
           type: this.$refs.type.value,
           range: this.$refs.range.value
         })
-        .then(function(r) {
+        .then(r => {
           vue.setData(r.data.values, r.data.keys);
         });
     }
   }
 };
 </script>
-
-<style lang="css">
-
+<style scoped>
+.chart {
+  max-width: 100%;
+}
 </style>

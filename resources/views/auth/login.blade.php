@@ -27,7 +27,7 @@
 
                         <input id="password" type="password" class="form-control" name="password" required>
 
-                        @component('admin.components.error', ['name' => 'email'])
+                        @component('admin.components.error', ['name' => 'password'])
                         @endcomponent
 
                     </div>

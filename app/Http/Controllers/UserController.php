@@ -23,7 +23,7 @@ class UserController extends Controller
             return $user->hasRole('administrator');
         });
         if ($admins->count() === 1) {
-            return back()->with('exeption', 'Es muss immer mindestens ein Administrator bestehen. Sie müssen zuerst einen anderen Benutzer diese Berechtigung geben, bevor Sie diesen löschen können.');
+            return back()->with('exeption', 'Es muss immer mindestens ein Administrator bestehen. Bitte geben Sie mindestens einem anderen Nutzer zuerst diese Berechtigung, bevor Sie diesen löschen.');
         }
         User::destroy($user);
 

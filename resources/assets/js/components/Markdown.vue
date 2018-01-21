@@ -1,6 +1,11 @@
 <template>
     <div class="card mb-4">
         <div class="card-body">
+            <div class="d-flex mb-1">
+                <button class="btn btn-danger ml-auto" @click="destroy">
+                    <i class="fa fa-trash" />
+                </button>
+            </div>
             <fieldset class="mb-2" :disabled="updatingBody || updatingTitle">
                 <form class="input-group mb-2" @submit.prevent="updateTitle">
                     <input type="text" class="form-control" placeholder="Titel" v-model="site.title">
@@ -114,6 +119,9 @@ export default {
           this.updatingTitle = false;
         })
         .catch(() => {});
+    },
+    destroy() {
+      this.$emit("delete", this.site);
     }
   }
 };

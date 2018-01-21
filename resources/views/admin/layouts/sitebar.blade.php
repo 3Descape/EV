@@ -52,21 +52,11 @@
                     </a>
 
                     <div class="collapse" id="sites">
-                        <a href="{{route('about_edit')}}" class="list-group-item">
-                            Über uns
-                        </a>
-
-                        <a href="{{route('sga_edit')}}" class="list-group-item">
-                            SGA
-                        </a>
-
-                        <a href="{{route('info_edit')}}" class="list-group-item">
-                            Info
-                        </a>
-
-                        <a href="{{route('imprint_edit')}}" class="list-group-item">
-                            Impressum
-                        </a>
+                        @foreach ($site_categories as $site_category)
+                            <a href="{{route('site_edit', $site_category->url)}}" class="list-group-item">
+                                {{ $site_category->name }}
+                            </a>
+                        @endforeach
                     </div>
                 @endcan
 

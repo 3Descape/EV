@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSitesTable extends Migration
+class CreateSiteCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateSitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sites', function (Blueprint $table) {
+        Schema::create('site_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title');
-            $table->text('html')->nullable();
-            $table->text('markup')->nullable();
-            $table->integer('site_category_id');
-            $table->integer('order');
+            $table->string('name')->unique();
+            $table->string('url')->unique();
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateSitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sites');
+        Schema::dropIfExists('site_categories');
     }
 }

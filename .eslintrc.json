@@ -9,6 +9,9 @@
         "eslint:recommended",
         "plugin:vue/recommended"
     ],
+    "plugins": [
+        "vue"
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -24,18 +27,25 @@
         "no-unused-vars": "warn",
         "constructor-super": "warn",
         "valid-typeof": "warn",
-        "vue/html-indent": ["error", 4, {
-            "attribute": 4,
-            "closeBracket": 0,
-            "alignAttributesVertically": true,
-            "ignores": []
-        }],
-        "vue/max-attributes-per-line": [3, {
-            "singleline": 3,
-            "multiline": {
-                "max": 1,
-                "allowFirstLine": false
+        "vue/html-indent": [
+            "error",
+            4,
+            {
+                "attribute": 4,
+                "closeBracket": 0,
+                "alignAttributesVertically": true,
+                "ignores": []
             }
-        }]
+        ],
+        "vue/max-attributes-per-line": [
+            10,
+            {
+                "singleline": 3,
+                "multiline": {
+                    "max": 1,
+                    "allowFirstLine": false
+                }
+            }
+        ]
     }
 }

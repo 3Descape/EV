@@ -5,47 +5,34 @@ namespace App\Http\Controllers;
 use App\Site;
 use App\User;
 use Illuminate\Http\Request;
+use App\SiteCategory;
 
 class SiteController extends Controller
 {
-    public function about()
+    public function edit(SiteCategory $site_category)
     {
-        $this->authorize('can_access_sites', User::class);
-        $texts = Site::where('category', '1')->with('images')->get();
-
-        return view('admin.sites.sites.site_show', [
-            'texts' => $texts,
-        ]);
+        $sites = $site_category->sites()->get();
+        return view('admin.sites.sites.site_edit', compact(
+            'site_category',
+            'sites'
+        ));
     }
 
-    public function sga()
+    public function store(Request $request)
     {
-        $this->authorize('can_access_sites', User::class);
-        $texts = Site::where('category', '2')->get();
-
-        return view('admin.sites.sites.site_show', [
-            'texts' => $texts,
+        $request->validate([
+            'title' => 'required|string',
+            'site_category_id' => 'required|exists:site_categories,id',
+            'order' => 'numeric'
         ]);
-    }
 
-    public function info()
-    {
-        $this->authorize('can_access_sites', User::class);
-        $texts = Site::where('category', '3')->get();
-
-        return view('admin.sites.sites.site_show', [
-            'texts' => $texts,
+        $site = Site::create([
+            'title' => $request->title,
+            'site_category_id' => $request->site_category_id,
+            'order' => $request->order
         ]);
-    }
 
-    public function imprint()
-    {
-        $this->authorize('can_access_sites', User::class);
-        $texts = Site::where('category', '4')->get();
-
-        return view('admin.sites.sites.site_show', [
-            'texts' => $texts,
-        ]);
+        return response()->json(['status' => 'Wurde hinzugefügt', 'site' => $site], 200);
     }
 
     public function update_body(Request $request, Site $site)
@@ -77,6 +64,12 @@ class SiteController extends Controller
             ]);
         }
 
-        return response()->json(['status' => 'Reihenfolge wurde geändert.']);
+        return response()->json(['status' => 'Reihenfolge wurde gespeichert.']);
+    }
+
+    public function destroy(Site $site)
+    {
+        $site->delete();
+        return response()->json(['status' => 'Wurde gelöscht.']);
     }
 }

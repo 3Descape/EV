@@ -3,14 +3,11 @@
 @section('title')
     Impressum
 @endsection
-
 @section('content')
-    <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto mt-4">
-        <div class="col-md-10 col-sm-12 mx-auto" id="{{$text->title}}">
-            <h1 class="text-center">{{$text->title}}</h1>
-            <div class="text-center mt-4">
-                {!!$text->html!!}
-            </div>
+    @foreach ($sites as $site)
+        <div class="col-md-6 col-sm-12 mx-auto text-block" id="{{str_slug($site->title, "-")}}">
+            <h1 class="text-center">{{$site->title}}</h1>
+            <p>{!!$site->html!!}</p>
         </div>
-    </div>
+    @endforeach
 @endsection

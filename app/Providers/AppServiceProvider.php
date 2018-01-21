@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 use Carbon\Carbon;
+use App\SiteCategory;
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\ServiceProvider;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -17,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
         setlocale(LC_TIME, 'German');
         Carbon::setLocale('de');
+
+        view()->share('site_categories', SiteCategory::all());
     }
 
     /**
@@ -26,6 +30,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 }

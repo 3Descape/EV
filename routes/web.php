@@ -45,11 +45,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/rolle/{role}/berechtigung/{permission}', 'PermissionRoleController@store')->name('permission_role_store');
     Route::delete('/rolle/{role}/berechtigung/{permission_id}', 'PermissionRoleController@destroy')->name('permission_role_destroy');
 
-    Route::get('/seite/über_uns', 'SiteController@about')->name('about_edit');
-    Route::get('/seite/sga', 'SiteController@sga')->name('sga_edit');
-    Route::get('/seite/info', 'SiteController@info')->name('info_edit');
-    Route::get('/seite/impress', 'SiteController@imprint')->name('imprint_edit');
+    Route::get('/seite/{site_category}', 'SiteController@edit')->name('site_edit');
+    Route::delete('/seite/{site}', 'SiteController@destroy')->name('site_destroy');
 
+    Route::post('/seite', 'SiteController@store')->name('site_store');
     Route::post('/seite/update/{site}/text', 'SiteController@update_body')->name('site_body_update');
     Route::post('/seite/update/{site}/titel', 'SiteController@update_title')->name('site_title_update');
     Route::post('/seite/update/reihenfolge', 'SiteController@update_order')->name('site_order_update');
@@ -96,4 +95,4 @@ Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
 Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
 Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
 
-Route::post('/bild/{image}', 'ImagesController@getImage');
+Route::post('/bild/{image}', 'ImageController@getImage');

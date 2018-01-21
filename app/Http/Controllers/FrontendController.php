@@ -9,6 +9,7 @@ use App\EventCategory;
 use App\PeopleCategory;
 use App\FixtureCategory;
 use App\Traits\AnalythicTrait;
+use App\SiteCategory;
 
 class FrontendController extends Controller
 {
@@ -30,13 +31,13 @@ class FrontendController extends Controller
     {
         $this->add_analythic();
         $committe = PeopleCategory::where('name', 'vorstand')->first()->people()->orderBy('name')->get();
-        $texts = Site::where('category', 1)->orderBy('order')->get();
+        $sites = SiteCategory::where('url', 'über_uns')->first()->sites()->get();
         $gruppenbild = Image::where('name', 'gruppenbild')->first();
 
         return view('sites.about', compact(
             'gruppenbild',
             'committe',
-            'texts'
+            'sites'
         ));
     }
 
@@ -96,22 +97,23 @@ class FrontendController extends Controller
     public function sga()
     {
         $this->add_analythic();
-        $texts = Site::where('category', 2)->orderBy('order')->get();
+        $sites = SiteCategory::where('url', 'sga')->first()->sites()->get();
+        $people = PeopleCategory::where('name', 'sga')->first()->people()->get();
 
-        return view('sites.sga', [
-            'people' => PeopleCategory::where('name', 'sga')->first()->people()->get(),
-            'texts' => $texts
-        ]);
+        return view('sites.sga', compact(
+            'sites',
+            'people'
+        ));
     }
 
     public function info()
     {
         $this->add_analythic();
-        $texts = Site::where('category', 3)->orderBy('order')->get();
+        $sites = SiteCategory::where('url', 'info')->first()->sites()->get();
         $fixturecategories = FixtureCategory::with('fixtures')->get();
 
         return view('sites.info', compact(
-            'texts',
+            'sites',
             'fixturecategories'
         ));
     }
@@ -126,10 +128,10 @@ class FrontendController extends Controller
     public function imprint()
     {
         $this->add_analythic();
-        $text = Site::where('category', 4)->orderBy('order')->first();
+        $sites = SiteCategory::where('url', 'impressum')->first()->sites()->get();
 
-        return view('sites.imprint', [
-            'text' => $text
-        ]);
+        return view('sites.imprint', compact(
+            'sites'
+        ));
     }
 }

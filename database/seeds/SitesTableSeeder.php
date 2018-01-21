@@ -2,6 +2,7 @@
 
 use App\Site;
 use Illuminate\Database\Seeder;
+use App\SiteCategory;
 
 class SiteTableSeeder extends Seeder
 {
@@ -12,11 +13,16 @@ class SiteTableSeeder extends Seeder
      */
     public function run()
     {
+        $site_category = SiteCategory::create([
+            'name' => 'Über uns',
+            'url' => 'über_uns'
+        ]);
+
         Site::create([
             'title' => 'ElternvertreterInnen',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '1',
+            'site_category_id' => $site_category->id,
             'order' => '2',
         ]);
 
@@ -24,7 +30,7 @@ class SiteTableSeeder extends Seeder
             'title' => 'Mitgliedsbeitrag',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '1',
+            'site_category_id' => $site_category->id,
             'order' => '3',
         ]);
 
@@ -32,15 +38,20 @@ class SiteTableSeeder extends Seeder
             'title' => 'Statuten',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '1',
+            'site_category_id' => $site_category->id,
             'order' => '4',
+        ]);
+
+        $site_category= SiteCategory::create([
+            'name' => 'SGA',
+            'url' => 'sga'
         ]);
 
         Site::create([
             'title' => 'Was ist der SGA?',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '2',
+            'site_category_id' => $site_category->id,
             'order' => '1',
         ]);
 
@@ -48,7 +59,7 @@ class SiteTableSeeder extends Seeder
             'title' => 'Welche Entscheidungen obliegen dem SGA?',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '2',
+            'site_category_id' => $site_category->id,
             'order' => '2',
         ]);
 
@@ -56,15 +67,19 @@ class SiteTableSeeder extends Seeder
             'title' => 'Beratungsrolle',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '2',
+            'site_category_id' => $site_category->id,
             'order' => '3',
         ]);
 
+        $site_category = SiteCategory::create([
+            'name' => 'Information',
+            'url' => 'info'
+        ]);
         Site::create([
             'title' => 'Aktuelles',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '3',
+            'site_category_id' => $site_category->id,
             'order' => '1',
         ]);
 
@@ -72,7 +87,7 @@ class SiteTableSeeder extends Seeder
             'title' => 'AbsolventInnen',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '3',
+            'site_category_id' => $site_category->id,
             'order' => '2',
         ]);
 
@@ -80,7 +95,7 @@ class SiteTableSeeder extends Seeder
             'title' => 'Fun Club',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '3',
+            'site_category_id' => $site_category->id,
             'order' => '3',
         ]);
 
@@ -88,22 +103,29 @@ class SiteTableSeeder extends Seeder
             'title' => 'Gesetze und Versicherungen',
             'html' => '<b>test</b>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
             'markup' => '**test**Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.',
-            'category' => '3',
+            'site_category_id' => $site_category->id,
             'order' => '4',
         ]);
 
+        $site_category = SiteCategory::create([
+            'name' => 'Impressum',
+            'url' => 'impressum'
+        ]);
         Site::create([
             'title' => 'Impressum',
-            'markup' => '
+            'markup' => '<center>
             Elternverein Weiz
             Andreas Hammerschmidt
             Offenburger Gasse 23
             8160 Weiz
             Telefon: 49 2845 / 936 82 38
             Telefax: 49 2845 / 936 82 39
-            E-Mail: info@example-sports.de',
-            'html' => 'Elternverein Weiz</br>Andreas Hammerschmidt</br>Offenburger Gasse 23</br>8160 Weiz</br>Telefon: 49 2845 / 936 82 38</br>Telefax: 49 2845 / 936 82 39</br>E-Mail: info@example-sports.de',
-            'category' => '4',
+            E-Mail: info@example-sports.de
+            </center>
+            ',
+
+            'html' => '<center>Elternverein Weiz<br/>Andreas Hammerschmidt<br/>Offenburger Gasse 23<br/>8160 Weiz<br/>Telefon: 49 2845 / 936 82 38<br/>Telefax: 49 2845 / 936 82 39<br/>E-Mail: info@example-sports.de<br/></center>',
+            'site_category_id' => $site_category->id,
             'order' => '1',
         ]);
     }

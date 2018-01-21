@@ -29,10 +29,12 @@
         @endforeach
     </div>
 </div>
-@foreach ($texts as $text) @if($text->html)
-<div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="test">
-    <h1 class="text-center">{{$text->title}}</h1>
-    <p>{!!$text->html!!}</p>
-</div>
-@endif @endforeach
+@foreach ($sites as $site)
+    @if($site->html)
+        <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="test">
+            <h1 class="text-center">{{$site->title}}</h1>
+            <p>{!!$site->html!!}</p>
+        </div>
+    @endif 
+@endforeach
 @endsection

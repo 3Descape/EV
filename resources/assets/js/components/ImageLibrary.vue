@@ -124,7 +124,6 @@ export default {
           this.isLoading = false;
         })
         .catch(errors => {
-          console.log(errors);
           vue.errors.setErrors(errors.response.data.errors);
           vue.reset();
           EventBus.$emit(

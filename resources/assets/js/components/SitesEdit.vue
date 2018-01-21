@@ -1,10 +1,31 @@
 <template lang="html">
     <div>
-        <draggable element="div" v-model="sites" @start="isDragging=true" @end="update"
+        <div>
+            <form @submit.prevent="store">
+                <div class="form-group">
+                    <label for="title">Überschrift:</label>
+                    <input type="text" v-model="site_title" class="form-control" id="title">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fa fa-plus" /> Hinzufügen
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div class="custom-control custom-checkbox my-3">
+            <input class="custom-control-input" type="checkbox" id="draggable" v-model="editable">
+            <label class="custom-control-label" for="draggable">
+                Sortierbar
+            </label>
+        </div>
+
+        <draggable element="div" :style="editable? 'cursor:move' : ''" v-model="sites" @start="isDragging=true" @end="update"
                    :options="dragOptions">
 
             <transition-group type="transition" :name="'flip-list'">
-                <markdown v-for="site in sites" :key="site.id" :site-prop="site" />
+                <markdown v-for="site in sites" :key="site.id" :site-prop="site" @delete="destroy"/>
             </transition-group>
         </draggable>
         <msg />
@@ -13,7 +34,7 @@
 
 <script>
 /* global axios */
-import Message from './Message.vue';
+import Message from "./Message.vue";
 import { EventBus } from "./EventBus.js";
 import Draggable from "vuedraggable";
 import Markdown from "./Markdown.vue";
@@ -27,18 +48,25 @@ export default {
     sitesProp: {
       type: Array,
       required: true
+    },
+    siteCategoryProp: {
+      type: Object,
+      required: true
     }
   },
   data: () => {
     return {
+      site_title: "",
       sites: [],
-      isDragging: false
+      isDragging: false,
+      editable: false
     };
   },
   computed: {
     dragOptions() {
       return {
         animation: 0,
+        disabled: !this.editable,
         ghostClass: "ghost",
         dragClass: "drag"
       };
@@ -54,13 +82,33 @@ export default {
         return a.order > b.order;
       });
     },
+    store() {
+      let vue = this;
+      axios
+        .post("/admin/seite", {
+          title: vue.site_title,
+          site_category_id: vue.siteCategoryProp.id,
+          order: vue.sites.length + 1
+        })
+        .then(msg => {
+          vue.site_title = "";
+          vue.sites.push(msg.data.site);
+          EventBus.$emit("msg-event", msg.data.status);
+        })
+        .catch(() => {
+          EventBus.$emit(
+            "msg-event",
+            "Es ist ein Fehler aufgetreten.",
+            "danger"
+          );
+        });
+    },
     update() {
       this.isDragging = false;
       this.sites = this.sites.map((element, index) => {
         element.order = index;
         return element;
       });
-      let vue = this;
       axios
         .post("/admin/seite/update/reihenfolge", {
           sites: this.sites.map(element => {
@@ -68,6 +116,24 @@ export default {
           })
         })
         .then(msg => {
+          EventBus.$emit("msg-event", msg.data.status);
+        })
+        .catch(() => {
+          EventBus.$emit(
+            "msg-event",
+            "Es ist ein Fehler aufgetreten.",
+            "danger"
+          );
+        });
+    },
+    destroy(site) {
+      let vue = this;
+      axios
+        .post(`/admin/seite/${site.id}`, {
+          _method: "delete"
+        })
+        .then(msg => {
+          vue.sites.splice(vue.sites.indexOf(site), 1);
           EventBus.$emit("msg-event", msg.data.status);
         })
         .catch(() => {
@@ -91,9 +157,6 @@ export default {
 .ghost {
   opacity: 0.5;
   background: hsl(0, 0%, 90%);
-}
-.card {
-  cursor: move;
 }
 .sortable-chosen {
   background-color: hsv(0, 0, 80%);

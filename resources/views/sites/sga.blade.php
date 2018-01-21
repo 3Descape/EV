@@ -6,10 +6,10 @@
 
 @section('content')
 
-    @foreach ($texts as $text)
-        <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="{{$text->title}}">
-          <h1 class="text-center">{{$text->title}}</h1>
-          <p>{!!$text->html!!}</p>
+    @foreach ($sites as $site)
+        <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="{{$site->title}}">
+          <h1 class="text-center">{{$site->title}}</h1>
+          <p>{!!$site->html!!}</p>
         </div>
     @endforeach
 

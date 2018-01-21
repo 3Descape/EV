@@ -30,7 +30,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        @component('admin.components.error', ['name' => 'description', 'class' => "mt-1"]) 
+                        @component('admin.components.error', ['name' => 'fixture_category', 'class' => "mt-1"]) 
                         @endcomponent
                     </div>
 

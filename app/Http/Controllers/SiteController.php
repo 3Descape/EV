@@ -6,6 +6,7 @@ use App\Site;
 use App\User;
 use Illuminate\Http\Request;
 use App\SiteCategory;
+use App\Image;
 
 class SiteController extends Controller
 {
@@ -13,9 +14,11 @@ class SiteController extends Controller
     {
         $this->authorize('can_access_sites', User::class);
         $sites = $site_category->sites()->get();
+        $images = Image::all();
         return view('admin.sites.sites.site_edit', compact(
             'site_category',
-            'sites'
+            'sites',
+            'images'
         ));
     }
 

@@ -15,7 +15,7 @@
 
         @if(!$fixturecategories->isEmpty())
             <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="thermine">
-                <h1 class="text-center">Thermine</h1>
+                <h1 class="text-center">Termine</h1>
                 <div class="row">
                     @foreach ($fixturecategories as $category)
                         @if(!$category->fixtures->isEmpty())

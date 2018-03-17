@@ -15,7 +15,6 @@
                             <div v-if="updatingTitle" class="fa fa-spinner fa-pulse" />
                         </button>
                     </div>
-
                 </form>
 
                 <form @submit.prevent="updateBody">
@@ -69,6 +68,10 @@ export default {
     siteProp: {
       type: Object,
       required: true
+    },
+    imagesProp: {
+      type: Array,
+      required: true
     }
   },
   data() {
@@ -81,7 +84,21 @@ export default {
   computed: {
     compiledMarkdown: function() {
       if (this.site.markup) {
-        return marked(this.site.markup, { renderer: renderer });
+        let temp = marked(this.site.markup, { renderer: renderer });
+
+        let vue = this;
+
+        return temp.replace(/@(\d+)/g, function(x) {
+          let ids = vue.imagesProp.map(function(element) {
+            return element.id;
+          });
+          let id = ids.indexOf(Number(x.substring(1)));
+          return id !== -1
+            ? '<img src="/storage/' +
+                vue.imagesProp[id].path +
+                '"/ class="img-fluid d-block mx-auto" style="max-height: 400px;">'
+            : x;
+        });
       } else {
         return "";
       }
@@ -93,6 +110,8 @@ export default {
       breaks: true,
       tables: true
     });
+
+    this.$forceUpdate();
   },
   methods: {
     updateBody() {
@@ -126,3 +145,6 @@ export default {
   }
 };
 </script>
+<style>
+
+</style>

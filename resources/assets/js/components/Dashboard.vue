@@ -2,16 +2,17 @@
     <div>
         <div class="form-inline">
             <div class="form-group">
-                <select ref="type" class="custom-select mr-2" @change="update">
+                <select ref="type" class="custom-select mr-2" v-model="type" @change="update">
                     <option value="year">Jahre</option>
                     <option value="month">Monate</option>
                     <option value="week">Wochen</option>
                     <option selected value="day">Tage</option>
                     <option value="hour">Stunden</option>
+                    
                 </select>
             </div>
             <div class="form-group">
-                <input class="form-control" ref="range" type="text" value="7" @change="update">
+                 <number-input @number-input="updateRange" :default="range" :min="2"/>
             </div>
         </div>
         <line-chart :chart-data="data" :options="options" class="chart"></line-chart>
@@ -21,12 +22,16 @@
 <script>
 /* global axios */
 import LineChart from "./LineChart.vue";
+import NumberInput from "./NumberInput.vue";
 export default {
   components: {
-    lineChart: LineChart
+    "line-chart": LineChart,
+    "number-input": NumberInput
   },
   data() {
     return {
+      range: 7,
+      type: "day",
       data: {},
       options: {
         responsive: true,
@@ -49,15 +54,7 @@ export default {
     };
   },
   mounted() {
-    var vue = this;
-    axios
-      .post("admin/getAnalythics", {
-        type: "day",
-        range: 7
-      })
-      .then(function(r) {
-        vue.setData(r.data.values, r.data.keys);
-      });
+    this.getData();
   },
   methods: {
     setData(data, labels) {
@@ -72,16 +69,24 @@ export default {
         ]
       };
     },
-    update() {
+    getData() {
       var vue = this;
       axios
         .post("admin/getAnalythics", {
           type: this.$refs.type.value,
-          range: this.$refs.range.value
+          range: this.range
         })
         .then(r => {
           vue.setData(r.data.values, r.data.keys);
         });
+    },
+    updateRange(value) {
+      console.log(value);
+      this.range = value;
+      this.update();
+    },
+    update() {
+      this.getData();
     }
   }
 };

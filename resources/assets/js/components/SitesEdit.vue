@@ -25,7 +25,7 @@
                    :options="dragOptions">
 
             <transition-group type="transition" :name="'flip-list'">
-                <markdown v-for="site in sites" :key="site.id" :site-prop="site" @delete="destroy"/>
+                <markdown :images-prop="imagesProp" v-for="site in sites" :key="site.id" :site-prop="site" @delete="destroy"/>
             </transition-group>
         </draggable>
         <msg />
@@ -51,6 +51,10 @@ export default {
     },
     siteCategoryProp: {
       type: Object,
+      required: true
+    },
+    imagesProp: {
+      type: Array,
       required: true
     }
   },

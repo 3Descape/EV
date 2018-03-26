@@ -18,7 +18,6 @@
         @endif
         <div class="container-fuid" id="app">
 
-
             <div class="container-fluid menu">@include('layouts.menu')</div>
             
             @yield('content')

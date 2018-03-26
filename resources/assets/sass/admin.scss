@@ -3,7 +3,7 @@
 @import "/palettes/palette_4.scss";
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 //admin section
-//
+
 blockquote {
     border-left: 5px solid hsl(0, 0%, 80%) !important;
     p{
@@ -93,7 +93,7 @@ $bg-sitebar: rgb(29, 29, 37);
     .content{
         flex:1;
         padding-top: 50px;
-
+        min-width: 0;
         .overflow{
             tbody{
                 tr{

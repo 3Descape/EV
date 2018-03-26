@@ -1,5 +1,6 @@
 <template>
-    <div class="input-group">
+    <div class="input-group"
+         style="max-width: 100%">
         <div @click="decrement"
              class="input-group-prepend">
             <div class="input-group-text">

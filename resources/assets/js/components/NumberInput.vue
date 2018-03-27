@@ -1,5 +1,6 @@
 <template>
     <div class="input-group"
+         :class="classes"
          style="max-width: 100%">
         <div @click="decrement"
              class="input-group-prepend">
@@ -53,6 +54,10 @@ export default {
       required: false
     },
     fieldName: {
+      type: String,
+      required: false
+    },
+    classes: {
       type: String,
       required: false
     }

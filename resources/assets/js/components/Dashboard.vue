@@ -1,8 +1,8 @@
 <template lang="html">
     <div class="col-lg-12" style="min-width: 0">
         <div class="form-inline">
-            <div class="form-group">
-                <select ref="type" class="custom-select mr-2" v-model="type" @change="getData">
+            <div class="form-group w-md-100 mr-md-2">
+                <select ref="type" class="custom-select text-center text-lg-left" v-model="type" @change="getData">
                     <option value="year">Jahre</option>
                     <option value="month">Monate</option>
                     <option value="week">Wochen</option>
@@ -10,8 +10,8 @@
                     <option value="hour">Stunden</option>
                 </select>
             </div>
-            <div class="form-group">
-                 <number-input @number-input="updateRange" :default="range" :min="2"/>
+            <div class="form-group w-md-100 mt-2 mt-lg-0">
+                 <number-input @number-input="updateRange" :default="range" :min="2" classes="w-100"/>
             </div>
         </div>
         <div class="chart">
@@ -62,7 +62,6 @@ export default {
       data: vue.data,
       options: vue.options
     });
-    console.log(chart);
   },
   methods: {
     setData(data, labels) {

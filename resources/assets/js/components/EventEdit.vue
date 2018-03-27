@@ -269,7 +269,7 @@ export default {
         data.append("file", vue.images[i]);
         jobs.push(
           await this.postImage(data, i).catch(errors => {
-            vue.errors.setErrors(errors.response.data);
+            vue.errors.setErrors(errors.response.data.errors);
           })
         );
         vue.$forceUpdate();
@@ -283,12 +283,14 @@ export default {
           vue.progress = [];
           vue.images = [];
         })
-        .catch(() => {});
+        .catch(() => {
+          console.log("error");
+        });
     },
     destroy(image) {
       let vue = this;
       axios
-        .delete(`/admin/bilder/${image.id}`)
+        .delete(`/admin/bild/${image.id}`)
         .then(msg => {
           vue.event.images.splice(vue.event.images.indexOf(image), 1);
           EventBus.$emit("msg-event", msg.data.status);

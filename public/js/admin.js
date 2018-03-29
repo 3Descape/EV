@@ -82064,7 +82064,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* global axios */
 
@@ -82120,6 +82119,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     store: function store() {
+      var _this = this;
+
       var vue = this;
       axios.post("/admin/seite", {
         title: vue.site_title,
@@ -82129,11 +82130,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         vue.site_title = "";
         vue.sites.push(msg.data.site);
         __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+        _this.update(false);
       }).catch(function () {
         __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
       });
     },
-    update: function update() {
+    update: function update(show_msg) {
       this.isDragging = false;
       this.sites = this.sites.map(function (element, index) {
         element.order = index;
@@ -82144,18 +82146,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
           return { id: element.id, order: element.order + 1 };
         })
       }).then(function (msg) {
-        __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+        if (show_msg) {
+          __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+        }
       }).catch(function () {
         __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
       });
     },
     destroy: function destroy(site) {
+      var _this2 = this;
+
       var vue = this;
       axios.post("/admin/seite/" + site.id, {
         _method: "delete"
       }).then(function (msg) {
         vue.sites.splice(vue.sites.indexOf(site), 1);
         __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+        _this2.update(false);
       }).catch(function () {
         __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
       });
@@ -84667,7 +84674,9 @@ var render = function() {
             start: function($event) {
               _vm.isDragging = true
             },
-            end: _vm.update
+            end: function($event) {
+              _vm.update(true)
+            }
           },
           model: {
             value: _vm.sites,

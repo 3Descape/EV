@@ -20,14 +20,14 @@
                 <div class="col-lg-6 col-md-12 mb-2">
                     <div class="card mx-0 mx-lg-1">
                         <div class="card-body row">
-                            <div class="col-sm-12 col-lg-{{$person->image_path? '9' : '12'}}">
+                            <div class="col-sm-9 col-lg-{{$person->image_path? '9' : '12'}}">
                                 <h4 class="card-title">{{$person->name}}</h4>
                                 @if($person->description)
                                     <p class="card-text">{{$person->description}}</p>
                                 @endif
                             </div>
                             @if($person->image_path)
-                                <div class="col-sm-12 col-lg-3">
+                                <div class="col-sm-3 col-lg-3">
                                     <img src="{{asset("/storage/{$person->image_path}")}}" alt="" class="img-fluid">
                                 </div>
                              @endif

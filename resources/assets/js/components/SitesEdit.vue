@@ -21,9 +21,8 @@
             </label>
         </div>
 
-        <draggable element="div" :style="editable? 'cursor:move' : ''" v-model="sites" @start="isDragging=true" @end="update"
+        <draggable element="div" :style="editable? 'cursor:move' : ''" v-model="sites" @start="isDragging=true" @end="update(true)"
                    :options="dragOptions">
-
             <transition-group type="transition" :name="'flip-list'">
                 <markdown :images-prop="imagesProp" v-for="site in sites" :key="site.id" :site-prop="site" @delete="destroy"/>
             </transition-group>
@@ -98,6 +97,7 @@ export default {
           vue.site_title = "";
           vue.sites.push(msg.data.site);
           EventBus.$emit("msg-event", msg.data.status);
+          this.update(false);
         })
         .catch(() => {
           EventBus.$emit(
@@ -107,7 +107,7 @@ export default {
           );
         });
     },
-    update() {
+    update(show_msg) {
       this.isDragging = false;
       this.sites = this.sites.map((element, index) => {
         element.order = index;
@@ -120,7 +120,9 @@ export default {
           })
         })
         .then(msg => {
-          EventBus.$emit("msg-event", msg.data.status);
+          if (show_msg) {
+            EventBus.$emit("msg-event", msg.data.status);
+          }
         })
         .catch(() => {
           EventBus.$emit(
@@ -139,6 +141,7 @@ export default {
         .then(msg => {
           vue.sites.splice(vue.sites.indexOf(site), 1);
           EventBus.$emit("msg-event", msg.data.status);
+          this.update(false);
         })
         .catch(() => {
           EventBus.$emit(

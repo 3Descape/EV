@@ -34,7 +34,7 @@ class PersonController extends Controller
     public function edit(Person $person)
     {
         $this->authorize('can_access_people', User::class);
-
+        $person->load('category');
         $categories = PeopleCategory::all();
 
         return view('admin.sites.people.person_edit', compact(
@@ -69,6 +69,26 @@ class PersonController extends Controller
         );
     }
 
+    function base64_to_jpeg($base64_string, $output_file)
+    {
+        // open the output file for writing
+        $ifp = fopen($output_file, 'wb');
+
+        // split the string on commas
+        // $data[ 0 ] == "data:image/png;base64"
+        // $data[ 1 ] == <actual base64 string>
+        $data = explode(',', $base64_string);
+
+        // we could add validation here with ensuring count( $data ) > 1
+        fwrite($ifp, base64_decode($data[1]));
+
+        // clean up the file resource
+        fclose($ifp);
+
+        return $output_file;
+    }
+
+
     public function update(Person $person, Request $request)
     {
         $this->authorize('can_access_people', User::class);
@@ -80,6 +100,7 @@ class PersonController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
+            \Log::info("hasFile");
             if ($person->image_path) {
                 Storage::disk('public')->delete($person->image_path);
             }
@@ -96,7 +117,7 @@ class PersonController extends Controller
             'people_category_id' => $request->people_category_id,
         ]);
 
-        return redirect()->route('person_frontend_index', $person->category->name);
+        return response()->json(["status" => "Updated person", "person" => $person->load('category')], 200);
     }
 
     public function destroy(Person $person)

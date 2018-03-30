@@ -2,7 +2,7 @@
 @import "/_variables.scss";
 @import "/palettes/palette_4.scss";
 @import "node_modules/font-awesome/scss/font-awesome.scss";
-
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,700i');
 body{
     text-align: justify;
     line-height: 2em;
@@ -10,7 +10,7 @@ body{
     transition: 0.5s;
     background-color: #FFFFFF;
     color: #333333;
-    *{font-family: 'Montserrat', sans-serif;}
+    *{font-family: 'Roboto', sans-serif;}
 }
 
 .menu{

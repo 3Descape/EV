@@ -30,13 +30,11 @@ class FrontendController extends Controller
     public function about()
     {
         $this->add_analythic();
-        $committe = PeopleCategory::where('name', 'vorstand')->first()->people()->orderBy('name')->get();
-        $sites = SiteCategory::where('url', 'über_uns')->first()->sites()->get();
+        $sites = SiteCategory::where('url', 'über_uns')->first()->sites()->orderBy('order')->get();
         $gruppenbild = Image::where('name', 'gruppenbild')->first();
 
         return view('sites.about', compact(
             'gruppenbild',
-            'committe',
             'sites'
         ));
     }
@@ -97,19 +95,17 @@ class FrontendController extends Controller
     public function sga()
     {
         $this->add_analythic();
-        $sites = SiteCategory::where('url', 'sga')->first()->sites()->get();
-        $people = PeopleCategory::where('name', 'sga')->first()->people()->get();
+        $sites = SiteCategory::where('url', 'sga')->first()->sites()->orderBy('order')->get();
 
         return view('sites.sga', compact(
-            'sites',
-            'people'
+            'sites'
         ));
     }
 
     public function info()
     {
         $this->add_analythic();
-        $sites = SiteCategory::where('url', 'info')->first()->sites()->get();
+        $sites = SiteCategory::where('url', 'info')->first()->sites()->orderBy('order')->get();
         $fixturecategories = FixtureCategory::with('fixtures')->get();
 
         return view('sites.info', compact(
@@ -128,7 +124,7 @@ class FrontendController extends Controller
     public function imprint()
     {
         $this->add_analythic();
-        $sites = SiteCategory::where('url', 'impressum')->first()->sites()->get();
+        $sites = SiteCategory::where('url', 'impressum')->first()->sites()->orderBy('order')->get();
 
         return view('sites.imprint', compact(
             'sites'

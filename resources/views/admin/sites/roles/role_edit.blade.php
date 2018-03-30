@@ -45,7 +45,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="role_add">Berechtigung Hinzufügen</label>
-                            <select id="role_add" name="role" class="form-control" name="">
+                            <select id="role_add" name="role" class="custom-select" name="">
                                 @foreach ($roles as $role)
                                     <option value="{{$role->id}}">{{ucfirst($role->name)}}</option>
                                 @endforeach

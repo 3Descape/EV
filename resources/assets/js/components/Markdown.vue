@@ -2,43 +2,71 @@
     <div class="card mb-4">
         <div class="card-body">
             <div class="d-flex mb-1">
-                <button class="btn btn-danger ml-auto" @click="destroy">
+                <button class="btn btn-danger ml-auto"
+                        @click="destroy">
                     <i class="fa fa-trash" />
                 </button>
             </div>
-            <fieldset class="mb-2" :disabled="updatingBody || updatingTitle">
-                <form class="input-group mb-2" @submit.prevent="updateTitle">
-                    <input type="text" class="form-control" placeholder="Titel" v-model="site.title">
+            <fieldset class="mb-2"
+                      :disabled="updatingBody || updatingTitle">
+                <form class="input-group mb-2"
+                      @submit.prevent="updateTitle">
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Titel"
+                           v-model="site.title">
                     <div class="input-group-prepend">
-                        <button type="submit" class="input-group-text bg-light">
-                            <div v-if="!updatingTitle" class="fa fa-refresh" />
-                            <div v-if="updatingTitle" class="fa fa-spinner fa-pulse" />
+                        <button type="submit"
+                                class="input-group-text bg-light">
+                            <div v-if="!updatingTitle"
+                                 class="fa fa-refresh" />
+                            <div v-if="updatingTitle"
+                                 class="fa fa-spinner fa-pulse" />
                         </button>
                     </div>
                 </form>
 
                 <form @submit.prevent="updateBody">
-                    <textarea name="name" class="form-control" v-model="site.markup" rows="5" />
-                    <button class="btn btn-info form-control mt-2" type="submit">
-                        <i v-if="!updatingBody" class="fa fa-edit" /> Text aktualisieren..
-                        <i v-if="updatingBody" class="fa fa-spinner fa-pulse" disabled />
+                    <textarea name="name"
+                              class="form-control"
+                              v-model="site.markup"
+                              rows="5" />
+                    <button class="btn btn-info form-control mt-2"
+                            type="submit">
+                        <i v-if="!updatingBody"
+                           class="fa fa-edit" /> Text aktualisieren..
+                        <i v-if="updatingBody"
+                           class="fa fa-spinner fa-pulse"
+                           disabled />
                     </button>
                 </form>
             </fieldset>
 
             <div class="card">
-                <div class="card-header" role="tab" id="headingOne">
+                <div class="card-header"
+                     role="tab"
+                     id="headingOne">
                     <h5 class="mb-0">
-                        <a data-toggle="collapse" :href="'#collapse' + site.id" aria-expanded="false" aria-controls="'collapse' + site.id" class="text-dark">
+                        <a data-toggle="collapse"
+                           :href="'#collapse' + site.id"
+                           aria-expanded="false"
+                           aria-controls="'collapse' + site.id"
+                           class="text-dark">
                             Vorschau
                             <i class="fa fa-caret-down" />
                         </a>
                     </h5>
                 </div>
 
-                <div :id="'collapse' + site.id" class="collapse" role="tabpanel">
-                    <div class="card-body" v-html="compiledMarkdown" />
+                <div :id="'collapse' + site.id"
+                     class="collapse"
+                     role="tabpanel">
+                    <div class="card-body"
+                         v-html="compiledMarkdown" />
+
                 </div>
+                <div tesss
+                     v-html="test"></div>
             </div>
         </div>
     </div>
@@ -48,6 +76,7 @@
 /* global axios */
 const marked = require("marked");
 let renderer = new marked.Renderer();
+import PeopleList from "./PeopleList.vue";
 
 renderer.image = function(href, title, text) {
   var out =
@@ -78,8 +107,12 @@ export default {
     return {
       site: this.siteProp,
       updatingBody: false,
-      updatingTitle: false
+      updatingTitle: false,
+      test: "<people-list category='sga'></people-list>"
     };
+  },
+  components: {
+    PeopleList: PeopleList
   },
   computed: {
     compiledMarkdown: function() {

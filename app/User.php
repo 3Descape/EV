@@ -49,7 +49,7 @@ class User extends Authenticatable
     /**
      * Checks if the user has a certain role
      * @method hasRole
-     * @param  App\Role or string
+     * @param  App\Role or String
      * @return boolean
      */
     public function hasRole($role)
@@ -58,7 +58,7 @@ class User extends Authenticatable
             return $this->roles->contains('name', $role);
         }
 
-        return !!$role->intersection($this->roles)->count();
+        return !!$this->roles()->get()->where('id', $role->id)->count();
     }
 
     /**

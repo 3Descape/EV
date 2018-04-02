@@ -15,9 +15,9 @@ class CreateAnalythicsTable extends Migration
     {
         Schema::create('analythics', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('created_at');
             $table->string('browser_info');
             $table->string('hash');
+            $table->timestamps();
         });
     }
 

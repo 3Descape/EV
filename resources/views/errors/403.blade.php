@@ -38,7 +38,7 @@
                 </form>
 
                 @can('can_access_dashboard', \App\User::class)
-                    <a href="{{route('admin_dashboard')}}" class="btn btn-success px-1">Dashboard</a>
+                    <a href="{{route('dashboard')}}" class="btn btn-success px-1">Dashboard</a>
                 @endcan
             </div>
         @endif

@@ -14,7 +14,6 @@ class Event extends Model
         'markup',
         'date',
         'location',
-        'category'
     ];
 
     protected $dates = [

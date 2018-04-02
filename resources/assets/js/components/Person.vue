@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="category">Kategory</label>
+                    <label for="category">Kategorie</label>
                     <select name="people_category_id"
                             v-model="person.category"
                             class="custom-select"
@@ -70,9 +70,9 @@
                     <div class="row">
 
                         <div class="col-lg-4 col-sm-6 col-md-6 mx-auto mx-lg-0 text-center">
-                            <i v-show="changed === false && person.image_path ===null"
+                            <i v-show="changed === false && person.image_path === null"
                                class="fa fa-user-circle fa-4x"></i>
-                            <div v-show="changed===false && person.image_path.length"
+                            <div v-show="changed === false && person.image_path !== '' && person.image_path !== null"
                                  class="mx-auto"
                                  style="width: 50%; height: auto">
 

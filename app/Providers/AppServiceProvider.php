@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Carbon\Carbon;
 use App\SiteCategory;
+use App\PersonCategory;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -20,7 +22,13 @@ class AppServiceProvider extends ServiceProvider
         setlocale(LC_TIME, 'German');
         Carbon::setLocale('de');
         if (!app()->runningInConsole()) {
-            view()->share('site_categories', SiteCategory::all());
+            View::share('site_categories', SiteCategory::all());
+            View::composer(
+                'admin.layouts.sitebar',
+                function ($view) {
+                    $view->with('person_categories', PersonCategory::all());
+                }
+            );
         }
     }
 

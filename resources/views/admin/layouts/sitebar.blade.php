@@ -92,9 +92,12 @@
                         </a>
 
                         <div class="collapse" id="frontend">
-                            <a href="{{route('person_frontend_index', 'sga')}}" class="list-group-item" data-parent="#frontend">SGA</a>
-                            <a href="{{route('person_frontend_index', 'ev')}}" class="list-group-item" data-parent="#frontend">Elternvertreter</a>
-                            <a href="{{route('person_frontend_index', 'vorstand')}}" class="list-group-item" data-parent="#frontend">Vorstände</a>
+                            @foreach($person_categories as $category)
+                                <a href="{{route('person_frontend_index', $category->name)}}" class="list-group-item" data-parent="#frontend">
+                                    {{ucfirst($category->name)}}
+                                </a>
+                            @endforeach
+                            <a href="{{route('person_category_index')}}" class="list-group-item" data-parent="#frontend">Kategorien</a>
                         </div>
 
                         <a href="{{route('user_index')}}" class="list-group-item">

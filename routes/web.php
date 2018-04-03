@@ -19,10 +19,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/veranstaltung-kategorien', 'EventCategoryController@index')->name('event_category_index');
     Route::post('/veranstaltung-kategorien', 'EventCategoryController@store')->name('event_category_store');
-    Route::get('/veranstaltung-kategorien/{event_category}/add', 'EventCategoryController@edit')->name('event_category_edit');
+    Route::get('/veranstaltung-kategorien/{event_category}/edit', 'EventCategoryController@edit')->name('event_category_edit');
     Route::put('/veranstaltung-kategorien/{event_category}', 'EventCategoryController@update')->name('event_category_update');
     Route::get('/veranstaltung-kategorien/{event_category}/konflikt', 'EventCategoryController@conflict')->name('event_category_conflict');
     Route::delete('/veranstaltung-kategorien/{event_category}', 'EventCategoryController@destroy')->name('event_category_destroy');
+
+    Route::get('/person-kategorie', 'PersonCategoryController@index')->name('person_category_index');
+    Route::post('/person-kategorie', 'PersonCategoryController@store')->name('person_category_store');
+    Route::get('/person-kategorie/{person_category}/edit', 'PersonCategoryController@edit')->name('person_category_edit');
+    Route::put('/person-kategorie/{person_category}', 'PersonCategoryController@update')->name('person_category_update');
+    Route::delete('/person-kategorie/{person_category}', 'PersonCategoryController@destroy')->name('person_category_destroy');
 
     Route::get('/person/frontend/{category}', 'PersonController@index')->name('person_frontend_index');
     Route::get('/person/{category}/add', 'PersonController@create')->name('person_create');

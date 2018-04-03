@@ -14,13 +14,8 @@ class PermissionsTableSeeder extends Seeder
     public function run()
     {
         $role = Role::create([
-            'name' => 'administrator',
-            'label' => 'Ist der Superuser und darf alles.'
-        ]);
-
-        $role->permissions()->create([
             'name' => 'admin',
-            'label' => 'Administrator',
+            'label' => 'Ist der Superuser und darf alles.'
         ]);
 
         Permission::create([

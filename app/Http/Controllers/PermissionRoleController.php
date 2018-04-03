@@ -11,7 +11,7 @@ class PermissionRoleController extends Controller
 {
     public function store(Request $request, Role $role, Permission $permission)
     {
-        $this->authorize('admin', User::class);
+        $this->authorize('can_access_roles', User::class);
         $role->permissions()->save($permission);
 
         if (request()->expectsJson()) {
@@ -25,7 +25,7 @@ class PermissionRoleController extends Controller
 
     public function destroy(Role $role, $permission_id)
     {
-        $this->authorize('admin', User::class);
+        $this->authorize('can_access_roles', User::class);
         $role->permissions()->detach($permission_id);
 
         if (request()->expectsJson()) {

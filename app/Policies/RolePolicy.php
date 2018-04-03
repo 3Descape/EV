@@ -23,14 +23,9 @@ class RolePolicy
 
     public function before(User $user)
     {
-        if ($user->hasRole('administrator')) {
+        if ($user->hasRole('admin')) {
             return true;
         }
-    }
-
-    public function admin(User $user)
-    {
-        return $user->hasRole('admin');
     }
 
     public function can_access_events(User $user)

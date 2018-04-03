@@ -2,9 +2,6 @@
 
 namespace Tests\Feature;
 
-use App\Role;
-use App\User;
-use App\Permission;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
@@ -18,24 +15,11 @@ class DashboardControllerTest extends TestCase
         $response = $this->get('admin');
         $response->assertStatus(302);
 
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
+        $user = new ActAsUser();
+        $this->actingAs($user->getUser());
         $response = $this->get('/admin');
         $response->assertStatus(403);
-
-        $permission = Permission::create([
-                'name' => 'any role',
-                'label' => 'user has at least one role'
-            ]);
-
-        $role = Role::create([
-                    'name' => 'basic user',
-                    'label' => 'is not a default user'
-                ]);
-
-        $role->permissions()->save($permission);
-        $user->assignRole('basic user');
-
+        $user->setUpPermission('admin');
         $response = $this->get('/admin');
         $response->assertStatus(200);
     }

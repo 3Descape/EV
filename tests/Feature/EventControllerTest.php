@@ -2,11 +2,8 @@
 
 namespace Tests\Feature;
 
-use App\Role;
-use App\User;
 use App\Event;
 use Carbon\Carbon;
-use App\Permission;
 use Tests\TestCase;
 use App\EventCategory;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -40,21 +37,8 @@ class EventControllerTest extends TestCase
             'location' => 'at the Gym'
         ]);
 
-        $user = factory(User::class)->create();
+        $user = (new ActAsUser())->setUpPermission('access_events')->getUser();
         $this->actingAs($user);
-
-        $permission = Permission::create([
-                'name' => 'access_events',
-                'label' => 'user has at least one role'
-            ]);
-
-        $role = Role::create([
-                    'name' => 'events',
-                    'label' => 'is not a default user'
-                ]);
-
-        $role->permissions()->save($permission);
-        $user->assignRole('events');
 
         $response = $this->get('/admin/veranstaltungen');
 

@@ -21,20 +21,26 @@ class UserTest extends TestCase
     }
 
     /** @test */
-    public function a_role_can_get_assigned_to_a_user_by_its_name()
+    public function a_role_can_get_assigned_to_a_user()
     {
-        $role = Role::create([
-            'name' => 'admin',
+        $role1 = Role::create([
+            'name' => 'admin1',
             'label' => 'Some description in here'
         ]);
 
+        $role2 = Role::create([
+            'name' => 'admin2',
+            'label' => 'Some description in here'
+        ]);
         $user = factory(User::class)->create();
 
-        $user->assignRole('admin');
+        $user->assignRole('admin1');
+        $user->assignRole($role2);
 
         $roles = User::first()->roles()->get()->toArray();
-        $this->assertEquals('admin', $roles[0]['name']);
-        $this->assertCount(1, $roles);
+        $this->assertEquals('admin1', $roles[0]['name']);
+        $this->assertEquals('admin2', $roles[1]['name']);
+        $this->assertCount(2, $roles);
     }
 
     /** @test */
@@ -47,7 +53,7 @@ class UserTest extends TestCase
             'label' => 'Some description in here'
         ]);
 
-        $user->assignRole('admin');
+        $user->assignRole($role);
 
         $this->assertTrue($user->hasRole('admin'));
         $this->assertTrue($user->hasRole($role));

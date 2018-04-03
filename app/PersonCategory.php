@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class PeopleCategory extends Model
+class PersonCategory extends Model
 {
     protected $fillable = ['name', 'has_image'];
 
     public function people()
     {
-        return $this->hasMany('App\Person');
+        return $this->hasMany(Person::class);
     }
 
     public function getRouteKeyName()

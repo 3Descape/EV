@@ -14,7 +14,7 @@ class FixtureCategoryController extends Controller
         $this->authorize('can_access_fixtures', User::class);
         $fixturecategories = FixtureCategory::all();
 
-        return view('admin.sites.fixture_categories.index', compact(
+        return view('admin.sites.fixture_categories.fixture_categories_index', compact(
             'fixturecategories'
         ));
     }
@@ -37,7 +37,7 @@ class FixtureCategoryController extends Controller
     {
         $this->authorize('can_access_fixtures', User::class);
 
-        return view('admin.sites.fixture_categories.edit', compact(
+        return view('admin.sites.fixture_categories.fixture_categories_edit', compact(
             'fixturecategory'
         ));
     }

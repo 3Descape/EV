@@ -12,6 +12,6 @@ class Person extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\PeopleCategory', 'people_category_id', 'id');
+        return $this->belongsTo(PersonCategory::class);
     }
 }

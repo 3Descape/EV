@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePeopleCategoriesTable extends Migration
+class CreatePersonCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreatePeopleCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('people_categories', function (Blueprint $table) {
+        Schema::create('person_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->unique();
             $table->boolean('has_image');
@@ -28,6 +28,6 @@ class CreatePeopleCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('people_categories');
+        Schema::dropIfExists('person_categories');
     }
 }

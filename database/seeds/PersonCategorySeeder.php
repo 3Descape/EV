@@ -1,9 +1,9 @@
 <?php
 
+use App\PersonCategory;
 use Illuminate\Database\Seeder;
-use App\PeopleCategory;
 
-class PeopleCategorySeeder extends Seeder
+class PersonCategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,17 +12,17 @@ class PeopleCategorySeeder extends Seeder
      */
     public function run()
     {
-        PeopleCategory::create([
+        PersonCategory::create([
             'name' => 'sga',
             'has_image' => true
         ]);
 
-        PeopleCategory::create([
+        PersonCategory::create([
             'name' => 'ev',
             'has_image' => false
         ]);
 
-        PeopleCategory::create([
+        PersonCategory::create([
             'name' => 'vorstand',
             'has_image' => true
         ]);

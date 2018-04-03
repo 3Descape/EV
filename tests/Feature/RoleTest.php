@@ -47,6 +47,7 @@ class RoleTest extends TestCase
             'name' => 'events',
             'label' => 'Some description in here'
         ]);
+        $this->assertFalse(!!Role::first()->users()->get()->count());
 
         $role->permissions()->save($permission);
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PersonCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use App\User;
 
 class PersonCategoryController extends Controller
 {
@@ -15,6 +16,7 @@ class PersonCategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('can_access_people', User::class);
         $person_categories = PersonCategory::all();
 
         return view('admin.sites.person_categories.person_category_index', compact(
@@ -30,6 +32,7 @@ class PersonCategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('can_access_people', User::class);
         $data = $request->validate([
             'name' => 'required|unique:person_categories,name|string',
             'has_image' => 'required|boolean'
@@ -51,6 +54,7 @@ class PersonCategoryController extends Controller
      */
     public function edit(PersonCategory $person_category)
     {
+        $this->authorize('can_access_people', User::class);
         return view('admin.sites.person_categories.person_category_edit', compact(
             'person_category'
         ));
@@ -65,6 +69,7 @@ class PersonCategoryController extends Controller
      */
     public function update(Request $request, PersonCategory $person_category)
     {
+        $this->authorize('can_access_people', User::class);
         $data = $request->validate([
             'name' => [
                 'required',
@@ -90,6 +95,7 @@ class PersonCategoryController extends Controller
      */
     public function destroy(PersonCategory $person_category)
     {
+        $this->authorize('can_access_people', User::class);
         if ($person_category->people()->get()->count() > 0) {
             return back()->with(['error' => "Dieser Kategorie sind noch Personen zugeordent.
             Bitte ordnen Sie diesen Personen eine Andere Kategorie zu oder löschen Sie diese."]);

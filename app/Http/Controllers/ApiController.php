@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\PeopleCategory;
+use App\PersonCategory;
 
 class ApiController extends Controller
 {
-    public function getPeople(PeopleCategory $category)
+    public function getPeople(PersonCategory $category)
     {
         $people = $category->people()->get();
 

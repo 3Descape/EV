@@ -32,7 +32,7 @@
 
                                             <div class="col-md-12 mt-4 d-flex">
                                                 <p class="mb-0">{{ucfirst($event->date->diffForHumans())}}</p>
-                                                <span class="badge badge-info ml-auto align-self-start">
+                                                <span class="badge badge-info ml-auto align-self-end">
                                                     {{ ucfirst($event->category->name)}}
                                                 </span>
                                             </div>

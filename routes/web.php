@@ -102,4 +102,4 @@ Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
 Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
 
 #Route::post('/bild/{image}', 'ImageController@getImage');
-Route::get('/people/{category}', 'ApiController@getPeople');
+Route::post('/people/{category}', 'ApiController@getPeople');

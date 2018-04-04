@@ -44,9 +44,9 @@
             <table class="table overflow">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Hat Bild:</th>
-                        <th>T</th>
+                        <th scope="col" >Name</th>
+                        <th scope="col">Besitzt Bild:</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,17 +54,19 @@
                         <tr>
                             <td scope="row">{{ ucfirst($category->name)}}</td>
                             <td>{{$category->has_image ? "Ja" : "Nein"}}</td>
-                            <td class="d-flex">
-                                <a href="{{route('person_category_edit', $category->name)}}" class="btn btn-warning ml-auto">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <form action="{{route('person_category_destroy', $category->name)}}" method="post">
-                                    <button class="btn btn-danger mx-1" type="submit">
-                                        <i class="fa fa-trash-o"></i>
-                                    </button>
-                                    {{ csrf_field() }}
-                                    {{method_field('DELETE')}}
-                                </form>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="{{route('person_category_edit', $category->name)}}" class="btn btn-warning ml-auto">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <form action="{{route('person_category_destroy', $category->name)}}" method="post">
+                                        <button class="btn btn-danger mx-1" type="submit">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                        {{ csrf_field() }}
+                                        {{method_field('DELETE')}}
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

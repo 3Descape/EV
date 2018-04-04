@@ -34,17 +34,19 @@
                         <tr>
                             <td scope="row">{{$category->name}}</td>
                             <td class="d-none d-md-table-cell">{{$category->description}}</td>
-                            <td class="d-flex">
-                                <a href="{{route('fixture_category_edit', $category->id)}}" class="btn btn-warning ml-auto">
-                                    <i class="fa fa-pencil"></i>
-                                </a>
-                                <form action="{{route('fixture_category_destroy', $category->id)}}" method="post">
-                                    <button class="btn btn-danger mx-1" type="submit">
-                                        <i class="fa fa-trash-o"></i>
-                                    </button>
-                                    {{ csrf_field() }}
-                                    {{method_field('DELETE')}}
-                                </form>
+                            <td>
+                                <div class="d-flex">
+                                    <a href="{{route('fixture_category_edit', $category->id)}}" class="btn btn-warning ml-auto">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <form action="{{route('fixture_category_destroy', $category->id)}}" method="post">
+                                        <button class="btn btn-danger mx-1" type="submit">
+                                            <i class="fa fa-trash-o"></i>
+                                        </button>
+                                        {{ csrf_field() }}
+                                        {{method_field('DELETE')}}
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endforeach

@@ -6,10 +6,11 @@
     <table class="table overflow">
         <thead>
             <tr>
-                <th>Name</th>
-                <th class="d-none d-sm-table-cell">Datum</th>
-                <th class="d-none d-md-table-cell">Ort</th>
-                <th class="d-none d-md-table-cell">Kategorie</th>
+                <th scope="col">Name</th>
+                <th scope="col" class="d-none d-sm-table-cell">Datum</th>
+                <th scope="col" class="d-none d-md-table-cell">Ort</th>
+                <th scope="col" class="d-none d-md-table-cell">Kategorie</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -19,18 +20,20 @@
                     <td class="d-none d-sm-table-cell overflow-text">{{$event->date->format('d.m.Y H:i')}}</td>
                     <td class="d-none d-md-table-cell overflow-text">{{$event->location}}</td>
                     <td class="d-none d-md-table-cell overflow-text">{{ucfirst($event->category->name)}}</td>
-                    <td class="d-flex">
-                        <a href="{{route('event_edit', $event->id)}}?type=archive" class="btn btn-warning ml-auto">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
-                        </a>
+                    <td>
+                        <div class="d-flex">
+                            <a href="{{route('event_edit', $event->id)}}?type=archive" class="btn btn-warning ml-auto">
+                                <i class="fa fa-edit" aria-hidden="true"></i>
+                            </a>
 
-                        <form action="{{route('event_destroy', $event->id)}}" method="POST">
-                            <button type="submit" class="btn btn-danger ml-1">
-                                <i class="fa fa-trash"></i>
-                            </button>
-                            {{method_field('DELETE')}}
-                            {{ csrf_field() }}
-                        </form>
+                            <form action="{{route('event_destroy', $event->id)}}" method="POST">
+                                <button type="submit" class="btn btn-danger ml-1">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                                {{method_field('DELETE')}}
+                                {{ csrf_field() }}
+                            </form>
+                        </div>
                     </td>
                 </tr>
             @endforeach

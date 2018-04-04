@@ -1,5 +1,5 @@
 <template>
-    <div class="row">
+    <div class="row mt-3">
         <div class="col-lg-6 col-md-12 mb-2"
              v-for="person in people"
              :key="person.id">
@@ -30,18 +30,19 @@
 <script>
 export default {
   props: {
-    category: {
+    kategorie: {
       type: String,
       required: true
     }
   },
   data() {
     return {
+      category: this.kategorie,
       people: []
     };
   },
   mounted() {
-    axios.get(`/people/${this.category}`).then(({ data: { people } }) => {
+    axios.post(`/people/${this.category}`).then(({ data: { people } }) => {
       this.people = people;
     });
   }

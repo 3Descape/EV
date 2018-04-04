@@ -4,15 +4,15 @@
     <div class="col-lg-10 col-md-12 mx-auto">
 
         <h2 class="text-center">
-            Konflikte beim Löschen der Kategorie {{$event_category->name}}
+            Konflikte beim Löschen der Kategorie "{{$event_category->name}}"
         </h2>
 
         <table class="table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Kategorie derzeit</th>
-                    <th>Neue Kategorie</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Kategorie derzeit</th>
+                    <th scope="col">Neue Kategorie</th>
                 </tr>
             </thead>
             <tbody>

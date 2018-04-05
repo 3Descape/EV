@@ -58,11 +58,6 @@ class RolePolicy
         return !$user->isDefaultUser();
     }
 
-    public function can_access_roles(User $user)
-    {
-        return $user->hasPermission('access_roles');
-    }
-
     public function can_access_files(User $user)
     {
         return $user->hasPermission('access_files');

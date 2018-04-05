@@ -44,11 +44,6 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         Permission::create([
-            'name' => 'access_roles',
-            'label' => 'Berechtigungen',
-        ]);
-
-        Permission::create([
             'name' => 'access_files',
             'label' => 'Downloads',
         ]);

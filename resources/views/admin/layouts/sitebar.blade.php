@@ -117,7 +117,7 @@
                     </a>
                 @endcan
 
-                @can('can_access_roles', \App\User::class)
+                @can('can_access_user', \App\User::class)
                     <a href="{{route('role_index')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
                         <i class="fa fa-globe"></i>
                         <span class="d-none d-md-inline-block">Berechtigungen</span>

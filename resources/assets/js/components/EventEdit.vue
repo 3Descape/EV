@@ -115,17 +115,16 @@
             </div>
 
             <div class="row" v-if="event.images.length">
-                <div class="col-lg-3 mb-1" v-for="image in event.images" :key="image.id">
+                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-1" v-for="image in event.images" :key="image.id">
                     <div class="card h-100">
                         <div class="card-body row">
-                            <div class="col-lg-3">
+                            <div class="col-lg-4 col-sm-6">
                                 <img :src="`/storage/${image.thump}`" class="img-fluid">
                             </div>
-                            <div class="col-lg-9 d-flex">
-                                <div>
-                                    <h4 v-if="image.name">{{ image.name }}</h4>
-                                    <p>Bild ID: {{ image.id }}</p>
-                                </div>
+                            <div class="col-lg-8 col-sm-6 d-flex align-items-center">
+                    
+                                <p class="mb-0">Bild ID: {{ image.id }}</p>
+                         
                                 <form @submit.prevent="destroy(image)" class="ml-auto">
                                     <button type="submit" class="btn btn-danger">
                                         <i class="fa fa-trash" />

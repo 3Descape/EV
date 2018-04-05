@@ -37,12 +37,13 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::put('/person/{person}', 'PersonController@update')->name('person_update');
     Route::delete('/person/{person}/edit', 'PersonController@destroy')->name('person_destroy');
 
+    Route::get('/nutzer', 'UserController@index')->name('user_index');
+    Route::get('/nutzer/{user}/delete', 'UserController@user_delete')->name('user_delete');
+    
     Route::get('/nutzer/{user}/edit', 'UserRoleController@edit')->name('user_role_edit');
     Route::put('/nutzer/{user}', 'UserRoleController@update')->name('user_role_update');
     Route::delete('/nutzer/{user}/rolle/{role}', 'UserRoleController@destroy')->name('user_role_destroy');
 
-    Route::get('/nutzer', 'UserController@index')->name('user_index');
-    Route::get('/nutzer/{user}/delete', 'UserController@user_delete')->name('user_delete');
 
     Route::get('/rolle', 'RoleController@index')->name('role_index');
     Route::post('/rolle', 'RoleController@store')->name('role_store');

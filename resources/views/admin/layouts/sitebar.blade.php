@@ -86,25 +86,21 @@
                     </a>
 
                     <div class="collapse" id="personen">
-                        <a href="#frontend" class="list-group-item" data-toggle="collapse" aria-expanded="false">
-                            <i class="fa fa-eye"></i>
-                            <span class="d-none d-md-inline-block">Frontend</span>
-                        </a>
-
-                        <div class="collapse" id="frontend">
-                            @foreach($person_categories as $category)
-                                <a href="{{route('person_frontend_index', $category->name)}}" class="list-group-item" data-parent="#frontend">
-                                    {{ucfirst($category->name)}}
-                                </a>
-                            @endforeach
-                            <a href="{{route('person_category_index')}}" class="list-group-item" data-parent="#frontend">Kategorien</a>
-                        </div>
-
-                        <a href="{{route('user_index')}}" class="list-group-item">
-                            <i class="fa fa-eye-slash"></i>
-                            <span class="d-none d-md-inline-block">Backend</span>
-                        </a>
+                        @foreach($person_categories as $category)
+                            <a href="{{route('person_frontend_index', $category->name)}}" class="list-group-item" data-parent="#personen">
+                                {{ucfirst($category->name)}}
+                            </a>
+                        @endforeach
+                        <a href="{{route('person_category_index')}}" class="list-group-item" data-parent="#frontend">Kategorien</a>
                     </div>
+                @endcan
+
+                @can('can_access_user', \App\User::class)
+
+                    <a href="{{route('user_index')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
+                        <i class="fa fa-"></i>
+                        <span class="d-none d-md-inline-block">Nutzer</span>
+                    </a>
                 @endcan
 
                 @can ('can_access_files', \App\User::class)

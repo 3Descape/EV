@@ -43,6 +43,11 @@ class RolePolicy
         return $user->hasPermission('access_people');
     }
 
+    public function can_access_user(User $user)
+    {
+        return $user->hasPermission('access_user');
+    }
+
     public function can_access_pictures(User $user)
     {
         return $user->hasPermission('access_pictures');

@@ -1,45 +1,62 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-10 col-md-12 mx-auto">
+            <div class="col-lg-8 col-md-12 mx-auto col-xl-7">
 
                 <h3>Berechtigungen:</h3>
 
-                <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#role_store_modal">
+                <button type="button"
+                        class="btn btn-success my-2"
+                        data-toggle="modal"
+                        data-target="#role_store_modal">
                     <i class="fa fa-plus" /> Berechtigung
                 </button>
 
-                <div class="card mb-5" v-for="(role, role_index) in roles" :key="role.id">
-                    <div class="card-header" :id="role.name">
+                <div class="card mb-4 mt-2"
+                     v-for="(role, role_index) in roles"
+                     :key="role.id">
+                    <div class="card-header"
+                         :id="role.name">
                         <div class="d-flex">
                             <div class="mr-auto d-flex align-items-end">
                                 <h4 class="mb-0">{{ role.name | ucfirst }}</h4>
                                 <p class="text-muted ml-2 mb-0">{{ role.label | ucfirst }}</p>
                             </div>
 
-                            <form v-if="!is_admin_role(role)" @submit.prevent="role_destroy(role)">
-                                <button type="submit" class="btn btn-danger float-left mx-1">
+                            <form v-if="!is_admin_role(role)"
+                                  @submit.prevent="role_destroy(role)">
+                                <button type="submit"
+                                        class="btn btn-danger float-left mx-1">
                                     <i class="fa fa-trash-o" /> Löschen
                                 </button>
                             </form>
                         </div>
                     </div>
 
-                    <div class="card-body" v-if="!is_admin_role(role)">
+                    <div class="card-body">
                         <div class="d-flex justify-content-end mb-2">
-                            <h5 class="mr-auto">Rechte:</h5>
-                            <button class="btn btn-success" @click="modal(role)" v-show="role.permissions.length < permissions.length">
+                            <h5 :class="['mr-auto', is_admin_role(role) ? 'text-muted' : '']">Rechte:
+                                <small v-if="is_admin_role(role)">Darf bereits alles..</small>
+                            </h5>
+                            <button :disabled="is_admin_role(role)"
+                                    class="btn btn-success"
+                                    @click="modal(role)"
+                                    v-show="role.permissions.length < permissions.length">
                                 <i class="fa fa-plus" /> Recht
                             </button>
                         </div>
-                        <div v-if="role.permissions">
-                            <div class="card mb-1" v-for="(permission, permission_index) in role.permissions" :key="permission.id">
+
+                        <div v-if="role.permissions"
+                             class="mt-3">
+                            <div class="card mb-1"
+                                 v-for="(permission, permission_index) in role.permissions"
+                                 :key="permission.id">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item d-flex justify-content-end">
                                         <span class="mr-auto">{{ permission.label }}</span>
                                         <form @submit.prevent="permission_role_destroy(role, role_index, permission, permission_index)">
                                             <button class="btn btn-danger mx-1">
-                                                <i class="fa fa-trash-o" /> Löschen
+                                                <i class="fa fa-trash-o" />
                                             </button>
                                         </form>
                                     </li>
@@ -55,7 +72,10 @@
         <modal id="role_store_modal">
             <div class="modal-header">
                 <h5 class="modal-title">Berechtigung hinzufügen</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -64,22 +84,34 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="role_name">Name:</label>
-                        <input class="form-control" type="text" id="role_name" v-model="role.name">
+                        <input class="form-control"
+                               type="text"
+                               id="role_name"
+                               v-model="role.name">
 
-                        <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
+                        <div class="alert alert-danger mt-2"
+                             role="alert"
+                             v-if="errors.hasError('name')">
                             <ul class="m-0">
-                                <li :key="error.name" v-for="error in errors.getError('name')">{{ error }}</li>
+                                <li :key="error.name"
+                                    v-for="error in errors.getError('name')">{{ error }}</li>
                             </ul>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="label">Beschreibung:</label>
-                        <input class="form-control" type="text" id="label" v-model="role.label">
+                        <input class="form-control"
+                               type="text"
+                               id="label"
+                               v-model="role.label">
 
-                        <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('label')">
+                        <div class="alert alert-danger mt-2"
+                             role="alert"
+                             v-if="errors.hasError('label')">
                             <ul class="m-0">
-                                <li :key="error.label" v-for="error in errors.getError('label')">{{ error }}</li>
+                                <li :key="error.label"
+                                    v-for="error in errors.getError('label')">{{ error }}</li>
                             </ul>
                         </div>
 
@@ -87,10 +119,13 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit"
+                            class="btn btn-success">
                         <i class="fa fa-plus" /> Hinzufügen
                     </button>
-                    <button type="button" class="btn btn-light border border-dark" data-dismiss="modal">
+                    <button type="button"
+                            class="btn btn-light border border-dark"
+                            data-dismiss="modal">
                         <i class="fa fa-times" /> Abbrechen
                     </button>
                 </div>
@@ -100,7 +135,10 @@
         <modal id="permission_add_modal">
             <div class="modal-header">
                 <h5 class="modal-title">Recht hinzufügen..</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -109,18 +147,25 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="permission_add">Recht:</label>
-                        <select id="permission_add" class="custom-select" v-model="permission_selected">
-                            <option v-for="permission in possible_permissions" :key="permission.id" :value="permission">
+                        <select id="permission_add"
+                                class="custom-select"
+                                v-model="permission_selected">
+                            <option v-for="permission in possible_permissions"
+                                    :key="permission.id"
+                                    :value="permission">
                                 {{ permission.label }}
                             </option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">
+                    <button type="submit"
+                            class="btn btn-success">
                         <i class="fa fa-plus" /> Hinzufügen
                     </button>
-                    <button type="button" class="btn btn-light border border-dark" data-dismiss="modal">
+                    <button type="button"
+                            class="btn btn-light border border-dark"
+                            data-dismiss="modal">
                         <i class="fa fa-times" /> Abbrechen
                     </button>
                 </div>
@@ -264,7 +309,7 @@ export default {
         });
     },
     is_admin_role(role) {
-      return role.name === "administrator";
+      return role.name === "admin";
     },
     select_options(role) {
       return this.permissions.filter(function(permission) {

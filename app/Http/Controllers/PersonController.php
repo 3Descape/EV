@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Person;
-use App\PeopleCategory;
+use App\PersonCategory;
 use Illuminate\Http\Request;
 use App\Http\Helpers\StoreImage;
 use Illuminate\Support\Facades\Storage;
 
 class PersonController extends Controller
 {
-    public function index(PeopleCategory $category)
+    public function index(PersonCategory $category)
     {
         $this->authorize('can_access_people', User::class);
         $people = $category->people()->orderBy('people.name')->get();
@@ -22,7 +22,7 @@ class PersonController extends Controller
         ]);
     }
 
-    public function create(PeopleCategory $category)
+    public function create(PersonCategory $category)
     {
         $this->authorize('can_access_people', User::class);
 
@@ -100,7 +100,6 @@ class PersonController extends Controller
         ]);
 
         if ($request->hasFile('file')) {
-            \Log::info("hasFile");
             if ($person->image_path) {
                 Storage::disk('public')->delete($person->image_path);
             }

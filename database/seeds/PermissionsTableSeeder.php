@@ -39,6 +39,11 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
         Permission::create([
+            'name' => 'access_user',
+            'label' => 'Benutzer'
+        ]);
+
+        Permission::create([
             'name' => 'access_roles',
             'label' => 'Berechtigungen',
         ]);

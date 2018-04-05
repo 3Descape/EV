@@ -11,7 +11,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        $this->authorize('can_access_roles', User::class);
+        $this->authorize('can_access_user', User::class);
 
         return view('admin.sites.roles.role_index', [
             'roles' => Role::with('permissions')->get(),
@@ -21,7 +21,7 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        $this->authorize('can_access_roles', User::class);
+        $this->authorize('can_access_user', User::class);
         $this->validate($request, [
             'name' => 'required|string|unique:roles|max:20',
             'label' => 'required|string|max:50',
@@ -47,7 +47,7 @@ class RoleController extends Controller
 
     public function destroy($id)
     {
-        $this->authorize('can_access_roles', User::class);
+        $this->authorize('can_access_user', User::class);
         Role::destroy($id);
 
         if (request()->expectsJson()) {

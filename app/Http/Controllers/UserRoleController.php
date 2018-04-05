@@ -10,7 +10,7 @@ class UserRoleController extends Controller
 {
     public function edit(User $user)
     {
-        $this->authorize('can_access_roles', User::class);
+        $this->authorize('can_access_user', User::class);
         $roles = Role::whereNotIn('id', $user->roles()->pluck('id'))->get();
 
         return view('admin.sites.roles.role_edit', [
@@ -21,7 +21,7 @@ class UserRoleController extends Controller
 
     public function update(Request $request, User $user)
     {
-        $this->authorize('can_access_roles', User::class);
+        $this->authorize('can_access_user', User::class);
         $user->roles()->save(Role::find($request->role));
 
         return redirect()->route('user_index');
@@ -29,7 +29,7 @@ class UserRoleController extends Controller
 
     public function destroy(User $user, Role $role)
     {
-        $this->authorize('can_access_roles', User::class);
+        $this->authorize('can_access_user', User::class);
         if ($role->name == 'administrator') {
             $count = $role->users()->count();
             if ($count <= 1) {

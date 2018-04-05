@@ -8,7 +8,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $this->authorize('can_access_people', User::class);
+        $this->authorize('can_access_user', User::class);
         $users = User::with('roles')->get();
 
         return view('admin.sites.users.user_index', [
@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function user_delete($user)
     {
-        $this->authorize('can_access_people', User::class);
+        $this->authorize('can_access_user', User::class);
         $admins = User::with('roles')->get()->filter(function ($user) {
             return $user->hasRole('administrator');
         });

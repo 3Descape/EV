@@ -23,12 +23,12 @@
                     <td>
                         <div class="d-flex">
                             <a href="{{route('event_edit', $event->id)}}?type=archive" class="btn btn-warning ml-auto">
-                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                <i class="fa fa-pencil-alt" aria-hidden="true"></i>
                             </a>
 
                             <form action="{{route('event_destroy', $event->id)}}" method="POST">
                                 <button type="submit" class="btn btn-danger ml-1">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fa fa-trash-alt"></i>
                                 </button>
                                 {{method_field('DELETE')}}
                                 {{ csrf_field() }}

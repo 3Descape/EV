@@ -19,7 +19,7 @@
 
         <div class="form-group d-flex">
             <button type="submit" class="btn btn-info ml-auto mr-2">
-                Bearbeiten <i class="fa fa-edit"></i>
+                Bearbeiten <i class="fa fa-pencil-alt"></i>
             </button>
 
             <a class="btn btn-light border border-dark align-self-start" href="{{route('file_index')}}">

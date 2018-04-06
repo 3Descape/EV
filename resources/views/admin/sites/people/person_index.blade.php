@@ -26,11 +26,11 @@
                                 <td class="d-none d-md-table-cell overflow-text">{{$person->description}}</td>
                                 <td class="d-flex">
                                     <a href="{{route('person_edit', $person->id)}}" class="btn btn-warning ml-auto">
-                                        <i class="fa fa-pencil"></i>
+                                        <i class="fa fa-pencil-alt"></i>
                                     </a>
                                     <form action="{{route('person_destroy', $person->id)}}" method="post">
                                         <button href="{{route('person_destroy', $person->id)}}" class="btn btn-danger mx-1">
-                                            <i class="fa fa-trash-o"></i>
+                                            <i class="fa fa-trash-alt"></i>
                                         </button>
                                         {{method_field('DELETE')}}
                                         {{ csrf_field() }}

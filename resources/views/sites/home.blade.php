@@ -58,7 +58,7 @@
                                     <div class="col-md-4">
                                         <a href="{{route('events_archive')}}?event={{$event->id}}"
                                             class="btn btn-success float-right">
-                                            <i class="fa fa-arrow-right"></i> Ansehen
+                                            <i class="fas fa-arrow-right"></i> Ansehen
                                         </a>
                                     </div>
                                 </div>
@@ -76,12 +76,6 @@
                 </div>
                 <div class="card col-md-12">
                     <div class="row">
-                        {{--  <div class="col-md-6">
-                            <a href="{{route('pdf_start_download')}}" class="btn btn-danger">
-                                <i class="fa fa-download"></i> Download
-                            </a>
-                        </div>  --}}
-            
                         <div class="col-md-12">
                             <a href="{{route('downloads_view')}}" class="btn btn-info mt-sm-4 mt-md-0">
                                 <i class="fa fa-download"></i> Downloads
@@ -99,25 +93,25 @@
                         <div class="row">
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <a href="#">
-                                    <i class="fa fa-youtube-play" aria-hidden="true"></i> YouTube
+                                    <i class="fab fa-youtube-square" aria-hidden="true"></i> YouTube
                                 </a>
                             </div>
 
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <a href="#">
-                                    <i class="fa fa-twitter-square" aria-hidden="true"></i> Twitter
+                                    <i class="fab fa-twitter-square" aria-hidden="true"></i> Twitter
                                 </a>
                             </div>
 
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <a href="#">
-                                    <i class="fa fa-facebook-official" aria-hidden="true"></i> Facebook
+                                    <i class="fab fa-facebook-square" aria-hidden="true"></i> Facebook
                                 </a>
                             </div>
 
                             <div class="col-lg-3 col-md-6 col-sm-12">
                                 <a href="#">
-                                    <i class="fa fa-graduation-cap" aria-hidden="true"></i> BG Weiz
+                                    <i class="fas fa-graduation-cap" aria-hidden="true"></i> BG Weiz
                                 </a>
                             </div>
                         </div>

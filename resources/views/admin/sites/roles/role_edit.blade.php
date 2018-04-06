@@ -15,7 +15,7 @@
                     <span class="mr-auto">{{ucfirst($role->name)}}</span>
                     <form action="{{route('user_role_destroy' , [$user->id, $role->id])}}" method="post" class="align-self-end mx-1">
                         <button class="btn btn-danger">
-                            <i class="fa fa-trash-o"></i>
+                            <i class="fa fa-trash-alt"></i>
                         </button>
                         {{ csrf_field() }}
                         {{method_field('DELETE')}}

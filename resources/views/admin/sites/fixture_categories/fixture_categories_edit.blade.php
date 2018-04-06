@@ -13,7 +13,7 @@
 
             <div class="form-group d-flex">
                 <button type="submit" class="btn btn-info ml-auto mr-2">
-                    <i class="fa fa-edit"></i> Bearbeiten
+                    <i class="fa fa-pencil-alt"></i> Bearbeiten
                 </button>
                 <a href="{{route('fixture_category_index')}}" class="btn btn-light border border-dark">
                     <i class="fa fa-times"></i> Abbrechen

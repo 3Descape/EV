@@ -116,13 +116,13 @@
                         <div class="d-flex">
                             <a :href="`/admin/datei/edit/${file.id}`"
                                class="btn btn-warning ml-auto">
-                                <i class="fa fa-edit" />
+                                <i class="fa fa-pencil-alt" />
                             </a>
 
                             <form @submit.prevent="remove(file)">
                                 <button type="submit"
                                         class="btn btn-danger mx-1">
-                                    <i class="fa fa-trash" />
+                                    <i class="fa fa-trash-alt" />
                                 </button>
                             </form>
 

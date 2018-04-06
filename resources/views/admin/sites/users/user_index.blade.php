@@ -41,11 +41,11 @@
                                     <td class="d-flex">
                                         <a href="{{route('user_role_edit', $user->id)}}"
                                             class="btn btn-warning ml-auto">
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                         </a>
                                         <a href="{{route('user_delete', $user->id)}}"
                                             class="btn btn-danger mx-1">
-                                            <i class="fa fa-trash-o"></i>
+                                            <i class="fa fa-trash-alt"></i>
                                         </a>
                                     </td>
                                 </tr>

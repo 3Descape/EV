@@ -1,9 +1,12 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 @import "/_variables.scss";
 @import "/palettes/palette_4.scss";
-@import "node_modules/font-awesome/scss/font-awesome.scss";
+
 @import "/helpers.scss";
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,700i');
+
+@import "node_modules/@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss";
+@import "node_modules/@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
 //admin section
 
 body{

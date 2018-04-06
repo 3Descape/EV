@@ -9,7 +9,7 @@
                         class="btn btn-success my-2"
                         data-toggle="modal"
                         data-target="#role_store_modal">
-                    <i class="fa fa-plus" /> Berechtigung
+                    <i class="fas fa-plus" /> Berechtigung
                 </button>
 
                 <div class="card mb-4 mt-2"
@@ -27,7 +27,7 @@
                                   @submit.prevent="role_destroy(role)">
                                 <button type="submit"
                                         class="btn btn-danger float-left mx-1">
-                                    <i class="fa fa-trash-o" /> Löschen
+                                    <i class="fa fa-trash-alt" /> Löschen
                                 </button>
                             </form>
                         </div>
@@ -56,7 +56,7 @@
                                         <span class="mr-auto">{{ permission.label }}</span>
                                         <form @submit.prevent="permission_role_destroy(role, role_index, permission, permission_index)">
                                             <button class="btn btn-danger mx-1">
-                                                <i class="fa fa-trash-o" />
+                                                <i class="fa fa-trash-alt" />
                                             </button>
                                         </form>
                                     </li>

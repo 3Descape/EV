@@ -37,11 +37,11 @@
                             <td>
                                 <div class="d-flex">
                                     <a href="{{route('fixture_category_edit', $category->id)}}" class="btn btn-warning ml-auto">
-                                        <i class="fa fa-pencil"></i>
+                                        <i class="fa fa-pencil-alt"></i>
                                     </a>
                                     <form action="{{route('fixture_category_destroy', $category->id)}}" method="post">
                                         <button class="btn btn-danger mx-1" type="submit">
-                                            <i class="fa fa-trash-o"></i>
+                                            <i class="fa fa-trash-alt"></i>
                                         </button>
                                         {{ csrf_field() }}
                                         {{method_field('DELETE')}}

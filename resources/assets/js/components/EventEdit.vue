@@ -80,7 +80,7 @@
 
                 <div class="form-group d-flex">
                     <button class="btn btn-info ml-auto mr-2">
-                        <i class="fa fa-edit" /> Bearbeiten
+                        <i class="fa fa-pencil-alt" /> Bearbeiten
                     </button>
                     <a :href="isArchived ? '/admin/veranstaltungen/archiv' : '/admin/veranstaltungen'" class="btn btn-light border border-dark">
                         <i class="fa fa-times" /> Abbrechen
@@ -127,7 +127,7 @@
                          
                                 <form @submit.prevent="destroy(image)" class="ml-auto">
                                     <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-trash" />
+                                        <i class="fa fa-trash-alt" />
                                     </button>
                                 </form>
                             </div>

@@ -76,11 +76,11 @@
                     <td>
                         <div class="d-flex">
                             <a href="{{route('event_edit', $event->id)}}" class="btn btn-warning ml-auto">
-                                <i class="fa fa-edit" aria-hidden="true"></i>
+                                <i class="fas fa-pencil-alt" aria-hidden="true"></i>
                             </a>
                             <form class="mx-1" action="{{route('event_destroy',$event->id)}}" method="POST">
                                 <button type="submit" class="btn btn-danger mx-1">
-                                    <i class="fa fa-trash"></i>
+                                    <i class="fa fa-trash-alt"></i>
                                 </button>
                                 {{ csrf_field() }}
                                 {{method_field('DELETE')}}

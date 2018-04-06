@@ -66,11 +66,11 @@
                                     <td style="max-width: 2rem">{{$fixture->category->name}}</td>
                                     <td class="d-flex" >
                                         <a href="{{route('fixture_edit', $fixture->id)}}" class="btn btn-warning ml-auto">
-                                            <i class="fa fa-pencil"></i>
+                                            <i class="fa fa-pencil-alt"></i>
                                         </a>
                                         <form action="{{route('fixture_destroy', $fixture->id)}}" method="post">
                                             <button class="btn btn-danger mx-1" type="submit">
-                                                <i class="fa fa-trash-o"></i>
+                                                <i class="fa fa-trash-alt"></i>
                                             </button>
                                             {{ csrf_field() }}
                                             {{method_field('DELETE')}}

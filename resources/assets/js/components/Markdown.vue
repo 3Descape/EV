@@ -4,7 +4,7 @@
             <div class="d-flex mb-1">
                 <button class="btn btn-danger ml-auto"
                         @click="destroy">
-                    <i class="fa fa-trash" />
+                    <i class="fa fa-trash-alt" />
                 </button>
             </div>
             <fieldset class="mb-2"
@@ -18,9 +18,9 @@
                     <div class="input-group-prepend">
                         <button type="submit"
                                 class="input-group-text bg-light">
-                            <div v-if="!updatingTitle"
-                                 class="fa fa-refresh" />
-                            <div v-if="updatingTitle"
+                            <div v-show="!updatingTitle"
+                                 class="fa fa-sync-alt" />
+                            <div v-show="updatingTitle"
                                  class="fa fa-spinner fa-pulse" />
                         </button>
                     </div>
@@ -33,9 +33,9 @@
                               rows="5" />
                     <button class="btn btn-info form-control mt-2"
                             type="submit">
-                        <i v-if="!updatingBody"
-                           class="fa fa-edit" /> Text aktualisieren..
-                        <i v-if="updatingBody"
+                        <i v-show="!updatingBody"
+                           class="fa fa-pencil-alt" /> Text aktualisieren..
+                        <i v-show="updatingBody"
                            class="fa fa-spinner fa-pulse"
                            disabled />
                     </button>

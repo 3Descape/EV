@@ -1,19 +1,24 @@
 <template>
     <div class="row">
-        <div class="col-lg-3 mb-3 px-2" v-for="image in images" :key="image.id">
+        <div class="col-lg-3 mb-3 px-2"
+             v-for="image in images"
+             :key="image.id">
             <div class="card h-100">
                 <div class="card-body row">
                     <div class="col-lg-3">
-                        <img :src="`/storage/${image.path}`" class="img-fluid">
+                        <img :src="`/storage/${image.path}`"
+                             class="img-fluid">
                     </div>
                     <div class="col-lg-9 d-flex">
                         <div>
                             <h4 v-if="image.name">{{ image.name }}</h4>
                             <p>Bild ID: {{ image.id }}</p>
                         </div>
-                        <form @submit.prevent="destroy(image)" class="ml-auto">
-                            <button type="submit" class="btn btn-danger">
-                                <i class="fa fa-trash" />
+                        <form @submit.prevent="destroy(image)"
+                              class="ml-auto">
+                            <button type="submit"
+                                    class="btn btn-danger">
+                                <i class="fa fa-trash-alt" />
                             </button>
                         </form>
                     </div>

@@ -3,6 +3,10 @@ require('./bootstrap');
 /* global Vue*/
 window.Vue = require('vue');
 
+// import fontawesome from '@fortawesome/fontawesome';
+// import solid from '@fortawesome/fontawesome-free-solid';
+// fontawesome.library.add(solid);
+
 Vue.component('dashboard', require('./components/Dashboard.vue'));
 Vue.component('roles', require('./components/Roles.vue'));
 Vue.component('sites-edit', require('./components/SitesEdit.vue'));

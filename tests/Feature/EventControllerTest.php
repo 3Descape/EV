@@ -13,7 +13,7 @@ class EventControllerTest extends TestCase
     use DatabaseMigrations;
 
     /** @test */
-    public function only_future_events_are_shown()
+    public function only_future_or_past_events_are_shown()
     {
         $category = EventCategory::create([
             'name' => 'sport'

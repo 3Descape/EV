@@ -7,22 +7,22 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::post('/getAnalythics', 'DashboardController@getAnalythics');
 
-    Route::get('/veranstaltungen', 'EventController@events_future')->name('event_future_index');
-    Route::get('/veranstaltungen/archiv', 'EventController@events_archived')->name('event_archived_index');
-    Route::post('/veranstaltungen', 'EventController@store')->name('event_store');
-    Route::get('/veranstaltungen/{event}/edit', 'EventController@edit')->name('event_edit');
-    Route::put('/veranstaltungen/{event}', 'EventController@update')->name('event_update');
-    Route::put('/veranstaltungen/{event}/konflikt', 'EventController@resolve_conflict')->name('event_resolve_conflict');
-    Route::delete('/veranstaltungen/{event}', 'EventController@destroy')->name('event_destroy');
+    Route::get('/veranstaltung', 'EventController@events_future')->name('event_future_index');
+    Route::get('/veranstaltung/archiv', 'EventController@events_archived')->name('event_archived_index');
+    Route::post('/veranstaltung', 'EventController@store')->name('event_store');
+    Route::get('/veranstaltung/{event}/edit', 'EventController@edit')->name('event_edit');
+    Route::put('/veranstaltung/{event}', 'EventController@update')->name('event_update');
+    Route::put('/veranstaltung/{event}/konflikt', 'EventController@resolve_conflict')->name('event_resolve_conflict');
+    Route::delete('/veranstaltung/{event}', 'EventController@destroy')->name('event_destroy');
 
-    Route::post('/veranstaltungen/{event}/bild', 'EventImageController@store')->name('event_image_store');
+    Route::post('/veranstaltung/{event}/bild', 'EventImageController@store')->name('event_image_store');
 
-    Route::get('/veranstaltung-kategorien', 'EventCategoryController@index')->name('event_category_index');
-    Route::post('/veranstaltung-kategorien', 'EventCategoryController@store')->name('event_category_store');
-    Route::get('/veranstaltung-kategorien/{event_category}/edit', 'EventCategoryController@edit')->name('event_category_edit');
-    Route::put('/veranstaltung-kategorien/{event_category}', 'EventCategoryController@update')->name('event_category_update');
-    Route::get('/veranstaltung-kategorien/{event_category}/konflikt', 'EventCategoryController@conflict')->name('event_category_conflict');
-    Route::delete('/veranstaltung-kategorien/{event_category}', 'EventCategoryController@destroy')->name('event_category_destroy');
+    Route::get('/veranstaltung-kategorie', 'EventCategoryController@index')->name('event_category_index');
+    Route::post('/veranstaltung-kategorie', 'EventCategoryController@store')->name('event_category_store');
+    Route::get('/veranstaltung-kategorie/{event_category}/edit', 'EventCategoryController@edit')->name('event_category_edit');
+    Route::put('/veranstaltung-kategorie/{event_category}', 'EventCategoryController@update')->name('event_category_update');
+    Route::get('/veranstaltung-kategorie/{event_category}/konflikt', 'EventCategoryController@conflict')->name('event_category_conflict');
+    Route::delete('/veranstaltung-kategorie/{event_category}', 'EventCategoryController@destroy')->name('event_category_destroy');
 
     Route::get('/person-kategorie', 'PersonCategoryController@index')->name('person_category_index');
     Route::post('/person-kategorie', 'PersonCategoryController@store')->name('person_category_store');
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::put('/person-kategorie/{person_category}', 'PersonCategoryController@update')->name('person_category_update');
     Route::delete('/person-kategorie/{person_category}', 'PersonCategoryController@destroy')->name('person_category_destroy');
 
-    Route::get('/person/frontend/{category}', 'PersonController@index')->name('person_frontend_index');
+    Route::get('/person/{category}', 'PersonController@index')->name('person_index');
     Route::get('/person/{category}/add', 'PersonController@create')->name('person_create');
     Route::post('/person/add', 'PersonController@store')->name('person_store');
     Route::get('/person/{person}/edit', 'PersonController@edit')->name('person_edit');
@@ -99,8 +99,7 @@ Route::get('/impressum', 'FrontendController@imprint')->name('imprint');
 Route::post('email/ev', 'MailController@send_ev')->name('mail_ev');
 Route::post('email/obmann', 'MailController@send_obmann')->name('mail_obmann');
 
-Route::get('/downloads', 'DownloadController@index')->name('downloads_view');
+Route::get('/download', 'DownloadController@index')->name('downloads_view');
 Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
 
-#Route::post('/bild/{image}', 'ImageController@getImage');
 Route::post('/people/{category}', 'ApiController@getPeople');

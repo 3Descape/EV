@@ -35,7 +35,7 @@ class PersonController extends Controller
     {
         $this->authorize('can_access_people', User::class);
         $person->load('category');
-        $categories = PeopleCategory::all();
+        $categories = PersonCategory::all();
 
         return view('admin.sites.people.person_edit', compact(
             'person',
@@ -53,7 +53,6 @@ class PersonController extends Controller
         ]);
 
         $image = new StoreImage();
-
         $saved = $image->store($request->file('file'), 'people/', false);
 
         Person::create([
@@ -69,33 +68,13 @@ class PersonController extends Controller
         );
     }
 
-    function base64_to_jpeg($base64_string, $output_file)
-    {
-        // open the output file for writing
-        $ifp = fopen($output_file, 'wb');
-
-        // split the string on commas
-        // $data[ 0 ] == "data:image/png;base64"
-        // $data[ 1 ] == <actual base64 string>
-        $data = explode(',', $base64_string);
-
-        // we could add validation here with ensuring count( $data ) > 1
-        fwrite($ifp, base64_decode($data[1]));
-
-        // clean up the file resource
-        fclose($ifp);
-
-        return $output_file;
-    }
-
-
     public function update(Person $person, Request $request)
     {
         $this->authorize('can_access_people', User::class);
         $this->validate($request, [
             'name' => 'required|string',
             'description' => 'nullable',
-            'people_category_id' => 'required|exists:people_categories,id',
+            'people_category_id' => 'required|exists:person_categories,id',
             'file' => 'image',
         ]);
 
@@ -113,7 +92,7 @@ class PersonController extends Controller
         $person->update([
             'name' => $request->name,
             'description' => $request->description,
-            'people_category_id' => $request->people_category_id,
+            'person_category_id' => $request->person_category_id,
         ]);
 
         return response()->json(["status" => "Updated person", "person" => $person->load('category')], 200);

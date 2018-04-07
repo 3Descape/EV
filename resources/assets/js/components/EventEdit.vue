@@ -212,7 +212,7 @@ export default {
       let vue = this;
       vue.isUpdating = true;
       axios
-        .put(`/admin/veranstaltungen/${vue.event.id}`, {
+        .put(`/admin/veranstaltung/${vue.event.id}`, {
           name: vue.event.name,
           location: vue.event.location,
           date: this.event.date,
@@ -250,7 +250,7 @@ export default {
           }
         };
         axios
-          .post(`/admin/veranstaltungen/${vue.event.id}/bild`, data, config)
+          .post(`/admin/veranstaltung/${vue.event.id}/bild`, data, config)
           .then(msg => {
             vue.event.images.push(msg.data.image);
             resolve();

@@ -123,7 +123,7 @@
                         Bearbeiten
                     </button>
 
-                    <a :href="'/admin/person/frontend/' + person.category.name"
+                    <a :href="'/admin/person/' + person.category.name"
                        class="btn btn-light border border-dark">
                         <i class="fa fa-times"></i> Abbrechen
                     </a>
@@ -206,9 +206,9 @@ export default {
       axios
         .post(`/admin/person/${this.person.id}`, formData)
         .then(msg => {
+          location.href = `/admin/person/${this.person.category.name}`;
           this.person = msg.data.person;
           this.changed = false;
-          location.href = `/admin/person/frontend/${this.person.category.name}`;
           this.working = false;
         })
         .catch(errors => {

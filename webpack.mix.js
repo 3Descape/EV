@@ -1,5 +1,5 @@
 let mix = require('laravel-mix');
-
+require('laravel-mix-purgecss');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -15,12 +15,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .js('resources/assets/js/admin.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .sass('resources/assets/sass/admin.scss', 'public/css')
+    .sass('resources/assets/sass/login.scss', 'public/css')
     .copy('node_modules/cropperjs/dist/cropper.min.css', 'public/css')
-    // .options({
-    //     purifyCss: {
-    //         purifyOptions: {
-    //             purifyCss: true,
-    //             whitelist: ['collapsing', 'callapse', 'show', 'collapsed', 'fa', '*fa*', 'blockquote']
-    //         },
-    //     }
-    // });
+    .purgeCss({
+        enabled: true,
+    });

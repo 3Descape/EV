@@ -87,7 +87,7 @@
 
                     <div class="collapse" id="personen">
                         @foreach($person_categories as $category)
-                            <a href="{{route('person_frontend_index', $category->name)}}" class="list-group-item" data-parent="#personen">
+                            <a href="{{route('person_index', $category->name)}}" class="list-group-item" data-parent="#personen">
                                 {{ucfirst($category->name)}}
                             </a>
                         @endforeach

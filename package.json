@@ -16,12 +16,10 @@
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1.4",
         "jquery": "^3.3.1",
-        "laravel-mix": "^1.7.2",
+        "laravel-mix": "^2.1.0",
         "lodash": "^4.17.5",
         "popper.js": "^1.14.3",
-        "vue": "^2.5.16"
-    },
-    "dependencies": {
+        "vue": "^2.5.16",
         "@fortawesome/fontawesome": "^1.1.5",
         "@fortawesome/fontawesome-free-webfonts": "^1.0.5",
         "chart.js": "^2.7.2",
@@ -29,9 +27,9 @@
         "eslint": "^4.19.0",
         "eslint-plugin-vue": "^4.3.0",
         "marked": "^0.3.17",
-        "purify-css": "^1.2.6",
-        "purifycss-webpack": "^0.7.0",
         "vue-template-compiler": "^2.5.16",
-        "vuedraggable": "^2.16.0"
-    }
+        "vuedraggable": "^2.16.0",
+        "laravel-mix-purgecss": "^2.0.0"
+    },
+    "dependencies": {}
 }

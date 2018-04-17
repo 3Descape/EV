@@ -59,6 +59,20 @@
                         @endforeach
                     </div>
                 @endcan
+                
+                @can ('can_access_pictures', \App\User::class)
+                    <a href="{{route('image_index')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
+                        <i class="fas fa-images"></i>
+                        <span class="d-none d-md-inline-block">Bilder</span>
+                    </a>
+                @endcan
+
+                @can ('can_access_files', \App\User::class)
+                    <a href="{{route('file_index')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
+                        <i class="fa fa-download"></i>
+                        <span class="d-none d-md-inline-block">Downloads</span>
+                    </a>
+                @endcan
 
                 @can('can_access_fixtures', \App\User::class)
                     <a href="#fixture" class="list-group-item d-inline-block collapsed" data-toggle="collapse" data-parent="#sidebar" aria-expanded="false">
@@ -100,20 +114,6 @@
                     <a href="{{route('user_index')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
                         <i class="fas fa-user-circle"></i>
                         <span class="d-none d-md-inline-block">Nutzer</span>
-                    </a>
-                @endcan
-
-                @can ('can_access_files', \App\User::class)
-                    <a href="{{route('file_index')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
-                        <i class="fa fa-download"></i>
-                        <span class="d-none d-md-inline-block">Downloads</span>
-                    </a>
-                @endcan
-
-                @can ('can_access_pictures', \App\User::class)
-                    <a href="{{route('image_index')}}" class="list-group-item d-inline-block" data-parent="#sidebar">
-                        <i class="fas fa-images"></i>
-                        <span class="d-none d-md-inline-block">Bilder</span>
                     </a>
                 @endcan
 

@@ -3299,6 +3299,14 @@ body * {
   width: auto;
 }
 
+.image-slider {
+  height: 30rem;
+}
+
+.image-slider img {
+  height: 100%;
+}
+
 .cookie {
   background-color: black;
   color: white;

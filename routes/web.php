@@ -60,9 +60,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/seite/update/{site}/titel', 'SiteController@update_title')->name('site_title_update');
     Route::post('/seite/update/reihenfolge', 'SiteController@update_order')->name('site_order_update');
 
-    Route::post('/seite/über_uns/hochladen', 'ImagesController@uploud_group_image')->name('group_image_store');
-    Route::delete('seite/über_uns', 'ImagesController@remove_group_image')->name('group_image_destroy');
-
     Route::get('/bild', 'ImageController@index')->name('image_index');
     Route::post('/bild', 'ImageController@store')->name('image_store');
     Route::delete('/bild/{image}', 'ImageController@destroy')->name('image_destroy');

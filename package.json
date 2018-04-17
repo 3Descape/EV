@@ -29,7 +29,10 @@
         "marked": "^0.3.17",
         "vue-template-compiler": "^2.5.16",
         "vuedraggable": "^2.16.0",
-        "laravel-mix-purgecss": "^2.0.0"
+        "laravel-mix-purgecss": "^2.0.0",
+        "flickity": "^2.1.1"
     },
-    "dependencies": {}
+    "dependencies": {
+        "flickity-fullscreen": "^1.0.1"
+    }
 }

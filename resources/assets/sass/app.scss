@@ -221,6 +221,17 @@ body{
     }
 }
 
+
+.carousel.is-fullscreen .carousel-cell {
+  height: 100%
+}
+.image-slider{
+    height: 30rem;
+    img{
+        height: 100%;
+    }
+}
+
 .cookie{
     background-color: black;
     color: white;

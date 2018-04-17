@@ -14,7 +14,7 @@ $sizes: (
   75: 75%,
   100: 100%
 ) !default;
-@import "node_modules/bootstrap/scss/mixins/_breakpoints.scss";
+// @import "node_modules/bootstrap/scss/mixins/_breakpoints.scss";
 
 @each $breakpoint in map-keys($grid-breakpoints) {
     @include media-breakpoint-down($breakpoint){

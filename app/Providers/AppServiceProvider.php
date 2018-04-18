@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
             View::composer(
                 'admin.layouts.sitebar',
                 function ($view) {
-                    $view->with('person_categories', PersonCategory::all());
+                    $view->with('person_categories', PersonCategory::orderBy('name')->get());
                 }
             );
         }

@@ -49,22 +49,23 @@ class PersonController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'description' => 'nullable',
-            'people_category_id' => 'required'
+            'person_category_id' => 'required|exists:person_categories,id'
         ]);
 
-        $image = new StoreImage();
-        $saved = $image->store($request->file('file'), 'people/', false);
+        // if($request->hasFile('image')){
+        //     $image = new StoreImage();
+        //     $saved = $image->store($request->file('file'), 'people/', false);
+        // }
 
         Person::create([
             'name' => $request->name,
             'description' => $request->description,
-            'people_category_id' => $request->people_category_id,
-            'image_path' => $saved->mainPath
+            'person_category_id' => $request->person_category_id
         ]);
 
         return redirect()->route(
-            'person_frontend_index',
-            PeopleCategory::find($request->people_category_id)->name
+            'person_index',
+            PersonCategory::find($request->person_category_id)->name
         );
     }
 
@@ -74,7 +75,7 @@ class PersonController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'description' => 'nullable',
-            'people_category_id' => 'required|exists:person_categories,id',
+            'person_category_id' => 'required|exists:person_categories,id',
             'file' => 'image',
         ]);
 

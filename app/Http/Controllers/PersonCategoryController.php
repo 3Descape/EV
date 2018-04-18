@@ -17,7 +17,7 @@ class PersonCategoryController extends Controller
     public function index()
     {
         $this->authorize('can_access_people', User::class);
-        $person_categories = PersonCategory::all();
+        $person_categories = PersonCategory::orderBy('name')->get();
 
         return view('admin.sites.person_categories.person_category_index', compact(
             'person_categories'
@@ -74,7 +74,7 @@ class PersonCategoryController extends Controller
             'name' => [
                 'required',
                 'string',
-                Rule::unique('people_categories')->ignore($person_category->name, 'name')
+                Rule::unique('person_categories')->ignore($person_category->name, 'name')
             ],
             'has_image' => 'required|boolean'
         ]);

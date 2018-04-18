@@ -4,7 +4,7 @@
              v-for="person in people"
              :key="person.id">
 
-            <div class="card mx-0 mx-lg-1">
+            <div class="card mx-0 mx-lg-1 h-100">
                 <div class="card-body row">
 
                     <div class="col-sm-3 col-lg-3 px-1"

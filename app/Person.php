@@ -8,7 +8,7 @@ class Person extends Model
 {
     protected $table = 'people';
 
-    protected $fillable = ['name', 'description', 'people_category_id', 'image_path'];
+    protected $fillable = ['name', 'description', 'person_category_id', 'image_path'];
 
     public function category()
     {

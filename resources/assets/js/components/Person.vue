@@ -187,7 +187,7 @@ export default {
       this.formData = new FormData();
       this.formData.append("name", this.person.name);
       this.formData.append("description", this.person.description);
-      this.formData.append("people_category_id", this.person.category.id);
+      this.formData.append("person_category_id", this.person.category.id);
       this.formData.append("_method", "PUT");
       if (this.changed) {
         window.cropper.getCroppedCanvas().toBlob(

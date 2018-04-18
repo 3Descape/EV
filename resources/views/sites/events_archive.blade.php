@@ -15,11 +15,11 @@
                             <div class="card-body">
                                 <div class="row">
                                     @if($event->thump_path)
-                                        <div class="col-lg-2 col-md-12 event_thumb">
-                                            <img src="{{asset('storage/'. $event->thump_path)}}" alt="" class="img-responsive">
+                                        <div class="col-lg-1 col-md-12 event_thumb">
+                                            <img src="{{asset('storage/'. $event->thump_path)}}" alt="" class="img-thumbnail" style="border-radius: 50%">
                                         </div>
                                     @endif
-                                    <div class="{{$event->thump_path ? 'col-lg-10 col-md-12' : 'col-lg-12'}}">
+                                    <div class="{{$event->thump_path ? 'col-lg-11 col-md-12' : 'col-lg-12'}}">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="d-flex justify-content-end">
@@ -30,7 +30,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-12 mt-4 d-flex">
+                                            <div class="col-md-12 mt-2 d-flex">
                                                 <p class="mb-0">{{ucfirst($event->date->diffForHumans())}}</p>
                                                 <span class="badge badge-info ml-auto align-self-end">
                                                     {{ ucfirst($event->category->name)}}

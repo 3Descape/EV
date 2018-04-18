@@ -8,7 +8,7 @@ class ApiController extends Controller
 {
     public function getPeople(PersonCategory $category)
     {
-        $people = $category->people()->get();
+        $people = $category->people()->orderBy('name')->get();
 
         return response()->json(['people' => $people], 200);
     }

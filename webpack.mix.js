@@ -19,4 +19,5 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .copy('node_modules/cropperjs/dist/cropper.min.css', 'public/css')
     .purgeCss({
         enabled: true,
+        whitelist: ['blockquote']
     });

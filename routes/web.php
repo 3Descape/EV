@@ -100,3 +100,13 @@ Route::get('/download', 'DownloadController@index')->name('downloads_view');
 Route::get('/download/{file}', 'DownloadController@file_download')->name('file_download');
 
 Route::post('/people/{category}', 'ApiController@getPeople');
+
+
+// Route::get('/mail', function(){
+//     $data = [
+//         'name' => 'Jon Doe',
+//         'text' => 'Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. 
+//         Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben wurden.'
+//     ];
+//     return new App\Mail\EvMail('test@test.com', $data);
+// });

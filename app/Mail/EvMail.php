@@ -5,7 +5,6 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class EvMail extends Mailable
 {
@@ -15,16 +14,14 @@ class EvMail extends Mailable
      *
      * @return void
      */
-
     public $from_address;
-    public $intro;
+    public $name;
     public $body;
-    public $greeting;
+
     public function __construct($from, $data)
     {
         $this->from_address = $from;
-        $this->greeting="Hallo!";
-        $this->intro = '<b>'. $data['name'] . '</b> hat Ihnen folgendes geschrieben.';
+        $this->name = $data['name'];
         $this->body = $data['text'];
     }
 
@@ -35,6 +32,6 @@ class EvMail extends Mailable
      */
     public function build()
     {
-        return $this->from($this->from_address)->markdown('emails.contact');
+        return $this->from($this->from_address)->view('emails.contact');
     }
 }

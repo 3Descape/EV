@@ -11,26 +11,21 @@
 @extends('emails.master')
 
 @section('content')
-
-    <div clas="row">
-        <div class="col-lg-6 col-md-10 col-sm-12 mx-auto">
-            <div class="card mt-3">
-                <div class="card-header">
-                    {{ $name }} hat Ihnen folgendes geschrieben:
-                </div>
-                <div class="card-body">
-                    <div class="border p-2 rounded">
-                        {{$body}}
-
-                    </div>
-                </div>
-                <div class="card-footer text-center">
-                    EV Weiz
-                </div>
+<div>
+    <div class="card mx-auto">
+        <div class="card-header px-2 py-2">
+            {{ $name }} hat Ihnen folgendes geschrieben:
+        </div>
+        <div class="card-body px-2 py-2">
+            <div class="border">
+                {!! $body !!}
             </div>
-
+        </div>
+        <div class="card-footer px-2 text-center">
+            EV Weiz
         </div>
     </div>
+</div>
 
 @endsection
 

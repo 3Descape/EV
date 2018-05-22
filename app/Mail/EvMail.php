@@ -22,7 +22,7 @@ class EvMail extends Mailable
     {
         $this->from_address = $from;
         $this->name = $data['name'];
-        $this->body = $data['text'];
+        $this->body = trim(preg_replace("/\r\n|\r/", '<br />', $data['text']));
     }
 
     /**

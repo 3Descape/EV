@@ -44,7 +44,7 @@
                         @foreach ($past_events as $event)
                             <div class="card">
                                 <div class="card-body row">
-                                    <div class="col-md-8">
+                                    <div class="col-md-8 col-sm-8 col-8">
                                         <div class="col-md-12">
                                             <h4>{{$event->name}}</h4>
                                         </div>
@@ -55,7 +55,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 col-sm-4 col-4">
                                         <a href="{{route('events_archive')}}?event={{$event->id}}"
                                             class="btn btn-success float-right">
                                             <i class="fas fa-arrow-right"></i> Ansehen
@@ -72,7 +72,7 @@
         <div class="container-fluid" id="download">
             <div class="col-md-9 mx-auto row" id="download">
                 <div class="col-md-12">
-                    <h1 class="text-center">Förderansuchen und Ähnliches:</h1>
+                    <h1 class="text-center">Förderansuchen und Downloads:</h1>
                 </div>
                 <div class="card col-md-12">
                     <div class="row">

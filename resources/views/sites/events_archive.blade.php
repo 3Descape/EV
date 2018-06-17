@@ -13,34 +13,31 @@
                     <div class="col-md-12 mx-auto mt-4">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    @if($event->thump_path)
-                                        <div class="col-lg-1 col-md-12 event_thumb">
-                                            <img src="{{asset('storage/'. $event->thump_path)}}" alt="" class="img-thumbnail" style="border-radius: 50%">
+                                <div class="d-flex">
+                                    {{-- @if($event->thump_path)
+                                        <div class="pr-2">
+                                            <img src="{{asset('storage/'. $event->thump_path)}}" alt="" class="" style="border-radius: 50%; height: 7rem; width: auto">
                                         </div>
-                                    @endif
-                                    <div class="{{$event->thump_path ? 'col-lg-11 col-md-12' : 'col-lg-12'}}">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="d-flex justify-content-end">
-                                                    <h3>{{ucfirst($event->name)}}</h3>
-                                                    <a href="{{route('events_archive')}}?event={{$event->id}}" class="btn btn-success ml-auto align-self-start">
-                                                        <i class="fa fa-arrow-right"></i> Ansehen
-                                                    </a>
-                                                </div>
+                                        @endif --}}
+                                        <div class="flex-grow-1 d-flex">
+                                            <div>
+                                                <h3>{{ucfirst($event->name)}}</h3>
                                             </div>
-
-                                            <div class="col-md-12 mt-2 d-flex">
-                                                <p class="mb-0">{{ucfirst($event->date->diffForHumans())}}</p>
-                                                <span class="badge badge-info ml-auto align-self-end">
-                                                    {{ ucfirst($event->category->name)}}
-                                                </span>
-                                            </div>
+                                        </div>
+                                        <a href="{{route('events_archive')}}?event={{$event->id}}" class="btn btn-success align-self-start">
+                                            <i class="fa fa-arrow-right"></i> Ansehen
+                                        </a> 
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex">
+                                            <p class="mb-0">{{ucfirst($event->date->diffForHumans())}}</p>
+                                            <span class="badge badge-info align-self-center ml-auto">
+                                                {{ ucfirst($event->category->name)}}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                 @endforeach
                 {{ $events->links('layouts.paginator') }}

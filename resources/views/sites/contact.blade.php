@@ -7,16 +7,16 @@
 @section('content')
     <div class="col-md-6 col-sm-12 mx-auto mt-4" id="contact">
         <h1 class="text-center">Kontakt</h1>
-        <p>Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</p>
+        <div class="alert alert-success">Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</div>
         <div class="col-md-12 mb-4">
-            <h3>Elternverein</h3>
+            <h4>Elternverein</h4>
             @if($msg = session('ev_mail'))
                 <div class="alert alert-success" role="alert">
                    {{$msg}}
                 </div>
             @endif
             <form action="{{route("mail_ev")}}" method="POST">
-                <div class="col-md-12 form-group">
+                <div class="col-md-12 form-group px-0">
                     <label for="ev_name">Ihr Name:</label>
                     <input type="text" class="form-control" name="name" id="ev_name" required>
 
@@ -33,14 +33,14 @@
         </div>
 
         <div class="col-md-12 mt-2">
-            <h3>Obmann</h3>
+            <h4>Obmann</h4>
             @if($msg = session('obmann_mail'))
                 <div class="alert alert-success" role="alert">
                    {{$msg}}
                 </div>
             @endif
             <form action="{{route("mail_obmann")}}" method="POST">
-                <div class="col-md-12 form-group">
+                <div class="col-md-12 form-group px-0">
                     <label for="obmann_name">Ihr Name:</label>
                     <input type="text" class="form-control" name="name" id="obmann_name" required>
 

@@ -12,8 +12,7 @@
         </div>
 
         <div class="form-group">
-            <label for="description">Datum:</label>
-            <input type="text" name="date" id="date" class="form-control" placeholder="dd.MM.yyyy HH:mm" value="{{ old('date') }}">
+            <date-input name="date" default="{{old("date") !== null ? (new Carbon\Carbon(old("date")))->format("Y-m-d H:i") : ""}}"></date-input>
             @component('admin.components.error', ['name' => 'date', 'class' => 'mt-1'])
             @endcomponent
         </div>
@@ -27,8 +26,8 @@
         </div>
 
         <div class="form-group">
-            <label for="location">Beschreibung:</label>
-            <input type="text" id="description" value="{{ old('markup') }}" class="form-control" name="markup">
+            <label for="markup">Beschreibung:</label>
+            <textarea type="text" id="description" value="{{ old('markup') }}" class="form-control" name="markup"></textarea>
             @component('admin.components.error', ['name' => 'markup', 'class' => 'mt-1'])
             @endcomponent
         </div>

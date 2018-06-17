@@ -23,8 +23,8 @@
                                             <div class="col-md-12 mt-4">
                                                 <h4>Wo und Wann?</h4>
                                                 <div class="d-flex">
-                                                    <p class="mb-0">Am {{$event->date->formatLocalized('%#d %B %Y') . ' ' . $event->location}}</p>
-                                                    <span class="badge badge-info ml-auto align-self-start">{{ ucfirst($event->category->name)}}</span>
+                                                    <p class="mb-0 mr-2">Am {{$event->date->formatLocalized('%#d %B %Y') . ' ' . $event->location}}</p>
+                                                    <span class="badge badge-info ml-auto align-self-end">{{ ucfirst($event->category->name)}}</span>
                                                 </div>
                                             </div>
                                         </div>

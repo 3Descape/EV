@@ -13,7 +13,6 @@
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email">E-Mail Adresse</label>
 
-
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                         @component('admin.components.error', ['name' => 'email'])
@@ -23,8 +22,6 @@
 
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                         <label for="password" class="control-label">Passwort</label>
-
-
                         <input id="password" type="password" class="form-control" name="password" required>
 
                         @component('admin.components.error', ['name' => 'password'])

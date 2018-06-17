@@ -84,7 +84,7 @@ return [
     'string' => ':attribute muss ein String sein.',
     'timezone' => ':attribute muss eine gültige Zeitzone sein.',
     'unique' => ':attribute ist schon vergeben.',
-    'uploaded' => 'Der :attribute konnte nicht hochgeladen werden.',
+    'uploaded' => ':attribute konnte nicht hochgeladen werden.',
     'url' => 'Das Format von :attribute ist ungültig.',
 
     /*

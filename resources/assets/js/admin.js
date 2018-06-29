@@ -6,6 +6,7 @@ window.Vue = require('vue');
 Vue.component('dashboard', require('./components/Dashboard.vue'));
 Vue.component('roles', require('./components/Roles.vue'));
 Vue.component('sites-edit', require('./components/SitesEdit.vue'));
+Vue.component('site-edit', require('./components/SiteEdit.vue'));
 Vue.component('event-edit', require('./components/EventEdit.vue'));
 Vue.component('file-uploud', require('./components/FileUploud.vue'));
 Vue.component('image-library', require('./components/ImageLibrary.vue'));

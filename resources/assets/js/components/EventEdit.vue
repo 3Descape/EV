@@ -36,7 +36,40 @@
 
                 <div class="form-group">
                     <label for="description">Beschreibung:</label>
-                    <textarea type="text" v-model="event.markup" class="form-control" required id="description" /> 
+
+                    <text-area :images-prop="imagesProp"
+                            :markup-prop="event.markup"
+                            @sync="sync">
+
+                        <div slot-scope="{compiledMarkdown, inputEvents, inputAttrs}">
+                            <textarea v-on="inputEvents"
+                                    v-bind="inputAttrs"
+                                    class="form-control"></textarea>
+
+                            <div class="card mt-2">
+                                <div class="card-header"
+                                    role="tab">
+                                    <h5 class="mb-0">
+                                        <a data-toggle="collapse"
+                                        :href="'#collapse' + event.id"
+                                        aria-expanded="false"
+                                        :aria-controls="'collapse' + event.id"
+                                        class="text-dark">
+                                            Vorschau
+                                            <i class="fa fa-caret-down" />
+                                        </a>
+                                    </h5>
+                                </div>
+
+                                <div :id="'collapse' + event.id"
+                                    class="collapse"
+                                    role="tabpanel">
+                                    <div class="card-body"
+                                        v-html="compiledMarkdown" />
+                                </div>
+                            </div>
+                        </div>
+                    </text-area>
 
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('markup')">
                         <ul class="m-0">
@@ -44,19 +77,6 @@
                         </ul>
                     </div>
 
-                    <input type="text" hidden v-model="compiledMarkdown" name="markup">
-
-                    <div class="card-header mt-2" role="tab">
-                        <h5 class="mb-0">
-                            <a data-toggle="collapse" href="#collapse" aria-expanded="false" aria-controls="collapse" class="text-dark">
-                                Vorschau <i class="fa fa-caret-down" />
-                            </a>
-                        </h5>
-                    </div>
-
-                    <div id="collapse" class="collapse" role="tabpanel">
-                        <div class="card-body" v-html="compiledMarkdown" />
-                    </div>
                 </div>
 
                 <div class="form-group">
@@ -145,13 +165,15 @@
 
 <script>
 /* global axios */
-const marked = require("marked");
 import Errors from "./Errors.js";
 import { EventBus } from "./EventBus.js";
 import Message from "./Message.vue";
+import TextArea from "./Textarea.vue";
+
 export default {
   components: {
-    msg: Message
+    msg: Message,
+    TextArea
   },
   props: {
     eventProp: {
@@ -161,6 +183,10 @@ export default {
     categories: {
       type: Array,
       required: true
+    },
+    imagesProp: {
+      type: Array,
+      required: false
     }
   },
   data() {
@@ -175,9 +201,6 @@ export default {
     };
   },
   computed: {
-    compiledMarkdown: function() {
-      return this.event.markup ? marked(this.event.markup) : "";
-    },
     prog: function() {
       return Math.round(
         this.progress.reduce(function(a, b) {
@@ -188,12 +211,6 @@ export default {
     }
   },
   created() {
-    marked.setOptions({
-      gfm: true,
-      breaks: true,
-      tables: true
-    });
-
     let now = new Date();
     let eventDate = new Date(this.event.date);
     this.isArchived = eventDate < now;
@@ -217,7 +234,7 @@ export default {
           location: vue.event.location,
           date: this.event.date,
           markup: vue.event.markup,
-          html: vue.compiledMarkdown,
+          html: vue.event.html,
           event_category_id: vue.event.event_category_id
         })
         .then(msg => {
@@ -301,6 +318,10 @@ export default {
             "danger"
           );
         });
+    },
+    sync(data) {
+      this.event.markup = data.markup;
+      this.event.html = data.html;
     }
   }
 };

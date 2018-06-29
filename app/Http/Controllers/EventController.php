@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Event;
+use App\Image;
 use Carbon\Carbon;
 use App\EventCategory;
 use Illuminate\Http\Request;
@@ -63,6 +64,7 @@ class EventController extends Controller
         return view('admin.sites.events.event_edit', [
             'event' => $event,
             'categories' => EventCategory::all(),
+            'images' => Image::all()
         ]);
     }
 

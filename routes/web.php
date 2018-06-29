@@ -1,5 +1,8 @@
 <?php
 
+use App\Site;
+use App\Image;
+
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -39,11 +42,10 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
 
     Route::get('/nutzer', 'UserController@index')->name('user_index');
     Route::get('/nutzer/{user}/delete', 'UserController@user_delete')->name('user_delete');
-    
+
     Route::get('/nutzer/{user}/edit', 'UserRoleController@edit')->name('user_role_edit');
     Route::put('/nutzer/{user}', 'UserRoleController@update')->name('user_role_update');
     Route::delete('/nutzer/{user}/rolle/{role}', 'UserRoleController@destroy')->name('user_role_destroy');
-
 
     Route::get('/rolle', 'RoleController@index')->name('role_index');
     Route::post('/rolle', 'RoleController@store')->name('role_store');
@@ -56,8 +58,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::delete('/seite/{site}', 'SiteController@destroy')->name('site_destroy');
 
     Route::post('/seite', 'SiteController@store')->name('site_store');
-    Route::post('/seite/update/{site}/text', 'SiteController@update_body')->name('site_body_update');
-    Route::post('/seite/update/{site}/titel', 'SiteController@update_title')->name('site_title_update');
+    Route::post('/seite/{site}/update', 'SiteController@update')->name('site_update');
     Route::post('/seite/update/reihenfolge', 'SiteController@update_order')->name('site_order_update');
 
     Route::get('/bild', 'ImageController@index')->name('image_index');
@@ -101,11 +102,19 @@ Route::get('/download/{file}', 'DownloadController@file_download')->name('file_d
 
 Route::post('/people/{category}', 'ApiController@getPeople');
 
+Route::get('/test', function () {
+    $images = Image::all();
+    $site = Site::first();
 
+    return view('admin.sites.test', [
+        'images' => $images,
+        'site' => $site
+    ]);
+});
 // Route::get('/mail', function(){
 //     $data = [
 //         'name' => 'Jon Doe',
-//         'text' => 'Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. 
+//         'text' => 'Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben wurden.
 //         Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben wurden.'
 //     ];
 //     return new App\Mail\EvMail('test@test.com', $data);

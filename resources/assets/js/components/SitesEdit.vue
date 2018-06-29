@@ -24,7 +24,9 @@
         <draggable element="div" :style="editable? 'cursor:move' : ''" v-model="sites" @start="isDragging=true" @end="update(true)"
                    :options="dragOptions">
             <transition-group type="transition" :name="'flip-list'">
-                <markdown :images-prop="imagesProp" v-for="site in sites" :key="site.id" :site-prop="site" @delete="destroy"/>
+                <div v-for="site in sites" :key="site.id" class="card mb-4">
+                    <site-edit :site-prop="site" :images-prop="imagesProp" @destroy="destroy"></site-edit>
+                </div>
             </transition-group>
         </draggable>
         <msg />
@@ -36,10 +38,9 @@
 import Message from "./Message.vue";
 import { EventBus } from "./EventBus.js";
 import Draggable from "vuedraggable";
-import Markdown from "./Markdown.vue";
+
 export default {
   components: {
-    markdown: Markdown,
     draggable: Draggable,
     msg: Message
   },
@@ -133,23 +134,8 @@ export default {
         });
     },
     destroy(site) {
-      let vue = this;
-      axios
-        .post(`/admin/seite/${site.id}`, {
-          _method: "delete"
-        })
-        .then(msg => {
-          vue.sites.splice(vue.sites.indexOf(site), 1);
-          EventBus.$emit("msg-event", msg.data.status);
-          this.update(false);
-        })
-        .catch(() => {
-          EventBus.$emit(
-            "msg-event",
-            "Es ist ein Fehler aufgetreten.",
-            "danger"
-          );
-        });
+      this.sites.splice(this.sites.indexOf(site), 1);
+      this.update(false);
     }
   }
 };

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Site;
 use App\User;
-use Illuminate\Http\Request;
-use App\SiteCategory;
 use App\Image;
+use App\SiteCategory;
+use Illuminate\Http\Request;
 
 class SiteController extends Controller
 {
@@ -15,6 +15,7 @@ class SiteController extends Controller
         $this->authorize('can_access_sites', User::class);
         $sites = $site_category->sites()->get();
         $images = Image::all();
+
         return view('admin.sites.sites.site_edit', compact(
             'site_category',
             'sites',
@@ -40,25 +41,21 @@ class SiteController extends Controller
         return response()->json(['status' => 'Wurde hinzugefügt', 'site' => $site], 200);
     }
 
-    public function update_body(Request $request, Site $site)
+    public function update(Request $request, Site $site)
     {
         $this->authorize('can_access_sites', User::class);
-        $site->update([
-            'html' => $request->compiledData,
-            'markup' => $request->rawData
+
+        $request->validate([
+            'title' => 'required|string'
         ]);
 
-        return response()->json(['status' => 'Updated body'], 200);
-    }
-
-    public function update_title(Request $request, Site $site)
-    {
-        $this->authorize('can_access_sites', User::class);
         $site->update([
             'title' => $request->title,
+            'html' => $request->html,
+            'markup' => $request->markup
         ]);
 
-        return response()->json(['status' => 'Updated title'], 200);
+        return response()->json(['status' => 'Gespeichert'], 200);
     }
 
     public function update_order(Request $request)
@@ -77,6 +74,7 @@ class SiteController extends Controller
     {
         $this->authorize('can_access_sites', User::class);
         $site->delete();
+
         return response()->json(['status' => 'Wurde gelöscht.']);
     }
 }

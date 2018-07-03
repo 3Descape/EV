@@ -101,10 +101,10 @@
 
                 <div class="form-group d-flex">
                     <button class="btn btn-info ml-auto mr-2">
-                        <i class="fa fa-pencil-alt" /> Bearbeiten
+                        <i class="fa fa-pencil-alt" /> Speichern
                     </button>
-                    <a :href="isArchived ? '/admin/veranstaltungen/archiv' : '/admin/veranstaltungen'" class="btn btn-light border border-dark">
-                        <i class="fa fa-times" /> Abbrechen
+                    <a :href="isArchived ? '/admin/veranstaltung/archiv' : '/admin/veranstaltung'" class="btn btn-light border border-dark">
+                        <i class="fa fa-times" /> Zurück
                     </a>
                 </div>
             </form>
@@ -114,7 +114,7 @@
             <hr>
             <div class="form-group">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile" name="file" @change="fileChange" multiple>
+                    <input type="file" class="custom-file-input" id="customFile" name="file" @change="fileChange" multiple accept="image/*">
                     <label class="custom-file-label" for="customFile">
                         <i class="fa fa-upload" /> Bilder hochladen..
                     </label>

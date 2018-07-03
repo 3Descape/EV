@@ -139,11 +139,14 @@ export default {
   },
   computed: {
     result: function() {
-      return `${this.formatDate(this.date.day)}.${this.formatDate(
+      let date = `${this.formatDate(this.date.day)}.${this.formatDate(
         this.date.month
       )}.${this.date.year} ${this.formatDate(this.date.hour)}:${this.formatDate(
         this.date.minute
       )}`;
+
+      this.$emit("date", date);
+      return date;
     }
   },
   methods: {
@@ -240,8 +243,6 @@ export default {
       } else {
         this.error = false;
       }
-
-      this.$emit("date", this.result);
     },
     reverseString: function(str) {
       return str
@@ -250,7 +251,7 @@ export default {
         .join("");
     }
   },
-  mounted() {
+  created() {
     let datetime;
     if (this.default) {
       datetime = new Date(Date.parse(this.default));

@@ -86554,7 +86554,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   computed: {
     result: function result() {
-      return this.formatDate(this.date.day) + "." + this.formatDate(this.date.month) + "." + this.date.year + " " + this.formatDate(this.date.hour) + ":" + this.formatDate(this.date.minute);
+      var date = this.formatDate(this.date.day) + "." + this.formatDate(this.date.month) + "." + this.date.year + " " + this.formatDate(this.date.hour) + ":" + this.formatDate(this.date.minute);
+
+      this.$emit("date", date);
+      return date;
     }
   },
   methods: {
@@ -86650,15 +86653,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else {
         this.error = false;
       }
-
-      this.$emit("date", this.result);
     },
 
     reverseString: function reverseString(str) {
       return str.split("").reverse().join("");
     }
   },
-  mounted: function mounted() {
+  created: function created() {
     var datetime = void 0;
     if (this.default) {
       datetime = new Date(Date.parse(this.default));
@@ -87516,13 +87517,13 @@ var render = function() {
                   staticClass: "btn btn-light border border-dark",
                   attrs: {
                     href: _vm.isArchived
-                      ? "/admin/veranstaltungen/archiv"
-                      : "/admin/veranstaltungen"
+                      ? "/admin/veranstaltung/archiv"
+                      : "/admin/veranstaltung"
                   }
                 },
                 [
                   _c("i", { staticClass: "fa fa-times" }),
-                  _vm._v(" Abbrechen\n                ")
+                  _vm._v(" Zurück\n                ")
                 ]
               )
             ])
@@ -87542,7 +87543,8 @@ var render = function() {
                     type: "file",
                     id: "customFile",
                     name: "file",
-                    multiple: ""
+                    multiple: "",
+                    accept: "image/*"
                   },
                   on: { change: _vm.fileChange }
                 }),
@@ -87685,7 +87687,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("button", { staticClass: "btn btn-info ml-auto mr-2" }, [
       _c("i", { staticClass: "fa fa-pencil-alt" }),
-      _vm._v(" Bearbeiten\n                ")
+      _vm._v(" Speichern\n                ")
     ])
   },
   function() {

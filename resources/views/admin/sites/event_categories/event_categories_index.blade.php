@@ -36,11 +36,11 @@
                 <td>
                     <div class="d-flex align-items-start">
                         <a href="{{route('event_category_edit', $category->id)}}" class="btn btn-warning ml-auto mr-1">
-                            <i class="fa fa-edit" aria-hidden="true"></i>
+                            <i class="fa fa-pencil-alt" aria-hidden="true"></i>
                         </a>
                         <form action="{{route('event_category_destroy', $category->id)}}" method="POST">
                             <button type="submit" class="btn btn-danger mx-1">
-                                <i class="fa fa-trash"></i>
+                                <i class="fa fa-trash-alt"></i>
                             </button>
                             {{method_field('DELETE')}}
                             {{ csrf_field() }}

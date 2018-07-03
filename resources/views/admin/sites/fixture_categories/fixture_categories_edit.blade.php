@@ -7,8 +7,7 @@
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" class="form-control" value="{{old('name') ?: $fixturecategory->name}}">
-                @component('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
-                @endcomponent
+                @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
             </div>
 
             <div class="form-group d-flex">

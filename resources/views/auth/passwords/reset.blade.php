@@ -24,8 +24,7 @@
                                 <input id="email" type="email" class="form-control ml-2" name="email" value="{{ $email or old('email') }}" required autofocus>
 
                                 <div class="ml-2">
-                                    @component('admin.components.error', ['name' => 'email'])
-                                    @endcomponent
+                                    @include('admin.components.error', ['name' => 'email'])
                                 </div>
                             </div>
 
@@ -33,8 +32,7 @@
                                 <label for="password" class="col-md-4 control-label">Passwort</label>
                                 <input id="password" type="password" class="form-control ml-2" name="password" required>
                                 <div class="ml-2">
-                                    @component('admin.components.error', ['name' => 'password'])
-                                    @endcomponent
+                                    @include('admin.components.error', ['name' => 'password'])
                                 </div>
                             </div>
 
@@ -43,8 +41,7 @@
                                 <input id="password-confirm" type="password" class="form-control ml-2" name="password_confirmation" required>
 
                                 <div class="ml-2">
-                                    @component('admin.components.error', ['name' => 'password_confirmation'])
-                                    @endcomponent
+                                    @include('admin.components.error', ['name' => 'password_confirmation'])
                                 </div>
                             </div>
 

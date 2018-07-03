@@ -22,8 +22,7 @@
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
 
                             <div class="ml-2">
-                                @component('admin.components.error', ['name' => 'email'])
-                                @endcomponent
+                                @include('admin.components.error', ['name' => 'email'])
                             </div>
                         </div>
 

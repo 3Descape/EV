@@ -6,15 +6,13 @@
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" class="form-control" name="name" value="{{old("name") ?: $file->name}}">
-            @component('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
-            @endcomponent
+            @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
         </div>
 
         <div class="form-group">
             <label for="description">Beschreibung:</label>
             <input class="form-control" type="text" id="description" name="description" value="{{old('description') ?: $file->description}}">
-            @component('admin.components.error', ['name' => 'description', 'class' => "mt-1"]) 
-            @endcomponent
+            @include('admin.components.error', ['name' => 'description', 'class' => "mt-1"]) 
         </div>
 
         <div class="form-group d-flex">

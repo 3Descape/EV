@@ -15,8 +15,7 @@
 
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
-                        @component('admin.components.error', ['name' => 'email'])
-                        @endcomponent
+                        @include('admin.components.error', ['name' => 'email'])
 
                     </div>
 
@@ -24,8 +23,7 @@
                         <label for="password" class="control-label">Passwort</label>
                         <input id="password" type="password" class="form-control" name="password" required>
 
-                        @component('admin.components.error', ['name' => 'password'])
-                        @endcomponent
+                        @include('admin.components.error', ['name' => 'password'])
 
                     </div>
 

@@ -8,8 +8,7 @@
                 <div class="form-group">
                     <label for="name">Name:</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{old('name') ?: ''}}">
-                    @component('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
-                    @endcomponent
+                    @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
                 </div>
 
                 <div class="form-group">
@@ -18,8 +17,7 @@
                         <option {{old('has_image') == 0 ? "selected" : ""}} value="0">Nein</option>
                         <option {{old('has_image') == 1 ? "selected" : ""}} value="1">Ja</option>
                     </select>
-                    @component('admin.components.error', ['name' => 'has_image', 'class' => "mt-1"]) 
-                    @endcomponent
+                    @include('admin.components.error', ['name' => 'has_image', 'class' => "mt-1"]) 
                 </div>
 
                 <div class="form-group">

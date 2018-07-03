@@ -7,29 +7,25 @@
         <div class="form-group">
             <label for="name">Name:</label>
             <input value="{{ old('name') }}" type="text" class="form-control" name="name" id="name">
-            @component('admin.components.error', ['name' => 'name', 'class' => 'mt-1'])
-            @endcomponent
+            @include('admin.components.error', ['name' => 'name', 'class' => 'mt-1'])
         </div>
 
         <div class="form-group">
             <date-input name="date" default="{{old("date") !== null ? (new Carbon\Carbon)->createFromFormat("d.m.Y H:i", old("date")) : ""}}"></date-input>
-            @component('admin.components.error', ['name' => 'date', 'class' => 'mt-1'])
-            @endcomponent
+            @include('admin.components.error', ['name' => 'date', 'class' => 'mt-1'])
         </div>
 
 
         <div class="form-group">
             <label for="location">Ort:</label>
             <input type="text" id="location" value="{{ old('location') }}" class="form-control" name="location">
-            @component('admin.components.error', ['name' => 'location', 'class' => 'mt-1'])
-            @endcomponent
+            @include('admin.components.error', ['name' => 'location', 'class' => 'mt-1'])
         </div>
 
         <div class="form-group">
             <label for="markup">Beschreibung:</label>
             <textarea type="text" id="description" value="{{ old('markup') }}" class="form-control" name="markup"></textarea>
-            @component('admin.components.error', ['name' => 'markup', 'class' => 'mt-1'])
-            @endcomponent
+            @include('admin.components.error', ['name' => 'markup', 'class' => 'mt-1'])
         </div>
 
         <div class="form-group">
@@ -43,8 +39,7 @@
                     </option>
                 @endforeach
             </select>
-            @component('admin.components.error', ['name' => 'category', 'class' => 'mt-1'])
-            @endcomponent
+            @include('admin.components.error', ['name' => 'category', 'class' => 'mt-1'])
         </div>
 
         <div class="form-group">

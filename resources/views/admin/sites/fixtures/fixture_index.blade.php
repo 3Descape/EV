@@ -9,15 +9,13 @@
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" name="name" id="name" class="form-control" value="{{old('name') ?: ''}}">
-                        @component('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
-                        @endcomponent
+                        @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
                     </div>
 
                     <div class="form-group">
                         <label for="name">Beschreibung:</label>
                         <input type="text" name="description" id="name" class="form-control" value="{{old('description') ?: ''}}">
-                        @component('admin.components.error', ['name' => 'description', 'class' => "mt-1"]) 
-                        @endcomponent
+                        @include('admin.components.error', ['name' => 'description', 'class' => "mt-1"]) 
                     </div>
 
                     <div class="form-group">
@@ -30,8 +28,7 @@
                                 </option>
                             @endforeach
                         </select>
-                        @component('admin.components.error', ['name' => 'fixture_category', 'class' => "mt-1"]) 
-                        @endcomponent
+                        @include('admin.components.error', ['name' => 'fixture_category', 'class' => "mt-1"]) 
                     </div>
 
                     <div class="form-group">

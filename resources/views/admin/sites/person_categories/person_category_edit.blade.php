@@ -7,8 +7,7 @@
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" name="name" id="name" class="form-control" value="{{ucfirst(old('name') ?: $person_category->name)}}">
-                @component('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
-                @endcomponent
+                @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
             </div>
 
 
@@ -24,8 +23,7 @@
                         Ja
                     </option>
                 </select>
-                @component('admin.components.error', ['name' => 'has_image', 'class' => "mt-1"]) 
-                @endcomponent
+                @include('admin.components.error', ['name' => 'has_image', 'class' => "mt-1"]) 
             </div>
 
             <div class="form-group d-flex">

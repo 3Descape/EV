@@ -5,7 +5,7 @@
     <div class="col-lg-10 col-md-12 mx-auto">
         @if (session('exeption'))
             <div class="alert alert-danger">
-                {{ session('exeption') }}
+                {!! session('exeption') !!}
             </div>
         @endif
         <h3>{{$user->name}} hat derzeit folgende Berechtigungen:</h3>
@@ -24,7 +24,7 @@
             @endforeach
         </ul>
 
-        @if ($roles->count())
+        @if ($roles->count() && !$user->isAdmin())
             <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#role_add_modal">
                 <i class="fa fa-plus"></i> Berechtigung
             </button>

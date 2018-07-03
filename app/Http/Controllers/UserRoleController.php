@@ -30,10 +30,10 @@ class UserRoleController extends Controller
     public function destroy(User $user, Role $role)
     {
         $this->authorize('can_access_user', User::class);
-        if ($role->name == 'administrator') {
+        if ($role->name == Role::ADMIN_ROLE_NAME) {
             $count = $role->users()->count();
             if ($count <= 1) {
-                return back()->with('exeption', 'Es muss immer mindestens ein Administrator bestehen. Bitte geben Sie mindestens einem anderen Nutzer zuerst diese Berechtigung, bevor Sie diese löschen.');
+                return back()->with('exeption', 'Es muss immer <strong>mindestens ein Administrator bestehen </strong>. Bitte geben Sie mindestens einem anderen Nutzer zuerst diese Berechtigung, damit Sie die Berechtigung von diesem Nutzer löschen können.');
             }
         }
         $user->roles()->detach($role->id);

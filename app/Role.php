@@ -18,6 +18,8 @@ class Role extends Model
         return $this->belongsToMany(Permission::class);
     }
 
+    public const ADMIN_ROLE_NAME = 'admin';
+
     /**
      * Returns all users that have this role
      * @method users

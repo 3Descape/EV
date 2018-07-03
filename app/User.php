@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
+
     protected $fillable = ['name', 'email', 'password'];
 
     protected $hidden = ['password', 'remember_token'];
@@ -63,6 +64,11 @@ class User extends Authenticatable
         }
 
         return !!$this->roles()->get()->where('id', $role->id)->count();
+    }
+
+    public function isAdmin()
+    {
+        return $this->hasRole(Role::ADMIN_ROLE_NAME);
     }
 
     /**

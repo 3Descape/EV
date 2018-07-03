@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Role;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -23,7 +24,7 @@ class RolePolicy
 
     public function before(User $user)
     {
-        if ($user->hasRole('admin')) {
+        if ($user->isAdmin()) {
             return true;
         }
     }

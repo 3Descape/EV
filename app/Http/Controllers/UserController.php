@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         $this->authorize('can_access_user', User::class);
         $admins = User::with('roles')->get()->filter(function ($user) {
-            return $user->hasRole('administrator');
+            return $user->isAdmin();
         });
         if ($admins->count() === 1) {
             return back()->with('exeption', 'Es muss immer mindestens ein Administrator bestehen. Bitte geben Sie mindestens einem anderen Nutzer zuerst diese Berechtigung, bevor Sie diesen löschen.');

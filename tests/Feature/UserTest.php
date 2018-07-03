@@ -49,13 +49,13 @@ class UserTest extends TestCase
         $user = factory(User::class)->create();
 
         $role = Role::create([
-            'name' => 'admin',
+            'name' => Role::ADMIN_ROLE_NAME,
             'label' => 'Some description in here'
         ]);
 
         $user->assignRole($role);
 
-        $this->assertTrue($user->hasRole('admin'));
+        $this->assertTrue($user->isAdmin());
         $this->assertTrue($user->hasRole($role));
     }
 

@@ -15,7 +15,7 @@ class RoleController extends Controller
 
         return view('admin.sites.roles.role_index', [
             'roles' => Role::with('permissions')->get(),
-            'permissions' => Permission::where('name', '!=', 'admin')->get(),
+            'permissions' => Permission::all(),
         ]);
     }
 

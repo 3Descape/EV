@@ -34,13 +34,19 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $this->authorize('can_access_events', User::class);
-        $this->validate($request, [
-            'name' => 'required|max:255',
-            'markup' => 'required',
-            'date' => 'required|date_format:d.m.Y H:i',
-            'location' => 'required|min:5',
-            'event_category_id' => 'exists:event_categories,id',
-        ]);
+
+        $request->validate(
+            [
+                'name' => 'required|max:255',
+                'markup' => 'required',
+                'date' => 'required|date',
+                'location' => 'required|min:5',
+                'event_category_id' => 'exists:event_categories,id'
+            ],
+            [
+                'date' => 'Bitte geben Sie ein gültiges Datum an.'
+            ]
+        );
 
         $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
 
@@ -83,10 +89,10 @@ class EventController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'location' => 'required',
-            'date' => 'required|date_format:"d.m.Y H:i"',
+            'date' => 'required|date',
             'event_category_id' => 'required|exists:event_categories,id',
         ], [
-            'date_format' => 'Datum entspricht nicht dem gültigen Format für dd.MM.yyyy HH:mm'
+            'date' => 'Bitte geben Sie ein gültiges Datum an.'
         ]);
 
         $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);

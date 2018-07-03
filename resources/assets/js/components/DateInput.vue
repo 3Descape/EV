@@ -1,7 +1,7 @@
 <template>
     <div class="w-100">
         <div class="d-flex">
-            <div class="d-flex flex-column px-1">
+            <div class="d-flex flex-column pr-1 flex-fill">
                 <p>Tag:</p>
                 <button @click="addDay()"
                         type="button"
@@ -22,7 +22,7 @@
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            <div class="d-flex flex-column px-1">
+            <div class="d-flex flex-column px-1 flex-fill">
                 <p>Monat:</p>
                 <button @click="addMonth()"
                         type="button"
@@ -43,7 +43,7 @@
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            <div class="d-flex flex-column px-1">
+            <div class="d-flex flex-column px-1 flex-fill">
                 <p>Jahr:</p>
                 <button @click="addYear()"
                         type="button"
@@ -64,7 +64,7 @@
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            <div class="d-flex flex-column px-1 ml-4">
+            <div class="d-flex flex-column px-1 flex-fill ml-4">
                 <p>Stunde:</p>
                 <button @click="addHour()"
                         type="button"
@@ -85,7 +85,7 @@
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            <div class="d-flex flex-column px-1">
+            <div class="d-flex flex-column pl-1 flex-fill">
                 <p>Minute:</p>
                 <button @click="addMinute()"
                         type="button"
@@ -240,6 +240,8 @@ export default {
       } else {
         this.error = false;
       }
+
+      this.$emit("date", this.result);
     },
     reverseString: function(str) {
       return str
@@ -251,9 +253,7 @@ export default {
   mounted() {
     let datetime;
     if (this.default) {
-      console.log(this.default);
       datetime = new Date(Date.parse(this.default));
-      console.log(datetime);
     } else {
       datetime = new Date();
     }

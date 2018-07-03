@@ -22,6 +22,10 @@ class Event extends Model
         'date'
     ];
 
+    protected $casts = [
+        'date' => 'date:Y-m-d H:i',
+    ];
+
     protected $with = ['category'];
 
     /**

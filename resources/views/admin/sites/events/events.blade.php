@@ -12,7 +12,7 @@
         </div>
 
         <div class="form-group">
-            <date-input name="date" default="{{old("date") !== null ? (new Carbon\Carbon(old("date")))->format("Y-m-d H:i") : ""}}"></date-input>
+            <date-input name="date" default="{{old("date") !== null ? (new Carbon\Carbon)->createFromFormat("d.m.Y H:i", old("date")) : ""}}"></date-input>
             @component('admin.components.error', ['name' => 'date', 'class' => 'mt-1'])
             @endcomponent
         </div>

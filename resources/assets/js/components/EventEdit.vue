@@ -25,8 +25,9 @@
                 </div>
 
                 <div class="form-group" v-if="!isArchived">
+
                     <label for="date">Datum:</label>
-                    <input type="text" class="form-control" placeholder="dd.MM.yyyy HH:mm" v-model="event.date" id="date" required>
+                    <date-input :default="event.date" @date="syncDate"></date-input>
                     <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('date')">
                         <ul class="m-0">
                             <li :key="error.date" v-for="error in errors.getError('date')">{{ error }}</li>
@@ -169,11 +170,13 @@ import Errors from "./Errors.js";
 import { EventBus } from "./EventBus.js";
 import Message from "./Message.vue";
 import TextArea from "./Textarea.vue";
+import DateInput from "./DateInput.vue";
 
 export default {
   components: {
     msg: Message,
-    TextArea
+    TextArea,
+    DateInput
   },
   props: {
     eventProp: {
@@ -214,16 +217,10 @@ export default {
     let now = new Date();
     let eventDate = new Date(this.event.date);
     this.isArchived = eventDate < now;
-    this.event.date = this.FormatDate(eventDate);
   },
   methods: {
-    FormatDate: date => {
-      let day = ("0" + (date.getDate() + 1)).slice(-2);
-      let month = ("0" + (date.getMonth() + 1)).slice(-2);
-      let year = date.getFullYear();
-      let hour = ("0" + date.getHours()).slice(-2);
-      let minute = ("0" + (date.getMinutes() + 1)).slice(-2);
-      return `${day}.${month}.${year} ${hour}:${minute}`;
+    syncDate(date) {
+      this.event.date = date;
     },
     update: function() {
       let vue = this;

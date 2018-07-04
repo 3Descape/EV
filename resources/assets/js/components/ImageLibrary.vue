@@ -2,7 +2,8 @@
     <div class="col-lg-12">
         <div>
             <msg />
-            <form @submit.prevent="uploud" ref="form">
+            <form @submit.prevent="uploud"
+                  ref="form">
 
                 <div class="form-group">
                     <div class="d-flex">
@@ -10,10 +11,18 @@
                         <p class="text-muted ml-1">(Optional)</p>
                     </div>
 
-                    <input ref="name" v-model="userImage.name" type="text" id="name" class="form-control" name="name">
-                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
+                    <input ref="name"
+                           v-model="userImage.name"
+                           type="text"
+                           id="name"
+                           class="form-control"
+                           name="name">
+                    <div class="alert alert-danger mt-2"
+                         role="alert"
+                         v-if="errors.hasError('name')">
                         <ul class="m-0">
-                            <li :key="error.name" v-for="error in errors.getError('name')">{{ error }}</li>
+                            <li :key="error.name"
+                                v-for="error in errors.getError('name')">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
@@ -21,39 +30,56 @@
                 <div class="form-group">
                     <label for="file">Datei:</label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" id="customFile" name="file" @change="fileChange" multiple>
-                        <label class="custom-file-label" for="customFile">
+                        <input type="file"
+                               class="custom-file-input"
+                               id="customFile"
+                               name="file"
+                               @change="fileChange"
+                               multiple>
+                        <label class="custom-file-label"
+                               for="customFile">
                             <i class="fa fa-upload" /> Bild hochladen..
                         </label>
                     </div>
 
-                    <div class="progress mt-2" v-show="progress > -1">
-                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" :style="`width:${progress}%`" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress mt-2"
+                         v-show="progress > -1">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                             role="progressbar"
+                             :style="`width:${progress}%`"
+                             :aria-valuenow="progress"
+                             aria-valuemin="0"
+                             aria-valuemax="100">
                             {{ progress }}%
                         </div>
                     </div>
 
-                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
+                    <div class="alert alert-danger mt-2"
+                         role="alert"
+                         v-if="errors.hasError('file')">
                         <ul class="m-0">
-                            <li :key="error.file" v-for="error in errors.getError('file')">{{ error }}</li>
+                            <li :key="error.file"
+                                v-for="error in errors.getError('file')">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <button class="form-control btn btn-success" type="submit" v-show="!isLoading">
+                    <button class="form-control btn btn-success"
+                            type="submit"
+                            v-show="!isLoading">
                         <i class="fa fa-plus" /> Hochladen
                     </button>
-                    <div class="form-control btn btn-success" type="submit" v-show="isLoading">
+                    <div class="form-control btn btn-success"
+                         type="submit"
+                         v-show="isLoading">
                         <i class="fa fa-spinner fa-pulse" />
                     </div>
                 </div>
             </form>
         </div>
 
-        <div>
-            <image-gallery :images-prop="imagesProp" />
-        </div>
+        <image-gallery :images-prop="imagesProp" />
     </div>
 
 </template>

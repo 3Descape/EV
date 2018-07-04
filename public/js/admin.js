@@ -80476,7 +80476,7 @@ var render = function() {
       _c("div", { staticClass: "row" }, [
         _c(
           "div",
-          { staticClass: "col-lg-8 col-md-12 mx-auto col-xl-7" },
+          { staticClass: "col-lg-10 col-md-12 mx-auto col-xl-10" },
           [
             _c("h3", [_vm._v("Berechtigungen:")]),
             _vm._v(" "),
@@ -80494,15 +80494,17 @@ var render = function() {
                       _c("div", { staticClass: "d-flex" }, [
                         _c(
                           "div",
-                          { staticClass: "mr-auto d-flex align-items-end" },
+                          { staticClass: "mr-auto d-lg-flex align-items-end " },
                           [
                             _c("h4", { staticClass: "mb-0" }, [
                               _vm._v(_vm._s(_vm._f("ucfirst")(role.name)))
                             ]),
                             _vm._v(" "),
-                            _c("p", { staticClass: "text-muted ml-2 mb-0" }, [
-                              _vm._v(_vm._s(_vm._f("ucfirst")(role.label)))
-                            ])
+                            _c(
+                              "p",
+                              { staticClass: "text-muted ml-0 ml-lg-2 mb-0" },
+                              [_vm._v(_vm._s(_vm._f("ucfirst")(role.label)))]
+                            )
                           ]
                         ),
                         _vm._v(" "),
@@ -88468,6 +88470,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* global axios */
 
@@ -88670,9 +88698,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "row" },
+    { staticClass: "row mx-0" },
     _vm._l(_vm.images, function(image) {
-      return _c("div", { key: image.id, staticClass: "col-lg-3 mb-3 px-2" }, [
+      return _c("div", { key: image.id, staticClass: "col-lg-3 mb-3 px-0" }, [
         _c("div", { staticClass: "card h-100" }, [
           _c("div", { staticClass: "card-body row" }, [
             _c("div", { staticClass: "col-lg-3" }, [
@@ -88738,200 +88766,201 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-lg-12" }, [
-    _c(
-      "div",
-      [
-        _c("msg"),
-        _vm._v(" "),
-        _c(
-          "form",
-          {
-            ref: "form",
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.uploud($event)
-              }
-            }
-          },
-          [
-            _c("div", { staticClass: "form-group" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.userImage.name,
-                    expression: "userImage.name"
-                  }
-                ],
-                ref: "name",
-                staticClass: "form-control",
-                attrs: { type: "text", id: "name", name: "name" },
-                domProps: { value: _vm.userImage.name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.userImage, "name", $event.target.value)
-                  }
+  return _c(
+    "div",
+    { staticClass: "col-lg-12" },
+    [
+      _c(
+        "div",
+        [
+          _c("msg"),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              ref: "form",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.uploud($event)
                 }
-              }),
-              _vm._v(" "),
-              _vm.errors.hasError("name")
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "alert alert-danger mt-2",
-                      attrs: { role: "alert" }
-                    },
-                    [
-                      _c(
-                        "ul",
-                        { staticClass: "m-0" },
-                        _vm._l(_vm.errors.getError("name"), function(error) {
-                          return _c("li", { key: error.name }, [
-                            _vm._v(_vm._s(error))
-                          ])
-                        })
-                      )
-                    ]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "file" } }, [_vm._v("Datei:")]),
-              _vm._v(" "),
-              _c("div", { staticClass: "custom-file" }, [
+              }
+            },
+            [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(0),
+                _vm._v(" "),
                 _c("input", {
-                  staticClass: "custom-file-input",
-                  attrs: {
-                    type: "file",
-                    id: "customFile",
-                    name: "file",
-                    multiple: ""
-                  },
-                  on: { change: _vm.fileChange }
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.userImage.name,
+                      expression: "userImage.name"
+                    }
+                  ],
+                  ref: "name",
+                  staticClass: "form-control",
+                  attrs: { type: "text", id: "name", name: "name" },
+                  domProps: { value: _vm.userImage.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.userImage, "name", $event.target.value)
+                    }
+                  }
                 }),
                 _vm._v(" "),
-                _vm._m(1)
+                _vm.errors.hasError("name")
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-danger mt-2",
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _c(
+                          "ul",
+                          { staticClass: "m-0" },
+                          _vm._l(_vm.errors.getError("name"), function(error) {
+                            return _c("li", { key: error.name }, [
+                              _vm._v(_vm._s(error))
+                            ])
+                          })
+                        )
+                      ]
+                    )
+                  : _vm._e()
               ]),
               _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.progress > -1,
-                      expression: "progress > -1"
-                    }
-                  ],
-                  staticClass: "progress mt-2"
-                },
-                [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "progress-bar progress-bar-striped progress-bar-animated",
-                      style: "width:" + _vm.progress + "%",
-                      attrs: {
-                        role: "progressbar",
-                        "aria-valuenow": _vm.progress,
-                        "aria-valuemin": "0",
-                        "aria-valuemax": "100"
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "file" } }, [_vm._v("Datei:")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "custom-file" }, [
+                  _c("input", {
+                    staticClass: "custom-file-input",
+                    attrs: {
+                      type: "file",
+                      id: "customFile",
+                      name: "file",
+                      multiple: ""
+                    },
+                    on: { change: _vm.fileChange }
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.progress > -1,
+                        expression: "progress > -1"
                       }
-                    },
-                    [
-                      _vm._v(
-                        "\n                        " +
-                          _vm._s(_vm.progress) +
-                          "%\n                    "
-                      )
-                    ]
-                  )
-                ]
-              ),
+                    ],
+                    staticClass: "progress mt-2"
+                  },
+                  [
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "progress-bar progress-bar-striped progress-bar-animated",
+                        style: "width:" + _vm.progress + "%",
+                        attrs: {
+                          role: "progressbar",
+                          "aria-valuenow": _vm.progress,
+                          "aria-valuemin": "0",
+                          "aria-valuemax": "100"
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                        " +
+                            _vm._s(_vm.progress) +
+                            "%\n                    "
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.errors.hasError("file")
+                  ? _c(
+                      "div",
+                      {
+                        staticClass: "alert alert-danger mt-2",
+                        attrs: { role: "alert" }
+                      },
+                      [
+                        _c(
+                          "ul",
+                          { staticClass: "m-0" },
+                          _vm._l(_vm.errors.getError("file"), function(error) {
+                            return _c("li", { key: error.file }, [
+                              _vm._v(_vm._s(error))
+                            ])
+                          })
+                        )
+                      ]
+                    )
+                  : _vm._e()
+              ]),
               _vm._v(" "),
-              _vm.errors.hasError("file")
-                ? _c(
-                    "div",
-                    {
-                      staticClass: "alert alert-danger mt-2",
-                      attrs: { role: "alert" }
-                    },
-                    [
-                      _c(
-                        "ul",
-                        { staticClass: "m-0" },
-                        _vm._l(_vm.errors.getError("file"), function(error) {
-                          return _c("li", { key: error.file }, [
-                            _vm._v(_vm._s(error))
-                          ])
-                        })
-                      )
-                    ]
-                  )
-                : _vm._e()
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "button",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: !_vm.isLoading,
-                      expression: "!isLoading"
-                    }
-                  ],
-                  staticClass: "form-control btn btn-success",
-                  attrs: { type: "submit" }
-                },
-                [
-                  _c("i", { staticClass: "fa fa-plus" }),
-                  _vm._v(" Hochladen\n                ")
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.isLoading,
-                      expression: "isLoading"
-                    }
-                  ],
-                  staticClass: "form-control btn btn-success",
-                  attrs: { type: "submit" }
-                },
-                [_c("i", { staticClass: "fa fa-spinner fa-pulse" })]
-              )
-            ])
-          ]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      [_c("image-gallery", { attrs: { "images-prop": _vm.imagesProp } })],
-      1
-    )
-  ])
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "button",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: !_vm.isLoading,
+                        expression: "!isLoading"
+                      }
+                    ],
+                    staticClass: "form-control btn btn-success",
+                    attrs: { type: "submit" }
+                  },
+                  [
+                    _c("i", { staticClass: "fa fa-plus" }),
+                    _vm._v(" Hochladen\n                ")
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.isLoading,
+                        expression: "isLoading"
+                      }
+                    ],
+                    staticClass: "form-control btn btn-success",
+                    attrs: { type: "submit" }
+                  },
+                  [_c("i", { staticClass: "fa fa-spinner fa-pulse" })]
+                )
+              ])
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("image-gallery", { attrs: { "images-prop": _vm.imagesProp } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {

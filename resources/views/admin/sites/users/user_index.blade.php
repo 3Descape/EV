@@ -5,7 +5,6 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-10 col-md-12 mx-auto">
-
             <div class="card">
                 <div class="card-header">
                     Benutzer

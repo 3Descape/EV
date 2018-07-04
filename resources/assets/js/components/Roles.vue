@@ -1,7 +1,7 @@
 <template>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8 col-md-12 mx-auto col-xl-7">
+            <div class="col-lg-10 col-md-12 mx-auto col-xl-10">
 
                 <h3>Berechtigungen:</h3>
 
@@ -18,9 +18,9 @@
                     <div class="card-header"
                          :id="role.name">
                         <div class="d-flex">
-                            <div class="mr-auto d-flex align-items-end">
+                            <div class="mr-auto d-lg-flex align-items-end ">
                                 <h4 class="mb-0">{{ role.name | ucfirst }}</h4>
-                                <p class="text-muted ml-2 mb-0">{{ role.label | ucfirst }}</p>
+                                <p class="text-muted ml-0 ml-lg-2 mb-0">{{ role.label | ucfirst }}</p>
                             </div>
 
                             <form v-if="!is_admin_role(role)"

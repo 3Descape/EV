@@ -80378,6 +80378,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -80399,12 +80402,46 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     __WEBPACK_IMPORTED_MODULE_0__EventBus_js__["a" /* EventBus */].$on("msg-event", function (message) {
       var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "success";
 
-      vue.message = message;
+      if (message instanceof Object) {
+        var html = "";
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = Object.keys(message)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var key = _step.value;
+
+            html += '<ul class="pl-2 mb-0 list-unstyled">';
+            message[key].forEach(function (elem) {
+              html += "<li>&#x25cf; " + elem + "</li>";
+            });
+            html += "</ul>";
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        vue.message = html;
+      } else {
+        vue.message = message;
+      }
       vue.type = type;
       vue.show = true;
       setTimeout(function () {
         vue.show = false;
-      }, 2000);
+      }, 10000);
     });
   }
 });
@@ -80434,8 +80471,13 @@ var render = function() {
         attrs: { role: "alert" }
       },
       [
-        _c("i", { staticClass: "fa fa-info-circle" }),
-        _vm._v(" " + _vm._s(_vm.message) + "\n    ")
+        _c("div", { staticClass: "d-flex" }, [
+          _c("i", {
+            staticClass: "fa fa-info-circle align-self-start mr-1 mt-1"
+          }),
+          _vm._v(" "),
+          _c("div", { domProps: { innerHTML: _vm._s(_vm.message) } })
+        ])
       ]
     )
   ])
@@ -81157,8 +81199,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         vue.sites.push(msg.data.site);
         __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
         _this.update(false);
-      }).catch(function () {
-        __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Es ist ein Fehler aufgetreten.", "danger");
+      }).catch(function (errors) {
+        __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", errors.response.data.errors, "danger");
       });
     },
     update: function update(show_msg) {
@@ -83173,9 +83215,7 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "form-group" }, [
-              _c("label", { attrs: { for: "title" } }, [
-                _vm._v("Überschrift:")
-              ]),
+              _c("label", { attrs: { for: "title" } }, [_vm._v("Titel:")]),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -83450,7 +83490,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 
 
@@ -83490,6 +83529,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       });
     },
     update: function update() {
+      var _this = this;
+
       this.updating = true;
       var vue = this;
       axios.post("/admin/seite/" + vue.site.id + "/update", {
@@ -83499,7 +83540,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }).then(function (response) {
         __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", response.data.status);
         vue.updating = false;
-      }).catch(function () {});
+      }).catch(function (error) {
+        _this.updating = false;
+        __WEBPACK_IMPORTED_MODULE_1__EventBus_js__["a" /* EventBus */].$emit("msg-event", error.response.data.errors, "danger");
+      });
     },
     sync: function sync(data) {
       this.site.markup = data.markup;
@@ -83564,6 +83608,7 @@ var renderer = new __WEBPACK_IMPORTED_MODULE_0_Marked___default.a.Renderer();
         this.$emit("sync", { markup: this.markup, html: compiled });
         return compiled;
       } else {
+        this.$emit("sync", { markup: "", html: "" });
         return "";
       }
     }

@@ -3,7 +3,7 @@
         <div>
             <form @submit.prevent="store">
                 <div class="form-group">
-                    <label for="title">Überschrift:</label>
+                    <label for="title">Titel:</label>
                     <input type="text" v-model="site_title" class="form-control" id="title">
                 </div>
                 <div class="form-group">
@@ -100,12 +100,8 @@ export default {
           EventBus.$emit("msg-event", msg.data.status);
           this.update(false);
         })
-        .catch(() => {
-          EventBus.$emit(
-            "msg-event",
-            "Es ist ein Fehler aufgetreten.",
-            "danger"
-          );
+        .catch(errors => {
+          EventBus.$emit("msg-event", errors.response.data.errors, "danger");
         });
     },
     update(show_msg) {

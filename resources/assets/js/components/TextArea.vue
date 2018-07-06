@@ -47,6 +47,7 @@ export default {
         this.$emit("sync", { markup: this.markup, html: compiled });
         return compiled;
       } else {
+        this.$emit("sync", { markup: "", html: "" });
         return "";
       }
     }

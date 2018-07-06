@@ -46,7 +46,8 @@ class SiteController extends Controller
         $this->authorize('can_access_sites', User::class);
 
         $request->validate([
-            'title' => 'required|string'
+            'title' => 'required|string',
+            'markup' => 'required|min:1'
         ]);
 
         $site->update([

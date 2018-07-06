@@ -1,5 +1,4 @@
 <template>
-
     <div class="card-body">
         <fieldset class="mb-2"
                   :disabled="updating">
@@ -124,7 +123,10 @@ export default {
           EventBus.$emit("msg-event", response.data.status);
           vue.updating = false;
         })
-        .catch(() => {});
+        .catch(error => {
+          this.updating = false;
+          EventBus.$emit("msg-event", error.response.data.errors, "danger");
+        });
     },
     sync(data) {
       this.site.markup = data.markup;

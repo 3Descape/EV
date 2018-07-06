@@ -124,6 +124,7 @@ return [
         'description' => 'Beschreibung',
         'file' => 'Datei',
         'location' => 'Ort',
-        'markup' => 'Beschreibung'
+        'markup' => 'Beschreibung',
+        'title' => 'Titel'
     ],
 ];

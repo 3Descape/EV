@@ -18,6 +18,6 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/login.scss', 'public/css')
     .copy('node_modules/cropperjs/dist/cropper.min.css', 'public/css')
     .purgeCss({
-        enabled: false,
+        enabled: true,
         whitelist: ['blockquote']
     });

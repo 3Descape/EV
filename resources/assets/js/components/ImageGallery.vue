@@ -1,6 +1,6 @@
 <template>
     <div class="row mx-0">
-        <div class="col-lg-3 mb-3 px-0"
+        <div class="col-lg-3 mb-3 px-0 "
              v-for="image in images"
              :key="image.id">
             <div class="card h-100">

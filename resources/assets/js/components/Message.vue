@@ -4,7 +4,10 @@
              :class="messageClass"
              role="alert"
              v-show="show">
-            <i class="fa fa-info-circle" /> {{ message }}
+            <div class="d-flex">
+                <i class="fa fa-info-circle align-self-start mr-1 mt-1" />
+                <div v-html="message"></div>
+            </div>
         </div>
     </transition>
 </template>
@@ -28,12 +31,25 @@ export default {
   mounted() {
     let vue = this;
     EventBus.$on("msg-event", (message, type = "success") => {
-      vue.message = message;
+      if (message instanceof Object) {
+        let html = "";
+        for (const key of Object.keys(message)) {
+          html += '<ul class="pl-2 mb-0 list-unstyled">';
+          message[key].forEach(elem => {
+            html += `<li>&#x25cf; ${elem}</li>`;
+          });
+          html += "</ul>";
+        }
+
+        vue.message = html;
+      } else {
+        vue.message = message;
+      }
       vue.type = type;
       vue.show = true;
       setTimeout(() => {
         vue.show = false;
-      }, 2000);
+      }, 10000);
     });
   }
 };

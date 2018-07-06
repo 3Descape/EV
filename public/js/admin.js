@@ -85517,6 +85517,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 _context.t0 = jobs;
                 _context.next = 9;
                 return this.postImage(data, i).catch(function (errors) {
+                  console.log(errors);
                   vue.errors.setErrors(errors.response.data.errors);
                 });
 

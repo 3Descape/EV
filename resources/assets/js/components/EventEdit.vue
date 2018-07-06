@@ -282,6 +282,7 @@ export default {
         data.append("file", vue.images[i]);
         jobs.push(
           await this.postImage(data, i).catch(errors => {
+            console.log(errors);
             vue.errors.setErrors(errors.response.data.errors);
           })
         );

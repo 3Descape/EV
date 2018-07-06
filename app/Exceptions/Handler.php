@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Exceptions\PostTooLargeException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -48,9 +49,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        $message = json_encode(['errors' => ['file' => ['Datei ist zu groß.']]]);
         if ($exception instanceof PostTooLargeException) {
-            return response($message, 413);
+            $message = ['errors' => ['file' => ['Datei ist zu groß.']]];
+
+            return response()->json($message, 413);
         }
 
         return parent::render($request, $exception);

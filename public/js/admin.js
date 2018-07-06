@@ -80355,7 +80355,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n.info[data-v-37652940] {\r\n  position: absolute;\r\n  top: 5px;\r\n  right: 0;\r\n  z-index: 20;\n}\n.fade-enter-active[data-v-37652940],\r\n.fade-leave-active[data-v-37652940] {\r\n  -webkit-transition: opacity 0.2s ease-out;\r\n  transition: opacity 0.2s ease-out;\n}\n.fade-enter[data-v-37652940],\r\n.fade-leave-to[data-v-37652940] {\r\n  opacity: 0;\n}\r\n", ""]);
+exports.push([module.i, "\n.info[data-v-37652940] {\r\n  position: fixed;\r\n  top: 10px;\r\n  right: 10px;\r\n  z-index: 20;\n}\n.fade-enter-active[data-v-37652940],\r\n.fade-leave-active[data-v-37652940] {\r\n  -webkit-transition: opacity 0.2s ease-out;\r\n  transition: opacity 0.2s ease-out;\n}\n.fade-enter[data-v-37652940],\r\n.fade-leave-to[data-v-37652940] {\r\n  opacity: 0;\n}\r\n", ""]);
 
 // exports
 
@@ -80367,6 +80367,9 @@ exports.push([module.i, "\n.info[data-v-37652940] {\r\n  position: absolute;\r\n
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__EventBus_js__ = __webpack_require__(10);
+//
+//
+//
 //
 //
 //
@@ -85477,22 +85480,6 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       this.images = e.target.files;
       this.uploudImages();
     },
-    postImage: function postImage(data, index) {
-      var vue = this;
-      return new Promise(function (resolve, reject) {
-        var config = {
-          onUploadProgress: function onUploadProgress(progressEvent) {
-            vue.$set(vue.progress, index, Math.round(progressEvent.loaded * 100 / progressEvent.total));
-          }
-        };
-        axios.post("/admin/veranstaltung/" + vue.event.id + "/bild", data, config).then(function (msg) {
-          vue.event.images.push(msg.data.image);
-          resolve();
-        }).catch(function (errors) {
-          reject(errors);
-        });
-      });
-    },
 
     uploudImages: function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee() {
@@ -85516,10 +85503,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                 data.append("file", vue.images[i]);
                 _context.t0 = jobs;
                 _context.next = 9;
-                return this.postImage(data, i).catch(function (errors) {
-                  console.log(errors);
-                  vue.errors.setErrors(errors.response.data.errors);
-                });
+                return this.postImage(data, i);
 
               case 9:
                 _context.t1 = _context.sent;
@@ -85535,14 +85519,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
               case 15:
 
-                Promise.all([jobs]).then(function () {
-                  if (vue.errors.length === 0) {
-                    __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", "Bilder wurden hinzugefügt");
-                  }
+                Promise.all([jobs]).then(function (msg) {
                   vue.progress = [];
                   vue.images = [];
-                }).catch(function () {
-                  console.log("error");
                 });
 
               case 16:
@@ -85559,6 +85538,26 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
 
       return uploudImages;
     }(),
+    postImage: function postImage(data, index) {
+      var vue = this;
+      return new Promise(function (resolve, reject) {
+        var config = {
+          onUploadProgress: function onUploadProgress(progressEvent) {
+            vue.$set(vue.progress, index, Math.round(progressEvent.loaded * 100 / progressEvent.total));
+          }
+        };
+
+        axios.post("/admin/veranstaltung/" + vue.event.id + "/bild", data, config).then(function (msg) {
+          vue.event.images.push(msg.data.image);
+          __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", msg.data.status);
+          resolve(msg);
+        }).catch(function (errors) {
+          reject(errors.response.data.errors);
+        });
+      }).catch(function (error) {
+        __WEBPACK_IMPORTED_MODULE_2__EventBus_js__["a" /* EventBus */].$emit("msg-event", error.file[0], "danger");
+      });
+    },
     destroy: function destroy(image) {
       var vue = this;
       axios.delete("/admin/bild/" + image.id).then(function (msg) {

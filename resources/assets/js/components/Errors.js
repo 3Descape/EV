@@ -2,7 +2,6 @@ export default class Errors {
     constructor() {
         this.errors = {};
     }
-
     setErrors(errors) {
         this.errors = errors;
     }

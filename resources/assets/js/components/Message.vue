@@ -1,6 +1,9 @@
 <template>
     <transition name="fade">
-        <div class="alert info" :class="messageClass" role="alert" v-show="show">
+        <div class="alert info"
+             :class="messageClass"
+             role="alert"
+             v-show="show">
             <i class="fa fa-info-circle" /> {{ message }}
         </div>
     </transition>
@@ -38,9 +41,9 @@ export default {
 
 <style scoped>
 .info {
-  position: absolute;
-  top: 5px;
-  right: 0;
+  position: fixed;
+  top: 10px;
+  right: 10px;
   z-index: 20;
 }
 

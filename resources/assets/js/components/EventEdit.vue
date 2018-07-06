@@ -251,11 +251,26 @@ export default {
       this.images = e.target.files;
       this.uploudImages();
     },
+    uploudImages: async function() {
+      let vue = this;
+      let jobs = [];
+      for (var i = 0; i < vue.images.length; i++) {
+        let data = new FormData();
+        data.append("file", vue.images[i]);
+        jobs.push(await this.postImage(data, i));
+        vue.$forceUpdate();
+      }
+
+      Promise.all([jobs]).then(msg => {
+        vue.progress = [];
+        vue.images = [];
+      });
+    },
     postImage(data, index) {
       let vue = this;
       return new Promise(function(resolve, reject) {
         let config = {
-          onUploadProgress: function(progressEvent) {
+          onUploadProgress: progressEvent => {
             vue.$set(
               vue.progress,
               index,
@@ -263,44 +278,22 @@ export default {
             );
           }
         };
+
         axios
           .post(`/admin/veranstaltung/${vue.event.id}/bild`, data, config)
           .then(msg => {
             vue.event.images.push(msg.data.image);
-            resolve();
+            EventBus.$emit("msg-event", msg.data.status);
+            resolve(msg);
           })
           .catch(errors => {
-            reject(errors);
+            reject(errors.response.data.errors);
           });
+      }).catch(error => {
+        EventBus.$emit("msg-event", error.file[0], "danger");
       });
     },
-    uploudImages: async function() {
-      let vue = this;
-      let jobs = [];
-      for (var i = 0; i < vue.images.length; i++) {
-        let data = new FormData();
-        data.append("file", vue.images[i]);
-        jobs.push(
-          await this.postImage(data, i).catch(errors => {
-            console.log(errors);
-            vue.errors.setErrors(errors.response.data.errors);
-          })
-        );
-        vue.$forceUpdate();
-      }
 
-      Promise.all([jobs])
-        .then(() => {
-          if (vue.errors.length === 0) {
-            EventBus.$emit("msg-event", "Bilder wurden hinzugefügt");
-          }
-          vue.progress = [];
-          vue.images = [];
-        })
-        .catch(() => {
-          console.log("error");
-        });
-    },
     destroy(image) {
       let vue = this;
       axios

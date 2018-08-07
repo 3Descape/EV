@@ -20,7 +20,7 @@
                             <input type="hidden" name="token" value="{{ $token }}">
 
                             <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">E-Mail Adresse</label>
+                                <label for="email" class="col-md-4 control-label">E-Mail Adresssffe</label>
                                 <input id="email" type="email" class="form-control ml-2" name="email" value="{{ $email or old('email') }}" required autofocus>
 
                                 <div class="ml-2">

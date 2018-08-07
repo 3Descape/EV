@@ -20,15 +20,16 @@ body{
 //     border-left: 1px solid #232427;
 // }
 .menu{
-    background-color: $color6 ;
+    background-color: $color6;
     padding: 0px;
     z-index: 10;
     nav{
         padding: 0px;
         .navbar-light{color: $color1;}
-
+        
         div.navbar-collapse > ul > li{
             a{
+                background-color: $color6;
                 padding-top: 16px;
                 padding-bottom: 16px;
                 @include media-breakpoint-down(md){
@@ -205,33 +206,6 @@ body{
         left: auto;
         width: calc(100% - 30px);
         text-align: center;
-    }
-
-    // .event_thumb{
-    //     @include media-breakpoint-down(md){
-    //         display: none;
-    //     }
-    //     width:100%;
-    //     max-height: 100%;
-    //     padding: 0px;
-    //     text-align: center;
-    //     overflow: hidden;
-
-    //     img{
-    //         height: 100%;
-    //         width: auto;
-    //     }
-    // }
-}
-
-
-.carousel.is-fullscreen .carousel-cell {
-  height: 100%
-}
-.image-slider{
-    height: 30rem;
-    img{
-        height: 100%;
     }
 }
 

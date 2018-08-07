@@ -1,9 +1,9 @@
 <template>
     <div class="row mx-0">
-        <div class="col-lg-3 mb-3 px-0 "
+        <div class="col-lg-3 mb-2 px-0"
              v-for="image in images"
              :key="image.id">
-            <div class="card h-100">
+            <div class="card h-100 mx-1">
                 <div class="card-body row">
                     <div class="col-lg-3">
                         <img :src="`/storage/${image.path}`"

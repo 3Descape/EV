@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="col-sm-11 col-lg-9 col-xl-7 mx-auto">
-        <div class="row mt-4">
+        <div class="row mt-5">
             <div class="col-lg-10 col-md-12 order-2 order-lg-1">
                 <h1 class="text-center">Veranstaltungen Archiv</h1>
                 @foreach ($events as $event)
@@ -14,30 +14,25 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex">
-                                    {{-- @if($event->thump_path)
-                                        <div class="pr-2">
-                                            <img src="{{asset('storage/'. $event->thump_path)}}" alt="" class="" style="border-radius: 50%; height: 7rem; width: auto">
+                                    <div class="flex-grow-1 d-flex">
+                                        <div>
+                                            <h3>{{ucfirst($event->name)}}</h3>
                                         </div>
-                                        @endif --}}
-                                        <div class="flex-grow-1 d-flex">
-                                            <div>
-                                                <h3>{{ucfirst($event->name)}}</h3>
-                                            </div>
-                                        </div>
-                                        <a href="{{route('events_archive')}}?event={{$event->id}}" class="btn btn-success align-self-start">
-                                            <i class="fa fa-arrow-right"></i> Ansehen
-                                        </a> 
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <div class="d-flex">
-                                            <p class="mb-0">{{ucfirst($event->date->diffForHumans())}}</p>
-                                            <span class="badge badge-info align-self-center ml-auto">
-                                                {{ ucfirst($event->category->name)}}
-                                            </span>
-                                        </div>
+                                    <a href="{{route('events_archive')}}?event={{$event->id}}" class="btn btn-success align-self-start">
+                                        <i class="fa fa-arrow-right"></i> Ansehen
+                                    </a> 
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div class="d-flex">
+                                        <p class="mb-0">{{ucfirst($event->date->diffForHumans())}}</p>
+                                        <span class="badge badge-info align-self-center ml-auto">
+                                            {{ ucfirst($event->category->name)}}
+                                        </span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                 @endforeach
                 {{ $events->links('layouts.paginator') }}
@@ -62,15 +57,6 @@
                                         </a>
                                     @endforeach
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a class="btn btn-success btn-block" href="{{route('events')}}">
-                                    <i class="fa fa-arrow-right"></i> Veranstaltungen
-                                </a>
                             </div>
                         </div>
                     </div>

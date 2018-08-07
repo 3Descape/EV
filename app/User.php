@@ -14,6 +14,9 @@ class User extends Authenticatable
 
     protected $hidden = ['password', 'remember_token'];
 
+    public $admin_delte_exception = 'Es muss immer <strong>mindestens ein Administrator bestehen </strong>. 
+                                    Bitte geben Sie einem anderen Nutzer zuerst die Administratorrechte!';
+
     /**
      * Returns all associated roles for a user
      * @method roles

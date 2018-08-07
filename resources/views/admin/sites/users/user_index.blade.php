@@ -12,7 +12,7 @@
                 <div class="card-body">
                     @if (session('exeption'))
                         <div class="alert alert-danger">
-                            {{ session('exeption') }}
+                            {!! session('exeption') !!}
                         </div>
                     @endif
                     <table class="table overflow">

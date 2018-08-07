@@ -95,7 +95,7 @@ class EventController extends Controller
             'date' => 'Bitte geben Sie ein gültiges Datum an.'
         ]);
 
-        $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
+        $date = Carbon::createFromFormat('Y-m-d H:i', $request->date);
 
         $event->update([
             'name' => $request->name,

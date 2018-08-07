@@ -14686,6 +14686,7 @@ body * {
 }
 
 .menu nav div.navbar-collapse > ul > li a {
+  background-color: #292D39;
   padding-top: 16px;
   padding-bottom: 16px;
 }
@@ -14872,18 +14873,6 @@ body * {
   left: auto;
   width: calc(100% - 30px);
   text-align: center;
-}
-
-.carousel.is-fullscreen .carousel-cell {
-  height: 100%;
-}
-
-.image-slider {
-  height: 30rem;
-}
-
-.image-slider img {
-  height: 100%;
 }
 
 .cookie {

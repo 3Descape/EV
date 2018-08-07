@@ -16,9 +16,16 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link {{request()->is('veranstaltungen*') ? 'active' : ''}}" style="cursor: pointer" href="{{route('events')}}">Veranstaltungen</a>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="event_dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Veranstaltungen
+            </a>
+            <div class="dropdown-menu py-0" aria-labelledby="event_dropdown" style="margin-top: -1px;" class="nav-link {{request()->is('veranstaltungen*') ? 'active' : ''}}">
+                <a class="dropdown-item" href="{{route('events')}}">Veranstaltungen</a>
+                <a class="dropdown-item" href="{{route('events_archive')}}">Archiv</a>
+            </div>
         </li>
+
         <li class="nav-item">
           <a class="nav-link {{request()->is('sga') ? 'active' : ''}}" href="{{route('sga')}}">SGA</a>
         </li>

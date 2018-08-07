@@ -6,17 +6,21 @@
                   @submit.prevent="update">
 
                 <div class="d-flex mb-2">
-                    <input type="text"
-                           class="form-control"
-                           placeholder="Titel"
-                           v-model="site.title">
+                    <label for="title"
+                           class="mr-auto">Titel:</label>
 
                     <button class="btn btn-danger ml-2"
                             @click.prevent="destroy">
                         <i class="fa fa-trash-alt"></i>
                     </button>
                 </div>
+                <input type="text"
+                       class="form-control mb-2"
+                       placeholder="Titel"
+                       v-model="site.title"
+                       id="title">
 
+                <label for="body">Text:</label>
                 <text-area :images-prop="imagesProp"
                            :markup-prop="site.markup"
                            @sync="sync">
@@ -24,7 +28,8 @@
                     <div slot-scope="{compiledMarkdown, inputEvents, inputAttrs}">
                         <textarea v-on="inputEvents"
                                   v-bind="inputAttrs"
-                                  class="form-control"></textarea>
+                                  class="form-control"
+                                  id="body"></textarea>
 
                         <div class="card mt-2">
                             <div class="card-header"

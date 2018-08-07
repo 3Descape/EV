@@ -2,17 +2,18 @@
 
 @section('content')
 <div>
-    <div class="card mx-auto">
-        <div class="card-header px-2 py-2">
-            {{ $name }} hat Ihnen folgendes geschrieben:
-        </div>
-        <div class="card-body px-2 py-2">
-            <div class="border">
-                {!! $body !!}
+        <div class="header bg-dark text-green">
+            <div class="container mx-auto py-3 font-bold">
+                {{ $name }} hat Ihnen folgendes geschrieben:
             </div>
         </div>
-        <div class="card-footer px-2 text-center">
-            EV Weiz
+        <div class="container mx-auto py-3 border my-3 px-2">
+                {!! $body !!}
+        </div>
+        <div class="bg-dark text-green py-2">
+            <div class="container mx-auto text-center font-bold">
+                <a href="{{route('home')}}" class="no-underline text-green">EV Weiz</a>
+            </div>
         </div>
     </div>
 </div>

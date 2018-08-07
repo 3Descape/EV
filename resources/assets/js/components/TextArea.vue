@@ -41,7 +41,7 @@ export default {
           return id !== -1
             ? '<img src="/storage/' +
                 vue.imagesProp[id].path +
-                '"/ class="img-fluid d-block mx-auto" style="max-height: 400px;">'
+                '"/ class="img-fluid d-block mx-auto" style="max-height: 20rem;">'
             : x;
         });
         this.$emit("sync", { markup: this.markup, html: compiled });

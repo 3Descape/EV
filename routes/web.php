@@ -1,8 +1,5 @@
 <?php
 
-use App\Site;
-use App\Image;
-
 Auth::routes();
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
@@ -102,20 +99,15 @@ Route::get('/download/{file}', 'DownloadController@file_download')->name('file_d
 
 Route::post('/people/{category}', 'ApiController@getPeople');
 
-Route::get('/test', function () {
-    $images = Image::all();
-    $site = Site::first();
-
-    return view('admin.sites.test', [
-        'images' => $images,
-        'site' => $site
-    ]);
-});
-// Route::get('/mail', function(){
+// Route::get('/mail', function () {
 //     $data = [
 //         'name' => 'Jon Doe',
-//         'text' => 'Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben wurden.
-//         Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben wurden.'
+//         'text' => 'Sehr geehrter Herr
+//         Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben wurden.
+//         Ist ein langer Beispieltext der für die E-Mail geschrieben wurden. Ist ein langer Beispieltext der für die E-Mail geschrieben
+//         wurden.
+//         LG Test'
 //     ];
+
 //     return new App\Mail\EvMail('test@test.com', $data);
 // });

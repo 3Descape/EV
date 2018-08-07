@@ -1,41 +1,26 @@
 <template>
-    <div>
+    <div class="image-slider d-flex algin-items-center">
         <slot></slot>
     </div>
 </template>
 
 <script>
-import Owl from "owl.carousel";
+import Slick from "slick-carousel";
 
-import "owl.carousel/dist/assets/owl.carousel.min.css";
-import "owl.carousel/dist/assets/owl.theme.default.min.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default {
   mounted() {
     $(document).ready(function() {
-      $(".owl-carousel").owlCarousel({
-        loop: true,
-        items: 3,
+      $(".image-slider").slick({
+        dots: true,
+        slidesToShow: 2,
+        variableWidth: true,
+        lazyLoad: "ondemand",
         autoplay: true,
-        autoplayTimeout: 2000,
-        margin: 10,
-        nav: true,
-        autoplayHoverPause: true,
-        responsiveClass: true,
-        responsive: {
-          0: {
-            items: 1,
-            nav: true
-          },
-          600: {
-            items: 2,
-            nav: false
-          },
-          1000: {
-            items: 3,
-            nav: true
-          }
-        }
+        autoplaySpeed: 2000,
+        pauseOnFocus: true
       });
     });
   }
@@ -44,18 +29,20 @@ export default {
 
 
 <style>
-.owl-carousel .owl-stage {
-  display: flex;
+@font-face {
+  font-family: Slick;
+  src: url("/public/fonts/vendor/slick-carousel/slick.ttf");
 }
 
-.owl-item img {
-  width: auto;
-  height: 100%;
+.slick-slide div img {
+  height: 35rem;
 }
-.owl-prev > span,
-.owl-next > span {
-  padding: 15px;
-  font-size: 2em;
+.slick-dots li button::before {
+  opacity: 0.3;
+}
+
+.slick-arrow::before {
+  color: black;
 }
 </style>
 

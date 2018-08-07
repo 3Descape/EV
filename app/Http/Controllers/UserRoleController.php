@@ -33,7 +33,7 @@ class UserRoleController extends Controller
         if ($role->name == Role::ADMIN_ROLE_NAME) {
             $count = $role->users()->count();
             if ($count <= 1) {
-                return back()->with('exeption', 'Es muss immer <strong>mindestens ein Administrator bestehen </strong>. Bitte geben Sie mindestens einem anderen Nutzer zuerst diese Berechtigung, damit Sie die Berechtigung von diesem Nutzer löschen können.');
+                return back()->with('exeption', $user->admin_delte_exception);
             }
         }
         $user->roles()->detach($role->id);

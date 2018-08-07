@@ -14,7 +14,8 @@
                        v-model="date.day"
                        @keydown.up="addDay()"
                        @keydown.down="subDay()"
-                       @change="validateDate()">
+                       @change="validateDate()"
+                       tabindex="1">
                 <button @click="subDay()"
                         type="button"
                         tabindex="-1"
@@ -35,7 +36,8 @@
                        v-model="date.month"
                        @keydown.up="addMonth()"
                        @keydown.down="subMonth()"
-                       @change="validateDate()">
+                       @change="validateDate()"
+                       tabindex="2">
                 <button @click="subMonth()"
                         type="button"
                         tabindex="-1"
@@ -56,7 +58,8 @@
                        v-model="date.year"
                        @keydown.up="addYear()"
                        @keydown.down="subYear()"
-                       @change="validateDate()">
+                       @change="validateDate()"
+                       tabindex="3">
                 <button @click="subYear()"
                         type="button"
                         tabindex="-1"
@@ -77,7 +80,8 @@
                        v-model="date.hour"
                        @keydown.up="addHour()"
                        @keydown.down="subHour()"
-                       @change="validateDate()">
+                       @change="validateDate()"
+                       tabindex="4">
                 <button @click="subHour()"
                         type="button"
                         tabindex="-1"
@@ -98,7 +102,8 @@
                        v-model="date.minute"
                        @keydown.up="addMinute()"
                        @keydown.down="subMinute()"
-                       @change="validateDate()">
+                       @change="validateDate()"
+                       tabindex="5">
                 <button @click="subMinute()"
                         type="button"
                         tabindex="-1"

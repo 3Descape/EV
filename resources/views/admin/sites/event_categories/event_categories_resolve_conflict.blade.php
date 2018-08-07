@@ -33,7 +33,7 @@
                                 </select>
 
                                 <button type="submit" class="btn btn-info">
-                                    <div class="fa fa-refresh"></div>
+                                    <div class="fa fa-sync-alt"></div>
                                 </button>
                                 
                                 {{method_field('PUT')}}

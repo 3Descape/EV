@@ -21,7 +21,7 @@
                                                 <p class="card-text">{!!$event->html!!}</p>
                                             </div>
                                             <div class="col-md-12 mt-4">
-                                                <h4>Wo und Wann?</h4>
+                                                <h5>Wo und Wann?</h5>
                                                 <div class="d-flex">
                                                     <p class="mb-0 mr-2">Am {{$event->date->formatLocalized('%#d %B %Y') . ' ' . $event->location}}</p>
                                                     <span class="badge badge-info ml-auto align-self-end">{{ ucfirst($event->category->name)}}</span>
@@ -60,15 +60,6 @@
                                         </a>
                                     @endforeach
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-12 mt-4">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <a class="btn btn-block btn-success" href="{{route('events_archive')}}">
-                                    <i class="fa fa-arrow-right"></i> Archiv
-                                </a>
                             </div>
                         </div>
                     </div>

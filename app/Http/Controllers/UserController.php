@@ -16,16 +16,17 @@ class UserController extends Controller
         ]);
     }
 
-    public function user_delete($user)
+    public function user_delete(User $user)
     {
         $this->authorize('can_access_user', User::class);
         $admins = User::with('roles')->get()->filter(function ($user) {
             return $user->isAdmin();
         });
-        if ($admins->count() === 1) {
-            return back()->with('exeption', 'Es muss immer mindestens ein Administrator bestehen. Bitte geben Sie mindestens einem anderen Nutzer zuerst diese Berechtigung, bevor Sie diesen löschen.');
+        if ($admins->count() === 1 && $user->isAdmin()) {
+            return back()->with('exeption', $user->admin_delte_exception);
         }
-        User::destroy($user);
+
+        $user->delete();
 
         return back();
     }

@@ -11,7 +11,8 @@
         </div>
 
         <div class="form-group">
-            <date-input name="date" default="{{old("date") !== null ? (new Carbon\Carbon)->createFromFormat("d.m.Y H:i", old("date")) : ""}}"></date-input>
+            <label for="date">Datum:</label>
+            <date-input name="date" default="{{old("date") !== null ? (new Carbon\Carbon)->createFromFormat("d.m.Y H:i", old("date")) : ""}}" id="date"></date-input>
             @include('admin.components.error', ['name' => 'date', 'class' => 'mt-1'])
         </div>
 

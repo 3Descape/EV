@@ -81,7 +81,7 @@ class EventController extends Controller
             'event_category_id' => $request->event_category_id
         ]);
 
-        return back();
+        return response()->json(['msg' => 'Kategorie wurde aktualisiert!'], 200);
     }
 
     public function update(Request $request, Event $event)

@@ -9,7 +9,7 @@
         <h1 class="text-center">Kontakt</h1>
         <div class="alert alert-success">Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</div>
         <div class="col-md-12 mb-4">
-            <h4>Elternverein</h4>
+            <h4>Elternverein:</h4>
             @if($msg = session('ev_mail'))
                 <div class="alert alert-success" role="alert">
                    {{$msg}}
@@ -33,7 +33,7 @@
         </div>
 
         <div class="col-md-12 mt-2">
-            <h4>Obmann</h4>
+            <h4>Obmann:</h4>
             @if($msg = session('obmann_mail'))
                 <div class="alert alert-success" role="alert">
                    {{$msg}}

@@ -27,7 +27,8 @@ class PersonController extends Controller
         $this->authorize('can_access_people', User::class);
 
         return view('admin.sites.people.person_create', [
-            'category' => $category
+            'category' => $category,
+            'categories' => PersonCategory::all()
         ]);
     }
 
@@ -48,25 +49,25 @@ class PersonController extends Controller
         $this->authorize('can_access_people', User::class);
         $this->validate($request, [
             'name' => 'required|string',
-            'description' => 'nullable',
-            'person_category_id' => 'required|exists:person_categories,id'
+            'person_category_id' => 'required|exists:person_categories,id',
+            'file' => 'image',
         ]);
 
-        // if($request->hasFile('image')){
-        //     $image = new StoreImage();
-        //     $saved = $image->store($request->file('file'), 'people/', false);
-        // }
-
-        Person::create([
+        $person = Person::create([
             'name' => $request->name,
-            'description' => $request->description,
+            'description' => $request->description ?? '',
             'person_category_id' => $request->person_category_id
         ]);
 
-        return redirect()->route(
-            'person_index',
-            PersonCategory::find($request->person_category_id)->name
-        );
+        if ($request->hasFile('file')) {
+            $image = new StoreImage();
+            $saved = $image->store($request->file, 'people/', false);
+            $person->update([
+                'image_path' => $saved->mainPath
+            ]);
+        }
+
+        return response()->json(['msg' => 'Person wurde erstellt.', 'person' => $person->load('category')], 200);
     }
 
     public function update(Person $person, Request $request)
@@ -74,7 +75,6 @@ class PersonController extends Controller
         $this->authorize('can_access_people', User::class);
         $this->validate($request, [
             'name' => 'required|string',
-            'description' => 'nullable',
             'person_category_id' => 'required|exists:person_categories,id',
             'file' => 'image',
         ]);
@@ -92,11 +92,11 @@ class PersonController extends Controller
 
         $person->update([
             'name' => $request->name,
-            'description' => $request->description,
+            'description' => $request->description ?? '',
             'person_category_id' => $request->person_category_id,
         ]);
 
-        return response()->json(["status" => "Updated person", "person" => $person->load('category')], 200);
+        return response()->json(['status' => 'Updated person', 'person' => $person->load('category')], 200);
     }
 
     public function destroy(Person $person)

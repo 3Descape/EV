@@ -136,6 +136,8 @@
 <script>
 import Cropper from "Cropperjs";
 import Errors from "./Errors.js";
+import "cropperjs/dist/cropper.min.css";
+
 export default {
   props: {
     personProp: {

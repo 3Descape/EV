@@ -11,7 +11,8 @@ Vue.component('event-edit', require('./components/EventEdit.vue'));
 Vue.component('file-uploud', require('./components/FileUploud.vue'));
 Vue.component('image-library', require('./components/ImageLibrary.vue'));
 Vue.component('personen-liste', require('./components/PeopleList.vue'));
-Vue.component('person', require('./components/Person.vue'));
+Vue.component('update-person', require('./components/UpdatePerson.vue'));
+Vue.component('create-person', require('./components/CreatePerson.vue'));
 Vue.component('date-input', require('./components/DateInput.vue'));
 Vue.component('event-resolve-conflict-list', require('./components/EventCategoryResolveConflictList.vue'));
 const app = new Vue({

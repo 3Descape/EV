@@ -31,7 +31,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::delete('/person-kategorie/{person_category}', 'PersonCategoryController@destroy')->name('person_category_destroy');
 
     Route::get('/person/{category}', 'PersonController@index')->name('person_index');
-    Route::get('/person/{category}/add', 'PersonController@create')->name('person_create');
+    Route::get('/person/{category}/create', 'PersonController@create')->name('person_create');
     Route::post('/person/add', 'PersonController@store')->name('person_store');
     Route::get('/person/{person}/edit', 'PersonController@edit')->name('person_edit');
     Route::put('/person/{person}', 'PersonController@update')->name('person_update');
@@ -68,17 +68,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::post('/datei', 'FileController@store')->name('file_store');
     Route::delete('/datei/{file}', 'FileController@delete')->name('file_destroy');
 
-    Route::get('/thermin', 'FixtureController@index')->name('fixture_index');
-    Route::post('/thermin', 'FixtureController@store')->name('fixture_store');
-    Route::get('/thermin/{fixture}/edit', 'FixtureController@edit')->name('fixture_edit');
-    Route::put('/thermin/{fixture}', 'FixtureController@update')->name('fixture_update');
-    Route::delete('/thermin/{fixture}', 'FixtureController@destroy')->name('fixture_destroy');
+    Route::get('/termin', 'FixtureController@index')->name('fixture_index');
+    Route::post('/termin', 'FixtureController@store')->name('fixture_store');
+    Route::get('/termin/{fixture}/edit', 'FixtureController@edit')->name('fixture_edit');
+    Route::put('/termin/{fixture}', 'FixtureController@update')->name('fixture_update');
+    Route::delete('/termin/{fixture}', 'FixtureController@destroy')->name('fixture_destroy');
 
-    Route::get('/thermin-kategorie', 'FixtureCategoryController@index')->name('fixture_category_index');
-    Route::post('/thermin-kategorie', 'FixtureCategoryController@store')->name('fixture_category_store');
-    Route::get('/thermin-kategorie/{fixturecategory}/edit', 'FixtureCategoryController@edit')->name('fixture_category_edit');
-    Route::put('/thermin-kategorie/{fixturecategory}', 'FixtureCategoryController@update')->name('fixture_category_update');
-    Route::delete('/thermin-kategorie/{fixturecategory}', 'FixtureCategoryController@destroy')->name('fixture_category_destroy');
+    Route::get('/termin-kategorie', 'FixtureCategoryController@index')->name('fixture_category_index');
+    Route::post('/termin-kategorie', 'FixtureCategoryController@store')->name('fixture_category_store');
+    Route::get('/termin-kategorie/{fixturecategory}/edit', 'FixtureCategoryController@edit')->name('fixture_category_edit');
+    Route::put('/termin-kategorie/{fixturecategory}', 'FixtureCategoryController@update')->name('fixture_category_update');
+    Route::delete('/termin-kategorie/{fixturecategory}', 'FixtureCategoryController@destroy')->name('fixture_category_destroy');
 });
 
 Route::get('/', 'FrontendController@index')->name('home');

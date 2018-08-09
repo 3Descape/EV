@@ -29,10 +29,8 @@
         "popper.js": "^1.14.3",
         "vue": "^2.5.16",
         "vue-template-compiler": "^2.5.16",
-        "vuedraggable": "^2.16.0"
-    },
-    "dependencies": {
-        "owl.carousel": "^2.3.4",
+        "vuedraggable": "^2.16.0",
         "slick-carousel": "^1.8.1"
-    }
+    },
+    "dependencies": {}
 }

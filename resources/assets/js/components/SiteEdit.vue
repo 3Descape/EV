@@ -47,7 +47,7 @@
                             </div>
 
                             <div :id="'collapse' + site.id"
-                                 class="collapse"
+                                 class="collapse markup-preview"
                                  role="tabpanel">
                                 <div class="card-body"
                                      v-html="compiledMarkdown" />

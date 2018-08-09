@@ -21,6 +21,7 @@
                                 <th>Name</th>
                                 <th class="d-none d-md-table-cell">E-Mail</th>
                                 <th class="d-none d-md-table-cell">Berechtigungen</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,15 +38,17 @@
                                             </a>
                                         @endforeach
                                     </td>
-                                    <td class="d-flex">
-                                        <a href="{{route('user_role_edit', $user->id)}}"
-                                            class="btn btn-warning ml-auto">
-                                            <i class="fa fa-pencil-alt"></i>
-                                        </a>
-                                        <a href="{{route('user_delete', $user->id)}}"
-                                            class="btn btn-danger mx-1">
-                                            <i class="fa fa-trash-alt"></i>
-                                        </a>
+                                    <td>
+                                        <div class="d-flex">
+                                            <a href="{{route('user_role_edit', $user->id)}}"
+                                                class="btn btn-warning ml-auto">
+                                                <i class="fa fa-pencil-alt"></i>
+                                            </a>
+                                            <a href="{{route('user_delete', $user->id)}}"
+                                                class="btn btn-danger mx-1">
+                                                <i class="fa fa-trash-alt"></i>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
                             @endforeach

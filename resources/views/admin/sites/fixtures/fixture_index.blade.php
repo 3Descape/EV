@@ -53,6 +53,7 @@
                                 <th>Name</th>
                                 <th>Beschreibung</th>
                                 <th>Kategorie</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,17 +62,20 @@
                                     <td scope="row">{{$fixture->name}}</td>
                                     <td class="d-none d-md-table-cell overflow-text">{{$fixture->description}}</td>
                                     <td style="max-width: 2rem">{{$fixture->category->name}}</td>
-                                    <td class="d-flex" >
-                                        <a href="{{route('fixture_edit', $fixture->id)}}" class="btn btn-warning ml-auto">
-                                            <i class="fa fa-pencil-alt"></i>
-                                        </a>
-                                        <form action="{{route('fixture_destroy', $fixture->id)}}" method="post">
-                                            <button class="btn btn-danger mx-1" type="submit">
-                                                <i class="fa fa-trash-alt"></i>
-                                            </button>
-                                            {{ csrf_field() }}
-                                            {{method_field('DELETE')}}
-                                        </form>
+                                    <td>
+                                        <div class="d-flex">
+
+                                            <a href="{{route('fixture_edit', $fixture->id)}}" class="btn btn-warning ml-auto">
+                                                <i class="fa fa-pencil-alt"></i>
+                                            </a>
+                                            <form action="{{route('fixture_destroy', $fixture->id)}}" method="post">
+                                                <button class="btn btn-danger mx-1" type="submit">
+                                                    <i class="fa fa-trash-alt"></i>
+                                                </button>
+                                                {{ csrf_field() }}
+                                                {{method_field('DELETE')}}
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                              @endforeach

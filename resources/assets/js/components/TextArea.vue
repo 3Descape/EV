@@ -39,9 +39,7 @@ export default {
           });
           let id = ids.indexOf(Number(x.substring(1)));
           return id !== -1
-            ? '<img src="/storage/' +
-                vue.imagesProp[id].path +
-                '"/ class="img-fluid d-block mx-auto" style="max-height: 20rem;">'
+            ? '<img src="/storage/' + vue.imagesProp[id].path + '"/>'
             : x;
         });
         this.$emit("sync", { markup: this.markup, html: compiled });
@@ -63,3 +61,5 @@ export default {
   }
 };
 </script>
+
+

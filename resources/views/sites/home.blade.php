@@ -91,7 +91,7 @@
                 <div class="row">
                     <div class="col-md-10 mx-auto">
                         <div class="row">
-                            <div class="col-lg-3 col-md-6 col-sm-12">
+                            {{-- <div class="col-lg-3 col-md-6 col-sm-12">
                                 <a href="#">
                                     <i class="fab fa-youtube-square" aria-hidden="true"></i> YouTube
                                 </a>
@@ -107,10 +107,10 @@
                                 <a href="#">
                                     <i class="fab fa-facebook-square" aria-hidden="true"></i> Facebook
                                 </a>
-                            </div>
+                            </div> --}}
 
-                            <div class="col-lg-3 col-md-6 col-sm-12">
-                                <a href="#">
+                            <div class="col-lg-12 col-md-12 col-sm-12 media-link">
+                                <a href="https://www.bgweiz.at/">
                                     <i class="fas fa-graduation-cap" aria-hidden="true"></i> BG Weiz
                                 </a>
                             </div>

@@ -7,7 +7,7 @@
 @section('content')
     <div class="col-md-6 col-sm-12 mx-auto mt-4" id="contact">
         <h1 class="text-center">Kontakt</h1>
-        <div class="alert alert-success">Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</div>
+        <p class="col-md-12">Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</p>
         <div class="col-md-12 mb-4">
             <h4>Elternverein:</h4>
             @if($msg = session('ev_mail'))
@@ -32,7 +32,7 @@
             </form>
         </div>
 
-        <div class="col-md-12 mt-2">
+        {{-- <div class="col-md-12 mt-2">
             <h4>Obmann:</h4>
             @if($msg = session('obmann_mail'))
                 <div class="alert alert-success" role="alert">
@@ -54,6 +54,6 @@
                     {{ csrf_field() }}
                 </div>
             </form>
-        </div>
+        </div> --}}
     </div>
 @endsection

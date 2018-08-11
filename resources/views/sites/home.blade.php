@@ -110,7 +110,7 @@
                             </div> --}}
 
                             <div class="col-lg-12 col-md-12 col-sm-12 media-link">
-                                <a href="https://www.bgweiz.at/">
+                                <a href="http://alt.bgweiz.at/cms/">
                                     <i class="fas fa-graduation-cap" aria-hidden="true"></i> BG Weiz
                                 </a>
                             </div>

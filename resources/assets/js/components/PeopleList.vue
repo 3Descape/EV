@@ -21,7 +21,8 @@
 
                             <p class="card-text"
                                style="line-height: 1.4;"
-                               v-if="person.description">{{person.description}}</p>
+                               v-if="person.html"
+                               v-html="person.html"></p>
                         </div>
                     </div>
                 </div>

@@ -24,7 +24,7 @@
                             @foreach ($people as $person)
                             <tr>
                                 <td scope="row">{{$person->name}}</td>
-                                <td class="d-none d-md-table-cell overflow-text">{{$person->description}}</td>
+                                <td class="d-none d-md-table-cell overflow-text">{!! $person->markup !!}</td>
                                 <td>
                                     <div class="d-flex">
                                         <a href="{{route('person_edit', $person->id)}}" class="btn btn-warning ml-auto">

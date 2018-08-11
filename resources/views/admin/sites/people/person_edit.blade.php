@@ -5,7 +5,7 @@
 @section('sitebar_inner')
 <div class="container-fluid">
     <div class="row">
-        <update-person :person-prop="{{$person}}" :categories="{{$categories}}"></update-person>
+        <update-person :person-prop="{{$person}}" :categories="{{$categories}}" :images-prop="{{$images}}"></update-person>
     </div> 
 </div>
 @endsection

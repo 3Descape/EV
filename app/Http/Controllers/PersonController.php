@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Image;
 use App\Person;
 use App\PersonCategory;
 use Illuminate\Http\Request;
@@ -28,7 +29,8 @@ class PersonController extends Controller
 
         return view('admin.sites.people.person_create', [
             'category' => $category,
-            'categories' => PersonCategory::all()
+            'categories' => PersonCategory::all(),
+            'images' => Image::all()
         ]);
     }
 
@@ -37,10 +39,12 @@ class PersonController extends Controller
         $this->authorize('can_access_people', User::class);
         $person->load('category');
         $categories = PersonCategory::all();
+        $images = Image::all();
 
         return view('admin.sites.people.person_edit', compact(
             'person',
-            'categories'
+            'categories',
+            'images'
         ));
     }
 
@@ -55,7 +59,8 @@ class PersonController extends Controller
 
         $person = Person::create([
             'name' => $request->name,
-            'description' => $request->description ?? '',
+            'markup' => $request->markup ?? '',
+            'html' => $request->html ?? '',
             'person_category_id' => $request->person_category_id
         ]);
 
@@ -92,7 +97,8 @@ class PersonController extends Controller
 
         $person->update([
             'name' => $request->name,
-            'description' => $request->description ?? '',
+            'markup' => $request->markup ?? '',
+            'html' => $request->html ?? '',
             'person_category_id' => $request->person_category_id,
         ]);
 

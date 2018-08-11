@@ -50,7 +50,7 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::create([
             'name' => 'access_fixtures',
-            'label' => 'Thermine',
+            'label' => 'Termine',
         ]);
     }
 }

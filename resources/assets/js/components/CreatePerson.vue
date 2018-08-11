@@ -22,24 +22,41 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="description">Beschreibung</label>
-                    <input type="text"
-                           class="form-control"
-                           id="description"
-                           name="description"
-                           v-model="person.description">
-                    <div class="alert alert-danger mt-2"
-                         role="alert"
-                         v-if="errors.hasError('description')">
-                        <ul class="m-0">
-                            <li :key="error.description"
-                                v-for="error in errors.getError('description')">
-                                {{ error }}
-                            </li>
-                        </ul>
+                <label for="body">Beschreibung:</label>
+                <text-area :images-prop="imagesProp"
+                           :markup-prop="person.markup"
+                           @sync="sync">
+
+                    <div slot-scope="{compiledMarkdown, inputEvents, inputAttrs}">
+                        <textarea v-on="inputEvents"
+                                  v-bind="inputAttrs"
+                                  class="form-control"
+                                  id="body"></textarea>
+
+                        <div class="card mt-2">
+                            <div class="card-header"
+                                 role="tab">
+                                <h5 class="mb-0">
+                                    <a data-toggle="collapse"
+                                       :href="'#collapse' + person.id"
+                                       aria-expanded="false"
+                                       :aria-controls="'collapse' + person.id"
+                                       class="text-dark">
+                                        Vorschau
+                                        <i class="fa fa-caret-down" />
+                                    </a>
+                                </h5>
+                            </div>
+
+                            <div :id="'collapse' + person.id"
+                                 class="collapse markup-preview"
+                                 role="tabpanel">
+                                <div class="card-body"
+                                     v-html="compiledMarkdown" />
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </text-area>
 
                 <div class="form-group">
                     <label for="category">Kategorie</label>
@@ -139,6 +156,7 @@ import Cropper from "Cropperjs";
 import Errors from "./Errors.js";
 import Message from "./Message.vue";
 import { EventBus } from "./EventBus.js";
+import TextArea from "./Textarea.vue";
 
 import "cropperjs/dist/cropper.min.css";
 export default {
@@ -149,13 +167,18 @@ export default {
     },
     categories: {
       type: Array
+    },
+    imagesProp: {
+      type: Array,
+      required: true
     }
   },
   data() {
     return {
       person: {
         name: "",
-        description: "",
+        markup: "",
+        html: "",
         category: this.category,
         image_path: null
       },
@@ -167,9 +190,14 @@ export default {
     };
   },
   components: {
-    msg: Message
+    msg: Message,
+    TextArea
   },
   methods: {
+    sync(data) {
+      this.person.markup = data.markup;
+      this.person.html = data.html;
+    },
     fileChange(e) {
       let temp = this.changed;
       this.image = e.target.files[0];
@@ -198,7 +226,8 @@ export default {
       this.working = true;
       this.formData = new FormData();
       this.formData.append("name", this.person.name);
-      this.formData.append("description", this.person.description);
+      this.formData.append("markup", this.person.markup);
+      this.formData.append("html", this.person.html);
       this.formData.append("person_category_id", this.person.category.id);
       if (this.changed) {
         window.cropper.getCroppedCanvas().toBlob(

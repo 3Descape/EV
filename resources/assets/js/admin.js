@@ -9,6 +9,7 @@ Vue.component('sites-edit', require('./components/SitesEdit.vue'));
 Vue.component('site-edit', require('./components/SiteEdit.vue'));
 Vue.component('event-edit', require('./components/EventEdit.vue'));
 Vue.component('file-uploud', require('./components/FileUploud.vue'));
+Vue.component('file-edit', require('./components/FileEdit.vue'));
 Vue.component('image-library', require('./components/ImageLibrary.vue'));
 Vue.component('personen-liste', require('./components/PeopleList.vue'));
 Vue.component('update-person', require('./components/UpdatePerson.vue'));

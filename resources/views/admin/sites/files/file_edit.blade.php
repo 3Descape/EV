@@ -2,7 +2,7 @@
 
 @section('sitebar_inner')
 <div class="col-lg-10 col-sm-12 col-md-12 mx-auto">
-    <form action="{{route('file_update', $file->id)}}" method="post">
+    {{-- <form action="{{route('file_update', $file->id)}}" method="post">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" id="name" class="form-control" name="name" value="{{old("name") ?: $file->name}}">
@@ -28,7 +28,8 @@
         {{ csrf_field() }}
         {{method_field('PUT')}}
         
-    </form>
+    </form> --}}
+    <file-edit :file-prop="{{$file}}" :images-prop="{{$images}}"></file-edit>
 </div>
 @endsection
 

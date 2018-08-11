@@ -22,23 +22,41 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="description">Beschreibung:</label>
-                <input v-model="file.description"
-                       class="form-control"
-                       type="text"
-                       id="description"
-                       name="description">
+            <label for="body">Beschreibung:</label>
+            <text-area :images-prop="imagesProp"
+                       :markup-prop="file.markup"
+                       @sync="sync">
 
-                <div class="alert alert-danger mt-2"
-                     role="alert"
-                     v-if="errors.hasError('description')">
-                    <ul class="m-0">
-                        <li :key="error.description"
-                            v-for="error in errors.getError('description')">{{ error }}</li>
-                    </ul>
+                <div slot-scope="{compiledMarkdown, inputEvents, inputAttrs}">
+                    <textarea v-on="inputEvents"
+                              v-bind="inputAttrs"
+                              class="form-control"
+                              id="body"></textarea>
+
+                    <div class="card mt-2">
+                        <div class="card-header"
+                             role="tab">
+                            <h5 class="mb-0">
+                                <a data-toggle="collapse"
+                                   href="#collapse"
+                                   aria-expanded="false"
+                                   aria-controls="collapse"
+                                   class="text-dark">
+                                    Vorschau
+                                    <i class="fa fa-caret-down" />
+                                </a>
+                            </h5>
+                        </div>
+
+                        <div id="collapse"
+                             class="collapse markup-preview"
+                             role="tabpanel">
+                            <div class="card-body"
+                                 v-html="compiledMarkdown" />
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </text-area>
 
             <div class="form-group">
                 <label for="file">Datei:</label>
@@ -110,7 +128,7 @@
                 <tr v-for="file in objects"
                     :key="file.id">
                     <td>{{ file.name }}</td>
-                    <td class="overflow-text d-none d-md-table-cell">{{ file.description }}</td>
+                    <td class="overflow-text d-none d-md-table-cell">{{ file.markup }}</td>
 
                     <td>
                         <div class="d-flex">
@@ -139,13 +157,19 @@
 import Message from "./Message";
 import { EventBus } from "./EventBus.js";
 import Errors from "./Errors.js";
+import TextArea from "./Textarea.vue";
 
 export default {
   components: {
-    msg: Message
+    msg: Message,
+    TextArea
   },
   props: {
     files: {
+      type: Array,
+      required: true
+    },
+    imagesProp: {
       type: Array,
       required: true
     }
@@ -154,7 +178,8 @@ export default {
     return {
       file: {
         name: "",
-        description: "",
+        markup: "",
+        html: "",
         file: {}
       },
       errors: new Errors(),
@@ -179,6 +204,10 @@ export default {
     this.objects = this.files;
   },
   methods: {
+    sync(data) {
+      this.file.markup = data.markup;
+      this.file.html = data.html;
+    },
     fileChange(e) {
       this.file.file = e.target.files[0];
     },
@@ -186,7 +215,8 @@ export default {
       let vue = this;
       let data = new FormData();
       data.append("name", this.file.name);
-      data.append("description", this.file.description);
+      data.append("html", this.file.html);
+      data.append("markup", this.file.markup);
       data.append("file", this.file.file);
 
       let config = {
@@ -201,7 +231,7 @@ export default {
         .post("/admin/datei", data, config)
         .then(msg => {
           vue.file.name = "";
-          vue.file.description = "";
+          vue.file.markup = "";
           vue.file.file = {};
           vue.$refs.name.focus();
           vue.$refs.form.reset();

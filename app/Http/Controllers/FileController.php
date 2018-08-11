@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\File;
 use App\User;
+use App\Image;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
@@ -14,27 +15,29 @@ class FileController extends Controller
     {
         $this->authorize('can_access_files', User::class);
         $files = File::all();
+        $images = Image::all();
 
         return view('admin.sites.files.file_index', compact(
-            'files'
+            'files',
+            'images'
         ));
     }
 
     public function store(Request $request)
     {
         $this->authorize('can_access_files', User::class);
-        $data = $request->validate([
+        $request->validate([
             'name' => 'required|string|unique:files,name',
-            'description' => 'required|string',
             'file' => 'required|file'
         ]);
 
         $file = $request->file('file');
         if ($file->isValid()) {
-            $path = Storage::disk('public')->putFileAs('files', $file, $data['name'] . '.' . $file->getClientOriginalExtension(), 'public');
+            $path = Storage::disk('public')->putFileAs('files', $file, $request->name . '.' . $file->getClientOriginalExtension(), 'public');
             $file = File::create([
-                'name' => $data['name'],
-                'description' => $data['description'],
+                'name' => $request->name,
+                'html' => $request->html,
+                'markup' => $request->markup,
                 'path' => $path,
                 'size' => $file->getClientSize()
             ]);
@@ -50,9 +53,10 @@ class FileController extends Controller
     {
         $this->authorize('can_access_files', User::class);
 
-        return view('admin.sites.files.file_edit', compact(
-            'file'
-        ));
+        return view('admin.sites.files.file_edit', [
+            'file' => $file,
+            'images' => Image::all()
+        ]);
     }
 
     public function update(Request $request, File $file)
@@ -63,16 +67,16 @@ class FileController extends Controller
                 'required',
                 'string',
                 Rule::unique('files')->ignore($file->name, 'name')
-            ],
-            'description' => 'required|string'
+            ]
         ]);
 
         $file->update([
             'name' => $request->name,
-            'description' => $request->description
+            'html' => $request->html,
+            'markup' => $request->markup,
         ]);
 
-        return redirect()->route('file_index');
+        return response()->json(['msg' => 'Änderungen wurden gespeichert.'], 200);
     }
 
     public function delete(File $file)
@@ -81,6 +85,6 @@ class FileController extends Controller
         Storage::disk('public')->delete($file->path);
         $file->delete();
 
-        return response()->json(['status' => 'Datei wurde gelöscht.']);
+        return response()->json(['status' => 'Datei wurde gelöscht.'], 200);
     }
 }

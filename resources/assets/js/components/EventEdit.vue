@@ -104,7 +104,7 @@
                         <i class="fa fa-pencil-alt" /> Speichern
                     </button>
                     <a :href="isArchived ? '/admin/veranstaltung/archiv' : '/admin/veranstaltung'" class="btn btn-light border border-dark">
-                        <i class="fa fa-times" /> Zurück
+                        <i class="fa fa-times" /> Abbrechen
                     </a>
                 </div>
             </form>

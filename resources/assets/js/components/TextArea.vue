@@ -39,7 +39,9 @@ export default {
           });
           let id = ids.indexOf(Number(x.substring(1)));
           return id !== -1
-            ? '<img src="/storage/' + vue.imagesProp[id].path + '"/>'
+            ? '<img src="/storage/' +
+                vue.imagesProp[id].path +
+                '" class="image-style"/>'
             : x;
         });
         this.$emit("sync", { markup: this.markup, html: compiled });

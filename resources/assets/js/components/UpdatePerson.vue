@@ -126,16 +126,20 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
+                <text-to-image @updated-image="updateEmail"
+                               @updating-start="updatingEmail = true"
+                               :image-prop="person.email"></text-to-image>
+
                 <div class="form-group d-flex">
                     <button type="submit"
+                            :disabled="!working && updatingEmail"
                             class="btn btn-info mr-2 ml-auto">
-                        <i v-show="!working"
+                        <i v-show="!working && !updatingEmail"
                            class="fa fa-edit"></i>
-                        <i v-show="working"
+                        <i v-show="working || updatingEmail"
                            class="fa fa-spinner fa-pulse"></i>
                         Bearbeiten
                     </button>
@@ -155,6 +159,7 @@ import Cropper from "Cropperjs";
 import Errors from "./Errors.js";
 import "cropperjs/dist/cropper.min.css";
 import TextArea from "./Textarea.vue";
+import TextToImage from "./TextToImage.vue";
 
 export default {
   props: {
@@ -172,7 +177,8 @@ export default {
     }
   },
   components: {
-    TextArea
+    TextArea,
+    TextToImage
   },
   data() {
     return {
@@ -181,7 +187,8 @@ export default {
       errors: new Errors(),
       image: "",
       formData: {},
-      working: false
+      working: false,
+      updatingEmail: false
     };
   },
   methods: {
@@ -219,6 +226,7 @@ export default {
       this.formData.append("name", this.person.name);
       this.formData.append("markup", this.person.markup);
       this.formData.append("html", this.person.html);
+      this.formData.append("email", this.person.email);
       this.formData.append("person_category_id", this.person.category.id);
       this.formData.append("_method", "PUT");
       if (this.changed) {
@@ -247,6 +255,10 @@ export default {
           this.errors.setErrors(errors.response.data.errors);
           this.working = false;
         });
+    },
+    updateEmail(data) {
+      this.person.email = data.image;
+      this.updatingEmail = false;
     }
   },
   filters: {

@@ -16,6 +16,7 @@ Vue.component('update-person', require('./components/UpdatePerson.vue'));
 Vue.component('create-person', require('./components/CreatePerson.vue'));
 Vue.component('date-input', require('./components/DateInput.vue'));
 Vue.component('event-resolve-conflict-list', require('./components/EventCategoryResolveConflictList.vue'));
+// Vue.component('text-to-image', require('./components/TextToImage.vue'));
 const app = new Vue({
     el: '#app',
 });

@@ -81,6 +81,11 @@
                     </div>
                 </div>
 
+                <text-to-image @updated-image="updateEmail"
+                               @updating-start="updatingEmail = true"
+                               :image-prop="person.email"
+                               class="mb-4"></text-to-image>
+
                 <div class="form-group"
                      v-if="person.category.has_image">
                     <label for="image">Bild:</label>
@@ -126,12 +131,12 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
                 <div class="form-group d-flex">
                     <button type="submit"
+                            :disabled="working || updatingEmail"
                             class="btn btn-success mr-2 ml-auto">
                         <i v-show="!working"
                            class="fa fa-edit"></i>
@@ -157,6 +162,7 @@ import Errors from "./Errors.js";
 import Message from "./Message.vue";
 import { EventBus } from "./EventBus.js";
 import TextArea from "./Textarea.vue";
+import TextToImage from "./TextToImage.vue";
 
 import "cropperjs/dist/cropper.min.css";
 export default {
@@ -180,8 +186,10 @@ export default {
         markup: "",
         html: "",
         category: this.category,
-        image_path: null
+        image_path: null,
+        email: ""
       },
+      updatingEmail: false,
       changed: false,
       errors: new Errors(),
       image: "",
@@ -191,7 +199,8 @@ export default {
   },
   components: {
     msg: Message,
-    TextArea
+    TextArea,
+    TextToImage
   },
   methods: {
     sync(data) {
@@ -228,6 +237,7 @@ export default {
       this.formData.append("name", this.person.name);
       this.formData.append("markup", this.person.markup);
       this.formData.append("html", this.person.html);
+      this.formData.append("email", this.person.email);
       this.formData.append("person_category_id", this.person.category.id);
       if (this.changed) {
         window.cropper.getCroppedCanvas().toBlob(
@@ -257,6 +267,10 @@ export default {
           this.errors.setErrors(errors.response.data.errors);
           this.working = false;
         });
+    },
+    updateEmail(data) {
+      this.person.email = data.image;
+      this.updatingEmail = false;
     }
   },
   filters: {

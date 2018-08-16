@@ -20,7 +20,7 @@ class CreatePeopleTable extends Migration
             $table->text('html')->nullable();
             $table->string('image_path')->nullable();
             $table->integer('person_category_id');
-            $table->integer('email')->nullable();
+            $table->text('email')->nullable();
             $table->timestamps();
         });
     }

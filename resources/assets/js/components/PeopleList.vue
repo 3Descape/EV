@@ -1,6 +1,5 @@
 <template>
     <div>
-
         <div class="row mt-3">
             <div class="col-lg-6 col-md-12 mb-2 px-md-0"
                  v-for="person in people"
@@ -19,14 +18,22 @@
                             <h4 class="card-title mb-2"
                                 style="font-weight: 500">{{person.name}}</h4>
 
-                            <p class="card-text"
-                               style="line-height: 1.4;"
-                               v-if="person.html"
-                               v-html="person.html"></p>
+                            <div class="card-text"
+                                 style="line-height: 1.4;"
+                                 v-if="person.html"
+                                 v-html="person.html">
+                            </div>
+                            <div v-if="person.email"
+                                 style="max-height: 2rem"
+                                 class="d-flex align-items-start">
+                                <p class="mr-1">Email: </p>
+                                <img style="margin-top: 0.2rem; height: 1.5rem"
+                                     :src="person.email">
+                            </div>
+
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -52,3 +59,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.card-text > p {
+  margin-bottom: 0px;
+}
+</style>
+

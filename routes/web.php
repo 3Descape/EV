@@ -79,6 +79,8 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/termin-kategorie/{fixturecategory}/edit', 'FixtureCategoryController@edit')->name('fixture_category_edit');
     Route::put('/termin-kategorie/{fixturecategory}', 'FixtureCategoryController@update')->name('fixture_category_update');
     Route::delete('/termin-kategorie/{fixturecategory}', 'FixtureCategoryController@destroy')->name('fixture_category_destroy');
+    Route::get('/email-bild', 'EmailImageController@index')->name('email_image_index');
+    Route::post('/email-bild/store', 'EmailImageController@store')->name('email_image_store');
 });
 
 Route::get('/', 'FrontendController@index')->name('home');

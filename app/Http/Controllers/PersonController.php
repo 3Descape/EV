@@ -100,7 +100,7 @@ class PersonController extends Controller
             'name' => $request->name,
             'markup' => $request->markup ?? '',
             'html' => $request->html ?? '',
-            'email' => $request->email,
+            'email' => $request->email ?? null,
             'person_category_id' => $request->person_category_id,
         ]);
 

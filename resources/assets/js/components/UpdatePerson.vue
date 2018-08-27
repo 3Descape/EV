@@ -129,9 +129,11 @@
                     </div>
                 </div>
 
+                <label for="email">Email:</label>
                 <text-to-image @updated-image="updateEmail"
                                @updating-start="updatingEmail = true"
-                               :image-prop="person.email"></text-to-image>
+                               :image-prop="person.email">
+                </text-to-image>
 
                 <div class="form-group d-flex">
                     <button type="submit"
@@ -226,7 +228,7 @@ export default {
       this.formData.append("name", this.person.name);
       this.formData.append("markup", this.person.markup);
       this.formData.append("html", this.person.html);
-      this.formData.append("email", this.person.email);
+      this.formData.append("email", this.person.email ? this.person.email : "");
       this.formData.append("person_category_id", this.person.category.id);
       this.formData.append("_method", "PUT");
       if (this.changed) {
@@ -246,10 +248,12 @@ export default {
       axios
         .post(`/admin/person/${this.person.id}`, formData)
         .then(msg => {
-          location.href = `/admin/person/${this.person.category.name}`;
           this.person = msg.data.person;
           this.changed = false;
           this.working = false;
+          setTimeout(() => {
+            location.href = `/admin/person/${this.person.category.name}`;
+          }, 500);
         })
         .catch(errors => {
           this.errors.setErrors(errors.response.data.errors);

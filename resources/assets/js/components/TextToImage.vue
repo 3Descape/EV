@@ -1,13 +1,19 @@
 <template>
     <div>
-        <label for="email">Email:</label>
-        <input type="text"
-               class="form-control mb-3"
-               v-model="text"
-               id="email"
-               @keyup="updateImage"
-               placeholder="Email...">
+        <div class="d-flex">
+            <input type="text"
+                   class="form-control mb-3"
+                   v-model="text"
+                   id="email"
+                   @keyup="updateImage"
+                   placeholder="Email...">
 
+            <button class="btn-danger btn ml-2 align-self-start"
+                    @click="deleteEmail"
+                    type="button">
+                <i class="fa fa-trash"></i>
+            </button>
+        </div>
         <label v-if="text && updating"
                for="">
             <i class="fa fa-sync-alt fa-spin"></i>
@@ -24,7 +30,6 @@
                  :src="image"
                  alt="">
         </div>
-
     </div>
 </template>
 
@@ -64,7 +69,12 @@ export default {
       },
       1500,
       {}
-    )
+    ),
+    deleteEmail() {
+      this.text = "";
+      this.image = "";
+      this.$emit("updated-image", { image: "" });
+    }
   },
   mounted() {
     console.log("created");

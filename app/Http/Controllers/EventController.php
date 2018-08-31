@@ -40,7 +40,7 @@ class EventController extends Controller
                 'name' => 'required|max:255',
                 'markup' => 'required',
                 'date' => 'required|date',
-                'location' => 'required|min:5',
+                'location' => 'required|min:3',
                 'event_category_id' => 'exists:event_categories,id'
             ],
             [
@@ -52,7 +52,7 @@ class EventController extends Controller
 
         Event::create([
             'name' => $request->name,
-            'html' => $request->markup,
+            'html' => nl2br($request->markup),
             'markup' => $request->markup,
             'date' => $date,
             'location' => $request->location,
@@ -88,14 +88,14 @@ class EventController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255',
-            'location' => 'required',
+            'location' => 'required|min:3',
             'date' => 'required|date',
             'event_category_id' => 'required|exists:event_categories,id',
         ], [
             'date' => 'Bitte geben Sie ein gültiges Datum an.'
         ]);
 
-        $date = Carbon::createFromFormat('Y-m-d H:i', $request->date);
+        $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
 
         $event->update([
             'name' => $request->name,

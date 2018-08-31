@@ -25,7 +25,7 @@
 
         <div class="form-group">
             <label for="markup">Beschreibung:</label>
-            <textarea type="text" id="description" value="{{ old('markup') }}" class="form-control" name="markup"></textarea>
+            <textarea type="text" id="description" class="form-control" name="markup">{{old('markup')}}</textarea>
             @include('admin.components.error', ['name' => 'markup', 'class' => 'mt-1'])
         </div>
 

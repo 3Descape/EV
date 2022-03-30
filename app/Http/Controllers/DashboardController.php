@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Analythic;
 use Carbon\Carbon;
-use http\Env\Response;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Analythic;
 
 class DashboardController extends Controller
 {

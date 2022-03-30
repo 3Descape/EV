@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Site;
-use App\Event;
-use App\Image;
-use App\EventCategory;
-use App\PeopleCategory;
-use App\FixtureCategory;
+use App\Models\Event;
+use App\Models\Image;
+use App\Models\EventCategory;
+use App\Models\FixtureCategory;
 use App\Traits\AnalythicTrait;
-use App\SiteCategory;
+use App\Models\SiteCategory;
 
 class FrontendController extends Controller
 {

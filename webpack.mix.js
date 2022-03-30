@@ -1,5 +1,5 @@
-let mix = require('laravel-mix');
-require('laravel-mix-purgecss');
+const mix = require('laravel-mix');
+
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,13 +11,13 @@ require('laravel-mix-purgecss');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-    .js('resources/assets/js/admin.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css')
-    .sass('resources/assets/sass/admin.scss', 'public/css')
-    .sass('resources/assets/sass/login.scss', 'public/css')
-    // .copy('node_modules/cropperjs/dist/cropper.min.css', 'public/css')
+mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/admin.js', 'public/js')
+    .sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/admin.scss', 'public/css')
+    .sass('resources/sass/login.scss', 'public/css')
     .purgeCss({
         enabled: true,
         whitelist: ['blockquote']
-    });
+    })
+    .sourceMaps();

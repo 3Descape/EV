@@ -1,61 +1,65 @@
 @extends('auth.master')
 
-@section('title')
-    Login
-@endsection
-
 @section('content')
-    <div class="container-fluid">
-        <div class="row full-height">
-            <div class="col-xl-5 col-lg-10 col-md-10 col-sm-11 mx-auto my-auto">
-                <div class="card">
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success">
-                                {{ session('status') }}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Reset Password') }}</div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('password.update') }}">
+                        @csrf
+
+                        <input type="hidden" name="token" value="{{ $token }}">
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                        @endif
+                        </div>
 
-                        <form class="form-horizontal" role="form" method="POST" action="{{ route('password.request') }}">
-                            <input type="hidden" name="token" value="{{ $token }}">
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                            <div class="form-group">
-                                <label for="email" class="col-md-4 control-label">E-Mail Adresse</label>
-                                <input id="email" type="email" class="form-control ml-2" name="email" value="{{ $email or old('email') }}" required autofocus>
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
-                                <div class="ml-2">
-                                    @include('admin.components.error', ['name' => 'email'])
-                                </div>
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="password" class="col-md-4 control-label">Passwort</label>
-                                <input id="password" type="password" class="form-control ml-2" name="password" required>
-                                <div class="ml-2">
-                                    @include('admin.components.error', ['name' => 'password'])
-                                </div>
+                        <div class="row mb-3">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="password-confirm" class="col-md-4 control-label">Passwort bestätigen</label>
-                                <input id="password-confirm" type="password" class="form-control ml-2" name="password_confirmation" required>
-
-                                <div class="ml-2">
-                                    @include('admin.components.error', ['name' => 'password_confirmation'])
-                                </div>
-                            </div>
-
-                            <div class="form-group">
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    Passwort zurücksetzen
+                                    {{ __('Reset Password') }}
                                 </button>
                             </div>
-                            {{ csrf_field() }}
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 @endsection

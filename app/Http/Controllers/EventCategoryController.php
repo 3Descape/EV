@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\EventCategory;
+use App\Models\User;
+use App\Models\EventCategory;
 use Illuminate\Http\Request;
 
 class EventCategoryController extends Controller

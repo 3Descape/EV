@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Image;
-use App\Person;
-use App\PersonCategory;
+use App\Models\User;
+use App\Models\Image;
+use App\Models\Person;
+use App\Models\PersonCategory;
 use Illuminate\Http\Request;
 use App\Http\Helpers\StoreImage;
 use Illuminate\Support\Facades\Storage;

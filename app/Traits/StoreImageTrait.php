@@ -1,8 +1,10 @@
 <?php
 namespace App\Traits;
+
 use Illuminate\Http\Request;
 use File;
 use Image;
+
 trait StoreImageTrait{
     public function store_image(Request $request, $directory, $thump = false)
     {

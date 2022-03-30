@@ -1,12 +1,18 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-$factory->define(App\Person::class, function (Faker $faker) {
-    return [
-        'name' => $faker->name,
-        'markup' => $faker->sentences($nb = 1, $asText = true),
-        'html' => $faker->sentences($nb = 1, $asText = true),
-        'person_category_id' => $faker->numberBetween($min = 1, $max = 3),
-    ];
-});
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class PersonFactory extends Factory
+{
+    public function definition()
+    {
+        return [
+            'name' => $this->faker->name,
+            'markup' => $this->faker->sentences($nb = 1, $asText = true),
+            'html' => $this->faker->sentences($nb = 1, $asText = true),
+            'person_category_id' => $this->faker->numberBetween($min = 1, $max = 3),
+        ];
+    }
+}

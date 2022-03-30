@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Event;
-use App\Image;
 use Carbon\Carbon;
-use App\EventCategory;
+use App\Models\User;
+use App\Models\Event;
+use App\Models\Image;
+use App\Models\EventCategory;
 use Illuminate\Http\Request;
 
 class EventController extends Controller

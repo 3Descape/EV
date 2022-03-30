@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Site;
-use App\User;
-use App\Image;
-use App\SiteCategory;
+use App\Models\Site;
+use App\Models\User;
+use App\Models\Image;
+use App\Models\SiteCategory;
 use Illuminate\Http\Request;
 
 class SiteController extends Controller

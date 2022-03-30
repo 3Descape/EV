@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\PersonCategory;
+use App\Models\User;
+use App\Models\PersonCategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use App\User;
 
 class PersonCategoryController extends Controller
 {

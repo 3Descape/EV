@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Fixture;
-use App\FixtureCategory;
+use App\Models\User;
+use App\Models\Fixture;
+use App\Models\FixtureCategory;
 use Illuminate\Http\Request;
 
 class FixtureController extends Controller

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class ResetPasswordController extends Controller
@@ -25,24 +26,5 @@ class ResetPasswordController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest');
-    }
-
-    protected function rules()
-    {
-        return [
-            'token' => 'required',
-            'email' => 'required|email|exists:users,email',
-            'password' => 'required|confirmed|min:6',
-        ];
-    }
+    protected $redirectTo = RouteServiceProvider::HOME;
 }

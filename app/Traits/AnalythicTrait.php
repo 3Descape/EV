@@ -2,7 +2,7 @@
 
 namespace App\Traits;
 
-use App\Analythic;
+use App\Models\Analythic;
 use Illuminate\Support\Facades\Cookie;
 
 trait AnalythicTrait

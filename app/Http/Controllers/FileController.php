@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\File;
-use App\User;
-use App\Image;
+use App\Models\File;
+use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;

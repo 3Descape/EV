@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\PersonCategory;
+use App\Models\PersonCategory;
 
 class ApiController extends Controller
 {

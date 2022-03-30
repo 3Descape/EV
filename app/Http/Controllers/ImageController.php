@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use File;
-use App\User;
-use App\Image;
+use App\Models\User;
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Http\Helpers\StoreImage;
 

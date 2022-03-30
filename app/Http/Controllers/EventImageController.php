@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
-use App\Event;
+use App\Models\User;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use App\Http\Helpers\StoreImage;
 

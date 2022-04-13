@@ -23,7 +23,7 @@
             background-color: #292D39;
         }
         .text-green{
-            color: #40E8AE;
+            color: #40E8AE !important;
         }
         .no-underline{
             text-decoration: none;
@@ -38,7 +38,7 @@
 
         .my-2{
             margin-top: 0.5rem;
-            margin-bottom: 0.5rem; 
+            margin-bottom: 0.5rem;
         }
         .my-3{
             margin-top: 1.0rem;
@@ -49,7 +49,7 @@
             padding-left: 0.5rem;
             padding-right: 0.5rem;
         }
-        
+
 
         .px-3{
             padding-left:  1.0rem;
@@ -68,6 +68,9 @@
         .border{
             border: 1px solid #e6e6e6;
             border-radius: 0.2rem;
+        }
+        a {
+            color: white;
         }
     </style>
     @yield('header')

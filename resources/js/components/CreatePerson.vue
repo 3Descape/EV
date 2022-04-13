@@ -2,20 +2,13 @@
     <div class="col-lg-10 col-md-12 mx-auto">
         <form @submit.prevent="update">
             <fieldset :disabled="working">
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="name">Name</label>
-                    <input type="text"
-                           class="form-control"
-                           id="name"
-                           name="name"
-                           v-model="person.name">
+                    <input type="text" class="form-control" id="name" name="name" v-model="person.name">
 
-                    <div class="alert alert-danger mt-2"
-                         role="alert"
-                         v-if="errors.hasError('name')">
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
                         <ul class="m-0">
-                            <li :key="error.name"
-                                v-for="error in errors.getError('name')">
+                            <li :key="error.name" v-for="error in errors.getError('name')">
                                 {{ error }}
                             </li>
                         </ul>
@@ -23,71 +16,29 @@
                 </div>
 
                 <label for="body">Beschreibung:</label>
-                <text-area :images-prop="imagesProp"
-                           :markup-prop="person.markup"
-                           @sync="sync">
-
-                    <div slot-scope="{compiledMarkdown, inputEvents, inputAttrs}">
-                        <textarea v-on="inputEvents"
-                                  v-bind="inputAttrs"
-                                  class="form-control"
-                                  id="body"></textarea>
-
-                        <div class="card mt-2">
-                            <div class="card-header"
-                                 role="tab">
-                                <h5 class="mb-0">
-                                    <a data-toggle="collapse"
-                                       :href="'#collapse' + person.id"
-                                       aria-expanded="false"
-                                       :aria-controls="'collapse' + person.id"
-                                       class="text-dark">
-                                        Vorschau
-                                        <i class="fa fa-caret-down" />
-                                    </a>
-                                </h5>
-                            </div>
-
-                            <div :id="'collapse' + person.id"
-                                 class="collapse markup-preview"
-                                 role="tabpanel">
-                                <div class="card-body"
-                                     v-html="compiledMarkdown" />
-                            </div>
-                        </div>
-                    </div>
+                <text-area  :images-prop="imagesProp"
+                            :people-group-prop="peopleGroupProp"
+                            v-model="person.markup">
                 </text-area>
 
-                <div class="form-group">
+                <div class="mb-3">
                     <label for="category">Kategorie</label>
-                    <select name="people_category_id"
-                            v-model="person.category"
-                            class="custom-select"
-                            id="category">
-                        <option v-for="category in categories"
-                                :key="category.id"
-                                :value="category"> {{category.name | ucfirst}}
-                        </option>
+                    <select name="people_category_id" v-model="person.category" class="form-select" id="category">
+                        <option v-for="category in categories" :key="category.id" :value="category"> {{ucfirst(category.name)}}</option>
                     </select>
-                    <div class="alert alert-danger mt-2"
-                         role="alert"
-                         v-if="errors.hasError('people_category_id')">
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('people_category_id')">
                         <ul class="m-0">
-                            <li :key="error.people_category_id"
-                                v-for="error in errors.getError('people_category_id')">
+                            <li :key="error.people_category_id" v-for="error in errors.getError('people_category_id')">
                                 {{ error }}
                             </li>
                         </ul>
                     </div>
                 </div>
 
-                <text-to-image @updated-image="updateEmail"
-                               @updating-start="updatingEmail = true"
-                               :image-prop="person.email"
-                               class="mb-4"></text-to-image>
+                <label for="email">Email:</label>
+                <input type="text" class="form-control mb-3" v-model="person.email" id="email" placeholder="Email...">
 
-                <div class="form-group"
-                     v-if="person.category.has_image">
+                <div class="mb-3" v-if="person.category.has_image">
                     <label for="image">Bild:</label>
                     <div class="row">
 
@@ -110,12 +61,12 @@
                         </div>
 
                         <div class="col-lg-8 col-md-6 d-flex mt-lg-0 mt-3">
-                            <div class="custom-file mb-2 align-self-center">
+                            <div class="mb-2 align-self-center">
                                 <input type="file"
-                                       class="custom-file-input"
+                                       class="form-control"
                                        name="file"
                                        @change="fileChange">
-                                <label class="custom-file-label"
+                                <label class="form-label"
                                        for="customFile">
                                     <i class="fa fa-upload"></i> Bild hochladen..
                                 </label>
@@ -134,19 +85,14 @@
                     </div>
                 </div>
 
-                <div class="form-group d-flex">
-                    <button type="submit"
-                            :disabled="working || updatingEmail"
-                            class="btn btn-success mr-2 ml-auto">
-                        <i v-show="!working"
-                           class="fa fa-edit"></i>
-                        <i v-show="working"
-                           class="fa fa-spinner fa-pulse"></i>
+                <div class="mb-3 d-flex">
+                    <button type="submit" :disabled="working || updatingEmail" class="btn btn-success me-2 ms-auto">
+                        <i v-show="!working" class="fa fa-edit"></i>
+                        <i v-show="working" class="fa fa-spinner fa-pulse"></i>
                         Hinzufügen
                     </button>
 
-                    <a :href="'/admin/person/' + person.category.name"
-                       class="btn btn-light border border-dark">
+                    <a :href="'/admin/person/' + person.category.name" class="btn btn-light border border-dark">
                         <i class="fa fa-times"></i> Abbrechen
                     </a>
                 </div>
@@ -160,23 +106,24 @@
 import Cropper from "Cropperjs";
 import Errors from "./Errors.js";
 import Message from "./Message.vue";
-import { EventBus } from "./EventBus.js";
 import TextArea from "./Textarea.vue";
-import TextToImage from "./TextToImage.vue";
 
 import "cropperjs/dist/cropper.min.css";
 export default {
   props: {
     category: {
       type: Object,
-      required: true
+      required: true,
     },
     categories: {
-      type: Array
+      type: Array,
     },
     imagesProp: {
       type: Array,
-      required: true
+      required: true,
+    },
+    peopleGroupProp: {
+        required: true,
     }
   },
   data() {
@@ -184,7 +131,6 @@ export default {
       person: {
         name: "",
         markup: "",
-        html: "",
         category: this.category,
         image_path: null,
         email: ""
@@ -193,20 +139,14 @@ export default {
       changed: false,
       errors: new Errors(),
       image: "",
-      formData: {},
       working: false
     };
   },
   components: {
     msg: Message,
     TextArea,
-    TextToImage
   },
   methods: {
-    sync(data) {
-      this.person.markup = data.markup;
-      this.person.html = data.html;
-    },
     fileChange(e) {
       let temp = this.changed;
       this.image = e.target.files[0];
@@ -227,40 +167,31 @@ export default {
           window.cropper.replace(this.$refs.img.src);
         }
       };
-      let url = reader.readAsDataURL(this.image);
+      reader.readAsDataURL(this.image);
       this.changed = true;
     },
-    update() {
-      let vue = this;
+    async update() {
       this.working = true;
-      this.formData = new FormData();
-      this.formData.append("name", this.person.name);
-      this.formData.append("markup", this.person.markup);
-      this.formData.append("html", this.person.html);
-      this.formData.append("email", this.person.email);
-      this.formData.append("person_category_id", this.person.category.id);
+      let formData = new FormData();
+      formData.append("name", this.person.name);
+      formData.append("markup", JSON.stringify(this.person.markup));
+      formData.append("email", this.person.email);
+      formData.append("person_category_id", this.person.category.id);
       if (this.changed) {
-        window.cropper.getCroppedCanvas().toBlob(
-          blob => {
-            vue.formData.append("file", blob, "person.jpeg");
-            this.post(vue.formData);
-          },
-          "image/jpeg",
-          0.5
-        );
-      } else {
-        this.post(this.formData);
+        const blob = await new Promise(resolve => window.cropper.getCroppedCanvas().toBlob(resolve, "image/jpeg", 0.5))
+        formData.append("file", blob, "person.jpeg");
       }
+      this.post(formData);
     },
     post(formData) {
       axios
-        .post(`/admin/person/add`, formData)
+        .post(route('person_store'), formData)
         .then(msg => {
           this.changed = false;
           this.working = false;
           this.person = msg.data.person;
-          EventBus.$emit("msg-event", msg.data.msg);
-          location.href = `/admin/person/${this.person.category.name}`;
+          this.emitter.emit("msg-event", [msg.data.msg]);
+          location.href = route('person_index', this.person.category.name);
         })
         .catch(errors => {
           console.log(errors.response.data);
@@ -271,15 +202,13 @@ export default {
     updateEmail(data) {
       this.person.email = data.image;
       this.updatingEmail = false;
-    }
-  },
-  filters: {
+    },
     ucfirst: function(value) {
       if (!value) return "";
       value = value.toString();
       return value.charAt(0).toUpperCase() + value.slice(1);
     }
-  }
+  },
 };
 </script>
 

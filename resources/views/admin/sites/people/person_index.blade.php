@@ -24,10 +24,10 @@
                             @foreach ($people as $person)
                             <tr>
                                 <td scope="row">{{$person->name}}</td>
-                                <td class="d-none d-md-table-cell overflow-text">{!! $person->markup !!}</td>
+                                {{-- <td class="d-none d-md-table-cell overflow-text">{!! $person->markup !!}</td> --}}
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{route('person_edit', $person->id)}}" class="btn btn-warning ml-auto">
+                                        <a href="{{route('person_edit', $person->id)}}" class="btn btn-warning ms-auto">
                                             <i class="fa fa-pencil-alt"></i>
                                         </a>
                                         <form action="{{route('person_destroy', $person->id)}}" method="post">

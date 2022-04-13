@@ -9,14 +9,14 @@
         <h1 class="text-center">Kontakt</h1>
         <p class="col-md-12">Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</p>
         <div class="col-md-12 mb-4">
-            <h4>Elternverein:</h4>
+            <h3>Elternverein:</h3>
             @if($msg = session('ev_mail'))
                 <div class="alert alert-success" role="alert">
                    {{$msg}}
                 </div>
             @endif
             <form action="{{route("mail_ev")}}" method="POST">
-                <div class="col-md-12 form-group px-0">
+                <div class="col-md-12mb-3 px-0">
                     <label for="ev_name">Ihr Name:</label>
                     <input type="text" class="form-control" name="name" id="ev_name" required>
 
@@ -40,7 +40,7 @@
                 </div>
             @endif
             <form action="{{route("mail_obmann")}}" method="POST">
-                <div class="col-md-12 form-group px-0">
+                <div class="col-md-12 row mb-3 px-0">
                     <label for="obmann_name">Ihr Name:</label>
                     <input type="text" class="form-control" name="name" id="obmann_name" required>
 

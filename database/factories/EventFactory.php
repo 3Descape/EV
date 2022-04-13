@@ -21,7 +21,6 @@ class EventFactory extends Factory
             'name' => $cont['name'],
             'event_category_id' => $cont['category'],
             'markup' => $sentence,
-            'html' => $sentence,
             'date' => $this->faker->dateTimeBetween($startDate = '-5 years', $endDate = '+3 years', $timezone = date_default_timezone_get()),
             'location' => $cont['location']
         ];

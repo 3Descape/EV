@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
-use App\Models\Analythic;
+use App\Models\Analytic;
 
 class DashboardController extends Controller
 {
@@ -25,7 +25,7 @@ class DashboardController extends Controller
         return view('admin.sites.dashboard');
     }
 
-    public function getAnalythics()
+    public function getAnalytics()
     {
         $options = [
             'year' => ['format' => 'o', 'Add' => 'addYears', 'increment' => 'addYear', 'Sub' => 'subYear'],
@@ -50,7 +50,7 @@ class DashboardController extends Controller
 
         $start_date = Carbon::now()->$sub_time($range - 1);
 
-        $data = Analythic::whereBetween('created_at', [$start_date, Carbon::now()->$increment()])
+        $data = Analytic::whereBetween('created_at', [$start_date, Carbon::now()->$increment()])
         ->orderBy('created_at')->get()
         ->groupBy(function ($date) use ($format) {
             return Carbon::parse($date->created_at)->format($format);

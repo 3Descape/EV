@@ -12,7 +12,7 @@
         <ul class="list-group">
             @foreach ($user->roles as $role)
                 <li class="list-group-item d-flex">
-                    <span class="mr-auto">{{ucfirst($role->name)}}</span>
+                    <span class="me-auto">{{ucfirst($role->name)}}</span>
                     <form action="{{route('user_role_destroy' , [$user->id, $role->id])}}" method="post" class="align-self-end mx-1">
                         <button class="btn btn-danger">
                             <i class="fa fa-trash-alt"></i>
@@ -25,7 +25,7 @@
         </ul>
 
         @if ($roles->count() && !$user->isAdmin())
-            <button type="button" class="btn btn-success my-2" data-toggle="modal" data-target="#role_add_modal">
+            <button type="button" class="btn btn-success my-2" data-bs-toggle="modal" data-target="#role_add_modal">
                 <i class="fa fa-plus"></i> Berechtigung
             </button>
         @else
@@ -37,15 +37,13 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Berechtigung Hinzufügen</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="POST" action="{{route('user_role_update', $user->id)}}">
                     <div class="modal-body">
-                        <div class="form-group">
+                        <div class="row mb-3">
                             <label for="role_add">Berechtigung Hinzufügen</label>
-                            <select id="role_add" name="role" class="custom-select" name="">
+                            <select id="role_add" name="role" class="form-select" name="">
                                 @foreach ($roles as $role)
                                     <option value="{{$role->id}}">{{ucfirst($role->name)}}</option>
                                 @endforeach
@@ -56,7 +54,7 @@
                         <button type="submit" class="btn btn-success">
                             <i class="fa fa-plus"></i> Hinzufügen
                         </button>
-                        <button type="button" class="btn btn-light border border-dark" data-dismiss="modal">
+                        <button type="button" class="btn btn-light border border-dark" data-bs-dismiss="modal">
                             <i class="fa fa-times"></i> Abbrechen
                         </button>
                     </div>

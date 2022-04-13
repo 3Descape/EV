@@ -2,13 +2,12 @@
     <div class="col-lg-12">
         <div>
             <msg />
-            <form @submit.prevent="uploud"
-                  ref="form">
+            <form @submit.prevent="uploud" ref="form">
 
-                <div class="form-group">
+                <div class="mb-3">
                     <div class="d-flex">
                         <label for="name">Name:</label>
-                        <p class="text-muted ml-1">(Optional)</p>
+                        <p class="text-muted ms-1">(Optional)</p>
                     </div>
 
                     <input ref="name"
@@ -17,33 +16,23 @@
                            id="name"
                            class="form-control"
                            name="name">
-                    <div class="alert alert-danger mt-2"
-                         role="alert"
-                         v-if="errors.hasError('name')">
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('name')">
                         <ul class="m-0">
-                            <li :key="error.name"
-                                v-for="error in errors.getError('name')">{{ error }}</li>
+                            <li :key="error.name" v-for="error in errors.getError('name')">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="file">Datei:</label>
-                    <div class="custom-file">
-                        <input type="file"
-                               class="custom-file-input"
-                               id="customFile"
-                               name="file"
-                               @change="fileChange"
-                               multiple>
-                        <label class="custom-file-label"
-                               for="customFile">
-                            <i class="fa fa-upload" /> Bild hochladen..
-                        </label>
-                    </div>
+                <div class="mb-3">
+                    <label for="file" class="form-label">Datei:</label>
+                    <input type="file"
+                            class="form-control"
+                            id="customFile"
+                            name="file"
+                            @change="fileChange"
+                            multiple>
 
-                    <div class="progress mt-2"
-                         v-show="progress > -1">
+                    <div class="progress mt-2" v-show="progress > -1">
                         <div class="progress-bar progress-bar-striped progress-bar-animated"
                              role="progressbar"
                              :style="`width:${progress}%`"
@@ -54,17 +43,14 @@
                         </div>
                     </div>
 
-                    <div class="alert alert-danger mt-2"
-                         role="alert"
-                         v-if="errors.hasError('file')">
+                    <div class="alert alert-danger mt-2" role="alert" v-if="errors.hasError('file')">
                         <ul class="m-0">
-                            <li :key="error.file"
-                                v-for="error in errors.getError('file')">{{ error }}</li>
+                            <li :key="error.file" v-for="error in errors.getError('file')">{{ error }}</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="mb-3">
                     <button class="form-control btn btn-success"
                             type="submit"
                             v-show="!isLoading">
@@ -88,7 +74,6 @@
 /* global axios */
 import Message from "./Message";
 import ImageGallery from "./ImageGallery";
-import { EventBus } from "./EventBus.js";
 import Errors from "./Errors.js";
 
 export default {
@@ -144,18 +129,18 @@ export default {
       axios
         .post("/admin/bild", data, config)
         .then(msg => {
-          EventBus.$emit("msg-event", msg.data.status);
+          this.emitter.emit("msg-event", [msg.data.status]);
           vue.reset();
-          EventBus.$emit("image-added", msg.data.image);
+          this.emitter.emit("image-added", [msg.data.image]);
           this.isLoading = false;
         })
         .catch(errors => {
           vue.errors.setErrors(errors.response.data.errors);
           vue.reset();
-          EventBus.$emit(
+          this.emitter.emit(
             "msg-event",
-            "Es ist ein Fehler aufgetreten.",
-            "danger"
+            [ "Es ist ein Fehler aufgetreten.",
+            "danger"]
           );
           this.isLoading = false;
         });

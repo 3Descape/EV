@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
+use App\Tiptap\Tiptap;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Event extends Model
 {
-    use HasFactory;
+    use HasFactory, Tiptap;
 
     protected $fillable = [
         'name',
         'event_category_id',
-        'html',
         'markup',
         'date',
         'location',
@@ -55,5 +56,15 @@ class Event extends Model
         $image = $this->images->first();
 
         return  $image ? $image->thump : false;
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->toHtml($this->raw_markup);
+    }
+
+    public function getFormattedDateAttribute()
+    {
+        return $this->date->format('d.m.Y H:i');
     }
 }

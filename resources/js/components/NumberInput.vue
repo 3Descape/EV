@@ -1,11 +1,8 @@
 <template>
     <div class="input-group"
          style="max-width: 100%">
-        <div @click="decrement"
-             class="input-group-prepend">
-            <div class="input-group-text">
-                <i class="fa fa-minus"></i>
-            </div>
+        <div @click="decrement" class="input-group-text">
+            <i class="fa fa-minus"></i>
         </div>
 
         <input class="form-control"
@@ -20,11 +17,8 @@
                @keydown.down.prevent="decrement"
                type="number">
 
-        <div @click="increment"
-             class="input-group-append">
-            <div class="input-group-text">
-                <i class="fa fa-plus"></i>
-            </div>
+        <div @click="increment" class="input-group-text">
+            <i class="fa fa-plus"></i>
         </div>
     </div>
 </template>

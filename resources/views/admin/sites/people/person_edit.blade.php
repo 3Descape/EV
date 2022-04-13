@@ -1,11 +1,11 @@
 @extends('admin.layouts.sitebar')
-@section('header')
-<link rel="stylesheet" href="{{asset('css/cropper.min.css')}}" />
-@endsection
 @section('sitebar_inner')
-<div class="container-fluid">
-    <div class="row">
-        <update-person :person-prop="{{$person}}" :categories="{{$categories}}" :images-prop="{{$images}}"></update-person>
-    </div> 
+{{-- {!! $person->description !!} --}}
+<div class="col-lg-10 col-md-12 mx-auto">
+    <div class="card">
+        <div class="card-body">
+            <update-person :person-prop="{{$person}}" :categories="{{$categories}}" :images-prop="{{$images}}" :people-group-prop="{{$peopleGroup}}"></update-person>
+        </div>
+    </div>
 </div>
 @endsection

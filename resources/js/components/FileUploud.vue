@@ -3,7 +3,7 @@
         <msg/>
         <form @submit.prevent="submit"
               ref="form">
-            <div class="form-group">
+            <div class="mb-3">
                 <label for="name">Name:</label>
                 <input ref="name"
                        v-model="file.name"
@@ -16,62 +16,26 @@
                      role="alert"
                      v-if="errors.hasError('name')">
                     <ul class="m-0">
-                        <li :key="error.name"
-                            v-for="error in errors.getError('name')">{{ error }}</li>
+                        <li :key="error.name" v-for="error in errors.getError('name')">{{ error }}</li>
                     </ul>
                 </div>
             </div>
 
-            <label for="body">Beschreibung:</label>
-            <text-area :images-prop="imagesProp"
-                       :markup-prop="file.markup"
-                       @sync="sync">
+            <div class="mb-">
+                <label for="body">Beschreibung:</label>
+                <text-area v-model="file.markup" :images-prop="imagesProp"  :people-group-prop="peopleGroupProp"></text-area>
+            </div>
 
-                <div slot-scope="{compiledMarkdown, inputEvents, inputAttrs}">
-                    <textarea v-on="inputEvents"
-                              v-bind="inputAttrs"
-                              class="form-control"
-                              id="body"></textarea>
+            <div class="mb-3">
+                <label for="file" class="form-label">Datei:</label>
 
-                    <div class="card mt-2">
-                        <div class="card-header"
-                             role="tab">
-                            <h5 class="mb-0">
-                                <a data-toggle="collapse"
-                                   href="#collapse"
-                                   aria-expanded="false"
-                                   aria-controls="collapse"
-                                   class="text-dark">
-                                    Vorschau
-                                    <i class="fa fa-caret-down" />
-                                </a>
-                            </h5>
-                        </div>
-
-                        <div id="collapse"
-                             class="collapse markup-preview"
-                             role="tabpanel">
-                            <div class="card-body"
-                                 v-html="compiledMarkdown" />
-                        </div>
-                    </div>
-                </div>
-            </text-area>
-
-            <div class="form-group">
-                <label for="file">Datei:</label>
-
-                <div class="custom-file">
+                <div class="mb-3">
                     <input type="file"
-                           class="custom-file-input"
+                           class="form-control"
                            id="customFile"
                            name="file"
                            @change="fileChange"
                            multiple>
-                    <label class="custom-file-label"
-                           for="customFile">
-                        <i class="fa fa-upload" /> Datei hochladen..
-                    </label>
                 </div>
 
                 <div class="progress mt-2"
@@ -97,11 +61,11 @@
             </div>
 
             <div v-show="fileSize"
-                 class="form-group">
+                 class="mb-3">
                 <p v-text="fileSize" />
             </div>
 
-            <div class="form-group">
+            <div class="mb-3">
                 <button class="form-control btn btn-success"
                         type="submit">
                     <i class="fa fa-plus" /> Hinzufügen
@@ -110,36 +74,26 @@
         </form>
 
         <table class="table overflow">
-            <col span="1"
-                 style="width: 25%;">
-            <col span="1"
-                 style="width: 65%;">
-            <col span="1"
-                 style="width: 10%;">
+            <col span="1" style="width: 80%;">
+            <col span="1" style="width: 20%;">
             <thead>
                 <tr>
                     <th scope="col">Name</th>
-                    <th scope="col"
-                        class="d-none d-md-table-cell">Beschreibung</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="file in objects"
-                    :key="file.id">
+                <tr v-for="file in objects" :key="file.id">
                     <td>{{ file.name }}</td>
-                    <td class="overflow-text d-none d-md-table-cell">{{ file.markup }}</td>
-
                     <td>
                         <div class="d-flex">
-                            <a :href="`/admin/datei/edit/${file.id}`"
-                               class="btn btn-warning ml-auto">
+                            <a :href="route('file_edit', file.id)"
+                               class="btn btn-warning ms-auto">
                                 <i class="fa fa-pencil-alt" />
                             </a>
 
                             <form @submit.prevent="remove(file)">
-                                <button type="submit"
-                                        class="btn btn-danger mx-1">
+                                <button type="submit" class="btn btn-danger mx-1">
                                     <i class="fa fa-trash-alt" />
                                 </button>
                             </form>
@@ -155,7 +109,6 @@
 <script>
 /* global axios*/
 import Message from "./Message";
-import { EventBus } from "./EventBus.js";
 import Errors from "./Errors.js";
 import TextArea from "./Textarea.vue";
 
@@ -172,6 +125,9 @@ export default {
     imagesProp: {
       type: Array,
       required: true
+    },
+    peopleGroupProp: {
+        required: true,
     }
   },
   data: () => {
@@ -179,7 +135,6 @@ export default {
       file: {
         name: "",
         markup: "",
-        html: "",
         file: {}
       },
       errors: new Errors(),
@@ -204,10 +159,6 @@ export default {
     this.objects = this.files;
   },
   methods: {
-    sync(data) {
-      this.file.markup = data.markup;
-      this.file.html = data.html;
-    },
     fileChange(e) {
       this.file.file = e.target.files[0];
     },
@@ -215,8 +166,7 @@ export default {
       let vue = this;
       let data = new FormData();
       data.append("name", this.file.name);
-      data.append("html", this.file.html);
-      data.append("markup", this.file.markup);
+      data.append("markup", JSON.stringify(this.file.markup));
       data.append("file", this.file.file);
 
       let config = {
@@ -228,7 +178,7 @@ export default {
       };
 
       axios
-        .post("/admin/datei", data, config)
+        .post(route('file_store'), data, config)
         .then(msg => {
           vue.file.name = "";
           vue.file.markup = "";
@@ -238,32 +188,23 @@ export default {
           vue.errors.clearErrors();
           vue.uploud = -1;
           vue.objects.push(msg.data.file);
-          EventBus.$emit("msg-event", msg.data.status);
+          this.emitter.emit("msg-event", [ msg.data.status ]);
         })
         .catch(errors => {
           vue.errors.setErrors(errors.response.data.errors);
           vue.uploud = -1;
-          EventBus.$emit(
-            "msg-event",
-            "Es ist ein Fehler aufgetreten.",
-            "danger"
-          );
+          this.emitter.emit("msg-event", [ "Es ist ein Fehler aufgetreten.", "danger" ] );
         });
     },
     remove(file) {
-      let vue = this;
       axios
-        .delete(`/admin/datei/${file.id}`)
+        .delete(route('file_destroy', file.id))
         .then(msg => {
-          vue.objects.splice(vue.objects.indexOf(file), 1);
-          EventBus.$emit("msg-event", msg.data.status);
+          this.objects.splice(this.objects.indexOf(file), 1);
+          this.emitter.emit("msg-event", [msg.data.status]);
         })
         .catch(() => {
-          EventBus.$emit(
-            "msg-event",
-            "Es ist ein Fehler aufgetreten.",
-            "danger"
-          );
+          this.emitter.emit("msg-event", ["Es ist ein Fehler aufgetreten.", "danger"]);
         });
     }
   }

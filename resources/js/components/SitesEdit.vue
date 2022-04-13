@@ -1,33 +1,54 @@
 <template lang="html">
     <div>
-        <div>
-            <form @submit.prevent="store">
-                <div class="form-group">
-                    <label for="title">Titel:</label>
-                    <input type="text" v-model="site_title" class="form-control" id="title">
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fa fa-plus" /> Hinzufügen
-                    </button>
-                </div>
-            </form>
+        <div class="card">
+            <div class="card-header">
+                Neue Sektion
+            </div>
+            <div class="card-body">
+                <form @submit.prevent="store">
+                    <div class="mb-3">
+                        <label for="title" hidden>Titel:</label>
+                        <input type="text" v-model="site_title" class="form-control" id="title" placeholder="Titel..">
+                    </div>
+
+                    <div class="mb-3 d-flex">
+                        <button type="submit" class="btn btn-success ms-auto">
+                            <i class="fa fa-plus" /> Hinzufügen
+                        </button>
+                    </div>
+                </form>
+
+            </div>
         </div>
 
-        <div class="custom-control custom-checkbox my-3">
-            <input class="custom-control-input" type="checkbox" id="draggable" v-model="editable">
-            <label class="custom-control-label" for="draggable">
-                Sortierbar
+        <div class="form-check form-switch my-3">
+            <input class="form-check-input" type="checkbox" id="draggable" v-model="editable">
+            <label class="form-check-label" for="draggable">
+                Sortiere Sektionen
             </label>
         </div>
 
-        <draggable element="div" :style="editable? 'cursor:move' : ''" v-model="sites" @start="isDragging=true" @end="update(true)"
-                   :options="dragOptions">
-            <transition-group type="transition" :name="'flip-list'">
-                <div v-for="site in sites" :key="site.id" class="card mb-4">
-                    <site-edit :site-prop="site" :images-prop="imagesProp" @destroy="destroy"></site-edit>
+        <!-- <div v-for="(key, value) in peopleGroupProp">
+            {{value}}
+            <div v-for="person in key">
+                {{person}}
+            </div>
+        </div> -->
+
+        <draggable
+            v-model="sites"
+            item-key="id"
+            @start="isDragging=true"
+            @end="update(true)"
+            v-bind="dragOptions"
+            tag="transition-group"
+            :component-data="{ name: 'flip-list' }">
+
+            <template #item="{ element }">
+                <div class="card mb-4" :style="[ editable ? 'cursor:move' : '' ]">
+                    <site-edit :site-prop="element" :images-prop="imagesProp" :people-group-prop="peopleGroupProp" @siteDestroy="postSiteDestroy"></site-edit>
                 </div>
-            </transition-group>
+            </template>
         </draggable>
         <msg />
     </div>
@@ -36,26 +57,30 @@
 <script>
 /* global axios */
 import Message from "./Message.vue";
-import { EventBus } from "./EventBus.js";
 import Draggable from "vuedraggable";
+import SiteEdit from "./SiteEdit.vue"
 
 export default {
   components: {
     draggable: Draggable,
-    msg: Message
+    msg: Message,
+    SiteEdit,
   },
   props: {
     sitesProp: {
       type: Array,
-      required: true
+      required: true,
     },
     siteCategoryProp: {
       type: Object,
-      required: true
+      required: true,
     },
     imagesProp: {
       type: Array,
-      required: true
+      required: true,
+    },
+    peopleGroupProp: {
+      required: true,
     }
   },
   data: () => {
@@ -63,7 +88,7 @@ export default {
       site_title: "",
       sites: [],
       isDragging: false,
-      editable: false
+      editable: false,
     };
   },
   computed: {
@@ -72,69 +97,64 @@ export default {
         animation: 0,
         disabled: !this.editable,
         ghostClass: "ghost",
-        dragClass: "drag"
+        dragClass: "drag",
       };
     }
   },
   created: function() {
-    this.sites = this.sitesProp;
-    this.sortSites();
+    this.sites = this.sitesProp
+    this.sortSites()
   },
   methods: {
     sortSites() {
       return this.sites.sort((a, b) => {
-        return a.order > b.order;
-      });
+        return a.order > b.order
+      })
     },
     store() {
-      let vue = this;
       axios
-        .post("/admin/seite", {
-          title: vue.site_title,
-          site_category_id: vue.siteCategoryProp.id,
-          order: vue.sites.length + 1
+        .post(route('site_store'), {
+          title: this.site_title,
+          site_category_id: this.siteCategoryProp.id,
+          order: this.sites.length + 1
         })
         .then(msg => {
-          vue.site_title = "";
-          vue.sites.push(msg.data.site);
-          EventBus.$emit("msg-event", msg.data.status);
-          this.update(false);
+          this.site_title = ""
+          this.sites.push(msg.data.site)
+          this.emitter.emit("msg-event", [msg.data.status])
+          this.update(false)
         })
         .catch(errors => {
-          EventBus.$emit("msg-event", errors.response.data.errors, "danger");
+          this.emitter.emit("msg-event", [errors.response.data.errors, "danger"])
         });
     },
     update(show_msg) {
-      this.isDragging = false;
+      this.isDragging = false
       this.sites = this.sites.map((element, index) => {
-        element.order = index;
-        return element;
-      });
+        element.order = index
+        return element
+      })
       axios
-        .post("/admin/seite/update/reihenfolge", {
+        .post(route('site_order_update'), {
           sites: this.sites.map(element => {
             return { id: element.id, order: element.order + 1 };
           })
         })
         .then(msg => {
           if (show_msg) {
-            EventBus.$emit("msg-event", msg.data.status);
+            this.emitter.emit("msg-event", [msg.data.status])
           }
         })
         .catch(() => {
-          EventBus.$emit(
-            "msg-event",
-            "Es ist ein Fehler aufgetreten.",
-            "danger"
-          );
-        });
+          this.emitter.emit("msg-event", [ "Es ist ein Fehler aufgetreten.", "danger" ])
+        })
     },
-    destroy(site) {
-      this.sites.splice(this.sites.indexOf(site), 1);
-      this.update(false);
+    postSiteDestroy(site) {
+      this.sites.splice(this.sites.indexOf(site), 1)
+      this.update(false)
     }
   }
-};
+}
 </script>
 <style scoped>
 .flip-list-move {

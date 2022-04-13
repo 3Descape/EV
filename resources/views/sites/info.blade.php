@@ -7,13 +7,13 @@
 @section('content')
     <div class="col-sm-11 mx-auto">
         @foreach ($sites as $site)
-            <div class="col-md-6 col-sm-12 mx-auto text-block" id="{{str_slug($site->title, "-")}}">
+            <div class="col-md-6 col-sm-12 mx-auto text-block" id="{{Str::slug($site->title, "-")}}">
                 <h1 class="text-center">{{$site->title}}</h1>
-                <p>{!!$site->html!!}</p>
+                <p>{!! $site->text !!}</p>
             </div>
         @endforeach
 
-        @if(!$fixturecategories->isEmpty())
+        {{-- @if(!$fixturecategories->isEmpty())
             <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block" id="thermine">
                 <h1 class="text-center">Termine</h1>
                 <div class="row">
@@ -38,5 +38,5 @@
                     @endforeach
                 </div>
             </div>
-        @endif
+        @endif --}}
 @endsection

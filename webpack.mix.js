@@ -1,4 +1,6 @@
 const mix = require('laravel-mix');
+require('laravel-mix-purgecss');
+const path = require('path');
 
 /*
  |--------------------------------------------------------------------------
@@ -15,9 +17,13 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
-    .sass('resources/sass/login.scss', 'public/css')
-    .purgeCss({
-        enabled: true,
-        whitelist: ['blockquote']
+    // .purgeCss({
+    //     enabled: true,
+    //     whitelist: ['blockquote']
+    // })
+   .alias({
+      'ziggy': path.join(__dirname, 'vendor/tightenco/ziggy/dist/vue')
     })
-    .sourceMaps();
+    .vue();
+    // .version();
+    // .sourceMaps();

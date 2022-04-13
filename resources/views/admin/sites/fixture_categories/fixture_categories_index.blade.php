@@ -5,13 +5,13 @@
 
         <div class="col-lg-12">
             <form action="{{route('fixture_category_store')}}" method="post">
-                <div class="form-group">
+                <div class="row mb-3">
                     <label for="name">Name:</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{old('name') ?: ''}}">
-                    @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
+                    @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"])
                 </div>
 
-                <div class="form-group">
+                <div class="row mb-3">
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-plus"></i> Hinzufügen
                     </button>
@@ -37,7 +37,7 @@
                             <td class="d-none d-md-table-cell">{{$category->description}}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{route('fixture_category_edit', $category->id)}}" class="btn btn-warning ml-auto">
+                                    <a href="{{route('fixture_category_edit', $category->id)}}" class="btn btn-warning ms-auto">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
                                     <form action="{{route('fixture_category_destroy', $category->id)}}" method="post">

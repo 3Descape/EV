@@ -22,12 +22,12 @@
                     <td class="d-none d-md-table-cell overflow-text">{{ucfirst($event->category->name)}}</td>
                     <td>
                         <div class="d-flex">
-                            <a href="{{route('event_edit', $event->id)}}?type=archive" class="btn btn-warning ml-auto">
+                            <a href="{{route('event_edit', $event->id)}}?type=archive" class="btn btn-warning ms-auto">
                                 <i class="fa fa-pencil-alt" aria-hidden="true"></i>
                             </a>
 
                             <form action="{{route('event_destroy', $event->id)}}" method="POST">
-                                <button type="submit" class="btn btn-danger ml-1">
+                                <button type="submit" class="btn btn-danger ms-1">
                                     <i class="fa fa-trash-alt"></i>
                                 </button>
                                 {{method_field('DELETE')}}

@@ -6,25 +6,25 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title>@yield('title')</title>
         <script>
-        window.Laravel = <?php echo json_encode([
+        window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
-        ]); ?>
+        ]) !!};
         </script>
-        <link rel="stylesheet" href="{{asset('/css/app.css')}}">
+        <link rel="stylesheet" href="{{mix('css/app.css')}}">
     </head>
     <body>
-        @if(! Cookie::get('ev_allow_cookies'))
+        @if(!Cookie::get('ev_allow_cookies'))
             @include('layouts.cookie')
         @endif
         <div class="container-fuid" id="app">
 
             <div class="container-fluid menu">@include('layouts.menu')</div>
-            
+
             @yield('content')
         </div>
 
         <footer>
-            <script src="{{asset('/js/app.js')}}"></script>
+            <script src="{{mix('js/app.js')}}"></script>
         </footer>
     </body>
 </html>

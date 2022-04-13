@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import { EventBus } from "./EventBus.js";
 import Message from "./Message";
 import EventCategoryListItem from "./EventCategoryListItem.vue";
 
@@ -40,7 +39,7 @@ export default {
     updatedEvent(event) {
       console.log("test");
       this.events.splice(this.events.indexOf(event), 1);
-      EventBus.$emit("msg-event", "Kategorie geändert.");
+      this.emitter.emit("msg-event", ["Kategorie geändert."]);
     }
   }
 };

@@ -8,12 +8,12 @@
 
     <form method="POST" action="{{route('event_category_store')}}">
 
-        <div class="form-group">
+        <div class="row mb-3">
             <label for="name">Name:</label>
             <input value="{{ old('name') }}" type="text" class="form-control" name="name" id="name" required placeholder="Name..">
         </div>
 
-        <div class="form-group">
+        <div class="row mb-3">
             <button type="submit" class="btn btn-success">
                 <i class="fa fa-plus"></i> Hinzufügen
             </button>
@@ -35,7 +35,7 @@
                 <td>{{$category->name}}</td>
                 <td>
                     <div class="d-flex align-items-start">
-                        <a href="{{route('event_category_edit', $category->id)}}" class="btn btn-warning ml-auto mr-1">
+                        <a href="{{route('event_category_edit', $category->id)}}" class="btn btn-warning ms-auto me-1">
                             <i class="fa fa-pencil-alt" aria-hidden="true"></i>
                         </a>
                         <form action="{{route('event_category_destroy', $category->id)}}" method="POST">

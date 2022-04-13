@@ -5,22 +5,22 @@
 
         <div class="col-lg-12">
             <form action="{{route('person_category_store')}}" method="post">
-                <div class="form-group">
+                <div class="row mb-3">
                     <label for="name">Name:</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{old('name') ?: ''}}">
-                    @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
+                    @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"])
                 </div>
 
-                <div class="form-group">
+                <div class="row mb-3">
                     <label for="has_image">Besitzt Bild:</label>
-                    <select name="has_image" id="has_image" class="custom-select">
+                    <select name="has_image" id="has_image" class="form-select">
                         <option {{old('has_image') == 0 ? "selected" : ""}} value="0">Nein</option>
                         <option {{old('has_image') == 1 ? "selected" : ""}} value="1">Ja</option>
                     </select>
-                    @include('admin.components.error', ['name' => 'has_image', 'class' => "mt-1"]) 
+                    @include('admin.components.error', ['name' => 'has_image', 'class' => "mt-1"])
                 </div>
 
-                <div class="form-group">
+                <div class="row mb-3">
                     <button type="submit" class="btn btn-success">
                         <i class="fa fa-plus"></i> Hinzufügen
                     </button>
@@ -54,7 +54,7 @@
                             <td>{{$category->has_image ? "Ja" : "Nein"}}</td>
                             <td>
                                 <div class="d-flex">
-                                    <a href="{{route('person_category_edit', $category->name)}}" class="btn btn-warning ml-auto">
+                                    <a href="{{route('person_category_edit', $category->name)}}" class="btn btn-warning ms-auto">
                                         <i class="fa fa-pencil-alt"></i>
                                     </a>
                                     <form action="{{route('person_category_destroy', $category->name)}}" method="post">

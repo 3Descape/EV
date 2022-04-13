@@ -35,7 +35,7 @@
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     </form>
 
-                    @can('can_access_dashboard', \App\User::class)
+                    @can('can_access_dashboard', \App\Models\User::class)
                         <a href="{{route('dashboard')}}" class="btn btn-success px-1">Dashboard</a>
                     @endcan
                 </div>

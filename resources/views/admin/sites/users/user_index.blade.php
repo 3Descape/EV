@@ -32,7 +32,7 @@
                                     <td class="d-none d-md-table-cell">
                                         @foreach ($user->roles as $role)
                                             <a href="{{route('role_index') . '#' . $role->name}}" class="role">
-                                                <span class="badge badge-secondary">
+                                                <span class="badge bg-secondary">
                                                     {{ucfirst($role->name)}}
                                                 </span>
                                             </a>
@@ -41,7 +41,7 @@
                                     <td>
                                         <div class="d-flex">
                                             <a href="{{route('user_role_edit', $user->id)}}"
-                                                class="btn btn-warning ml-auto">
+                                                class="btn btn-warning ms-auto">
                                                 <i class="fa fa-pencil-alt"></i>
                                             </a>
                                             <a href="{{route('user_delete', $user->id)}}"

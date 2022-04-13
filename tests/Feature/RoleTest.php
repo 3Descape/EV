@@ -36,7 +36,7 @@ class RoleTest extends TestCase
     /** @test */
     public function a_role_hasMany_users()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $permission = Permission::create([
             'name' => 'manage events',

@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
+use App\Tiptap\Tiptap;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Person extends Model
 {
-    use HasFactory;
+    use HasFactory, Tiptap;
 
     protected $table = 'people';
 
     protected $fillable = [
         'name',
         'markup',
-        'html',
         'email',
         'person_category_id',
         'image_path',
@@ -23,5 +23,10 @@ class Person extends Model
     public function category()
     {
         return $this->belongsTo(PersonCategory::class, 'person_category_id');
+    }
+
+    public function getDescriptionAttribute()
+    {
+        return $this->toHtml($this->raw_markup);
     }
 }

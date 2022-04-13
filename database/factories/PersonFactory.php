@@ -11,8 +11,8 @@ class PersonFactory extends Factory
         return [
             'name' => $this->faker->name,
             'markup' => $this->faker->sentences($nb = 1, $asText = true),
-            'html' => $this->faker->sentences($nb = 1, $asText = true),
             'person_category_id' => $this->faker->numberBetween($min = 1, $max = 3),
+            'email' => $this->faker->email(),
         ];
     }
 }

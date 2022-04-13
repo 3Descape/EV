@@ -5,7 +5,7 @@
              role="alert"
              v-show="show">
             <div class="d-flex">
-                <i class="fa fa-info-circle align-self-start mr-1 mt-1" />
+                <i class="fa fa-info-circle align-self-start me-1 mt-1" />
                 <div v-html="message"></div>
             </div>
         </div>
@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import { EventBus } from "./EventBus.js";
-
 export default {
   data: () => {
     return {
@@ -29,8 +27,7 @@ export default {
     }
   },
   mounted() {
-    let vue = this;
-    EventBus.$on("msg-event", (message, type = "success") => {
+    this.emitter.on("msg-event", ([message, type = "success"]) => {
       if (message instanceof Object) {
         let html = "";
         for (const key of Object.keys(message)) {
@@ -41,14 +38,15 @@ export default {
           html += "</ul>";
         }
 
-        vue.message = html;
-      } else {
-        vue.message = message;
+        this.message = html;
+      } else
+      {
+        this.message = message;
       }
-      vue.type = type;
-      vue.show = true;
+      this.type = type;
+      this.show = true;
       setTimeout(() => {
-        vue.show = false;
+        this.show = false;
       }, 10000);
     });
   }

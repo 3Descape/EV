@@ -21,12 +21,12 @@
                                     </div>
                                     <a href="{{route('events_archive')}}?event={{$event->id}}" class="btn btn-success align-self-start">
                                         <i class="fa fa-arrow-right"></i> Ansehen
-                                    </a> 
+                                    </a>
                                 </div>
                                 <div class="flex-grow-1">
                                     <div class="d-flex">
                                         <p class="mb-0">{{ucfirst($event->date->diffForHumans())}}</p>
-                                        <span class="badge badge-info align-self-center ml-auto">
+                                        <span class="badge badge-info align-self-center ms-auto">
                                             {{ ucfirst($event->category->name)}}
                                         </span>
                                     </div>
@@ -46,7 +46,7 @@
                                 <label for="event_select">Filter:</label>
                             </div>
                             <div class="col-md-12">
-                                <button id="event_select" type="button" class="btn btn-primary btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <button id="event_select" type="button" class="btn btn-primary btn-block dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{$text}}
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="event_select">

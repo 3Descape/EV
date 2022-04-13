@@ -22,7 +22,6 @@ class EventControllerTest extends TestCase
         $event_past = Event::create([
             'name' => 'past',
             'event_category_id' => $category->id,
-            'html' => '<strong>Some description</strong>',
             'markup' => '**Test**',
             'date' => Carbon::now()->subDay(1),
             'location' => 'at the Gym'
@@ -31,7 +30,6 @@ class EventControllerTest extends TestCase
         $event_future = Event::create([
             'name' => 'future',
             'event_category_id' => $category->id,
-            'html' => '<strong>Some description</strong>',
             'markup' => '**Test**',
             'date' => Carbon::now()->addDay(1),
             'location' => 'at the Gym'

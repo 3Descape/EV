@@ -3,7 +3,9 @@
 use App\Http\Controllers\ApiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadController;
+use App\Http\Controllers\EventCategoryController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\EventImageController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\FixtureCategoryController;
 use App\Http\Controllers\FixtureController;
@@ -19,12 +21,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserRoleController;
 use Illuminate\Support\Facades\Route;
 
-// Auth::routes();
+Auth::routes(['reset' => false]);
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::post('/getAnalythics', [DashboardController::class, 'getAnalythics']);
+    Route::post('/getAnalytics', [DashboardController::class, 'getAnalytics']);
 
     Route::get('/veranstaltung', [EventController::class, 'events_future'])->name('event_future_index');
     Route::get('/veranstaltung/archiv', [EventController::class, 'events_archived'])->name('event_archived_index');

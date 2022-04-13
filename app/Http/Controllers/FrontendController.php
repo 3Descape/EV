@@ -6,16 +6,16 @@ use App\Models\Event;
 use App\Models\Image;
 use App\Models\EventCategory;
 use App\Models\FixtureCategory;
-use App\Traits\AnalythicTrait;
+use App\Traits\AnalyticTrait;
 use App\Models\SiteCategory;
 
 class FrontendController extends Controller
 {
-    use AnalythicTrait;
+    use AnalyticTrait;
 
     public function index()
     {
-        $this->add_analythic();
+        $this->add_analytic();
         $future_events = Event::futureEvents()->take(3)->get();
         $past_events = Event::pastEvents()->take(3)->get();
 
@@ -27,7 +27,7 @@ class FrontendController extends Controller
 
     public function about()
     {
-        $this->add_analythic();
+        $this->add_analytic();
         $sites = SiteCategory::where('url', 'über_uns')->first()->sites()->orderBy('order')->get();
         $gruppenbild = Image::where('name', 'gruppenbild')->first();
 
@@ -39,7 +39,7 @@ class FrontendController extends Controller
 
     public function events_future($type = null)
     {
-        $this->add_analythic();
+        $this->add_analytic();
         $text = 'Alle';
         if ($type) {
             $text = ucfirst($type);
@@ -61,7 +61,7 @@ class FrontendController extends Controller
 
     public function events_archived($type = null)
     {
-        $this->add_analythic();
+        $this->add_analytic();
         if (request('event')) {
             $event = Event::with('images')->find(request('event'));
 
@@ -92,7 +92,7 @@ class FrontendController extends Controller
 
     public function sga()
     {
-        $this->add_analythic();
+        $this->add_analytic();
         $sites = SiteCategory::where('url', 'sga')->first()->sites()->orderBy('order')->get();
 
         return view('sites.sga', compact(
@@ -102,7 +102,7 @@ class FrontendController extends Controller
 
     public function info()
     {
-        $this->add_analythic();
+        $this->add_analytic();
         $sites = SiteCategory::where('url', 'info')->first()->sites()->orderBy('order')->get();
         $fixturecategories = FixtureCategory::with('fixtures')->get();
 
@@ -114,14 +114,14 @@ class FrontendController extends Controller
 
     public function contact()
     {
-        $this->add_analythic();
+        $this->add_analytic();
 
         return view('sites.contact');
     }
 
     public function imprint()
     {
-        $this->add_analythic();
+        $this->add_analytic();
         $sites = SiteCategory::where('url', 'impressum')->first()->sites()->orderBy('order')->get();
 
         return view('sites.imprint', compact(

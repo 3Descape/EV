@@ -1,9 +1,17 @@
 require('./bootstrap');
-/* global vue */
-let Vue = require('vue');
+import { createApp } from "vue";
 
-Vue.component('image-slider', require('./components/ImageSlider.vue'));
-Vue.component('personen-liste', require('./components/PeopleList.vue'));
-const app = new Vue({
-    el: '#app',
+// app.component('image-slider', require('./components/ImageSlider.vue'));
+// app.component('personen-liste', require('./components/PeopleList.vue'));
+// app.component('person', require('./components/Person.vue'));
+
+import Person from './components/Person.vue'
+
+const app = createApp({
+    components: {
+        Person,
+    }
 });
+
+
+app.mount("#app");

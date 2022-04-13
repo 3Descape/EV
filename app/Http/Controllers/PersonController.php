@@ -8,6 +8,7 @@ use App\Models\Person;
 use App\Models\PersonCategory;
 use Illuminate\Http\Request;
 use App\Http\Helpers\StoreImage;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class PersonController extends Controller
@@ -27,10 +28,13 @@ class PersonController extends Controller
     {
         $this->authorize('can_access_people', User::class);
 
+        $peopleGroup = Person::with('category')->orderBy('name')->get()->groupBy('category.name');
+
         return view('admin.sites.people.person_create', [
             'category' => $category,
             'categories' => PersonCategory::all(),
-            'images' => Image::all()
+            'images' => Image::all(),
+            'peopleGroup' => $peopleGroup,
         ]);
     }
 
@@ -40,11 +44,13 @@ class PersonController extends Controller
         $person->load('category');
         $categories = PersonCategory::all();
         $images = Image::all();
+        $peopleGroup = Person::with('category')->orderBy('name')->get()->groupBy('category.name');
 
         return view('admin.sites.people.person_edit', compact(
             'person',
             'categories',
-            'images'
+            'images',
+            'peopleGroup'
         ));
     }
 
@@ -60,7 +66,6 @@ class PersonController extends Controller
         $person = Person::create([
             'name' => $request->name,
             'markup' => $request->markup ?? '',
-            'html' => $request->html ?? '',
             'email' => $request->email,
             'person_category_id' => $request->person_category_id
         ]);
@@ -79,6 +84,7 @@ class PersonController extends Controller
     public function update(Person $person, Request $request)
     {
         $this->authorize('can_access_people', User::class);
+
         $this->validate($request, [
             'name' => 'required|string',
             'person_category_id' => 'required|exists:person_categories,id',
@@ -98,8 +104,7 @@ class PersonController extends Controller
 
         $person->update([
             'name' => $request->name,
-            'markup' => $request->markup ?? '',
-            'html' => $request->html ?? '',
+            'markup' => $request->markup ? json_encode($request->markup) : '',
             'email' => $request->email ?? null,
             'person_category_id' => $request->person_category_id,
         ]);

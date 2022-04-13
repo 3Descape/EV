@@ -13,9 +13,9 @@
                     <li class="list-group-item d-flex">
                         <div>
                             <h3>{{$file->name}}</h3>
-                            {!! $file->html !!}
+                            {!! $file->description !!}
                         </div>
-                        <a href="{{route('file_download', $file->id)}}" class="btn btn-primary ml-auto align-self-start">
+                        <a href="{{route('file_download', $file->id)}}" class="btn btn-primary ms-auto align-self-start">
                             <i class="fa fa-download" aria-hidden="true"></i>
                         </a>
                     </li>

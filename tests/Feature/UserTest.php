@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace Tests\Feature;
 
@@ -15,7 +15,7 @@ class UserTest extends TestCase
     /** @test */
     public function a_user_has_no_role_by_default()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->assertEmpty($user->roles()->get());
     }
@@ -32,7 +32,7 @@ class UserTest extends TestCase
             'name' => 'admin2',
             'label' => 'Some description in here'
         ]);
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $user->assignRole('admin1');
         $user->assignRole($role2);
@@ -46,7 +46,7 @@ class UserTest extends TestCase
     /** @test */
     public function assert_if_a_user_has_a_given_role()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $role = Role::create([
             'name' => Role::ADMIN_ROLE_NAME,
@@ -62,7 +62,7 @@ class UserTest extends TestCase
     /** @test */
     public function assert_if_a_user_has_a_given_permission()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $permission = Permission::create([
             'name' => 'manage events',

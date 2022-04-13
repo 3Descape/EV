@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Site;
 use App\Models\User;
 use App\Models\Image;
+use App\Models\Person;
+use App\Models\PersonCategory;
 use App\Models\SiteCategory;
 use Illuminate\Http\Request;
 
@@ -15,11 +17,12 @@ class SiteController extends Controller
         $this->authorize('can_access_sites', User::class);
         $sites = $site_category->sites()->get();
         $images = Image::all();
-
+        $peopleGroup = Person::with('category')->orderBy('name')->get()->groupBy('category.name');
         return view('admin.sites.sites.site_edit', compact(
             'site_category',
             'sites',
-            'images'
+            'images',
+            'peopleGroup',
         ));
     }
 
@@ -52,7 +55,6 @@ class SiteController extends Controller
 
         $site->update([
             'title' => $request->title,
-            'html' => $request->html,
             'markup' => $request->markup
         ]);
 
@@ -76,6 +78,6 @@ class SiteController extends Controller
         $this->authorize('can_access_sites', User::class);
         $site->delete();
 
-        return response()->json(['status' => 'Wurde gelöscht.']);
+        return response()->json(['status' => 'Seite wurde gelöscht.']);
     }
 }

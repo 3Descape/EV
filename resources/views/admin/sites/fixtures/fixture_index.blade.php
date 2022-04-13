@@ -6,21 +6,21 @@
         <div class="col-lg-12">
             @if(!$fixturecategories->isEmpty())
                 <form action="{{route('fixture_store')}}" method="post">
-                    <div class="form-group">
+                    <div class="row mb-3">
                         <label for="name">Name:</label>
                         <input type="text" name="name" id="name" class="form-control" value="{{old('name') ?: ''}}">
-                        @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"]) 
+                        @include('admin.components.error', ['name' => 'name', 'class' => "mt-1"])
                     </div>
 
-                    <div class="form-group">
+                    <div class="row mb-3">
                         <label for="name">Beschreibung:</label>
                         <input type="text" name="description" id="name" class="form-control" value="{{old('description') ?: ''}}">
-                        @include('admin.components.error', ['name' => 'description', 'class' => "mt-1"]) 
+                        @include('admin.components.error', ['name' => 'description', 'class' => "mt-1"])
                     </div>
 
-                    <div class="form-group">
+                    <div class="row mb-3">
                         <label for="fixture_category">Kategorie:</label>
-                        <select class="custom-select" name="fixture_category">
+                        <select class="form-select" name="fixture_category">
                             @foreach ($fixturecategories as $category)
                                 <option
                                 {{old("fixture_category") ? old("fixture_category") == $category->name ? 'selected=selected' : "" : ""}}
@@ -28,10 +28,10 @@
                                 </option>
                             @endforeach
                         </select>
-                        @include('admin.components.error', ['name' => 'fixture_category', 'class' => "mt-1"]) 
+                        @include('admin.components.error', ['name' => 'fixture_category', 'class' => "mt-1"])
                     </div>
 
-                    <div class="form-group">
+                    <div class="row mb-3">
                         <button type="submit" class="btn btn-success">
                             <i class="fa fa-plus"></i> Hinzufügen
                         </button>
@@ -65,7 +65,7 @@
                                     <td>
                                         <div class="d-flex">
 
-                                            <a href="{{route('fixture_edit', $fixture->id)}}" class="btn btn-warning ml-auto">
+                                            <a href="{{route('fixture_edit', $fixture->id)}}" class="btn btn-warning ms-auto">
                                                 <i class="fa fa-pencil-alt"></i>
                                             </a>
                                             <form action="{{route('fixture_destroy', $fixture->id)}}" method="post">

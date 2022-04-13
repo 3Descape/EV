@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
+use App\Tiptap\Tiptap;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Site extends Model
 {
-    use HasFactory;
+    use HasFactory, Tiptap;
 
     protected $fillable = [
         'title',
-        'html',
         'markup',
         'order',
         'site_category_id',
@@ -25,5 +25,10 @@ class Site extends Model
     public function category()
     {
         return $this->belongsTo(SiteCategory::class, 'site_category_id');
+    }
+
+    public function getTextAttribute()
+    {
+        return $this->toHtml($this->raw_markup);
     }
 }

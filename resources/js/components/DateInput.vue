@@ -67,7 +67,7 @@
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            <div class="d-flex flex-column px-1 flex-fill ml-4">
+            <div class="d-flex flex-column px-1 flex-fill ms-4">
                 <p>Stunde:</p>
                 <button @click="addHour()"
                         type="button"
@@ -144,11 +144,7 @@ export default {
   },
   computed: {
     result: function() {
-      let date = `${this.formatDate(this.date.day)}.${this.formatDate(
-        this.date.month
-      )}.${this.date.year} ${this.formatDate(this.date.hour)}:${this.formatDate(
-        this.date.minute
-      )}`;
+      let date = `${this.date.year}-${this.formatDate(this.date.month)}-${this.formatDate(this.date.day)} ${this.formatDate(this.date.hour)}:${this.formatDate(this.date.minute)}`;
 
       this.$emit("date", date);
       return date;

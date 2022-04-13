@@ -1,23 +1,17 @@
 <template>
     <div class="row mx-0">
-        <div class="col-lg-3 mb-2 px-0"
-             v-for="image in images"
-             :key="image.id">
+        <div class="col-lg-2 col-md-3 mb-2 px-0" v-for="image in images" :key="image.id">
             <div class="card h-100 mx-1">
-                <div class="card-body row">
-                    <div class="col-lg-3">
-                        <img :src="`/storage/${image.path}`"
-                             class="img-fluid">
+                <div class="card-body d-flex flex-column">
+                    <div>
+                        <h6 v-if="image.name">{{ image.name }}</h6>
                     </div>
-                    <div class="col-lg-9 d-flex">
-                        <div>
-                            <h4 v-if="image.name">{{ image.name }}</h4>
-                            <p>Bild ID: {{ image.id }}</p>
-                        </div>
-                        <form @submit.prevent="destroy(image)"
-                              class="ml-auto">
-                            <button type="submit"
-                                    class="btn btn-danger">
+                    <div>
+                        <img :src="`/storage/${image.path}`" class="img-fluid">
+                    </div>
+                    <div class="mt-auto">
+                        <form @submit.prevent="destroy(image)" class="mt-2">
+                            <button type="submit" class="btn btn-danger form-control">
                                 <i class="fa fa-trash-alt" />
                             </button>
                         </form>
@@ -30,7 +24,6 @@
 
 <script>
 /* global axios*/
-import { EventBus } from "./EventBus.js";
 export default {
   props: {
     imagesProp: {
@@ -38,17 +31,14 @@ export default {
       required: true
     }
   },
-  data: () => {
+  data: function() {
     return {
-      images: []
+      images: this.imagesProp
     };
   },
   created: function() {
-    this.images = this.imagesProp;
-
-    let vue = this;
-    EventBus.$on("image-added", function(image) {
-      vue.images.push(image);
+    this.emitter.on("image-added", ([image]) => {
+      this.images.push(image);
     });
   },
   methods: {
@@ -58,13 +48,11 @@ export default {
         .delete(`/admin/bild/${image.id}`)
         .then(msg => {
           vue.images.splice(vue.images.indexOf(image), 1);
-          EventBus.$emit("msg-event", msg.data.status);
+          this.emitter.emit("msg-event", [ msg.data.status ]);
         })
         .catch(() => {
-          EventBus.$emit(
-            "msg-event",
-            "Es ist ein Fehler aufgetreten.",
-            "danger"
+          this.emitter.emit(
+            "msg-event", [ "Es ist ein Fehler aufgetreten.", "danger" ]
           );
         });
     }

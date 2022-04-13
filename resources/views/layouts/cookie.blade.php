@@ -1,9 +1,9 @@
 <div class="cookie d-flex">
-    <p class="mr-4">
+    <p class="me-4">
         <i class="fa fa-info-circle"></i>
-        Diese Webseite verwendet Cookies! 
+        Diese Webseite verwendet Cookies!
     </p>
-    <button id="accept" type="button" class="btn ml-auto align-self-start"><i class="fa fa-check"></i></button>
+    <button id="accept" type="button" class="btn ms-auto align-self-start"><i class="fa fa-check"></i></button>
     {{Cookie::get('ev_allow_cookies')}}
 </div>
 

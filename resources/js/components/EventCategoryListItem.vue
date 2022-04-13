@@ -4,10 +4,10 @@
         <td>{{event.name}}</td>
         <td class="">{{event.category.name}}</td>
         <td>
-            <form class="ml-auto d-flex"
+            <form class="ms-auto d-flex"
                   @submit.prevent="update(event)"
                   method="POST">
-                <select class="custom-select mr-2"
+                <select class="form-select me-2"
                         v-model="new_category">
                     <option v-for="category in categories"
                             :key="category.id"
@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import { EventBus } from "./EventBus.js";
-import Message from "./Message";
 export default {
   props: ["event", "categories"],
   data() {
@@ -53,10 +51,8 @@ export default {
           this.updating = false;
         })
         .catch(error => {
-          EventBus.$emit(
-            "msg-event",
-            "Es ist ein Fehler aufgetreten.",
-            "danger"
+          this.emitter.emit(
+            "msg-event", [ "Es ist ein Fehler aufgetreten.", "danger" ]
           );
         });
     }

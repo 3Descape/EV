@@ -4,7 +4,7 @@
 <div>
     <div class="header bg-dark text-green">
         <div class="container mx-auto py-3 font-bold">
-            {{ $name }} hat Ihnen folgendes geschrieben:
+            {{ $name }}({{$from_address}}) hat Ihnen folgendes geschrieben:
         </div>
     </div>
     <div class="container mx-auto py-3 border my-3 px-2">

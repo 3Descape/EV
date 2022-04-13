@@ -8,7 +8,7 @@
                 <div class="card mx-0 mx-lg-1 h-100">
                     <div class="card-body d-flex p-3">
 
-                        <div class="mr-3"
+                        <div class="me-3"
                              v-if="person.image_path">
                             <img :src='"/storage/" + person.image_path'
                                  class="img-fluid"
@@ -26,7 +26,7 @@
                             <div v-if="person.email"
                                  style="max-height: 2rem"
                                  class="d-flex align-items-start">
-                                <p class="mr-1">Email: </p>
+                                <p class="me-1">Email: </p>
                                 <img style="margin-top: 0.2rem; height: 1.5rem"
                                      :src="person.email">
                             </div>

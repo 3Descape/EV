@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\Image;
 use App\Models\EventCategory;
+use App\Models\Person;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -14,11 +15,15 @@ class EventController extends Controller
     public function events_future()
     {
         $this->authorize('can_access_events', User::class);
-        $events = Event::with('category')->futureEvents()->get();
+        $events = Event::with('category')->futureEvents()->get()->append('formatted_date');
+        $images = Image::all();
+        $peopleGroup = Person::with('category')->orderBy('name')->get()->groupBy('category.name');
 
         return view('admin.sites.events.events', [
             'events' => $events,
             'categories' => EventCategory::all(),
+            'images' => $images,
+            'peopleGroup' => $peopleGroup,
         ]);
     }
 
@@ -48,29 +53,30 @@ class EventController extends Controller
             ]
         );
 
-        $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
+        $date = Carbon::createFromFormat('Y-m-d H:i', $request->date);
 
-        Event::create([
+        $event = Event::create([
             'name' => $request->name,
-            'html' => nl2br($request->markup),
             'markup' => $request->markup,
             'date' => $date,
             'location' => $request->location,
             'event_category_id' => $request->event_category_id,
         ]);
 
-        return back();
+        return response()->json(['msg' => "Event wurde erstellt.", 'event' => $event->load('category')], 200);
     }
 
     public function edit($id)
     {
         $this->authorize('can_access_events', User::class);
         $event = Event::with('images', 'category')->find($id);
+        $peopleGroup = Person::with('category')->orderBy('name')->get()->groupBy('category.name');
 
         return view('admin.sites.events.event_edit', [
             'event' => $event,
             'categories' => EventCategory::all(),
-            'images' => Image::all()
+            'images' => Image::all(),
+            'peopleGroup' => $peopleGroup,
         ]);
     }
 
@@ -95,13 +101,12 @@ class EventController extends Controller
             'date' => 'Bitte geben Sie ein gültiges Datum an.'
         ]);
 
-        $date = Carbon::createFromFormat('d.m.Y H:i', $request->date);
+        $date = Carbon::createFromFormat('Y-m-d H:i', $request->date);
 
         $event->update([
             'name' => $request->name,
             'event_category_id' => $request->event_category_id,
             'markup' => $request->markup,
-            'html' => $request->html,
             'date' => $date,
             'location' => $request->location
         ]);
@@ -119,6 +124,12 @@ class EventController extends Controller
     {
         $this->authorize('can_access_events', User::class);
         $event->delete();
+
+        if (request()->expectsJson()) {
+            return response()->json([
+                'status' => 'Veranstaltung wurde gelöscht.'
+            ], 200);
+        }
 
         return back();
     }

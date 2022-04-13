@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    @routes
     <script>
         window.Laravel = {!! json_encode(['csrfToken' => csrf_token(),]) !!};
     </script>
@@ -9,7 +10,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@yield('title')</title>
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="{{asset('/css/admin.css')}}">
+    <link rel="stylesheet" href="{{mix('css/admin.css')}}">
     @yield('header')
 </head>
 <body>
@@ -18,7 +19,7 @@
     </div>
 
     <footer>
-        <script src="{{asset('/js/admin.js')}}"></script>
+        <script src="{{mix('js/admin.js')}}"></script>
         @yield('footer')
     </footer>
 </body>

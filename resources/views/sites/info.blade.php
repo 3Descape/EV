@@ -1,4 +1,4 @@
-@extends('sites.sites_master')
+@extends('master')
 
 @section('title')
     Info
@@ -7,7 +7,7 @@
 @section('content')
     <div class="col-sm-11 mx-auto">
         @foreach ($sites as $site)
-            <div class="col-md-6 col-sm-12 mx-auto text-block" id="{{Str::slug($site->title, "-")}}">
+            <div class="col-md-6 col-sm-12 mx-md-auto mx-3 text-block" id="{{Str::slug($site->title, "-")}}">
                 <h1 class="text-center">{{$site->title}}</h1>
                 <p>{!! $site->text !!}</p>
             </div>

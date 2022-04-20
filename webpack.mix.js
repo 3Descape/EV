@@ -17,13 +17,13 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/admin.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/admin.scss', 'public/css')
-    // .purgeCss({
-    //     enabled: true,
-    //     whitelist: ['blockquote']
-    // })
+    .purgeCss({
+        enabled: true,
+        whitelist: ['blockquote', 'text-start', 'text-center', 'text-end', 'img-fluid']
+    })
    .alias({
       'ziggy': path.join(__dirname, 'vendor/tightenco/ziggy/dist/vue')
     })
-    .vue();
-    // .version();
-    // .sourceMaps();
+    .vue()
+    .version()
+    .sourceMaps();

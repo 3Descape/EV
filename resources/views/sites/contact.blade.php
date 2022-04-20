@@ -1,11 +1,11 @@
-@extends('sites.sites_master')
+@extends('master')
 
 @section('title')
     Kontakt
 @endsection
 
 @section('content')
-    <div class="col-md-6 col-sm-12 mx-auto mt-4" id="contact">
+    <div class="col-md-6 col-sm-12 mx-md-auto mx-3 mt-4" id="contact">
         <h1 class="text-center">Kontakt</h1>
         <p class="col-md-12">Möchten Sie mit uns in Kontakt treten? Schreiben Sie uns doch!</p>
         <div class="col-md-12 mb-4">

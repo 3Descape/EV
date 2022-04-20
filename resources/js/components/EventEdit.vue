@@ -49,27 +49,7 @@
                     </div>
                 </div>
 
-                <div class="row" v-if="event.images.length">
-                    <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-1" v-for="image in event.images" :key="image.id">
-                        <div class="card h-100">
-                            <div class="card-body row">
-                                <div class="col-lg-4 col-sm-6">
-                                    <img :src="`/storage/${image.thump}`" class="img-fluid">
-                                </div>
-                                <div class="col-lg-8 col-sm-6 d-flex align-items-center">
-
-                                    <p class="mb-0">Bild ID: {{ image.id }}</p>
-
-                                    <form @submit.prevent="destroy(image)" class="ms-auto">
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-trash-alt" />
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <image-gallery :images-prop="event.images" v-if="event.images.length"></image-gallery>
 
                 <div v-else>
                     <p>Es gibt noch keine Bilder für diese Veranstaltung.</p>
@@ -84,11 +64,13 @@
 import Errors from "./Errors.js"
 import Message from "./Message.vue"
 import Event from "./Event.vue"
+import ImageGallery from "./ImageGallery.vue"
 
 export default {
   components: {
     msg: Message,
     Event,
+    ImageGallery
   },
   props: {
     eventProp: {

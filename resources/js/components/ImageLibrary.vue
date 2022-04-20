@@ -51,9 +51,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <button class="form-control btn btn-success"
-                            type="submit"
-                            v-show="!isLoading">
+                    <button class="form-control btn btn-success" type="submit" v-show="!isLoading" :disabled="!userImage.image">
                         <i class="fa fa-plus" /> Hochladen
                     </button>
                     <div class="form-control btn btn-success"
@@ -91,8 +89,8 @@ export default {
     return {
       errors: new Errors(),
       userImage: {
-        name: "",
-        image: {}
+        name: null,
+        image: null
       },
       progress: -1,
       isLoading: false
@@ -103,8 +101,8 @@ export default {
       this.userImage.image = e.target.files[0];
     },
     reset() {
-      this.userImage.name = "";
-      this.userImage.image = {};
+      this.userImage.name = null;
+      this.userImage.image = null;
       this.$refs.name.focus();
       this.$refs.form.reset();
       this.progress = -1;
@@ -113,7 +111,7 @@ export default {
       let vue = this;
       vue.isLoading = true;
       let data = new FormData();
-      data.append("name", this.userImage.name);
+      data.append("name", this.userImage.name ?? "");
       data.append("file", this.userImage.image);
 
       let config = {
@@ -137,11 +135,7 @@ export default {
         .catch(errors => {
           vue.errors.setErrors(errors.response.data.errors);
           vue.reset();
-          this.emitter.emit(
-            "msg-event",
-            [ "Es ist ein Fehler aufgetreten.",
-            "danger"]
-          );
+          this.emitter.emit("msg-event", [ "Es ist ein Fehler aufgetreten.", "danger"]);
           this.isLoading = false;
         });
     }

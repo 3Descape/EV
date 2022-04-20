@@ -1,11 +1,11 @@
-@extends('sites.sites_master')
+@extends('master')
 
 @section('title')
     Veranstaltungen Archiv
 @endsection
 
 @section('content')
-    <div class="col-sm-11 col-lg-9 col-xl-7 mx-auto">
+    <div class="col-sm-11 col-lg-9 col-xl-7 mx-md-auto mx-3">
         <div class="row mt-5">
             <div class="col-lg-10 col-md-12 order-2 order-lg-1">
                 <h1 class="text-center">Veranstaltungen Archiv</h1>

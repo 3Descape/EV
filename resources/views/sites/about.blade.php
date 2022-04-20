@@ -1,10 +1,10 @@
-@extends('sites.sites_master')
+@extends('master')
 @section('title') Über uns
 @endsection
 
 @section('content')
 @if ($gruppenbild)
-<div class="col-sm-11 col-lg-9 col-xl-6 mx-auto text-block text-center">
+<div class="col-sm-11 col-lg-9 col-xl-6 mx-md-auto mx-3 text-block text-center">
     <img src="{{asset('storage/'. $gruppenbild->path)}}" class="image-style" style="max-height: 30em">
 </div>
 @endif

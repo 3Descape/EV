@@ -160,7 +160,7 @@
 
         </div>
 
-        <editor-content :editor="editor" />
+        <editor-content :editor="editor" class="position-relative" />
 
         <modal id="image_modal">
             <div class="modal-header">
@@ -183,20 +183,10 @@
                                v-model="image_url">
                     </div>
 
-
-                    <div class="mb-3">
-                        <label for="image_size" class="form-label">Größe:</label>
-                        <input class="form-range"
-                               type="range"
-                               min="5"
-                               max="100"
-                               step="1.0"
-                               id="image_size"
-                               v-model="image_size">
-                    </div>
-
-                    <div v-for="image in imagesProp" :key="image.id">
-                        <img :src="'/storage/' + image.thump" class="preview-image" @click="image_url = '/storage/' + image.path">
+                    <div class="row">
+                        <div v-for="image in imagesProp" :key="image.id" class="col-md-6 p-1 d-flex align-items-center justify-content-center" :class="{'border border-2 border-success rounded' : image_url === `/storage/${image.path}`}">
+                            <img :src="`/storage/${image.thump}`" class="preview-image" @click="image_url = `/storage/${image.path}`">
+                        </div>
                     </div>
                 </div>
 
@@ -281,15 +271,14 @@ import TableRow from '@tiptap/extension-table-row'
 import TableCell from '@tiptap/extension-table-cell'
 import TableHeader from '@tiptap/extension-table-header'
 import Underline from '@tiptap/extension-underline'
-import Image from '@tiptap/extension-image'
-import Focus from '@tiptap/extension-focus'
-import { TextAlign } from './TextAlign.js'
-import { PersonNode } from './TiptapPerson.js'
+import TextAlign from './TextAlign.js'
+import TiptapPerson from './TiptapPerson.js'
+import TiptapImage from './TiptapImage.js'
 
-import Person from "./Person.vue"
+import Person from './Person.vue'
+import Modal from "./Modal.vue";
 
 import { Modal as BootstrapModal } from "bootstrap"
-import Modal from "./Modal.vue";
 
 export default {
   props: {
@@ -325,18 +314,17 @@ export default {
       peopleGroup: this.peopleGroupProp,
       show_person_modal: false,
       replace_selection: false,
-    }
-  },
-  watch: {
-      modelValue(value) {
-          if(value === null) this.editor.commands.clearContent()
+      selected: {
+
       }
+    }
   },
   beforeMount() {
     this.resetPeopleSelection()
 
     this.editor = new Editor({
         content: this.modelValue,
+        // content: this.modelValue,
         editorProps: {
             attributes: {
                 class: 'form-control text-area mt-2',
@@ -362,7 +350,7 @@ export default {
                     HTMLAttributes: {
                         class: 'bg-light rounded p-2 my-2 font-monospace lh-lg text-danger'
                     }
-                }
+                },
             }),
             Link,
             Table.extend({
@@ -385,40 +373,9 @@ export default {
                 alignments: ['text-start', 'text-center', 'text-end'],
                 defaultAlignment: 'text-start'
             }),
-            Focus.configure({
-                className: 'node-focus',
-                mode: 'shallowest',
-
-            }),
-            Image.extend({
-                addAttributes() {
-                    return {
-                        ...this.parent?.(),
-                        size: {
-                            default: null,
-                            renderHTML: attributes => {
-                                if(!attributes.size) return
-                                return {
-                                    style: `max-width: ${attributes.size}%`,
-                                }
-                            },
-                        },
-                    };
-                },
-                addOptions() {
-                    return {
-                        ...this.parent?.(),
-                        HTMLAttributes: {
-                            class: 'img-fluid'
-                        }
-                    }
-                },
-            }),
-            PersonNode.configure({
+            TiptapImage,
+            TiptapPerson.configure({
                 people: Object.values(this.peopleGroupProp).flatMap(x => x),
-                HTMLAttributes: {
-                    class: 'bg-danger'
-                }
             })
         ],
     })
@@ -498,15 +455,17 @@ export default {
     }
   },
   watch: {
-    modelValue(value) {
-        const isSame = JSON.stringify(this.editor.getJSON()) === JSON.stringify(value)
+      modelValue(value) {
+          if(value === null) this.editor.commands.clearContent()
 
-        if (isSame) {
-            return
-        }
+//         const isSame = JSON.stringify(this.editor.getJSON()) === JSON.stringify(value)
 
-        this.editor.commands.setContent(value, false)
-    }
+//         if (isSame) {
+//             return
+//         }
+
+//         this.editor.commands.setContent(value, false)
+      }
   },
   beforeUnmount() {
     this.editor.destroy()
@@ -528,11 +487,13 @@ export default {
 }
 
 .ProseMirror {
+
     .node-focus {
         .person {
             border: 1px solid black;
         }
     }
+
     table {
         td, th {
             position: relative;

@@ -1,8 +1,6 @@
-import { end } from '@popperjs/core'
-import { Extension } from '@tiptap/core'
-import { TextAlign as TipTapTextAlign } from '@tiptap/extension-text-align'
+import TextAlign from '@tiptap/extension-text-align'
 
-export const TextAlign = TipTapTextAlign.extend({
+export default TextAlign.extend({
   addGlobalAttributes() {
     return [
       {

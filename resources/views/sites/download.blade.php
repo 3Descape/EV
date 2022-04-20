@@ -1,11 +1,11 @@
-@extends('sites.sites_master')
+@extends('master')
 
 @section('title')
     Download
 @endsection
 
 @section('content')
-    <div class="col-sm-11 col-lg-9 col-xl-6 mx-auto mt-4">
+    <div class="col-sm-11 col-lg-9 col-xl-6 mx-md-auto mx-3 mt-4">
         <div class="col-md-10 col-sm-12 mx-auto">
         @if($files->count())
             <ul class="list-group">

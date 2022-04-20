@@ -1,51 +1,52 @@
 import {
     Node,
-    nodeInputRule,
     mergeAttributes,
 } from '@tiptap/core'
 
 import { VueNodeViewRenderer } from '@tiptap/vue-3'
-import TiptapPerson from "./TiptapPerson.vue"
+import TiptapPersonView from './TiptapPersonView.vue'
 
-export const PersonNode = Node.create({
+export default Node.create({
     name: 'personnode',
 
     priority: 100,
 
+    group: 'block',
+
+    draggable: true,
+
+    atom: true,
+
+    addOptions() {
+      return {
+        HTMLAttributes: {},
+        people: null,
+      }
+    },
     addAttributes() {
         return {
             personId: {
-                default: null,
+                parseHTML: element => element.getAttribute('person-id') || null,
             },
         }
     },
-
-    addOptions() {
-        return {
-            people: null
-        }
+    renderHTML({ HTMLAttributes }) {
+      return ['person', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
     },
-
-    group: 'block',
-
-    content: '',
-
     parseHTML() {
         return [
             { tag: 'person' },
         ]
     },
-
-    renderHTML({ HTMLAttributes }) {
-        return ['person', mergeAttributes(this.options.HTMLAttributes, HTMLAttributes)]
+    addNodeView() {
+        return VueNodeViewRenderer(TiptapPersonView)
     },
     addCommands() {
         return {
-            setPerson: (people, replace = false, parseOptions = {}) => ({ chain, editor, tr, dispatch }) => {
+            setPerson: (people, replace = false, parseOptions = {}) => ({ chain, tr }) => {
                 if(!Array.isArray(people))
                 {
-                    console.warn("TipTapPerson.js People must be of type array!")
-                    return;
+                    people = [people]
                 }
 
                 const raw_content = people.map(person => {
@@ -63,8 +64,5 @@ export const PersonNode = Node.create({
                 return chain().insertContentAt(tr.selection.to, raw_content).run()
             },
         }
-    },
-    addNodeView() {
-        return VueNodeViewRenderer(TiptapPerson)
     },
 })

@@ -14,11 +14,11 @@
             <div class="row mb-3">
                 <label for="has_image">Besitzt Bild:</label>
                 <select name="has_image" id="has_image" class="form-select">
-                    <option {{old('has_image') ? old('has_image') == 0 ? "selected" : "" : $person_category->has_image == 0 ? "selected" : ""}}
+                    <option {{old('has_image') ? (old('has_image') == 0 ? "selected" : "") : ($person_category->has_image == 0 ? "selected" : "")}}
                         value="0">
                         Nein
                     </option>
-                    <option {{old('has_image') ? old('has_image') == 1 ? "selected" : "" : $person_category->has_image == 1 ? "selected" : ""}}
+                    <option {{old('has_image') ? (old('has_image') == 1 ? "selected" : "") : ($person_category->has_image == 1 ? "selected" : "")}}
                         value="1">
                         Ja
                     </option>

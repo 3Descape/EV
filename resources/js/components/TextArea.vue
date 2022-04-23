@@ -1,167 +1,166 @@
 <template>
-    <div>
-        <div v-if="editor">
-            <button type="button" @click="editor.chain().focus().setParagraph().run()" :class="[ baseClass, editor.isActive('paragraph') ? activeClass : inactiveClass ]">
-                <i class="fa fa-t"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 1 }) ? activeClass : inactiveClass ]">
-                H1
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 2 }) ? activeClass : inactiveClass ]">
-                H2
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 3 }) ? activeClass : inactiveClass ]">
-                H3
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleHeading({ level: 4 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 4 }) ? activeClass : inactiveClass ]">
-                H4
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 5 }) ? activeClass : inactiveClass ]">
-                H5
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleHeading({ level: 6 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 6 }) ? activeClass : inactiveClass ]">
-                H6
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleBold().run()" :class="[ baseClass, editor.isActive('bold') ? activeClass : inactiveClass ]">
-                <i class="fa fa-bold"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleItalic().run()" :class="[ baseClass, editor.isActive('italic') ? activeClass : inactiveClass ]">
-                <i class="fa fa-italic"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleUnderline().run()" :class="[ baseClass, editor.isActive('underline') ? activeClass : inactiveClass ]">
-                <i class="fa fa-underline"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleStrike().run()" :class="[ baseClass, editor.isActive('strike') ? activeClass : inactiveClass ]">
-                <i class="fa fa-strikethrough"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().setTextAlign('text-start').run()" :class="[ baseClass, editor.isActive({textAlign: 'text-start'}) ? activeClass : inactiveClass ]">
-                <i class="fa fa-align-left"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().setTextAlign('text-center').run()" :class="[ baseClass, editor.isActive({textAlign: 'text-center'}) ? activeClass : inactiveClass ]">
-                <i class="fa fa-align-center"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().setTextAlign('text-end').run()" :class="[ baseClass, editor.isActive({textAlign: 'text-end'}) ? activeClass : inactiveClass ]">
-                <i class="fa fa-align-right"></i>
-            </button>
-            <button type="button" @click="setLink" :class="[ baseClass, editor.isActive('link') ? activeClass : inactiveClass ]">
-                <i class="fa fa-link"></i>
-            </button>
-            <button type="button" @click="setImage" :class="[ baseClass, editor.isActive('image') ? activeClass : inactiveClass ]">
-                <i class="fa fa-image"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleBulletList().run()" :class="[ baseClass, editor.isActive('bulletList') ? activeClass : inactiveClass ]">
-                <i class="fa fa-list"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleOrderedList().run()" :class="[ baseClass, editor.isActive('orderedList') ? activeClass : inactiveClass ]">
-                <i class="fa fa-list-ol"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().toggleBlockquote().run()" :class="[ baseClass, editor.isActive('blockquote') ? activeClass : inactiveClass ]">
-                <i class="fa fa-quote-right"></i> Blockquote
-            </button>
-            <!-- <button type="button" @click="editor.chain().focus().toggleCode().run()" :class="[ baseClass, editor.isActive('code') ? activeClass : inactiveClass ]">
-                <i class="fa fa-code"></i>
-            </button> -->
-            <button type="button" @click="editor.chain().focus().unsetAllMarks().run()" :class="[baseClass, inactiveClass]">
-                <i class="fa fa-remove-format"></i>
-            </button>
-            <!-- <button type="button" @click="editor.chain().focus().setHorizontalRule().run()"
-            >
-                Horizontale Linie
-            </button> -->
-            <!-- <button type="button" @click="editor.chain().focus().toggleCodeBlock().run()" :class="[ baseClass, editor.isActive('codeBlock') ? activeClass : inactiveClass ]"
-            >
-                <i class="fa fa-code"></i> Codeblock
-            </button> -->
-            <!-- <button type="button" @click="editor.chain().focus().setHardBreak().run()" :class="[baseClass, inactiveClass]">
-                Zeilenumbruch
-            </button> -->
-            <!-- <button type="button" @click="editor.chain().focus().clearNodes().run()"
-            >
-                clear nodes
-            </button> -->
-
-            <button type="button" @click="editor.chain().focus().undo().run()" :class="[baseClass, inactiveClass]">
-                <i class="fa fa-undo"></i>
-            </button>
-            <button type="button" @click="editor.chain().focus().redo().run()" :class="[baseClass, inactiveClass]">
-                <i class="fa fa-redo"></i>
-            </button>
-
-            <button v-if="peopleGroup" type="button" @click="setPerson" :class="[ baseClass, editor.isActive('personnode') ? activeClass : inactiveClass ]">
-                <i class="fa fa-person"></i>
-            </button>
-
-            <button type="button"  :class="[baseClass, inactiveClass]"  @click="showTableButtons = !showTableButtons">
-                <i class="fa fa-table"></i> <i class="fa fa-caret-down"></i>
-            </button>
-
-            <span v-show="showTableButtons">
-                <button type="button" @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()" :class="[baseClass, inactiveClass]">
-                    Neue Tabelle
+    <div :ref="(el) => { this.boundingRef = el }">
+        <div class="bg-body p-1" :class="wrapperClasses" v-if="editor">
+            <div :class="bodyClasses">
+                <button type="button" @click="editor.chain().focus().setParagraph().run()" :class="[ baseClass, editor.isActive('paragraph') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-t"></i>
                 </button>
-                <button type="button" @click="editor.chain().focus().deleteTable().run()" :class="[baseClass, inactiveClass]">
-                    <i class="fa fa-minus"></i> Tabelle
+                <button type="button" @click="editor.chain().focus().toggleHeading({ level: 1 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 1 }) ? activeClass : inactiveClass ]">
+                    H1
                 </button>
-                <button type="button" @click="editor.chain().focus().addColumnBefore().run()" :class="[baseClass, inactiveClass]">
-                    <i class="fa fa-plus"></i> Spalte davor
+                <button type="button" @click="editor.chain().focus().toggleHeading({ level: 2 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 2 }) ? activeClass : inactiveClass ]">
+                    H2
                 </button>
-                <button type="button" @click="editor.chain().focus().addColumnAfter().run()" :class="[baseClass, inactiveClass]">
-                    <i class="fa fa-plus"></i> Spalte danach
+                <button type="button" @click="editor.chain().focus().toggleHeading({ level: 3 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 3 }) ? activeClass : inactiveClass ]">
+                    H3
                 </button>
-                <button type="button" @click="editor.chain().focus().deleteColumn().run()" :class="[baseClass, inactiveClass]">
-                    <i class="fa fa-minus"></i> Spalte
+                <button type="button" @click="editor.chain().focus().toggleHeading({ level: 4 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 4 }) ? activeClass : inactiveClass ]">
+                    H4
                 </button>
-                <button type="button" @click="editor.chain().focus().addRowBefore().run()" :class="[baseClass, inactiveClass]">
-                    <i class="fa fa-plus"></i> Zeile davor
+                <button type="button" @click="editor.chain().focus().toggleHeading({ level: 5 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 5 }) ? activeClass : inactiveClass ]">
+                    H5
                 </button>
-                <button type="button" @click="editor.chain().focus().addRowAfter().run()" :class="[baseClass, inactiveClass]">
-                    <i class="fa fa-plus"></i> Zeile danach
+                <button type="button" @click="editor.chain().focus().toggleHeading({ level: 6 }).run()" :class="[ baseClass, editor.isActive('heading', { level: 6 }) ? activeClass : inactiveClass ]">
+                    H6
                 </button>
-                <button type="button" @click="editor.chain().focus().deleteRow().run()" :class="[baseClass, inactiveClass]">
-                    <i class="fa fa-minus"></i> Zeile
+                <button type="button" @click="editor.chain().focus().toggleBold().run()" :class="[ baseClass, editor.isActive('bold') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-bold"></i>
                 </button>
-                <button type="button" @click="editor.chain().focus().mergeCells().run()" :class="[baseClass, inactiveClass]">
-                    Vereine Zellen
+                <button type="button" @click="editor.chain().focus().toggleItalic().run()" :class="[ baseClass, editor.isActive('italic') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-italic"></i>
                 </button>
-                <button type="button" @click="editor.chain().focus().splitCell().run()" :class="[baseClass, inactiveClass]">
-                    Teile Zellen
+                <button type="button" @click="editor.chain().focus().toggleUnderline().run()" :class="[ baseClass, editor.isActive('underline') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-underline"></i>
                 </button>
-                <button type="button" @click="editor.chain().focus().toggleHeaderColumn().run()" :class="[baseClass, inactiveClass]">
-                    Toggle Überschrift Spalte
+                <button type="button" @click="editor.chain().focus().toggleStrike().run()" :class="[ baseClass, editor.isActive('strike') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-strikethrough"></i>
                 </button>
-                <button type="button" @click="editor.chain().focus().toggleHeaderRow().run()" :class="[baseClass, inactiveClass]">
-                    Toggle Überschrift Zeile
+                <button type="button" @click="editor.chain().focus().setTextAlign('text-start').run()" :class="[ baseClass, editor.isActive({textAlign: 'text-start'}) ? activeClass : inactiveClass ]">
+                    <i class="fa fa-align-left"></i>
                 </button>
-                <button type="button" @click="editor.chain().focus().toggleHeaderCell().run()" :class="[baseClass, inactiveClass]">
-                    Toggle Überschrift Zelle
+                <button type="button" @click="editor.chain().focus().setTextAlign('text-center').run()" :class="[ baseClass, editor.isActive({textAlign: 'text-center'}) ? activeClass : inactiveClass ]">
+                    <i class="fa fa-align-center"></i>
                 </button>
-                <!-- <button type="button" @click="editor.chain().focus().mergeOrSplit().run()"
-                >
-                    mergeOrSplit
+                <button type="button" @click="editor.chain().focus().setTextAlign('text-end').run()" :class="[ baseClass, editor.isActive({textAlign: 'text-end'}) ? activeClass : inactiveClass ]">
+                    <i class="fa fa-align-right"></i>
+                </button>
+                <button type="button" @click="setLink" :class="[ baseClass, editor.isActive('link') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-link"></i>
+                </button>
+                <button type="button" @click="setImage" :class="[ baseClass, editor.isActive('image') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-image"></i>
+                </button>
+                <button type="button" @click="editor.chain().focus().toggleBulletList().run()" :class="[ baseClass, editor.isActive('bulletList') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-list"></i>
+                </button>
+                <button type="button" @click="editor.chain().focus().toggleOrderedList().run()" :class="[ baseClass, editor.isActive('orderedList') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-list-ol"></i>
+                </button>
+                <button type="button" @click="editor.chain().focus().toggleBlockquote().run()" :class="[ baseClass, editor.isActive('blockquote') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-quote-right"></i> Blockquote
+                </button>
+                <!-- <button type="button" @click="editor.chain().focus().toggleCode().run()" :class="[ baseClass, editor.isActive('code') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-code"></i>
                 </button> -->
-                <!-- <button type="button" @click="editor.chain().focus().setCellAttribute('colspan', 2).run()"
+                <button type="button" @click="editor.chain().focus().unsetAllMarks().run()" :class="[baseClass, inactiveClass]">
+                    <i class="fa fa-remove-format"></i>
+                </button>
+                <!-- <button type="button" @click="editor.chain().focus().setHorizontalRule().run()"
                 >
-                    setCellAttribute
+                    Horizontale Linie
                 </button> -->
-                <!-- <button type="button" @click="editor.chain().focus().fixTables().run()"
+                <!-- <button type="button" @click="editor.chain().focus().toggleCodeBlock().run()" :class="[ baseClass, editor.isActive('codeBlock') ? activeClass : inactiveClass ]"
                 >
-                    fixTables
+                    <i class="fa fa-code"></i> Codeblock
                 </button> -->
-                <!-- <button type="button" @click="editor.chain().focus().goToNextCell().run()"
+                <!-- <button type="button" @click="editor.chain().focus().setHardBreak().run()" :class="[baseClass, inactiveClass]">
+                    Zeilenumbruch
+                </button> -->
+                <!-- <button type="button" @click="editor.chain().focus().clearNodes().run()"
                 >
-                    goToNextCell
+                    clear nodes
                 </button> -->
-                <!-- <button type="button" @click="editor.chain().focus().goToPreviousCell().run()"
-                >
-                    goToPreviousCell
-                </button> -->
-            </span>
 
+                <button type="button" @click="editor.chain().focus().undo().run()" :class="[baseClass, inactiveClass]">
+                    <i class="fa fa-undo"></i>
+                </button>
+                <button type="button" @click="editor.chain().focus().redo().run()" :class="[baseClass, inactiveClass]">
+                    <i class="fa fa-redo"></i>
+                </button>
 
+                <button v-if="peopleGroup" type="button" @click="setPerson" :class="[ baseClass, editor.isActive('personnode') ? activeClass : inactiveClass ]">
+                    <i class="fa fa-person"></i>
+                </button>
+
+                <button type="button"  :class="[baseClass, inactiveClass]"  @click="showTableButtons = !showTableButtons">
+                    <i class="fa fa-table"></i> <i class="fa fa-caret-down"></i>
+                </button>
+
+                <span v-show="showTableButtons">
+                    <button type="button" @click="editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()" :class="[baseClass, inactiveClass]">
+                        Neue Tabelle
+                    </button>
+                    <button type="button" @click="editor.chain().focus().deleteTable().run()" :class="[baseClass, inactiveClass]">
+                        <i class="fa fa-minus"></i> Tabelle
+                    </button>
+                    <button type="button" @click="editor.chain().focus().addColumnBefore().run()" :class="[baseClass, inactiveClass]">
+                        <i class="fa fa-plus"></i> Spalte davor
+                    </button>
+                    <button type="button" @click="editor.chain().focus().addColumnAfter().run()" :class="[baseClass, inactiveClass]">
+                        <i class="fa fa-plus"></i> Spalte danach
+                    </button>
+                    <button type="button" @click="editor.chain().focus().deleteColumn().run()" :class="[baseClass, inactiveClass]">
+                        <i class="fa fa-minus"></i> Spalte
+                    </button>
+                    <button type="button" @click="editor.chain().focus().addRowBefore().run()" :class="[baseClass, inactiveClass]">
+                        <i class="fa fa-plus"></i> Zeile davor
+                    </button>
+                    <button type="button" @click="editor.chain().focus().addRowAfter().run()" :class="[baseClass, inactiveClass]">
+                        <i class="fa fa-plus"></i> Zeile danach
+                    </button>
+                    <button type="button" @click="editor.chain().focus().deleteRow().run()" :class="[baseClass, inactiveClass]">
+                        <i class="fa fa-minus"></i> Zeile
+                    </button>
+                    <button type="button" @click="editor.chain().focus().mergeCells().run()" :class="[baseClass, inactiveClass]">
+                        Vereine Zellen
+                    </button>
+                    <button type="button" @click="editor.chain().focus().splitCell().run()" :class="[baseClass, inactiveClass]">
+                        Teile Zellen
+                    </button>
+                    <button type="button" @click="editor.chain().focus().toggleHeaderColumn().run()" :class="[baseClass, inactiveClass]">
+                        Toggle Überschrift Spalte
+                    </button>
+                    <button type="button" @click="editor.chain().focus().toggleHeaderRow().run()" :class="[baseClass, inactiveClass]">
+                        Toggle Überschrift Zeile
+                    </button>
+                    <button type="button" @click="editor.chain().focus().toggleHeaderCell().run()" :class="[baseClass, inactiveClass]">
+                        Toggle Überschrift Zelle
+                    </button>
+                    <!-- <button type="button" @click="editor.chain().focus().mergeOrSplit().run()"
+                    >
+                        mergeOrSplit
+                    </button> -->
+                    <!-- <button type="button" @click="editor.chain().focus().setCellAttribute('colspan', 2).run()"
+                    >
+                        setCellAttribute
+                    </button> -->
+                    <!-- <button type="button" @click="editor.chain().focus().fixTables().run()"
+                    >
+                        fixTables
+                    </button> -->
+                    <!-- <button type="button" @click="editor.chain().focus().goToNextCell().run()"
+                    >
+                        goToNextCell
+                    </button> -->
+                    <!-- <button type="button" @click="editor.chain().focus().goToPreviousCell().run()"
+                    >
+                        goToPreviousCell
+                    </button> -->
+                </span>
+            </div>
         </div>
 
         <editor-content :editor="editor" class="position-relative" />
-
         <modal id="image_modal">
             <div class="modal-header">
                 <h5 class="modal-title">Bild einfügen:</h5>
@@ -276,7 +275,9 @@ import TiptapPerson from './TiptapPerson.js'
 import TiptapImage from './TiptapImage.js'
 
 import Person from './Person.vue'
-import Modal from "./Modal.vue";
+import Modal from "./Modal.vue"
+
+import throttle from 'lodash/throttle'
 
 import { Modal as BootstrapModal } from "bootstrap"
 
@@ -303,6 +304,18 @@ export default {
   data() {
     return {
       editor: null,
+      controlIsFloating: false,
+
+      controlWrapperClasses: [
+            "sticky",
+            "d-flex",
+            "justify-content-center",
+      ],
+      controlBodyClasses: [
+          "col-md-8",
+          "mx-auto",
+      ],
+      boundingRef: null,
       activeClass: "btn-dark",
       inactiveClass: "btn-light border border-dark",
       baseClass: "btn btn-sm btn-light me-1 mb-1",
@@ -383,6 +396,11 @@ export default {
   mounted() {
     this.image_modal = BootstrapModal.getOrCreateInstance(document.getElementById('image_modal'))
     this.person_modal = BootstrapModal.getOrCreateInstance(document.getElementById('person_modal'))
+
+    window.addEventListener('scroll', throttle(function() {
+        this.controlIsFloating = 20 > this.boundingRef.getBoundingClientRect().top && 0 < this.boundingRef.getBoundingClientRect().bottom;
+    }.bind(this), 200))
+
   },
   methods: {
     ucFirst(string) {
@@ -467,6 +485,20 @@ export default {
 //         this.editor.commands.setContent(value, false)
       }
   },
+  computed: {
+    wrapperClasses() {
+        if(!this.controlIsFloating || !this.controlWrapperClasses)
+            return []
+
+        return this.controlWrapperClasses;
+    },
+    bodyClasses() {
+        if(!this.controlIsFloating || !this.controlBodyClasses)
+            return []
+
+        return this.controlBodyClasses;
+    },
+  },
   beforeUnmount() {
     this.editor.destroy()
   },
@@ -474,6 +506,14 @@ export default {
 </script>
 
 <style lang="scss">
+.sticky {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left:0;
+  z-index: 500;
+}
+
 .preview-image {
     height: 200px;
 }

@@ -19,7 +19,11 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/admin.scss', 'public/css')
     .purgeCss({
         enabled: true,
-        whitelist: ['blockquote', 'text-start', 'text-center', 'text-end', 'img-fluid']
+        safelist: {
+            standard: ['blockquote', 'text-start', 'text-center', 'text-end', 'img-fluid'],
+            deep: [/form-control/, /cropper.*$/],
+            greedy: [/file-selector-button/]
+        },
     })
    .alias({
       'ziggy': path.join(__dirname, 'vendor/tightenco/ziggy/dist/vue')

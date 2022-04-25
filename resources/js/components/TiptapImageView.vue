@@ -5,7 +5,7 @@
                 Menü
             </button>
 
-            <div class="tiptap-image-view-menu" :style="menuStyle" :ref="(ele) => this.menu = ele" v-show="menuIsVisible" @mouseleave="menuIsVisible = false">
+            <div class="tiptap-image-view-menu" :style="menuStyle" v-show="menuIsVisible" @mouseleave="menuIsVisible = false">
                 <label :for="`tiptap-image-view-menu-size-${componentId}`" class="form-label mb-0">Größe:</label>
                 <input type="range" min="0" max="100" class="tiptap-image-view-input form-range" v-model.number="node.attrs.size" :id="`tiptap-image-view-menu-size-${componentId}`">
             </div>
@@ -28,28 +28,21 @@ export default {
     data() {
         return {
             html: "",
-            menuIsVisible: false,
             imageRef: null,
-            menu: null,
+            menuIsVisible: false,
             menuStyle: {
                 top: "0px",
                 left: "0px",
             },
-            componentId: 0
+            componentId: 0,
         }
     },
     methods: {
         openImageSettings(event)
         {
-            console.log(event.clientX)
             this.menuStyle.top = `${event.clientY}px`
             this.menuStyle.left = `${event.clientX}px`
             this.menuIsVisible = true
-        },
-        hoverStart()
-        {
-            this.updateHoverSize()
-            controlIsVisible = true;
         },
         generateHTML(node) {
             return generateHTML(node)
@@ -108,7 +101,7 @@ export default {
     display: inline-block;
 
     &.tiptap-image-view-selected {
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        box-shadow: rgba(104, 225, 255, 0.24) 0px 5px 15px;
     }
 
     .tiptap-image-view-control {

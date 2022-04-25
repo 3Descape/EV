@@ -85,6 +85,7 @@ export default {
             this.updateHTML()
         },
         imageRef(image) {
+            if(!image) return
             image.classList.add("tiptap-image-view-image")
         }
     },

@@ -9,12 +9,12 @@ export default Image.extend({
             ...this.parent?.(),
             size: {
                 default: this.options.defaultSize,
-                renderHTML: attributes => {
-                    if(!attributes.size || attributes.size == 100) return {}
-                    return {
-                        style: `width: ${attributes.size}${this.options.sizeUnit}`,
-                    }
-                },
+                // renderHTML: attributes => {
+                //     if(!attributes.size || attributes.size == 100) return {}
+                //     return {
+                //         style: `width: ${attributes.size}${this.options.sizeUnit}`,
+                //     }
+                // },
                 parseHTML: element => element.stile.width || this.options.defaultSize,
             },
         };
@@ -23,7 +23,7 @@ export default Image.extend({
         return {
             ...this.parent?.(),
             HTMLAttributes: {
-                class: 'img-fluid'
+                // class: 'img-fluid'
             },
             defaultSize: 100,
             sizeUnit: "%",

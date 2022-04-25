@@ -1,7 +1,7 @@
 <template>
-    <div :ref="(el) => { this.boundingRef = el }">
-        <div class="bg-body p-1" :class="wrapperClasses" v-if="editor">
-            <div :class="bodyClasses">
+    <div>
+        <div class="bg-body p-1 sticky-top" v-if="editor">
+            <div>
                 <button type="button" @click="editor.chain().focus().setParagraph().run()" :class="[ baseClass, editor.isActive('paragraph') ? activeClass : inactiveClass ]">
                     <i class="fa fa-t"></i>
                 </button>
@@ -160,7 +160,8 @@
             </div>
         </div>
 
-        <editor-content :editor="editor" class="position-relative" />
+        <editor-content :editor="editor" />
+
         <modal id="image_modal">
             <div class="modal-header">
                 <h5 class="modal-title">Bild einfügen:</h5>
@@ -277,8 +278,6 @@ import TiptapImage from './TiptapImage.js'
 import Person from './Person.vue'
 import Modal from "./Modal.vue"
 
-import throttle from 'lodash/throttle'
-
 import { Modal as BootstrapModal } from "bootstrap"
 
 export default {
@@ -304,18 +303,6 @@ export default {
   data() {
     return {
       editor: null,
-      controlIsFloating: false,
-
-      controlWrapperClasses: [
-            "sticky",
-            "d-flex",
-            "justify-content-center",
-      ],
-      controlBodyClasses: [
-          "col-md-8",
-          "mx-auto",
-      ],
-      boundingRef: null,
       activeClass: "btn-dark",
       inactiveClass: "btn-light border border-dark",
       baseClass: "btn btn-sm btn-light me-1 mb-1",
@@ -396,11 +383,6 @@ export default {
   mounted() {
     this.image_modal = BootstrapModal.getOrCreateInstance(document.getElementById('image_modal'))
     this.person_modal = BootstrapModal.getOrCreateInstance(document.getElementById('person_modal'))
-
-    window.addEventListener('scroll', throttle(function() {
-        this.controlIsFloating = 20 > this.boundingRef.getBoundingClientRect().top && 0 < this.boundingRef.getBoundingClientRect().bottom;
-    }.bind(this), 200))
-
   },
   methods: {
     ucFirst(string) {
@@ -506,14 +488,6 @@ export default {
 </script>
 
 <style lang="scss">
-.sticky {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left:0;
-  z-index: 500;
-}
-
 .preview-image {
     height: 200px;
 }

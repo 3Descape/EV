@@ -25,7 +25,7 @@
         </ul>
 
         @if ($roles->count() && !$user->isAdmin())
-            <button type="button" class="btn btn-success my-2" data-bs-toggle="modal" data-target="#role_add_modal">
+            <button type="button" class="btn btn-success my-2" data-bs-toggle="modal" data-bs-target="#role_add_modal">
                 <i class="fa fa-plus"></i> Berechtigung
             </button>
         @else
